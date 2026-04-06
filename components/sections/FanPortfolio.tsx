@@ -63,12 +63,12 @@ export default function FanPortfolio() {
   // Idle motion drift (Faster speed as requested)
   useAnimationFrame((time, delta) => {
     if (!isPaused) {
-      const speed = 0.05; 
+      const speed = -0.05; 
       const currentX = driftX.get();
       const limit = 300; 
       
       let nextX = currentX + speed * delta;
-      if (nextX > limit) nextX = -limit;
+      if (nextX < -limit) nextX = limit;
       
       driftX.set(nextX);
     }
@@ -92,7 +92,7 @@ export default function FanPortfolio() {
     <section 
       ref={sectionRef}
       onMouseMove={onMouseMove}
-      className="relative z-10 overflow-hidden bg-background py-32 md:py-48"
+      className="relative z-10 overflow-hidden bg-background py-16 md:py-24"
     >
       <div className="mx-auto max-w-[1600px] px-6 text-center md:px-12 lg:px-16">
         <div className="mb-20 flex flex-col items-center space-y-12">
@@ -129,7 +129,7 @@ export default function FanPortfolio() {
 
         {/* 3D Bookshelf Container with Extreme Depth & Neighbor Push */}
         <div 
-          className="relative flex min-h-[750px] items-center justify-center pt-24"
+          className="relative flex min-h-[650px] items-center justify-center pt-12"
           style={{ perspective: "3500px", transformStyle: "preserve-3d" }}
         >
           <motion.div 
@@ -140,8 +140,8 @@ export default function FanPortfolio() {
               {filteredProjects.map((project, i) => {
                 const center = (filteredProjects.length - 1) / 2;
                 
-                // Increased Gap: Spaced out (450px) to fill horizontal width and avoid overlap
-                let xPos = (i - center) * 450; 
+                // Increased Gap: Spaced out (380px) to fill horizontal width and avoid overlap
+                let xPos = (i - center) * 380; 
 
                 // Neighbor Push Logic (Subtle now that they are spaced)
                 if (hoveredIndex !== -1 && hoveredId !== project.id) {

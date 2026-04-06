@@ -1,90 +1,117 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
+import React, { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 const processSteps = [
-  { step: "01", title: "Discovery", description: "Deep diving into your brand's essence and target audience to define a clear strategic direction." },
-  { step: "02", title: "Strategy", description: "Mapping out the digital blueprint, from user experience paths to core technological foundations." },
-  { step: "03", title: "Design", description: "Crafting visual identities and interactive prototypes that marry aesthetic luxury with peak functionality." },
-  { step: "04", title: "Development", description: "Coding high-performance, smooth, and scalable digital ecosystems with meticulous attention to detail." },
+  { 
+    step: "01", 
+    title: "Discovery", 
+    description: "Deep diving into your brand's essence and target audience to define a clear strategic direction.",
+    details: ["Audit & Research", "Competitor Analysis", "Brand Positioning", "User Persona Mapping"]
+  },
+  { 
+    step: "02", 
+    title: "Strategy", 
+    description: "Mapping out the digital blueprint, from user experience paths to core technological foundations.",
+    details: ["Architecture Design", "UX Workflows", "Tech Stack Selection", "Project Scoping"]
+  },
+  { 
+    step: "03", 
+    title: "Design", 
+    description: "Crafting visual identities and interactive prototypes that marry aesthetic luxury with peak functionality.",
+    details: ["Visual Identity", "UI Systems", "Interactive Prototypes", "Motion Direction"]
+  },
+  { 
+    step: "04", 
+    title: "Development", 
+    description: "Coding high-performance, smooth, and scalable digital ecosystems with meticulous attention to detail.",
+    details: ["Frontend Craft", "Backend Systems", "Performance Tuning", "Quality Assurance"]
+  },
 ];
 
 export default function Process() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const stepsRef = useRef<HTMLDivElement[]>([]);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      stepsRef.current.forEach((step, index) => {
-        gsap.from(step, {
-          scrollTrigger: {
-            trigger: step,
-            start: "top 80%",
-            toggleActions: "play none none reverse",
-          },
-          opacity: 0,
-          y: 60,
-          duration: 1.2,
-          ease: "power3.out",
-          delay: index * 0.1,
-        });
-      });
-
-      // Animate Section Header
-      gsap.from(".process-header", {
-        scrollTrigger: {
-          trigger: ".process-header",
-          start: "top 80%",
-        },
-        y: 80,
-        opacity: 0,
-        rotateX: -20,
-        duration: 1.5,
-        ease: "expo.out",
-      });
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, []);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"],
+  });
 
   return (
-    <section ref={containerRef} className="py-32 px-8 md:px-16 bg-background relative z-10 overflow-hidden">
-      <div className="max-w-7xl mx-auto flex flex-col gap-24">
-        <div className="flex flex-col gap-6 max-w-2xl process-header">
-          <h4 className="text-sm font-bold uppercase tracking-[0.5em] text-primary">How we work</h4>
-          <h2 className="text-5xl md:text-7xl font-bold tracking-tighter leading-none text-foreground uppercase">
-            The Digital <br />
-            <span className="italic font-playfair font-normal lowercase">Mastery</span> Process
-          </h2>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 pt-16">
-          {processSteps.map((step, index) => (
-            <div
-              key={step.step}
-              ref={(el) => { if (el) stepsRef.current[index] = el; }}
-              className="flex flex-col gap-10 group"
-            >
-              <div className="text-4xl font-bold text-foreground/10 group-hover:text-primary transition-all duration-500 font-playfair">
-                {step.step}
-              </div>
-              <div className="flex flex-col gap-4">
-                <h3 className="text-2xl font-bold uppercase tracking-widest text-foreground group-hover:translate-x-2 transition-transform duration-500">
-                  {step.title}
-                </h3>
-                <p className="text-foreground/50 text-sm leading-relaxed tracking-wide font-medium">
-                  {step.description}
-                </p>
-              </div>
-              <div className="w-full h-[1px] bg-border group-hover:bg-primary transition-all duration-700 mt-2" />
+    <section ref={containerRef} className="relative bg-background py-32 md:py-48" id="process">
+      <div className="mx-auto max-w-[1600px] px-6 md:px-12 lg:px-16">
+        <div className="grid gap-24 lg:grid-cols-[1fr_1.2fr]">
+          {/* Left Side: Sticky Title & Info */}
+          <div className="lg:sticky lg:top-48 lg:h-fit space-y-12">
+            <div className="space-y-6">
+              <p className="text-[10px] font-bold uppercase tracking-[0.5em] text-primary">How we work</p>
+              <h2 className="text-5xl font-black uppercase tracking-tighter md:text-6xl lg:text-7xl leading-[0.9]">
+                The Digital <br />
+                <span className="font-playfair font-normal italic text-primary/80">Mastery</span> <br />
+                Process
+              </h2>
             </div>
-          ))}
+            
+            <p className="max-w-md text-lg leading-relaxed text-foreground/40 font-medium">
+              We've refined our methodology over a decade to ensure every project is launched with clinical precision and creative flair.
+            </p>
+
+            <div className="hidden lg:flex flex-col gap-8 opacity-20 group hover:opacity-100 transition-opacity duration-500">
+               {processSteps.map((s) => (
+                 <div key={s.step} className="flex items-center gap-6">
+                    <span className="text-xs font-bold font-mono">{s.step}</span>
+                    <div className="h-px w-24 bg-foreground" />
+                 </div>
+               ))}
+            </div>
+          </div>
+
+          {/* Right Side: Step Progression */}
+          <div className="space-y-32 md:space-y-48">
+            {processSteps.map((step, index) => (
+              <motion.div
+                key={step.step}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                className="group relative flex flex-col gap-10"
+              >
+                <div className="flex items-baseline gap-6">
+                  <span className="font-playfair text-6xl text-primary/20 md:text-8xl">
+                    {step.step}
+                  </span>
+                  <div className="h-px flex-1 bg-border/40 transition-colors group-hover:bg-primary/40" />
+                </div>
+
+                <div className="space-y-8">
+                  <h3 className="text-3xl font-black uppercase tracking-tighter md:text-5xl lg:text-6xl">
+                    {step.title}
+                  </h3>
+                  <p className="max-w-xl text-lg md:text-xl text-foreground/50 leading-relaxed font-medium">
+                    {step.description}
+                  </p>
+
+                  <div className="grid grid-cols-2 gap-x-8 gap-y-4 pt-6">
+                    {step.details.map((detail) => (
+                      <div key={detail} className="flex items-center gap-3">
+                        <div className="h-1 w-1 rounded-full bg-primary" />
+                        <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-foreground/30 group-hover:text-foreground/60 transition-colors">
+                          {detail}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
+
+      {/* Decorative vertical line */}
+      <div className="absolute left-[calc(100%/2.2)] top-0 -z-10 h-full w-px bg-gradient-to-b from-transparent via-border/20 to-transparent hidden lg:block" />
     </section>
   );
 }

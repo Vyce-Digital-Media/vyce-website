@@ -69,7 +69,7 @@ export function FanCard({
         zIndex: isHovered ? 500 : total - Math.abs(relativeIndex)
       }}
       className={cn(
-        "group relative h-[450px] w-[320px] flex-shrink-0 cursor-pointer overflow-hidden rounded-xl border border-white/5 bg-zinc-900 shadow-[0_20px_50px_rgba(0,0,0,0.8)] transition-all duration-500 md:h-[580px] md:w-[400px]",
+        "group relative h-[380px] w-[270px] flex-shrink-0 cursor-pointer overflow-hidden rounded-xl border border-white/5 bg-zinc-900 shadow-[0_20px_50px_rgba(0,0,0,0.8)] transition-all duration-500 md:h-[500px] md:w-[340px]",
         isHovered && "ring-1 ring-white/20 shadow-[0_45px_100px_rgba(0,0,0,1)]"
       )}
     >

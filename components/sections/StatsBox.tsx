@@ -4,20 +4,25 @@ import React, { useRef, useEffect } from "react";
 import { motion, useInView, useSpring, useTransform } from "framer-motion";
 
 const stats = [
-  { 
-    value: 500, 
-    suffix: "+", 
-    label: "Projects delivered across brand, motion, and experience" 
+  {
+    value: 50,
+    suffix: "+",
+    label: "Projects Delivered"
   },
-  { 
-    value: 96, 
-    suffix: "%", 
-    label: "Long-term client satisfaction" 
+  {
+    value: 100,
+    suffix: "%",
+    label: "Client Satisfaction"
   },
-  { 
-    value: 15, 
-    suffix: "+", 
-    label: "Years operating across creative and growth disciplines" 
+  {
+    value: 4,
+    suffix: "",
+    label: "Core Services"
+  },
+  {
+    value: 2,
+    suffix: "+",
+    label: "Years Crafting Brands"
   },
 ];
 
@@ -31,7 +36,7 @@ function Counter({ value, suffix }: { value: number; suffix: string }) {
     damping: 15,
   });
 
-  const displayValue = useTransform(spring, (current) => 
+  const displayValue = useTransform(spring, (current) =>
     `${Math.round(current).toString()}${suffix}`
   );
 
@@ -42,9 +47,9 @@ function Counter({ value, suffix }: { value: number; suffix: string }) {
   }, [isInView, spring, value]);
 
   return (
-    <motion.span 
-      ref={ref} 
-      className="text-5xl font-black tracking-tighter text-white md:text-7xl lg:text-8xl"
+    <motion.span
+      ref={ref}
+      className="text-5xl font-black tracking-tighter text-white transition-all duration-500 group-hover:text-primary md:text-7xl lg:text-8xl group-hover:scale-110 group-hover:drop-shadow-[0_0_15px_rgba(0,68,255,0.5)]"
     >
       {displayValue}
     </motion.span>
@@ -55,20 +60,25 @@ export default function StatsBox() {
   return (
     <section className="bg-background px-6 py-20 md:px-12 lg:px-16">
       <div className="mx-auto max-w-7xl">
-        <div className="relative overflow-hidden rounded-[32px] border border-white/10 bg-zinc-950/50 p-12 md:p-20">
-          <div className="grid grid-cols-1 gap-12 md:grid-cols-3 md:gap-0">
+        <div className="relative overflow-hidden rounded-[32px] border border-white/10 bg-zinc-950/50 p-20 md:p-24">
+          <div className="grid grid-cols-1 gap-16 sm:grid-cols-2 lg:grid-cols-4 md:gap-y-16 lg:gap-0">
             {stats.map((stat, index) => (
-              <div 
-                key={index} 
-                className="relative flex flex-col items-center justify-center text-center md:px-10"
+              <div
+                key={index}
+                className="relative flex flex-col items-center justify-center text-center md:px-10 group cursor-pointer"
               >
-                {/* Vertical Divider */}
+                {/* Vertical Divider for desktop (4 columns) */}
                 {index !== 0 && (
-                  <div className="absolute left-0 top-1/2 h-20 w-px -translate-y-1/2 bg-white/10 hidden md:block" />
+                  <div className="absolute left-0 top-1/2 h-20 w-px -translate-y-1/2 bg-white/10 hidden lg:block" />
                 )}
-                
+
+                {/* Vertical Divider for tablet (2 columns) */}
+                {index % 2 !== 0 && (
+                  <div className="absolute left-0 top-1/2 h-20 w-px -translate-y-1/2 bg-white/10 hidden sm:block lg:hidden" />
+                )}
+
                 <Counter value={stat.value} suffix={stat.suffix} />
-                <p className="mt-6 max-w-[200px] text-[11px] font-medium leading-relaxed tracking-wide text-foreground/45 group-hover:text-foreground/80">
+                <p className="mt-6 max-w-[200px] text-[10px] font-bold uppercase tracking-[0.4em] text-foreground/30 group-hover:text-foreground/80 transition-colors">
                   {stat.label}
                 </p>
               </div>

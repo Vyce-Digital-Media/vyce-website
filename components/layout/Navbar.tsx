@@ -8,10 +8,12 @@ import { cn } from "@/lib/utils";
 import { VyceLogo } from "@/components/ui/VyceLogo";
 
 const navLinks = [
+  { name: "Home", href: "/" },
   { name: "About Us", href: "/about" },
   { name: "Services", href: "/services" },
   { name: "Portfolio", href: "/portfolio" },
-  { name: "Contact", href: "/contact" },
+  { name: "Our Process", href: "/#process" },
+  { name: "Contact Us", href: "/contact" },
 ] as const;
 
 const socialLinks: {
@@ -19,10 +21,10 @@ const socialLinks: {
   href: string;
   icon: React.ComponentType<React.SVGProps<SVGSVGElement> & { size?: number }>;
 }[] = [
-  { name: "Twitter", href: "https://twitter.com", icon: Share2 },
-  { name: "Facebook", href: "https://facebook.com", icon: Globe },
-  { name: "Instagram", href: "https://instagram.com", icon: AtSign },
-];
+    { name: "Twitter", href: "https://twitter.com", icon: Share2 },
+    { name: "Facebook", href: "https://facebook.com", icon: Globe },
+    { name: "Instagram", href: "https://instagram.com", icon: AtSign },
+  ];
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
