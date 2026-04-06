@@ -22,11 +22,11 @@ export default function Footer() {
     <footer className="border-t border-border/10 bg-background relative overflow-hidden">
       <div className="absolute inset-0 z-0 bg-gradient-to-b from-transparent to-primary/5 pointer-events-none" />
 
-      <div className="relative z-10 mx-auto max-w-[1600px] px-6 py-24 md:px-12 lg:px-16">
+      <div className="relative z-10 mx-auto max-w-[1600px] px-6 py-16 md:px-12 lg:px-16">
         <div className="grid gap-16 lg:grid-cols-2 lg:items-start">
           <div className="space-y-12">
             <h2 className="text-4xl md:text-6xl font-black tracking-tighter uppercase relative group">
-              VYCE <span className="font-playfair italic font-normal text-primary">Studio</span>
+              VYCE
             </h2>
             <div className="space-y-6">
               <h3 className="max-w-xl text-xl md:text-2xl font-medium leading-relaxed tracking-tight text-foreground">
@@ -54,7 +54,7 @@ export default function Footer() {
                 ))}
               </ul>
             </div>
-            
+
             <div className="space-y-6">
               <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-foreground/40">Socials</p>
               <ul className="space-y-4 text-sm font-medium text-foreground/80">
@@ -75,9 +75,9 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-32 flex flex-col gap-8 border-t border-border/10 pt-8 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-10 flex flex-col gap-8 border-t border-border/10 pt-8 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-foreground/40">
-            © {year} VYCE Studio. All rights reserved.
+            © {year} VYCE All rights reserved.
           </p>
           <div className="flex gap-8 text-[10px] font-bold uppercase tracking-[0.2em] text-foreground/40">
             <Link href="/privacy" className="transition hover:text-foreground">Privacy Policy</Link>

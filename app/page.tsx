@@ -38,9 +38,7 @@ export default function Home() {
               transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
               className="space-y-12"
             >
-              <div className="flex items-center gap-4 text-[10px] font-bold uppercase tracking-[0.5em] text-primary">
-                <span className="h-px w-8 bg-primary" /> The Philosophy
-              </div>
+
 
               <h2 className="text-6xl font-black uppercase tracking-tighter sm:text-7xl md:text-8xl lg:text-[10rem] leading-[0.85]">
                 Precision <br />
@@ -133,7 +131,7 @@ export default function Home() {
             <MagneticButton>
               <Link
                 href="/contact"
-                className="inline-flex rounded-full bg-primary px-12 py-6 text-[11px] font-black uppercase tracking-[0.3em] text-background transition-all hover:bg-primary/90 hover:scale-105 active:scale-95"
+                className="inline-flex rounded-full bg-primary px-12 py-6 text-[11px] font-black uppercase tracking-[0.3em] text-white transition-all hover:bg-primary/90 hover:scale-105 active:scale-95"
               >
                 Book a Free Call →
               </Link>

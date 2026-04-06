@@ -8,6 +8,7 @@ import {
   useTransform,
   useInView,
   useSpring,
+  useMotionValue,
 } from "framer-motion";
 import MagneticButton from "@/components/ui/MagneticButton";
 
@@ -37,10 +38,30 @@ const coreValues = [
 ];
 
 const teamMembers = [
-  { name: "Manav", role: "Founder / Creative Director", emoji: "🎨" },
-  { name: "Ria", role: "Strategy & Growth Lead", emoji: "📈" },
-  { name: "Dev", role: "Motion Designer", emoji: "🎬" },
-  { name: "Aryan", role: "Full-Stack Developer", emoji: "💻" },
+  {
+    name: "Manav",
+    role: "Founder / Creative Director",
+    image: "/images/team/manav.png",
+    bio: "Visionary leader pushing the boundaries of digital narrative and brand strategy."
+  },
+  {
+    name: "Ria",
+    role: "Strategy & Growth Lead",
+    image: "/images/team/ria.png",
+    bio: "Analytic powerhouse focused on scaling brands through data-driven storytelling."
+  },
+  {
+    name: "Dev",
+    role: "Motion Designer",
+    image: "/images/team/dev.png",
+    bio: "Master of movement, bringing static brands to life through cinematic motion design."
+  },
+  {
+    name: "Aryan",
+    role: "Full-Stack Developer",
+    image: "/images/team/aryan.png",
+    bio: "Architect of seamless digital experiences, bridging the gap between design and tech."
+  },
 ];
 
 const whyVyce = [
@@ -110,29 +131,104 @@ function TeamCard({
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-60px" });
 
+  // Mouse tracking for tilt
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const mouseXSpring = useSpring(x);
+  const mouseYSpring = useSpring(y);
+
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], [10, -10]);
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], [-10, 10]);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+    const xPct = mouseX / width - 0.5;
+    const yPct = mouseY / height - 0.5;
+    x.set(xPct);
+    y.set(yPct);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 60, rotateX: -15 }}
-      animate={isInView ? { opacity: 1, y: 0, rotateX: 0 } : {}}
+      initial={{ opacity: 0, y: 80, scale: 0.95 }}
+      animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
       transition={{
-        duration: 0.9,
+        duration: 1.2,
         ease: [0.16, 1, 0.3, 1],
-        delay: index * 0.12,
+        delay: index * 0.15,
       }}
-      style={{ perspective: 800, transformStyle: "preserve-3d" }}
-      className="group relative cursor-pointer"
+      className="group relative h-[600px] w-full cursor-pointer perspective-[1200px]"
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
     >
-      <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-zinc-950/60 p-8 transition-all duration-500 group-hover:border-primary/30 group-hover:bg-zinc-900/80 group-hover:shadow-[0_0_40px_rgba(0,68,255,0.08)]">
-        <div className="mb-6 text-4xl">{member.emoji}</div>
-        <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-primary/60">
-          {member.role}
-        </p>
-        <h3 className="mt-2 text-2xl font-black uppercase tracking-tighter">
-          {member.name}
-        </h3>
-        <div className="mt-6 h-px w-0 bg-primary transition-all duration-700 group-hover:w-full" />
-      </div>
+      <motion.div
+        style={{
+          rotateX,
+          rotateY,
+          transformStyle: "preserve-3d",
+        }}
+        className="relative h-full w-full overflow-hidden rounded-[32px] border border-white/5 bg-zinc-950 transition-all duration-700 group-hover:border-primary/20 group-hover:shadow-[0_40px_80px_-20px_rgba(0,10,30,0.8)]"
+      >
+        {/* Large Portrait Background */}
+        <div className="absolute inset-0 z-0">
+          <img
+            src={member.image}
+            alt={member.name}
+            className="h-full w-full object-cover transition-transform duration-1000 group-hover:scale-105"
+          />
+          {/* Multi-layered Gradients for Editorial Reveal */}
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent opacity-60" />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background opacity-90" />
+        </div>
+
+        {/* Content Overlay */}
+        <div className="absolute inset-0 z-10 flex flex-col justify-end p-8 md:p-12">
+          <div className="space-y-4">
+            <div className="overflow-hidden">
+              <motion.p
+                initial={{ y: "100%" }}
+                whileInView={{ y: 0 }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                className="text-[9px] font-bold uppercase tracking-[0.5em] text-primary"
+              >
+                {member.role}
+              </motion.p>
+            </div>
+
+            <div className="overflow-hidden">
+              <motion.h3
+                initial={{ y: "100%" }}
+                whileInView={{ y: 0 }}
+                transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+                className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-white"
+              >
+                {member.name}
+              </motion.h3>
+            </div>
+
+            <div className="mt-6 opacity-0 translate-y-4 transition-all duration-700 group-hover:opacity-60 group-hover:translate-y-0">
+              <p className="max-w-[280px] text-xs font-medium leading-relaxed tracking-tight text-white/80 italic font-playfair">
+                "{member.bio}"
+              </p>
+            </div>
+
+
+          </div>
+        </div>
+
+        {/* Floating Aura on Hover */}
+        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-primary/5 to-transparent opacity-0 transition-opacity duration-1000 group-hover:opacity-100" />
+      </motion.div>
     </motion.div>
   );
 }
@@ -214,7 +310,7 @@ export default function AboutPage() {
           <div className="lg:sticky lg:top-40 space-y-6">
 
             <RevealLine>
-              <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter leading-[0.9]">
+              <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter leading-[0.9] mt-22">
                 Not an Agency.
               </h2>
             </RevealLine>
@@ -278,22 +374,69 @@ export default function AboutPage() {
           </div>
 
           <div className="grid gap-16 lg:grid-cols-2 items-center">
-            {/* 3D tilting story block */}
-            <motion.div
-              style={{ rotateY: storyRotate }}
-              className="relative overflow-hidden rounded-3xl border border-white/10 bg-zinc-900/60 p-12 md:p-16"
-            >
-              <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-foreground/30 mb-8">
-                Story Body
-              </p>
-              <p className="text-xl md:text-2xl text-foreground/70 font-medium leading-relaxed">
-                We saw more small and medium businesses struggle to get noticed —
-                not because they weren't good at what they did, but because their
-                branding didn't reflect it. So we built Vyce: a creative agency
-                that combines strategy, design, video, and tech into one
-                seamless experience.
-              </p>
-            </motion.div>
+            {/* 3D Midnight Perspective Card */}
+            <div className="relative group perspective-[2000px]">
+              <motion.div
+                style={{
+                  rotateY: storyRotate,
+                  transformStyle: "preserve-3d",
+                }}
+                className="relative overflow-hidden rounded-[48px] border border-white/[0.08] bg-gradient-to-br from-[#050a15] to-[#010204] p-12 md:p-20 shadow-[0_50px_100px_-30px_rgba(0,10,30,0.9)] transition-all duration-700"
+              >
+                {/* 1. Magnetic Reactive Glow (Mouse Tracking Simulation via Gradient) */}
+                <div className="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000">
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,var(--primary-blue)_0%,transparent_50%)] opacity-20 blur-[120px] mix-blend-screen" />
+                </div>
+
+                {/* 2. Abstract Geometric Background "Mesh" */}
+                <div className="absolute inset-0 z-0 opacity-[0.04] pointer-events-none overflow-hidden">
+                  <div className="absolute top-0 left-0 w-full h-full bg-[linear-gradient(90deg,transparent_24.5%,rgba(255,255,255,0.1)_25%,rgba(255,255,255,0.1)_26%,transparent_27%,transparent_74.5%,rgba(255,255,255,0.1)_75%,rgba(255,255,255,0.1)_76%,transparent_77%),linear-gradient(0deg,transparent_24.5%,rgba(255,255,255,0.1)_25%,rgba(255,255,255,0.1)_26%,transparent_27%,transparent_74.5%,rgba(255,255,255,0.1)_75%,rgba(255,255,255,0.1)_76%,transparent_77%)] bg-[size:60px_60px]" />
+                </div>
+
+                {/* 3. Main Narrative Content */}
+                <motion.div style={{ translateZ: 80 }} className="relative z-10 w-full space-y-12">
+
+
+                  <div className="space-y-12">
+                    <h3 className="text-3xl md:text-5xl font-black uppercase tracking-tighter leading-[1.0] text-white">
+                      From <span className="text-primary glow-text transition-all duration-700 group-hover:brightness-125">Static Noise</span> <br />
+                      To <span className="font-playfair font-normal italic text-primary/70">Thoughtful Simplicity.</span>
+                    </h3>
+
+                    <div className="max-w-xl">
+                      <FadeIn delay={0.2}>
+                        <p className="text-lg md:text-2xl text-foreground/50 font-medium leading-[1.6] tracking-tight">
+                          We saw more brands struggle to get noticed —
+                          not because they weren't good, but because their
+                          <span className="text-white"> digital presence lacked a core truth.</span>
+                        </p>
+                      </FadeIn>
+                      <FadeIn delay={0.4}>
+                        <p className="mt-8 text-lg md:text-2xl text-foreground/50 font-medium leading-[1.6] tracking-tight">
+                          So we built Vyce: a studio that combines
+                          <span className="text-[#4D96FF] font-bold"> strategic logic </span>
+                          with
+                          <span className="font-playfair italic text-white/90"> editorial restraint </span>
+                          into one cohesive story.
+                        </p>
+                      </FadeIn>
+                    </div>
+                  </div>
+
+
+                </motion.div>
+
+                {/* 4. Active Corner Light Sweep */}
+                <motion.div
+                  animate={{ x: ["-100%", "200%"] }}
+                  transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                  className="absolute -top-1/2 -left-1/2 w-full h-[200%] bg-gradient-to-r from-transparent via-primary/5 to-transparent skew-x-[-35deg]"
+                />
+              </motion.div>
+
+              {/* Unique Outer "Aura" Glow */}
+              <div className="absolute -inset-1 rounded-[48px] bg-gradient-to-br from-primary/20 via-transparent to-transparent opacity-0 group-hover:opacity-50 blur-xl transition-all duration-1000 -z-10" />
+            </div>
 
             {/* Scrolling milestones */}
             <div className="space-y-10">
@@ -336,21 +479,7 @@ export default function AboutPage() {
                 </h2>
               </RevealLine>
             </div>
-            <FadeIn delay={0.2} className="space-y-8">
-              <div className="space-y-3 border-l-2 border-primary/30 pl-8">
-                <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-primary">Mission</p>
-                <p className="text-lg text-foreground/60 font-medium leading-relaxed">
-                  To make powerful branding accessible to every visionary business —
-                  not just the big ones.
-                </p>
-              </div>
-              <div className="space-y-3 border-l-2 border-foreground/10 pl-8">
-                <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-foreground/30">Vision</p>
-                <p className="text-lg text-foreground/60 font-medium leading-relaxed">
-                  A world where every brand looks as good as the product behind it.
-                </p>
-              </div>
-            </FadeIn>
+
           </div>
 
           {/* Two-card layout */}
@@ -388,11 +517,7 @@ export default function AboutPage() {
                 </h2>
               </RevealLine>
             </div>
-            <FadeIn delay={0.2}>
-              <p className="max-w-xs text-sm text-foreground/40 font-medium leading-relaxed">
-                The principles we work by — non-negotiable, always.
-              </p>
-            </FadeIn>
+
           </div>
 
           <div className="grid gap-0 divide-y divide-white/5">
@@ -465,7 +590,7 @@ export default function AboutPage() {
                 </h2>
               </RevealLine>
               <RevealLine delay={0.1}>
-                <h2 className="text-5xl md:text-7xl font-playfair font-normal italic text-primary leading-[0.9]">
+                <h2 className="text-5xl md:text-7xl pb-2 font-playfair font-normal italic text-primary leading-[0.9]">
                   Only One is You.
                 </h2>
               </RevealLine>
@@ -500,15 +625,11 @@ export default function AboutPage() {
           <FadeIn delay={0.1} className="hidden lg:flex items-center justify-center">
             <div className="relative w-full aspect-square max-w-[480px] flex flex-col items-center justify-center">
               <div className="rounded-full border border-white/5 bg-zinc-900/50 w-full h-full flex flex-col items-center justify-center gap-6 p-16">
-                <span className="text-[9px] font-bold uppercase tracking-[0.5em] text-foreground/30">
-                  Why Us
-                </span>
+
                 <span className="text-[8rem] font-black tracking-tighter leading-none text-white/10">
                   VYCE
                 </span>
-                <span className="text-center text-sm text-foreground/30 font-medium leading-relaxed max-w-[240px]">
-                  Boutique studio. Relentlessly creative.
-                </span>
+
               </div>
               <div className="absolute inset-0 rounded-full bg-primary/5 blur-[80px] -z-10" />
             </div>
