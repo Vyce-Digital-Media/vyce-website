@@ -188,7 +188,7 @@ export default function Hero() {
           <span className="block overflow-hidden">
             <span
               ref={(el) => { titleLinesRef.current[0] = el; }}
-              className="inline-block font-playfair font-normal italic text-[clamp(3.5rem,12vw,14rem)] uppercase tracking-[-0.04em] leading-[0.95]"
+              className="inline-block font-playfair font-normal mt-20 italic text-[clamp(3.5rem,12vw,14rem)] uppercase tracking-[-0.04em] leading-[0.95]"
             >
               We Make
             </span>
