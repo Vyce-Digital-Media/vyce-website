@@ -50,26 +50,26 @@ export default function FanPortfolio() {
   const [filter, setFilter] = useState("All Projects");
   const [hoveredId, setHoveredId] = useState<number | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
-  
+
   // Animation state
   const [isPaused, setIsPaused] = useState(false);
   const driftX = useMotionValue(0);
   const springDriftX = useSpring(driftX, { stiffness: 50, damping: 20 });
-  
+
   // Mouse tracking for parallax influence
-  const mouseX = useMotionValue(0.5); 
+  const mouseX = useMotionValue(0.5);
   const springMouseX = useSpring(mouseX, { stiffness: 100, damping: 20 });
 
   // Idle motion drift (Faster speed as requested)
   useAnimationFrame((time, delta) => {
     if (!isPaused) {
-      const speed = -0.05; 
+      const speed = -0.05;
       const currentX = driftX.get();
-      const limit = 300; 
-      
+      const limit = 300;
+
       let nextX = currentX + speed * delta;
       if (nextX < -limit) nextX = limit;
-      
+
       driftX.set(nextX);
     }
   });
@@ -81,15 +81,15 @@ export default function FanPortfolio() {
     mouseX.set(x);
   };
 
-  const filteredProjects = filter === "All Projects" 
-    ? projects 
+  const filteredProjects = filter === "All Projects"
+    ? projects
     : projects.filter((p) => p.category === filter);
 
   // Find index of hovered card to calculate "Neighbor Push"
   const hoveredIndex = filteredProjects.findIndex(p => p.id === hoveredId);
 
   return (
-    <section 
+    <section
       ref={sectionRef}
       onMouseMove={onMouseMove}
       className="relative z-10 overflow-hidden bg-background py-16 md:py-24"
@@ -99,7 +99,7 @@ export default function FanPortfolio() {
           <h2 className="text-4xl font-black uppercase tracking-tighter text-foreground sm:text-6xl md:text-[10rem] lg:text-[12rem] whitespace-nowrap">
             Portfolio
           </h2>
-          
+
           {/* Category Filter Buttons with Borders */}
           <div className="flex flex-wrap justify-center gap-x-6 gap-y-4">
             {categories.map((cat) => (
@@ -108,8 +108,8 @@ export default function FanPortfolio() {
                 onClick={() => setFilter(cat)}
                 className={cn(
                   "group relative flex items-center justify-center gap-3 px-8 py-4 rounded-full border transition-all duration-500",
-                  filter === cat 
-                    ? "border-primary bg-primary/10 text-white shadow-[0_0_20px_rgba(255,255,255,0.05)]" 
+                  filter === cat
+                    ? "border-primary bg-primary/10 text-white shadow-[0_0_20px_rgba(255,255,255,0.05)]"
                     : "border-white/5 bg-white/5 text-foreground/40 hover:border-white/20 hover:text-foreground"
                 )}
               >
@@ -128,35 +128,35 @@ export default function FanPortfolio() {
         </div>
 
         {/* 3D Bookshelf Container with Extreme Depth & Neighbor Push */}
-        <div 
+        <div
           className="relative flex min-h-[650px] items-center justify-center pt-12"
           style={{ perspective: "3500px", transformStyle: "preserve-3d" }}
         >
-          <motion.div 
+          <motion.div
             style={{ x: springDriftX, transformStyle: "preserve-3d" }}
             className="relative flex items-center justify-center"
           >
             <AnimatePresence mode="popLayout" initial={false}>
               {filteredProjects.map((project, i) => {
                 const center = (filteredProjects.length - 1) / 2;
-                
+
                 // Increased Gap: Spaced out (380px) to fill horizontal width and avoid overlap
-                let xPos = (i - center) * 380; 
+                let xPos = (i - center) * 380;
 
                 // Neighbor Push Logic (Subtle now that they are spaced)
                 if (hoveredIndex !== -1 && hoveredId !== project.id) {
-                  const pushDistance = 40; 
+                  const pushDistance = 40;
                   if (i < hoveredIndex) xPos -= pushDistance;
                   if (i > hoveredIndex) xPos += pushDistance;
                 }
 
                 return (
-                  <motion.div 
-                    key={project.id} 
+                  <motion.div
+                    key={project.id}
                     layout
                     initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ 
-                      opacity: 1, 
+                    animate={{
+                      opacity: 1,
                       scale: 1,
                       x: xPos,
                       zIndex: hoveredId === project.id ? 500 : filteredProjects.length - Math.abs(i - center)
@@ -171,7 +171,7 @@ export default function FanPortfolio() {
                       total={filteredProjects.length}
                       {...project}
                       mouseX={springMouseX}
-                      scrollUnfold={useMotionValue(1)} 
+                      scrollUnfold={useMotionValue(1)}
                       isHovered={hoveredId === project.id}
                       onHover={(h) => {
                         setHoveredId(h ? project.id : null);

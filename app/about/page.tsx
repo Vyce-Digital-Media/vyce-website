@@ -402,7 +402,7 @@ export default function AboutPage() {
 
       {/* ── 01. NOT AN AGENCY ────────────────────────────────────── */}
       <section className="relative px-6 py-32 md:px-12 lg:px-20 md:py-44">
-        <div className="mx-auto max-w-[1600px] grid gap-20 lg:grid-cols-[1fr_1.2fr] items-start">
+        <div className="mx-auto max-w-[1300px] grid gap-20 lg:grid-cols-[1fr_1.2fr] items-start">
           <div className="lg:sticky lg:top-40 space-y-6">
             <RevealLine>
               <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter leading-[0.9] mt-22">
@@ -458,7 +458,7 @@ export default function AboutPage() {
 
       {/* ── 02. OUR STORY ───────────────────────────────────────── */}
       <section ref={storyRef} className="relative px-6 py-32 md:px-12 lg:px-20 bg-zinc-950/30 overflow-hidden">
-        <div className="mx-auto max-w-[1600px] space-y-20">
+        <div className="mx-auto max-w-[1300px] space-y-20">
           <div>
             <RevealLine className="mt-4">
               <h2 className="text-5xl md:text-8xl lg:text-[9rem] font-black uppercase tracking-tighter leading-[0.9]">
@@ -612,7 +612,7 @@ export default function AboutPage() {
 
       {/* ── 03. MISSION & VISION ─────────────────────────────────── */}
       <section className="relative px-6 py-32 md:px-12 lg:px-20 overflow-hidden">
-        <div className="mx-auto max-w-[1600px]">
+        <div className="mx-auto max-w-[1300px]">
           <div className="mt-8 grid gap-16 lg:grid-cols-2 items-end">
             <div>
               <RevealLine>
@@ -651,7 +651,7 @@ export default function AboutPage() {
         className="relative px-6 py-32 md:px-12 lg:px-20 bg-zinc-950/30 overflow-hidden"
         onMouseLeave={() => setHoveredValue(null)}
       >
-        <div className="mx-auto max-w-[1600px]">
+        <div className="mx-auto max-w-[1300px]">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-24">
             <div>
               <RevealLine className="mt-4">
@@ -745,7 +745,7 @@ export default function AboutPage() {
 
       {/* ── 05. MEET THE TEAM ────────────────────────────────────── */}
       <section className="relative px-6 py-32 md:px-12 lg:px-20 overflow-hidden">
-        <div className="mx-auto max-w-[1600px]">
+        <div className="mx-auto max-w-[1300px]">
           <div className="mb-20">
             <RevealLine className="mt-4">
               <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter leading-[0.9]">
@@ -775,7 +775,7 @@ export default function AboutPage() {
 
       {/* ── 06. WHY CHOOSE VYCE ──────────────────────────────────── */}
       <section className="relative px-6 py-32 md:px-12 lg:px-20 bg-zinc-950/30 overflow-hidden">
-        <div className="mx-auto max-w-[1600px] grid gap-20 lg:grid-cols-2 items-center">
+        <div className="mx-auto max-w-[1300px] grid gap-20 lg:grid-cols-2 items-center">
           <div className="space-y-10">
             <div>
               <RevealLine className="mt-4">

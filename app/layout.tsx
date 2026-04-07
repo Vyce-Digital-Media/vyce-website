@@ -5,6 +5,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import LenisProvider from "@/components/providers/LenisProvider";
 import ProjectTransitionOverlay from "@/components/ui/ProjectTransition";
+import ScrollToTop from "@/components/ui/ScrollToTop";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -33,6 +34,7 @@ export default function RootLayout({
         className={`${inter.variable} ${spaceGrotesk.variable} bg-background text-foreground antialiased selection:bg-primary selection:text-white`}
       >
         <LenisProvider>
+          <ScrollToTop />
           <div className="noise-bg" aria-hidden />
           <Navbar />
           <main className="min-h-screen">{children}</main>

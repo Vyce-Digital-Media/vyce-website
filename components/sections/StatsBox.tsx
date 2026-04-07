@@ -86,8 +86,8 @@ export default function StatsBox() {
           </div>
 
           {/* Background subtle glow */}
-          <div className="absolute -bottom-24 -left-24 h-96 w-96 rounded-full bg-primary/5 blur-[120px]" />
-          <div className="absolute -right-24 -top-24 h-96 w-96 rounded-full bg-primary/5 blur-[120px]" />
+          <div className="absolute -bottom-24 -left-24 h-96 w-96 rounded-full bg-primary/5 blur-[120px] pointer-events-none" />
+          <div className="absolute -right-24 -top-24 h-96 w-96 rounded-full bg-primary/5 blur-[120px] pointer-events-none" />
         </div>
       </div>
     </section>

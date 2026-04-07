@@ -7,7 +7,6 @@ import StatsBox from "@/components/sections/StatsBox";
 import ServicesGrid from "@/components/sections/ServicesGrid";
 import ExploreCollection from "@/components/sections/ImageScroller3D";
 import ScrollingText from "@/components/sections/ScrollingText";
-import MagneticButton from "@/components/ui/MagneticButton";
 import Link from "next/link";
 
 export default function Home() {
@@ -28,7 +27,7 @@ export default function Home() {
 
       {/* Manifesto Section (Refactored) */}
       <section className="relative px-6 py-40 md:px-12 lg:px-16 bg-zinc-950/20 overflow-hidden" id="about">
-        <div className="mx-auto max-w-[1600px]">
+        <div className="mx-auto max-w-[1400px]">
           <div className="grid lg:grid-cols-[1.2fr_1fr] gap-24 items-start">
             {/* Split Typographic Column */}
             <motion.div
@@ -128,22 +127,18 @@ export default function Home() {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-8">
-            <MagneticButton>
-              <Link
-                href="/contact"
-                className="inline-flex rounded-full bg-primary px-12 py-6 text-[11px] font-black uppercase tracking-[0.3em] text-white transition-all hover:bg-primary/90 hover:scale-105 active:scale-95"
-              >
-                Book a Free Call →
-              </Link>
-            </MagneticButton>
-            <MagneticButton>
-              <Link
-                href="/services"
-                className="inline-flex rounded-full border border-foreground/20 bg-transparent px-12 py-6 text-[11px] font-black uppercase tracking-[0.3em] text-foreground transition-all hover:border-foreground hover:bg-foreground/5 hover:scale-105 active:scale-95"
-              >
-                View Our Services →
-              </Link>
-            </MagneticButton>
+            <Link
+              href="/contact"
+              className="inline-flex rounded-full bg-primary px-12 py-6 text-[11px] font-black uppercase tracking-[0.3em] text-white transition-all hover:bg-primary/90 hover:scale-105 active:scale-95"
+            >
+              Book a Free Call →
+            </Link>
+            <Link
+              href="/services"
+              className="inline-flex rounded-full border border-foreground/20 bg-transparent px-12 py-6 text-[11px] font-black uppercase tracking-[0.3em] text-foreground transition-all hover:border-foreground hover:bg-foreground/5 hover:scale-105 active:scale-95"
+            >
+              View Our Services →
+            </Link>
           </div>
         </motion.div>
       </section>

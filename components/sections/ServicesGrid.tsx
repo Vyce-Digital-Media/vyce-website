@@ -66,15 +66,15 @@ export default function ServicesGrid() {
               <div className="mb-10 flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-primary">
                 <service.icon size={28} strokeWidth={1.5} />
               </div>
-              
+
               <h3 className="mb-4 text-2xl font-bold uppercase tracking-tight text-white md:text-3xl">
                 {service.title}
               </h3>
-              
+
               <p className="text-sm leading-relaxed text-foreground/40 md:text-base">
                 {service.description}
               </p>
-              
+
               <div className="mt-auto pt-10">
                 <div className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 opacity-0 transition-all duration-300 group-hover:translate-x-2 group-hover:border-primary group-hover:text-primary group-hover:opacity-100">
                   <Zap size={16} />

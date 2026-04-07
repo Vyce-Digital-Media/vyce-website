@@ -593,7 +593,7 @@ function ImageScroller3D({ cards, isTransitionActive, sideGradientWidth = 80, in
           style={{
             perspective: '1000px',
             perspectiveOrigin: '50% 50%',
-            padding: infiniteLoop ? 'clamp(60px, 10vw, 120px) 0 clamp(80px, 12vw, 140px) clamp(10px, 5vw, 150px)' : 'clamp(60px, 10vw, 120px) 0 clamp(80px, 12vw, 140px) 0',
+            padding: 'clamp(60px, 10vw, 120px) 0 clamp(80px, 12vw, 140px) 0',
             transformStyle: 'preserve-3d',
             position: 'relative',
             zIndex: 1,
@@ -641,7 +641,7 @@ export default function ExploreCollection() {
 
   return (
     <section className="relative z-10 overflow-hidden bg-background py-16 md:py-24" id="portfolio">
-      <div className="mx-auto max-w-[1600px] px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-[1240px] px-4 sm:px-6 lg:px-8">
         <h2 className="text-4xl font-black uppercase tracking-tighter text-foreground sm:text-6xl md:text-[10rem] lg:text-[12rem] whitespace-nowrap text-center mb-12">Portfolio</h2>
         <div className="mb-8 mt-8 lg:mt-8 md:mt-10">
           {topics.length > 0 && (

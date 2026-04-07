@@ -5,27 +5,27 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 const processSteps = [
-  { 
-    step: "01", 
-    title: "Discovery", 
+  {
+    step: "01",
+    title: "Discovery",
     description: "Deep diving into your brand's essence and target audience to define a clear strategic direction.",
     details: ["Audit & Research", "Competitor Analysis", "Brand Positioning", "User Persona Mapping"]
   },
-  { 
-    step: "02", 
-    title: "Strategy", 
+  {
+    step: "02",
+    title: "Strategy",
     description: "Mapping out the digital blueprint, from user experience paths to core technological foundations.",
     details: ["Architecture Design", "UX Workflows", "Tech Stack Selection", "Project Scoping"]
   },
-  { 
-    step: "03", 
-    title: "Design", 
+  {
+    step: "03",
+    title: "Design",
     description: "Crafting visual identities and interactive prototypes that marry aesthetic luxury with peak functionality.",
     details: ["Visual Identity", "UI Systems", "Interactive Prototypes", "Motion Direction"]
   },
-  { 
-    step: "04", 
-    title: "Development", 
+  {
+    step: "04",
+    title: "Development",
     description: "Coding high-performance, smooth, and scalable digital ecosystems with meticulous attention to detail.",
     details: ["Frontend Craft", "Backend Systems", "Performance Tuning", "Quality Assurance"]
   },
@@ -52,18 +52,18 @@ export default function Process() {
                 Process
               </h2>
             </div>
-            
+
             <p className="max-w-md text-lg leading-relaxed text-foreground/40 font-medium">
               We've refined our methodology over a decade to ensure every project is launched with clinical precision and creative flair.
             </p>
 
             <div className="hidden lg:flex flex-col gap-8 opacity-20 group hover:opacity-100 transition-opacity duration-500">
-               {processSteps.map((s) => (
-                 <div key={s.step} className="flex items-center gap-6">
-                    <span className="text-xs font-bold font-mono">{s.step}</span>
-                    <div className="h-px w-24 bg-foreground" />
-                 </div>
-               ))}
+              {processSteps.map((s) => (
+                <div key={s.step} className="flex items-center gap-6">
+                  <span className="text-xs font-bold font-mono">{s.step}</span>
+                  <div className="h-px w-24 bg-foreground" />
+                </div>
+              ))}
             </div>
           </div>
 

@@ -210,8 +210,6 @@ export default function Hero() {
             </span>
           </span>
         </h1>
-
-
       </div>
 
 
