@@ -7,9 +7,10 @@ interface RollingTextProps {
   text: string;
   direction?: "left" | "right";
   baseVelocity?: number;
+  invert?: boolean;
 }
 
-function RollingText({ text, direction = "left", baseVelocity = 5 }: RollingTextProps) {
+function RollingText({ text, direction = "left", baseVelocity = 5, invert = false }: RollingTextProps) {
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -37,10 +38,10 @@ function RollingText({ text, direction = "left", baseVelocity = 5 }: RollingText
         style={{ x: xTranslate }}
         className="flex gap-12 md:gap-24 lg:gap-32 px-12 md:px-24"
       >
-        <span className="text-[5rem] font-black uppercase tracking-tighter text-foreground sm:text-[8rem] md:text-[10rem] lg:text-[12rem] leading-[0.8]">
+        <span className={invert ? "text-[5rem] font-black uppercase tracking-tighter text-foreground/10 sm:text-[8rem] md:text-[10rem] lg:text-[12rem] leading-[0.8]" : "text-[5rem] font-black uppercase tracking-tighter text-foreground sm:text-[8rem] md:text-[10rem] lg:text-[12rem] leading-[0.8]"}>
           {text}
         </span>
-        <span className="text-[5rem] font-black uppercase tracking-tighter text-foreground/10 sm:text-[8rem] md:text-[10rem] lg:text-[12rem] leading-[0.8]">
+        <span className={invert ? "text-[5rem] font-black uppercase tracking-tighter text-foreground sm:text-[8rem] md:text-[10rem] lg:text-[12rem] leading-[0.8]" : "text-[5rem] font-black uppercase tracking-tighter text-foreground/10 sm:text-[8rem] md:text-[10rem] lg:text-[12rem] leading-[0.8]"}>
           {text}
         </span>
         <span className="text-[5rem] font-black uppercase tracking-tighter text-foreground/5 sm:text-[8rem] md:text-[10rem] lg:text-[12rem] leading-[0.8]">
@@ -56,7 +57,7 @@ export default function ScrollingText() {
     <section className="relative z-10 overflow-hidden bg-background py-16 md:py-24 lg:py-32">
       <div className="flex flex-col gap-0 -space-y-4 md:-space-y-8 lg:-space-y-12">
         <RollingText text="Curious" direction="left" />
-        <RollingText text="Creative" direction="right" />
+        <RollingText text="Creative" direction="right" invert />
         <RollingText text="Innovative" direction="left" />
       </div>
 

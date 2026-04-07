@@ -1,6 +1,8 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
 import {
   motion,
@@ -181,9 +183,9 @@ function ServiceRow({
   service: (typeof services)[0];
   index: number;
 }) {
-  const ref = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const bgRef = useRef<HTMLDivElement>(null);
 
   // 3D tilt on hover
   const x = useMotionValue(0);
@@ -203,19 +205,54 @@ function ServiceRow({
     y.set(0);
   };
 
+  useEffect(() => {
+    let ctx = gsap.context(() => {
+      // Stack cards animation with ScrollTrigger
+      gsap.fromTo(
+        containerRef.current,
+        { opacity: 0, y: 100, scale: 0.95 },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 95%",
+            end: "top 40%",
+            scrub: true,
+          },
+        }
+      );
+
+      // Parallax inner background
+      if (bgRef.current) {
+        gsap.fromTo(
+          bgRef.current,
+          { y: "-10%" },
+          {
+            y: "10%",
+            ease: "none",
+            scrollTrigger: {
+              trigger: containerRef.current,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
+            },
+          }
+        );
+      }
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
+
   const Icon = service.icon;
   const isEven = index % 2 === 0;
 
   return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 60 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{
-        duration: 1.1,
-        ease: [0.16, 1, 0.3, 1],
-        delay: index * 0.08,
-      }}
+    <div
+      ref={containerRef}
       className="group"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
@@ -223,11 +260,16 @@ function ServiceRow({
       <motion.div
         ref={cardRef}
         style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-        className="relative overflow-hidden rounded-[32px] border border-white/[0.06] bg-gradient-to-br from-zinc-950 to-zinc-900/80 p-10 md:p-14 transition-all duration-700 hover:border-primary/25 hover:shadow-[0_40px_80px_-20px_rgba(0,10,30,0.8)]"
+        className="relative overflow-hidden rounded-[28px] border border-white/[0.06] bg-zinc-950 p-6 md:p-8 transition-all duration-700 hover:border-primary/25 hover:shadow-[0_40px_80px_-20px_rgba(0,10,30,0.8)]"
       >
+        <div
+          ref={bgRef}
+          className="absolute -inset-[20%] z-0 bg-gradient-to-br from-zinc-950 to-zinc-900/80 pointer-events-none"
+        />
+
         {/* Animated glow */}
         <div
-          className="absolute inset-0 z-0 opacity-0 transition-opacity duration-700 group-hover:opacity-100"
+          className="absolute inset-0 z-0 opacity-0 transition-opacity duration-700 group-hover:opacity-100 mix-blend-screen pointer-events-none"
           style={{
             background: `radial-gradient(circle at ${isEven ? "20% 50%" : "80% 50%"}, ${service.iconColor.replace("0.15", "0.08")} 0%, transparent 60%)`,
           }}
@@ -240,26 +282,26 @@ function ServiceRow({
           className="pointer-events-none absolute -top-1/2 left-0 h-[200%] w-1/3 bg-gradient-to-r from-transparent via-white/[0.025] to-transparent skew-x-[-25deg] z-0"
         />
 
-        <div className={`relative z-10 flex flex-col gap-10 lg:flex-row lg:items-start ${isEven ? "" : "lg:flex-row-reverse"}`}>
+        <div className={`relative z-10 flex flex-col gap-6 lg:flex-row lg:items-start ${isEven ? "" : "lg:flex-row-reverse"}`}>
           {/* Left column */}
-          <div className="flex flex-col gap-6 lg:w-[42%]">
-            <div className="flex items-end justify-between lg:flex-col lg:items-start lg:gap-8">
+          <div className="flex flex-col gap-4 lg:w-[42%]">
+            <div className="flex items-end justify-between lg:flex-col lg:items-start lg:gap-6">
               <div
-                className="flex h-16 w-16 items-center justify-center rounded-2xl border border-white/10 text-primary transition-all duration-500 group-hover:scale-110 group-hover:border-primary/30"
+                className="flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 text-primary transition-all duration-500 group-hover:scale-110 group-hover:border-primary/30"
                 style={{ background: service.iconColor }}
               >
-                <Icon size={28} strokeWidth={1.5} />
+                <Icon size={24} strokeWidth={1.5} />
               </div>
-              <span className="font-playfair text-[5rem] leading-none text-foreground/[0.07] transition-colors duration-500 group-hover:text-foreground/[0.12] md:text-[7rem]">
+              <span className="font-playfair text-[4rem] leading-none text-foreground/[0.07] transition-colors duration-500 group-hover:text-foreground/[0.12] md:text-[5.5rem]">
                 {service.num}
               </span>
             </div>
 
             <div>
-              <h2 className="text-3xl font-black uppercase tracking-tighter text-white md:text-4xl lg:text-5xl">
+              <h2 className="text-2xl font-black uppercase tracking-tighter text-white md:text-3xl lg:text-4xl">
                 {service.title}
               </h2>
-              <p className="mt-4 text-base font-medium leading-relaxed text-foreground/40 md:text-lg">
+              <p className="mt-3 text-sm font-medium leading-relaxed text-foreground/40 md:text-base">
                 {service.summary}
               </p>
             </div>
@@ -269,24 +311,24 @@ function ServiceRow({
           <div className="hidden lg:block lg:w-px lg:self-stretch bg-gradient-to-b from-transparent via-white/10 to-transparent" />
 
           {/* Right column */}
-          <div className="flex flex-col gap-8 lg:flex-1">
-            <p className="text-lg leading-relaxed text-foreground/55 md:text-xl">
+          <div className="flex flex-col gap-6 lg:flex-1">
+            <p className="text-base leading-relaxed text-foreground/55 md:text-lg">
               {service.description}
             </p>
 
             <div>
-              <p className="mb-4 text-[9px] font-bold uppercase tracking-[0.5em] text-foreground/30">
+              <p className="mb-3 text-[9px] font-bold uppercase tracking-[0.5em] text-foreground/30">
                 Typical Deliverables
               </p>
-              <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+              <ul className="grid grid-cols-1 gap-2 sm:grid-cols-2">
                 {service.deliverables.map((d) => (
                   <li key={d} className="flex items-center gap-3">
                     <CheckCircle2
-                      size={14}
+                      size={12}
                       className="flex-shrink-0 text-primary/60"
                       strokeWidth={2}
                     />
-                    <span className="text-sm font-medium text-foreground/50 transition-colors duration-300 group-hover:text-foreground/70">
+                    <span className="text-xs font-medium text-foreground/50 transition-colors duration-300 group-hover:text-foreground/70">
                       {d}
                     </span>
                   </li>
@@ -296,7 +338,7 @@ function ServiceRow({
           </div>
         </div>
       </motion.div>
-    </motion.div>
+    </div>
   );
 }
 
@@ -368,13 +410,12 @@ export default function ServicesPage() {
           </div>
 
           <FadeIn delay={0.3} className="max-w-2xl">
-            <p className="text-base md:text-xl text-foreground/40 font-medium leading-relaxed">
+            <p className="text-base md:text-xl text-foreground/40 font-medium leading-relaxed mb-16">
               One partner for narrative, interface, motion, and implementation.
               Engagements are scoped as retainers or phased SOWs — always with a
               visible critical path.
             </p>
           </FadeIn>
-
 
         </motion.div>
 
@@ -385,9 +426,9 @@ export default function ServicesPage() {
       </section>
 
       {/* ── 01. SERVICE CARDS ─────────────────────────────────────── */}
-      <section className="relative px-6 py-24 md:px-12 lg:px-20 bg-zinc-950/30">
+      <section className="relative px-6 py-20 md:px-12 lg:px-20 bg-zinc-950/30">
         <div className="mx-auto max-w-[1600px]">
-          <div className="mb-20 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <div className="mb-16 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <div>
               <RevealLine>
                 <h2 className="text-5xl font-black pr-2 uppercase tracking-tighter leading-[0.9] md:text-7xl">
@@ -403,10 +444,24 @@ export default function ServicesPage() {
 
           </div>
 
-          <div className="flex flex-col gap-6">
+          {/* Sticky stacking cards */}
+          <div className="relative">
             {services.map((service, index) => (
-              <ServiceRow key={service.num} service={service} index={index} />
+              <div
+                key={service.num}
+                className="sticky"
+                style={{
+                  top: `${88 + index * 18}px`,
+                  zIndex: index + 1,
+                  // Each stacked card is slightly smaller in block size
+                  paddingBottom: index < services.length - 1 ? "18px" : 0,
+                }}
+              >
+                <ServiceRow service={service} index={index} />
+              </div>
             ))}
+            {/* Scroll spacer so last card can fully stack */}
+            <div style={{ height: "40vh" }} />
           </div>
         </div>
 

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import Link from "next/link";
 import {
   motion,
@@ -9,6 +9,7 @@ import {
   useInView,
   useSpring,
   useMotionValue,
+  AnimatePresence,
 } from "framer-motion";
 import MagneticButton from "@/components/ui/MagneticButton";
 
@@ -19,21 +20,56 @@ const coreValues = [
     num: "01",
     title: "Growth Over Everything",
     body: "We measure success by your growth, not just by how good the work looks.",
+    image:
+      "https://images.unsplash.com/photo-1551434678-e076c223a692?w=720&h=900&fit=crop&q=80",
   },
   {
     num: "02",
     title: "Client First. Always.",
     body: "You're not a ticket number. We communicate, we listen, we deliver.",
+    image:
+      "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=720&h=900&fit=crop&q=80",
   },
   {
     num: "03",
     title: "Creativity Loves Strategy",
     body: "Beautiful work that doesn't convert is just decoration. We do both.",
+    image:
+      "https://images.unsplash.com/photo-1558655146-364adaf1fcc9?w=720&h=900&fit=crop&q=80",
   },
   {
     num: "04",
     title: "No Blending. Ever.",
     body: "We stand up for the right ideas — because safe is the riskiest move.",
+    image:
+      "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=720&h=900&fit=crop&q=80",
+  },
+];
+
+const milestones = [
+  {
+    year: "Then",
+    text: "Born from frustration with generic agencies.",
+    image:
+      "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=720&h=900&fit=crop&q=80",
+  },
+  {
+    year: "Early Days",
+    text: "First clients — brands no one knew about, brands everyone now loves.",
+    image:
+      "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=720&h=900&fit=crop&q=80",
+  },
+  {
+    year: "Growth",
+    text: "Expanded to video, strategy, and full digital ecosystems.",
+    image:
+      "https://images.unsplash.com/photo-1573164713988-8665fc963095?w=720&h=900&fit=crop&q=80",
+  },
+  {
+    year: "Now",
+    text: "A boutique powerhouse with global ambitions.",
+    image:
+      "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=720&h=900&fit=crop&q=80",
   },
 ];
 
@@ -42,25 +78,25 @@ const teamMembers = [
     name: "Manav",
     role: "Founder / Creative Director",
     image: "/images/team/manav.png",
-    bio: "Visionary leader pushing the boundaries of digital narrative and brand strategy."
+    bio: "Visionary leader pushing the boundaries of digital narrative and brand strategy.",
   },
   {
     name: "Ria",
     role: "Strategy & Growth Lead",
     image: "/images/team/ria.png",
-    bio: "Analytic powerhouse focused on scaling brands through data-driven storytelling."
+    bio: "Analytic powerhouse focused on scaling brands through data-driven storytelling.",
   },
   {
     name: "Dev",
     role: "Motion Designer",
     image: "/images/team/dev.png",
-    bio: "Master of movement, bringing static brands to life through cinematic motion design."
+    bio: "Master of movement, bringing static brands to life through cinematic motion design.",
   },
   {
     name: "Aryan",
     role: "Full-Stack Developer",
     image: "/images/team/aryan.png",
-    bio: "Architect of seamless digital experiences, bridging the gap between design and tech."
+    bio: "Architect of seamless digital experiences, bridging the gap between design and tech.",
   },
 ];
 
@@ -121,6 +157,64 @@ function FadeIn({
   );
 }
 
+/** Animated image panel — a clip-path wipe from bottom entering, wipe to top exiting */
+function HoverImagePanel({
+  activeIndex,
+  images,
+  label,
+}: {
+  activeIndex: number | null;
+  images: string[];
+  label?: string;
+}) {
+  return (
+    <div className="relative w-full h-full overflow-hidden rounded-3xl bg-zinc-900/40">
+      {/* Default idle state */}
+      <AnimatePresence>
+        {activeIndex === null && (
+          <motion.div
+            key="idle"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.4 }}
+            className="absolute inset-0 flex flex-col items-center justify-center gap-4 border border-white/[0.06] rounded-3xl"
+          >
+            <div className="w-12 h-px bg-white/10" />
+            <p className="text-[10px] font-bold uppercase tracking-[0.5em] text-white/15">
+              {label ?? "Hover to preview"}
+            </p>
+            <div className="w-12 h-px bg-white/10" />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Active image */}
+      <AnimatePresence mode="wait">
+        {activeIndex !== null && (
+          <motion.div
+            key={activeIndex}
+            initial={{ clipPath: "inset(100% 0% 0% 0%)" }}
+            animate={{ clipPath: "inset(0% 0% 0% 0%)" }}
+            exit={{ clipPath: "inset(0% 0% 100% 0%)" }}
+            transition={{ duration: 0.55, ease: [0.76, 0, 0.24, 1] }}
+            className="absolute inset-0 rounded-3xl overflow-hidden"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={images[activeIndex]}
+              alt=""
+              className="w-full h-full object-cover"
+            />
+            {/* Dark overlay gradient */}
+            <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
 function TeamCard({
   member,
   index,
@@ -131,7 +225,6 @@ function TeamCard({
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-60px" });
 
-  // Mouse tracking for tilt
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   const mouseXSpring = useSpring(x);
@@ -179,19 +272,17 @@ function TeamCard({
         }}
         className="relative h-full w-full overflow-hidden rounded-[32px] border border-white/5 bg-zinc-950 transition-all duration-700 group-hover:border-primary/20 group-hover:shadow-[0_40px_80px_-20px_rgba(0,10,30,0.8)]"
       >
-        {/* Large Portrait Background */}
         <div className="absolute inset-0 z-0">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={member.image}
             alt={member.name}
             className="h-full w-full object-cover transition-transform duration-1000 group-hover:scale-105"
           />
-          {/* Multi-layered Gradients for Editorial Reveal */}
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent opacity-60" />
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background opacity-90" />
         </div>
 
-        {/* Content Overlay */}
         <div className="absolute inset-0 z-10 flex flex-col justify-end p-8 md:p-12">
           <div className="space-y-4">
             <div className="overflow-hidden">
@@ -218,15 +309,12 @@ function TeamCard({
 
             <div className="mt-6 opacity-0 translate-y-4 transition-all duration-700 group-hover:opacity-60 group-hover:translate-y-0">
               <p className="max-w-[280px] text-xs font-medium leading-relaxed tracking-tight text-white/80 italic font-playfair">
-                "{member.bio}"
+                &ldquo;{member.bio}&rdquo;
               </p>
             </div>
-
-
           </div>
         </div>
 
-        {/* Floating Aura on Hover */}
         <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-primary/5 to-transparent opacity-0 transition-opacity duration-1000 group-hover:opacity-100" />
       </motion.div>
     </motion.div>
@@ -236,6 +324,9 @@ function TeamCard({
 // ─── Page ────────────────────────────────────────────────────────────────────
 
 export default function AboutPage() {
+  const [hoveredValue, setHoveredValue] = useState<number | null>(null);
+  const [hoveredMilestone, setHoveredMilestone] = useState<number | null>(null);
+
   const heroRef = useRef(null);
   const { scrollYProgress: heroScroll } = useScroll({
     target: heroRef,
@@ -252,15 +343,20 @@ export default function AboutPage() {
   });
   const storyRotate = useTransform(storyScroll, [0, 1], [4, -4]);
 
+  // Cursor-following image for "What We Stand For"
+  const cursorX = useMotionValue(-400);
+  const cursorY = useMotionValue(-400);
+  const floatX = useSpring(cursorX, { stiffness: 180, damping: 22 });
+  const floatY = useSpring(cursorY, { stiffness: 180, damping: 22 });
+
   return (
     <div className="bg-background text-foreground overflow-hidden">
 
       {/* ── 00. HERO ──────────────────────────────────────────────── */}
       <section
         ref={heroRef}
-        className="relative flex h-[90vh] min-h-[640px] flex-col items-center justify-center overflow-hidden"
+        className="relative flex h-[100vh] min-h-[640px] flex-col items-center justify-center overflow-hidden"
       >
-        {/* Decorative grid lines */}
         <div className="pointer-events-none absolute inset-0 opacity-[0.03]">
           {Array.from({ length: 6 }).map((_, i) => (
             <div
@@ -298,7 +394,7 @@ export default function AboutPage() {
           <FadeIn delay={0.3} className="max-w-xl">
             <p className="text-base md:text-lg text-foreground/40 font-medium leading-relaxed">
               This page is all about personality, purpose, and brand — we want a
-              reason to trust you before they've seen your portfolio.
+              reason to trust you before they&apos;ve seen your portfolio.
             </p>
           </FadeIn>
         </motion.div>
@@ -308,7 +404,6 @@ export default function AboutPage() {
       <section className="relative px-6 py-32 md:px-12 lg:px-20 md:py-44">
         <div className="mx-auto max-w-[1600px] grid gap-20 lg:grid-cols-[1fr_1.2fr] items-start">
           <div className="lg:sticky lg:top-40 space-y-6">
-
             <RevealLine>
               <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter leading-[0.9] mt-22">
                 Not an Agency.
@@ -316,7 +411,7 @@ export default function AboutPage() {
             </RevealLine>
             <RevealLine delay={0.08}>
               <h2 className="text-5xl md:text-7xl font-playfair font-normal italic text-primary leading-[0.9]">
-                We're Your Brand's Best Decision.
+                We&apos;re Your Brand&apos;s Best Decision.
               </h2>
             </RevealLine>
           </div>
@@ -356,7 +451,6 @@ export default function AboutPage() {
           </div>
         </div>
 
-        {/* Pulled from the right: massive faded number */}
         <div className="pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 -translate-x-[-8%] opacity-[0.025] select-none">
           <span className="text-[20rem] font-black leading-none">01</span>
         </div>
@@ -373,87 +467,136 @@ export default function AboutPage() {
             </RevealLine>
           </div>
 
-          <div className="grid gap-16 lg:grid-cols-2 items-center">
-            {/* 3D Midnight Perspective Card */}
-            <div className="relative group perspective-[2000px]">
+          {/* ── grid: card | milestones ── */}
+          <div className="grid gap-16 lg:grid-cols-[1.1fr_0.9fr] items-start">
+
+            {/* Left: 3D card that also shows hovered milestone image */}
+            <div className="lg:sticky lg:top-32 relative group perspective-[2000px]">
               <motion.div
                 style={{
                   rotateY: storyRotate,
                   transformStyle: "preserve-3d",
                 }}
-                className="relative overflow-hidden rounded-[48px] border border-white/[0.08] bg-gradient-to-br from-[#050a15] to-[#010204] p-12 md:p-20 shadow-[0_50px_100px_-30px_rgba(0,10,30,0.9)] transition-all duration-700"
+                className="relative overflow-hidden rounded-[48px] border border-white/[0.08] bg-gradient-to-br from-[#050a15] to-[#010204] shadow-[0_50px_100px_-30px_rgba(0,10,30,0.9)] transition-all duration-700"
               >
-                {/* 1. Magnetic Reactive Glow (Mouse Tracking Simulation via Gradient) */}
+                {/* Glow overlay */}
                 <div className="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000">
                   <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,var(--primary-blue)_0%,transparent_50%)] opacity-20 blur-[120px] mix-blend-screen" />
                 </div>
 
-                {/* 2. Abstract Geometric Background "Mesh" */}
+                {/* Geometric mesh background */}
                 <div className="absolute inset-0 z-0 opacity-[0.04] pointer-events-none overflow-hidden">
                   <div className="absolute top-0 left-0 w-full h-full bg-[linear-gradient(90deg,transparent_24.5%,rgba(255,255,255,0.1)_25%,rgba(255,255,255,0.1)_26%,transparent_27%,transparent_74.5%,rgba(255,255,255,0.1)_75%,rgba(255,255,255,0.1)_76%,transparent_77%),linear-gradient(0deg,transparent_24.5%,rgba(255,255,255,0.1)_25%,rgba(255,255,255,0.1)_26%,transparent_27%,transparent_74.5%,rgba(255,255,255,0.1)_75%,rgba(255,255,255,0.1)_76%,transparent_77%)] bg-[size:60px_60px]" />
                 </div>
 
-                {/* 3. Main Narrative Content */}
-                <motion.div style={{ translateZ: 80 }} className="relative z-10 w-full space-y-12">
-
-
-                  <div className="space-y-12">
-                    <h3 className="text-3xl md:text-5xl font-black uppercase tracking-tighter leading-[1.0] text-white">
-                      From <span className="text-primary glow-text transition-all duration-700 group-hover:brightness-125">Static Noise</span> <br />
-                      To <span className="font-playfair font-normal italic text-primary/70">Thoughtful Simplicity.</span>
-                    </h3>
-
-                    <div className="max-w-xl">
-                      <FadeIn delay={0.2}>
-                        <p className="text-lg md:text-2xl text-foreground/50 font-medium leading-[1.6] tracking-tight">
-                          We saw more brands struggle to get noticed —
-                          not because they weren't good, but because their
-                          <span className="text-white"> digital presence lacked a core truth.</span>
-                        </p>
-                      </FadeIn>
-                      <FadeIn delay={0.4}>
-                        <p className="mt-8 text-lg md:text-2xl text-foreground/50 font-medium leading-[1.6] tracking-tight">
-                          So we built Vyce: a studio that combines
-                          <span className="text-[#4D96FF] font-bold"> strategic logic </span>
-                          with
-                          <span className="font-playfair italic text-white/90"> editorial restraint </span>
-                          into one cohesive story.
-                        </p>
-                      </FadeIn>
-                    </div>
+                {/* Narrative Content - Always present but fades out when image is shown */}
+                <div
+                  className={`relative z-10 p-12 md:p-16 space-y-12 transition-opacity duration-500 ${hoveredMilestone !== null ? "opacity-0 pointer-events-none" : "opacity-100"
+                    }`}
+                >
+                  <h3 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-[1.0] text-white">
+                    From <span className="text-primary glow-text transition-all duration-700 group-hover:brightness-125">Static Noise</span> <br />
+                    To <span className="font-playfair font-normal italic text-primary/70">Thoughtful Simplicity.</span>
+                  </h3>
+                  <div className="max-w-2xl">
+                    <p className="text-xl md:text-2xl text-foreground/50 font-medium leading-[1.6] tracking-tight">
+                      We saw more brands struggle to get noticed —
+                      not because they weren&apos;t good, but because their{" "}
+                      <span className="text-white">digital presence lacked a core truth.</span>
+                    </p>
+                    <p className="mt-10 text-xl md:text-2xl text-foreground/50 font-medium leading-[1.6] tracking-tight">
+                      So we built Vyce: a studio that combines{" "}
+                      <span className="text-[#4D96FF] font-bold">strategic logic </span>
+                      with
+                      <span className="font-playfair italic text-white/90"> editorial restraint </span>
+                      into one cohesive story.
+                    </p>
                   </div>
+                </div>
 
+                {/* Hover image (milestone) */}
+                <AnimatePresence mode="wait">
+                  {hoveredMilestone !== null && (
+                    <motion.div
+                      key={`ms-img-${hoveredMilestone}`}
+                      initial={{ clipPath: "inset(100% 0% 0% 0%)" }}
+                      animate={{ clipPath: "inset(0% 0% 0% 0%)" }}
+                      exit={{ clipPath: "inset(0% 0% 100% 0%)" }}
+                      transition={{ duration: 0.55, ease: [0.76, 0, 0.24, 1] }}
+                      className="absolute inset-0 z-20 rounded-[48px] overflow-hidden"
+                    >
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={milestones[hoveredMilestone].image}
+                        alt={milestones[hoveredMilestone].year}
+                        className="w-full h-full object-cover scale-105"
+                      />
+                      {/* Overlay with milestone label */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent" />
+                      <div className="absolute bottom-0 left-0 p-10 z-30">
+                        <motion.p
+                          initial={{ y: 20, opacity: 0 }}
+                          animate={{ y: 0, opacity: 1 }}
+                          transition={{ delay: 0.25, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                          className="text-[10px] font-bold uppercase tracking-[0.5em] text-primary mb-2"
+                        >
+                          {milestones[hoveredMilestone].year}
+                        </motion.p>
+                        <motion.p
+                          initial={{ y: 20, opacity: 0 }}
+                          animate={{ y: 0, opacity: 1 }}
+                          transition={{ delay: 0.32, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                          className="text-white font-black text-2xl md:text-3xl uppercase tracking-tighter leading-tight"
+                        >
+                          {milestones[hoveredMilestone].text}
+                        </motion.p>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
 
-                </motion.div>
-
-                {/* 4. Active Corner Light Sweep */}
+                {/* Light sweep */}
                 <motion.div
                   animate={{ x: ["-100%", "200%"] }}
                   transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                  className="absolute -top-1/2 -left-1/2 w-full h-[200%] bg-gradient-to-r from-transparent via-primary/5 to-transparent skew-x-[-35deg]"
+                  className="absolute -top-1/2 -left-1/2 w-full h-[200%] bg-gradient-to-r from-transparent via-primary/5 to-transparent skew-x-[-35deg] z-10 pointer-events-none"
                 />
               </motion.div>
 
-              {/* Unique Outer "Aura" Glow */}
+              {/* Outer aura glow */}
               <div className="absolute -inset-1 rounded-[48px] bg-gradient-to-br from-primary/20 via-transparent to-transparent opacity-0 group-hover:opacity-50 blur-xl transition-all duration-1000 -z-10" />
             </div>
 
-            {/* Scrolling milestones */}
-            <div className="space-y-10">
-              {[
-                { year: "Then", text: "Born from frustration with generic agencies." },
-                { year: "Early Days", text: "First clients — brands no one knew about, brands everyone now loves." },
-                { year: "Growth", text: "Expanded to video, strategy, and full digital ecosystems." },
-                { year: "Now", text: "A boutique powerhouse with global ambitions." },
-              ].map((m, i) => (
+            {/* Right: Milestone items */}
+            <div className="space-y-0 divide-y divide-white/5">
+              {milestones.map((m, i) => (
                 <FadeIn key={m.year} delay={i * 0.1}>
-                  <div className="group flex items-start gap-8 border-b border-white/5 pb-10 last:border-0 last:pb-0">
-                    <span className="font-playfair text-5xl italic text-primary/20 transition-colors group-hover:text-primary/60 leading-none mt-1">
+                  <div
+                    className={`group flex items-start gap-8 cursor-default transition-all duration-300 hover:px-3 ${i === 0 ? "pt-12 md:pt-16 pb-10" : "py-10"
+                      }`}
+                    onMouseEnter={() => setHoveredMilestone(i)}
+                    onMouseLeave={() => setHoveredMilestone(null)}
+                  >
+                    <span className="font-playfair text-5xl italic text-primary/20 transition-colors duration-500 group-hover:text-primary/70 leading-none mt-1 flex-shrink-0">
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    <div>
-                      <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-primary mb-2">{m.year}</p>
-                      <p className="text-foreground/50 font-medium leading-relaxed">{m.text}</p>
+                    <div className="flex-1">
+                      <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-primary mb-2 transition-opacity duration-300">
+                        {m.year}
+                      </p>
+                      <p className="text-foreground/50 font-medium leading-relaxed group-hover:text-foreground/80 transition-colors duration-500">
+                        {m.text}
+                      </p>
+                    </div>
+                    {/* Arrow indicator */}
+                    <div className="hidden md:flex items-center self-center">
+                      <motion.div
+                        animate={hoveredMilestone === i ? { x: 0, opacity: 1 } : { x: -8, opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="text-primary text-sm font-bold"
+                      >
+                        →
+                      </motion.div>
                     </div>
                   </div>
                 </FadeIn>
@@ -470,7 +613,6 @@ export default function AboutPage() {
       {/* ── 03. MISSION & VISION ─────────────────────────────────── */}
       <section className="relative px-6 py-32 md:px-12 lg:px-20 overflow-hidden">
         <div className="mx-auto max-w-[1600px]">
-
           <div className="mt-8 grid gap-16 lg:grid-cols-2 items-end">
             <div>
               <RevealLine>
@@ -479,10 +621,8 @@ export default function AboutPage() {
                 </h2>
               </RevealLine>
             </div>
-
           </div>
 
-          {/* Two-card layout */}
           <div className="mt-20 grid gap-6 md:grid-cols-2">
             {[
               { label: "Mission", headline: "Empower every brand to compete at the highest level." },
@@ -507,7 +647,10 @@ export default function AboutPage() {
       </section>
 
       {/* ── 04. CORE VALUES ──────────────────────────────────────── */}
-      <section className="relative px-6 py-32 md:px-12 lg:px-20 bg-zinc-950/30 overflow-hidden">
+      <section
+        className="relative px-6 py-32 md:px-12 lg:px-20 bg-zinc-950/30 overflow-hidden"
+        onMouseLeave={() => setHoveredValue(null)}
+      >
         <div className="mx-auto max-w-[1600px]">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-24">
             <div>
@@ -517,28 +660,81 @@ export default function AboutPage() {
                 </h2>
               </RevealLine>
             </div>
-
           </div>
 
-          <div className="grid gap-0 divide-y divide-white/5">
-            {coreValues.map((v, i) => (
-              <FadeIn key={v.num} delay={i * 0.1}>
-                <div className="group flex items-start gap-8 py-10 transition-all duration-300 hover:px-4">
-                  <span className="font-playfair text-5xl italic text-primary/20 transition-colors duration-500 group-hover:text-primary/80 leading-none mt-1 flex-shrink-0">
-                    {v.num}
-                  </span>
-                  <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-16 flex-1">
-                    <h3 className="text-xl md:text-2xl font-black uppercase tracking-tight leading-tight flex-shrink-0 md:w-64">
-                      {v.title}
-                    </h3>
-                    <p className="text-foreground/40 font-medium leading-relaxed group-hover:text-foreground/70 transition-colors duration-500">
-                      {v.body}
-                    </p>
+          {/* 2-col: value rows | right image panel */}
+          <div className="grid gap-12 lg:grid-cols-[1fr_380px] items-center">
+
+            {/* Left: value rows */}
+            <div className="divide-y divide-white/5">
+              {coreValues.map((v, i) => (
+                <FadeIn key={v.num} delay={i * 0.1}>
+                  <div
+                    className="group flex items-start gap-8 py-12 transition-all duration-300 hover:pl-4 cursor-default"
+                    onMouseEnter={() => setHoveredValue(i)}
+                    onMouseLeave={() => setHoveredValue(null)}
+                  >
+                    <span className="font-playfair text-6xl italic text-primary/20 transition-colors duration-500 group-hover:text-primary/80 leading-none mt-1 flex-shrink-0 w-20">
+                      {v.num}
+                    </span>
+                    <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-16 flex-1">
+                      <h3 className="text-2xl md:text-3xl font-black uppercase tracking-tight leading-tight flex-shrink-0 md:w-72 group-hover:text-white transition-colors duration-300">
+                        {v.title}
+                      </h3>
+                      <p className="text-foreground/40 text-lg font-medium leading-relaxed group-hover:text-foreground/70 transition-colors duration-500">
+                        {v.body}
+                      </p>
+                    </div>
+                    <div className="hidden md:block h-px w-0 group-hover:w-10 bg-primary self-center transition-all duration-500 flex-shrink-0" />
                   </div>
-                  <div className="hidden md:block h-px flex-shrink-0 w-8 bg-foreground/10 mt-4 transition-all duration-500 group-hover:w-16 group-hover:bg-primary" />
-                </div>
-              </FadeIn>
-            ))}
+                </FadeIn>
+              ))}
+            </div>
+
+            {/* Right: fixed image panel with earthycrafts-style animate */}
+            <div className="hidden lg:block relative h-[480px]">
+              <AnimatePresence mode="wait">
+                {hoveredValue !== null ? (
+                  <motion.div
+                    key={`img-${hoveredValue}`}
+                    initial={{ opacity: 0, scale: 0.82, y: 24, rotate: hoveredValue % 2 === 0 ? -6 : 6 }}
+                    animate={{ opacity: 1, scale: 1, y: 0, rotate: hoveredValue % 2 === 0 ? 2 : -2 }}
+                    exit={{ opacity: 0, scale: 0.88, y: -16 }}
+                    transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                    className="absolute inset-0 rounded-2xl overflow-hidden shadow-[0_32px_80px_-16px_rgba(0,0,0,0.8)] border border-white/10"
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={coreValues[hoveredValue].image}
+                      alt={coreValues[hoveredValue].title}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+                    <div className="absolute bottom-0 left-0 p-6">
+                      <p className="text-[9px] font-bold uppercase tracking-[0.5em] text-primary mb-1">
+                        {coreValues[hoveredValue].num}
+                      </p>
+                      <p className="text-white text-sm font-black uppercase tracking-tight">
+                        {coreValues[hoveredValue].title}
+                      </p>
+                    </div>
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="idle"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="absolute inset-0 rounded-2xl border border-white/[0.06] flex items-center justify-center"
+                  >
+                    <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-white/15">
+                      Hover to reveal
+                    </p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
           </div>
         </div>
 
@@ -551,7 +747,6 @@ export default function AboutPage() {
       <section className="relative px-6 py-32 md:px-12 lg:px-20 overflow-hidden">
         <div className="mx-auto max-w-[1600px]">
           <div className="mb-20">
-
             <RevealLine className="mt-4">
               <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter leading-[0.9]">
                 The Humans Behind the Work
@@ -559,7 +754,7 @@ export default function AboutPage() {
             </RevealLine>
             <FadeIn delay={0.2} className="mt-8">
               <p className="max-w-xl text-lg text-foreground/40 font-medium leading-relaxed">
-                We're a tight-knit crew of designers, strategists, videographers,
+                We&apos;re a tight-knit crew of designers, strategists, videographers,
                 and developers who genuinely love what we do. Every project gets
                 our full attention — no token visitors.
               </p>
@@ -583,7 +778,6 @@ export default function AboutPage() {
         <div className="mx-auto max-w-[1600px] grid gap-20 lg:grid-cols-2 items-center">
           <div className="space-y-10">
             <div>
-
               <RevealLine className="mt-4">
                 <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter leading-[0.9]">
                   A Lot of Agencies.
@@ -615,21 +809,18 @@ export default function AboutPage() {
                   href="/contact"
                   className="group inline-flex items-center gap-4 rounded-full bg-primary px-10 py-5 text-[11px] font-black uppercase tracking-[0.3em] text-background transition-all duration-300 hover:bg-primary/90 hover:scale-105 active:scale-95"
                 >
-                  Let's Talk →
+                  Let&apos;s Talk →
                 </Link>
               </MagneticButton>
             </FadeIn>
           </div>
 
-          {/* Right: Big typographic number */}
           <FadeIn delay={0.1} className="hidden lg:flex items-center justify-center">
             <div className="relative w-full aspect-square max-w-[480px] flex flex-col items-center justify-center">
               <div className="rounded-full border border-white/5 bg-zinc-900/50 w-full h-full flex flex-col items-center justify-center gap-6 p-16">
-
                 <span className="text-[8rem] font-black tracking-tighter leading-none text-white/10">
                   VYCE
                 </span>
-
               </div>
               <div className="absolute inset-0 rounded-full bg-primary/5 blur-[80px] -z-10" />
             </div>

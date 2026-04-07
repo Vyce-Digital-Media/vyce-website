@@ -14,18 +14,19 @@ gsap.registerPlugin(ScrollTrigger);
 const mouseNDC = { x: -999, y: -999 };
 
 // ─── Particle Swarm with Mouse Repulsion ─────────────────────────────────────
-function ParticleSwarm({ count = 9000 }: { count?: number }) {
+function ParticleSwarm({ count = 12000 }: { count?: number }) {
   const pointsRef = useRef<THREE.Points>(null);
 
-  // origins: where each particle lives at rest
+  // Camera fov=60, z=5 → visible half-height = tan(30°)*5 ≈ 2.89, half-width ≈ 5.14 for 16:9
+  // Spread particles to exactly cover the full visible frustum with some margin
   const { positions, origins, velocities } = useMemo(() => {
     const positions = new Float32Array(count * 3);
     const origins = new Float32Array(count * 3);
     const velocities = new Float32Array(count * 3);
     for (let i = 0; i < count; i++) {
-      const x = (Math.random() - 0.5) * 14;
-      const y = (Math.random() - 0.5) * 8;
-      const z = (Math.random() - 0.5) * 4;
+      const x = (Math.random() - 0.5) * 12;  // ±6 covers full width incl. ultrawide
+      const y = (Math.random() - 0.5) * 7;   // ±3.5 covers full viewport height
+      const z = (Math.random() - 0.5) * 2;
       positions[i * 3] = origins[i * 3] = x;
       positions[i * 3 + 1] = origins[i * 3 + 1] = y;
       positions[i * 3 + 2] = origins[i * 3 + 2] = z;
@@ -109,16 +110,26 @@ export default function Hero() {
   const ctaRef = useRef<HTMLDivElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  // Track mouse NDC on the section
-  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    mouseNDC.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-    mouseNDC.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
-  };
-  const handleMouseLeave = () => {
-    mouseNDC.x = -999;
-    mouseNDC.y = -999;
-  };
+  // Track mouse NDC across the FULL hero section via window-level listener
+  useEffect(() => {
+    const handleWindowMouseMove = (e: MouseEvent) => {
+      const rect = heroRef.current?.getBoundingClientRect();
+      if (!rect) return;
+      // Only track while cursor is within the hero section
+      mouseNDC.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+      mouseNDC.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+    };
+    const handleWindowMouseLeave = () => {
+      mouseNDC.x = -999;
+      mouseNDC.y = -999;
+    };
+    window.addEventListener("mousemove", handleWindowMouseMove);
+    window.addEventListener("mouseleave", handleWindowMouseLeave);
+    return () => {
+      window.removeEventListener("mousemove", handleWindowMouseMove);
+      window.removeEventListener("mouseleave", handleWindowMouseLeave);
+    };
+  }, []);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -155,8 +166,6 @@ export default function Hero() {
   return (
     <section
       ref={heroRef}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
       className="relative flex h-dvh min-h-[700px] w-full flex-col items-center justify-center overflow-hidden bg-background"
     >
       {/* Particle Background */}
@@ -166,9 +175,8 @@ export default function Hero() {
         </Canvas>
       </div>
 
-      {/* Gradient Overlays */}
-      <div className="absolute inset-0 z-[2] bg-gradient-to-b from-background/80 via-transparent to-background pointer-events-none" />
-      <div className="absolute inset-0 z-[2] bg-[radial-gradient(ellipse_at_center,transparent_30%,var(--background)_80%)] pointer-events-none" />
+      {/* Gradient Overlays — only a subtle bottom fade for text readability */}
+      <div className="absolute bottom-0 left-0 right-0 h-40 z-[2] bg-gradient-to-t from-background to-transparent pointer-events-none" />
 
       {/* Content */}
       <div ref={containerRef} className="relative z-10 flex w-full max-w-[1400px] flex-col items-center px-6 md:px-12">

@@ -5,7 +5,7 @@ import Hero from "@/components/sections/Hero";
 import Process from "@/components/sections/Process";
 import StatsBox from "@/components/sections/StatsBox";
 import ServicesGrid from "@/components/sections/ServicesGrid";
-import FanPortfolio from "@/components/sections/FanPortfolio";
+import ExploreCollection from "@/components/sections/ImageScroller3D";
 import ScrollingText from "@/components/sections/ScrollingText";
 import MagneticButton from "@/components/ui/MagneticButton";
 import Link from "next/link";
@@ -19,8 +19,8 @@ export default function Home() {
 
       <StatsBox />
 
-      {/* New 3D Fan Portfolio Experience */}
-      <FanPortfolio />
+      {/* New 3D ImageScroller Portfolio Experience */}
+      <ExploreCollection />
 
       <ScrollingText />
 
