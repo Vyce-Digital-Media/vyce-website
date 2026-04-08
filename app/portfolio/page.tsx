@@ -204,8 +204,8 @@ export default function PortfolioPage() {
 
   // Map progress to exact indices linearly
   const length = filtered.length;
-  // Make the track longer so there's plenty of scrolling room per item (150vh per item)
-  const trackHeight = `${length * 150}vh`;
+  // Reduce the track length so cards flip faster per scroll tick (80vh per item instead of 150vh)
+  const trackHeight = `${length * 80}vh`;
   const linearProgress = useTransform(galleryProgress, [0, 1], [0, length - 1]);
 
   // Create a snapped progress integer

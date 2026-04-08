@@ -245,13 +245,7 @@ export default function WebExperiencesPage() {
           </FadeIn>
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1, duration: 1 }}
-          className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 text-foreground/20 font-mono text-xs z-10"
-        >
-          <div className="w-px h-12 bg-gradient-to-b from-foreground/0 via-foreground/50 to-foreground/0" />
-          <span>Scroll</span>
-        </motion.div>
+
       </section>
 
       {/* ── 02. HORIZONTAL SCROLL ─────────────────────────────────── */}

@@ -45,7 +45,7 @@ function HeroSection() {
 
       // Initially, image wrapper sits on the right half with some padding
       gsap.set(imageWrapperRef.current, {
-        clipPath: "inset(10% 5% 10% 50% round 30px)"
+        clipPath: "inset(15% 5% 10% 50% round 30px)"
       });
 
       tl.to(textRef.current, {
@@ -162,7 +162,7 @@ function FloatingGallery() {
   }, []);
 
   return (
-    <section ref={containerRef} className="relative h-[250vh] w-full overflow-hidden bg-background z-30">
+    <section ref={containerRef} className="relative h-[180vh] w-full overflow-hidden bg-background z-30">
       {/* Background Typography pinned to center via sticky */}
       <div className="sticky top-0 h-screen flex items-center justify-center pointer-events-none opacity-5 w-full">
         <h2 className="text-[20vw] font-black uppercase tracking-tighter mix-blend-overlay">Gallery</h2>
@@ -171,7 +171,7 @@ function FloatingGallery() {
       {/* Positioned Images - We remove `animate` and let user freely drag */}
 
       {/* TOP */}
-      <div className="absolute top-[10%] left-[50%] -translate-x-1/2 w-[240px] md:w-[300px] aspect-[4/5] float-wrapper z-20" data-speed="1.5">
+      <div className="absolute top-[40%] left-[50%] -translate-x-1/2 w-[240px] md:w-[300px] aspect-[4/5] float-wrapper z-20" data-speed="1.5">
         <motion.div
           drag dragConstraints={{ top: -150, bottom: 150, left: -200, right: 200 }} dragElastic={0.1}
           whileHover={{ scale: 1.02 }} whileDrag={{ scale: 1.1, rotate: -2, zIndex: 50, cursor: "grabbing" }}
@@ -182,7 +182,7 @@ function FloatingGallery() {
       </div>
 
       {/* LEFT */}
-      <div className="absolute top-[35%] left-[5%] md:left-[10%] w-[280px] md:w-[350px] aspect-[4/5] float-wrapper z-10" data-speed="2.2">
+      <div className="absolute top-[75%] left-[5%] md:left-[10%] w-[280px] md:w-[350px] aspect-[4/5] float-wrapper z-10" data-speed="2.2">
         <motion.div
           drag dragConstraints={{ top: -150, bottom: 150, left: -200, right: 200 }} dragElastic={0.1}
           whileHover={{ scale: 1.02 }} whileDrag={{ scale: 1.1, rotate: 3, zIndex: 50, cursor: "grabbing" }}
@@ -193,7 +193,7 @@ function FloatingGallery() {
       </div>
 
       {/* CENTER */}
-      <div className="absolute top-[45%] left-[50%] -translate-x-1/2 w-[320px] md:w-[450px] aspect-video float-wrapper z-30" data-speed="1.2">
+      <div className="absolute top-[75%] left-[50%] -translate-x-1/2 w-[320px] md:w-[450px] aspect-video float-wrapper z-30" data-speed="1.2">
         <motion.div
           drag dragConstraints={{ top: -150, bottom: 150, left: -200, right: 200 }} dragElastic={0.1}
           whileHover={{ scale: 1.02 }} whileDrag={{ scale: 1.1, rotate: -1, zIndex: 50, cursor: "grabbing" }}
@@ -204,7 +204,7 @@ function FloatingGallery() {
       </div>
 
       {/* RIGHT */}
-      <div className="absolute top-[50%] right-[5%] md:right-[10%] w-[250px] md:w-[320px] aspect-[3/4] float-wrapper z-20" data-speed="1.8">
+      <div className="absolute top-[70%] right-[5%] md:right-[10%] w-[250px] md:w-[320px] aspect-[3/4] float-wrapper z-20" data-speed="1.8">
         <motion.div
           drag dragConstraints={{ top: -150, bottom: 150, left: -200, right: 200 }} dragElastic={0.1}
           whileHover={{ scale: 1.02 }} whileDrag={{ scale: 1.1, rotate: 4, zIndex: 50, cursor: "grabbing" }}
@@ -214,8 +214,30 @@ function FloatingGallery() {
         </motion.div>
       </div>
 
+      {/* BOTTOM LEFT */}
+      <div className="absolute top-[100%] left-[20%] -translate-x-1/2 w-[240px] md:w-[300px] aspect-[4/5] float-wrapper z-20" data-speed="1.5">
+        <motion.div
+          drag dragConstraints={{ top: -150, bottom: 150, left: -200, right: 200 }} dragElastic={0.1}
+          whileHover={{ scale: 1.02 }} whileDrag={{ scale: 1.1, rotate: -2, zIndex: 50, cursor: "grabbing" }}
+          className="w-full h-full cursor-grab overflow-hidden rounded-[30px] border border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.5)]"
+        >
+          <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80" alt="Top" className="w-full h-full object-cover pointer-events-none" />
+        </motion.div>
+      </div>
+
+      {/* BOTTOM RIGHT */}
+      <div className="absolute top-[100%] right-[0%] -translate-x-1/2 w-[240px] md:w-[300px] aspect-[4/5] float-wrapper z-20" data-speed="1.5">
+        <motion.div
+          drag dragConstraints={{ top: -150, bottom: 150, left: -200, right: 200 }} dragElastic={0.1}
+          whileHover={{ scale: 1.02 }} whileDrag={{ scale: 1.1, rotate: -2, zIndex: 50, cursor: "grabbing" }}
+          className="w-full h-full cursor-grab overflow-hidden rounded-[30px] border border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.5)]"
+        >
+          <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80" alt="Top" className="w-full h-full object-cover pointer-events-none" />
+        </motion.div>
+      </div>
+
       {/* BOTTOM */}
-      <div className="absolute top-[75%] left-[50%] -translate-x-1/2 w-[300px] md:w-[400px] aspect-square float-wrapper z-10" data-speed="0.9">
+      <div className="absolute top-[90%] left-[50%] -translate-x-1/2 w-[300px] md:w-[400px] aspect-square float-wrapper z-10" data-speed="0.9">
         <motion.div
           drag dragConstraints={{ top: -150, bottom: 150, left: -200, right: 200 }} dragElastic={0.1}
           whileHover={{ scale: 1.02 }} whileDrag={{ scale: 1.1, rotate: -3, zIndex: 50, cursor: "grabbing" }}

@@ -45,7 +45,7 @@ const expressions = [
   {
     title: "Typography",
     description: "The silent voice of your brand. We curate type stacks that balance editorial elegance with maximum digital legibility.",
-    image: "https://images.unsplash.com/photo-1600100612665-2746c827be9b?w=900&h=600&fit=crop&q=80"
+    image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=1200&h=800&fit=crop&q=80"
   },
   {
     title: "Color Logic",
@@ -55,7 +55,7 @@ const expressions = [
   {
     title: "Art Direction",
     description: "Strict guidelines for photography, 3D, and layout to ensure every asset feels undeniably yours.",
-    image: "https://images.unsplash.com/photo-1606788075819-2b0bbca0b0eb?w=900&h=600&fit=crop&q=80"
+    image: "https://images.unsplash.com/photo-1542744094-24638eff58bb?w=1200&h=800&fit=crop&q=80"
   }
 ];
 
@@ -302,12 +302,7 @@ export default function BrandingPage() {
           </FadeIn>
         </motion.div>
         
-        <motion.div 
-          initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1, duration: 1 }}
-          className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 text-foreground/20 font-mono text-xs z-10"
-        >
-          <div className="w-px h-12 bg-gradient-to-b from-foreground/0 via-foreground/50 to-foreground/0" />
-        </motion.div>
+
       </section>
 
       {/* ── 02. HORIZONTAL SCROLL (MID-PAGE ENERGY) ───────────────── */}
