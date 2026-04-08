@@ -42,6 +42,7 @@ const services = [
       "Typography & color tokens",
       "Brand guidelines site or PDF",
     ],
+    href: "/services/branding",
   },
   {
     num: "02",
@@ -58,6 +59,7 @@ const services = [
       "Next.js implementation",
       "Analytics & SEO foundations",
     ],
+    href: "/services/web-experiences",
   },
   {
     num: "03",
@@ -74,6 +76,7 @@ const services = [
       "Prototypes & usability tests",
       "Design QA with engineering",
     ],
+    href: "/services/product-design",
   },
   {
     num: "04",
@@ -90,6 +93,7 @@ const services = [
       "Experimentation backlog",
       "Reporting templates",
     ],
+    href: "/services/digital-growth",
   },
 ];
 
@@ -205,27 +209,14 @@ function ServiceRow({
     y.set(0);
   };
 
+  const Icon = service.icon;
+  const isEven = index % 2 === 0;
+
+  // Let the parent manage the complex GSAP pinning & timeline!
+  // Remove the simple scroll trigger that conflicts with parents pinning.
   useEffect(() => {
     let ctx = gsap.context(() => {
-      // Stack cards animation with ScrollTrigger
-      gsap.fromTo(
-        containerRef.current,
-        { opacity: 0, y: 100, scale: 0.95 },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top 95%",
-            end: "top 40%",
-            scrub: true,
-          },
-        }
-      );
-
-      // Parallax inner background
+      // Parallax inner background (still fine to keep)
       if (bgRef.current) {
         gsap.fromTo(
           bgRef.current,
@@ -243,17 +234,13 @@ function ServiceRow({
         );
       }
     }, containerRef);
-
     return () => ctx.revert();
   }, []);
-
-  const Icon = service.icon;
-  const isEven = index % 2 === 0;
 
   return (
     <div
       ref={containerRef}
-      className="group"
+      className="group w-full max-w-[1600px] mx-auto"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
@@ -335,6 +322,16 @@ function ServiceRow({
                 ))}
               </ul>
             </div>
+
+            <div className="mt-8 flex items-center">
+              <Link
+                href={service.href}
+                className="group inline-flex items-center gap-3 rounded-full bg-primary/10 border border-primary/20 px-6 py-3 text-[10px] font-black uppercase tracking-[0.2em] text-primary transition-all duration-300 hover:bg-primary hover:text-background hover:scale-105"
+              >
+                View More
+                <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
+              </Link>
+            </div>
           </div>
         </div>
       </motion.div>
@@ -343,6 +340,70 @@ function ServiceRow({
 }
 
 // ─── Page ─────────────────────────────────────────────────────────────────
+
+function DeckingCards({ servicesList, titleNode }: { servicesList: typeof services; titleNode: React.ReactNode }) {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    let ctx = gsap.context(() => {
+      const cards = gsap.utils.toArray<HTMLElement>('.deck-card');
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 12%", // Pin when the title reaches the top
+          end: `+=${cards.length * 90}%`,
+          pin: true,
+          scrub: 1, // Slight scrub delay for smoother feeling
+        }
+      });
+
+      cards.forEach((card, i) => {
+        if (i > 0) {
+          // Add a label for this card's entrance
+          tl.addLabel(`card-${i}`);
+
+          // Card enters from bottom
+          tl.from(card, {
+            y: window.innerHeight,
+            ease: "power2.out"
+          }, `card-${i}`);
+
+          // Simultaneously scale down ALL previous cards
+          for (let j = 0; j < i; j++) {
+            tl.to(cards[j], {
+              scale: "-=0.04", // Shrink further with each new card
+              y: "-=15",      // Move up slightly with each new card
+              opacity: "-=0.15", // Dim further with each new card
+              ease: "power2.out"
+            }, `card-${i}`);
+          }
+        }
+      });
+    }, containerRef);
+    return () => ctx.revert();
+  }, [servicesList]);
+
+  return (
+    <div ref={containerRef} className="relative w-full hidden md:block">
+      {/* Pinned Title Layer */}
+      {titleNode}
+
+      {/* Pinned Stacking Cards Layer */}
+      <div className="relative h-[75vh] w-full mt-0 lg:-mt-4">
+        {servicesList.map((service, index) => (
+          <div
+            key={service.num}
+            className="deck-card absolute w-full top-0 left-0"
+            style={{ zIndex: index + 1 }}
+          >
+            <ServiceRow service={service} index={index} />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export default function ServicesPage() {
   // Hero parallax
@@ -419,55 +480,55 @@ export default function ServicesPage() {
 
         </motion.div>
 
-        {/* Massive faded sector label */}
-        <div className="pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 opacity-[0.025] select-none">
-          <span className="text-[20rem] font-black leading-none">00</span>
-        </div>
+
       </section>
 
       {/* ── 01. SERVICE CARDS ─────────────────────────────────────── */}
-      <section className="relative px-6 py-20 md:px-12 lg:px-20 bg-zinc-950/30">
+      <section className="relative px-6 py-24 md:px-12 lg:px-20 bg-zinc-950/30 overflow-hidden">
         <div className="mx-auto max-w-[1600px]">
-          <div className="mb-16 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-            <div>
-              <RevealLine>
-                <h2 className="text-5xl font-black pr-2 uppercase tracking-tighter leading-[0.9] md:text-7xl">
-                  What We Do
-                </h2>
-              </RevealLine>
-              <RevealLine delay={0.08}>
-                <h2 className="text-5xl font-playfair font-normal italic text-primary leading-[0.9] md:text-7xl">
-                  Best.
-                </h2>
-              </RevealLine>
-            </div>
-
-          </div>
-
-          {/* Sticky stacking cards */}
-          <div className="relative">
-            {services.map((service, index) => (
-              <div
-                key={service.num}
-                className="sticky"
-                style={{
-                  top: `${88 + index * 18}px`,
-                  zIndex: index + 1,
-                  // Each stacked card is slightly smaller in block size
-                  paddingBottom: index < services.length - 1 ? "18px" : 0,
-                }}
-              >
-                <ServiceRow service={service} index={index} />
+          <DeckingCards
+            servicesList={services}
+            titleNode={
+              <div className="mb-16 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+                <div>
+                  <RevealLine>
+                    <h2 className="text-5xl font-black pr-2 uppercase tracking-tighter leading-[0.9] md:text-7xl">
+                      What We Do
+                    </h2>
+                  </RevealLine>
+                  <RevealLine delay={0.08}>
+                    <h2 className="text-5xl font-playfair font-normal italic mb-8 text-primary leading-[0.9] md:text-7xl">
+                      Best.
+                    </h2>
+                  </RevealLine>
+                </div>
               </div>
+            }
+          />
+
+          {/* Fallback for mobile since pinning is better on desktop */}
+          <div className="relative md:hidden flex flex-col gap-8 pb-12 mt-16">
+            <div className="mb-8 flex flex-col gap-6">
+              <div>
+                <RevealLine>
+                  <h2 className="text-5xl font-black pr-2 uppercase tracking-tighter leading-[0.9]">
+                    What We Do
+                  </h2>
+                </RevealLine>
+                <RevealLine delay={0.08}>
+                  <h2 className="text-5xl font-playfair font-normal italic text-primary leading-[0.9]">
+                    Best.
+                  </h2>
+                </RevealLine>
+              </div>
+            </div>
+            {services.map((service, index) => (
+              <ServiceRow key={service.num} service={service} index={index} />
             ))}
-            {/* Scroll spacer so last card can fully stack */}
-            <div style={{ height: "40vh" }} />
           </div>
         </div>
 
-        <div className="pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 opacity-[0.025] select-none">
-          <span className="text-[20rem] font-black leading-none">01</span>
-        </div>
+
       </section>
 
       {/* ── 02. PROCESS ───────────────────────────────────────────── */}
@@ -561,9 +622,7 @@ export default function ServicesPage() {
           </div>
         </div>
 
-        <div className="pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 opacity-[0.025] select-none">
-          <span className="text-[20rem] font-black leading-none">02</span>
-        </div>
+
       </section>
 
       {/* ── 03. ENGINEERING CALLOUT ───────────────────────────────── */}
@@ -620,18 +679,16 @@ export default function ServicesPage() {
                 </div>
 
                 <FadeIn delay={0.4} className="flex-shrink-0">
-                  <MagneticButton>
-                    <Link
-                      href="/contact"
-                      className="group inline-flex items-center gap-4 rounded-full bg-primary px-10 py-5 text-[11px] font-black uppercase tracking-[0.3em] text-background transition-all duration-300 hover:bg-primary/90 hover:scale-105 active:scale-95"
-                    >
-                      Request a Scope
-                      <ArrowRight
-                        size={16}
-                        className="transition-transform duration-300 group-hover:translate-x-1"
-                      />
-                    </Link>
-                  </MagneticButton>
+                  <Link
+                    href="/contact"
+                    className="group inline-flex items-center gap-4 rounded-full bg-primary px-10 py-5 text-[11px] font-black uppercase tracking-[0.3em] text-white transition-all duration-300 hover:bg-primary/90 hover:scale-105 active:scale-95 shadow-[0_20px_40px_-10px_rgba(0,68,255,0.3)]"
+                  >
+                    Request a Scope
+                    <ArrowRight
+                      size={16}
+                      className="transition-transform duration-300 group-hover:translate-x-1"
+                    />
+                  </Link>
                 </FadeIn>
               </div>
 
@@ -645,9 +702,7 @@ export default function ServicesPage() {
           </FadeIn>
         </div>
 
-        <div className="pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 opacity-[0.025] select-none">
-          <span className="text-[20rem] font-black leading-none">03</span>
-        </div>
+
       </section>
 
     </div>

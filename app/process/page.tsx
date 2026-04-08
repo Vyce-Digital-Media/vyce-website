@@ -159,12 +159,8 @@ function FAQItem({ item, index }: { item: typeof faqItems[0]; index: number }) {
 // ─── Step Card ─────────────────────────────────────────────────────────────
 
 function StepCard({ step, index, isActive }: { step: typeof processSteps[0]; index: number; isActive: boolean }) {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-
   return (
     <motion.div
-      ref={ref}
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
@@ -237,7 +233,7 @@ export default function ProcessPage() {
   const lineScaleY = useTransform(lineScroll, [0, 1], [0, 1]);
 
   return (
-    <div className="bg-background text-foreground overflow-hidden">
+    <div className="bg-background text-foreground overflow-clip">
 
       {/* ── HERO ──────────────────────────────────────────────────── */}
       <section ref={heroRef} className="relative flex min-h-[82vh] flex-col items-center justify-center overflow-hidden px-6 py-32">
@@ -265,9 +261,7 @@ export default function ProcessPage() {
             </p>
           </FadeIn>
         </motion.div>
-        <div className="pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 opacity-[0.025] select-none">
-          <span className="text-[20rem] font-black leading-none">00</span>
-        </div>
+
       </section>
 
       {/* ── INTRO STRIP ───────────────────────────────────────────── */}
@@ -288,11 +282,11 @@ export default function ProcessPage() {
       </section>
 
       {/* ── PROCESS STEPS ─────────────────────────────────────────── */}
-      <section ref={processRef} className="relative px-6 pt-24 pb-32 md:px-12 lg:px-20 overflow-hidden">
+      <section ref={processRef} className="relative px-6 pt-24 pb-32 md:px-12 lg:px-20 overflow-clip">
         <div className="mx-auto max-w-[1600px] grid gap-24 lg:grid-cols-[1fr_1.2fr] items-start">
 
           {/* Left Side: Sticky Title & Info */}
-          <div className="lg:sticky lg:top-24 lg:h-fit space-y-12">
+          <div className="lg:sticky lg:top-48 lg:h-fit space-y-12">
             <div className="space-y-6">
               <RevealLine>
                 <h2 className="text-5xl font-black uppercase tracking-tighter md:text-6xl lg:text-7xl leading-none">
@@ -321,7 +315,7 @@ export default function ProcessPage() {
           </div>
 
           {/* Right Side: Step Progression */}
-          <div className="space-y-20 md:space-y-28">
+          <div className="space-y-32 md:space-y-48">
             {processSteps.map((step, index) => (
               <StepCard key={step.step} step={step} index={index} isActive={false} />
             ))}
@@ -358,9 +352,7 @@ export default function ProcessPage() {
           </div>
         </div>
 
-        <div className="pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 opacity-[0.025] select-none">
-          <span className="text-[20rem] font-black leading-none">02</span>
-        </div>
+
       </section>
 
       {/* ── FAQ ───────────────────────────────────────────────────── */}
@@ -383,9 +375,7 @@ export default function ProcessPage() {
           </div>
         </div>
 
-        <div className="pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 opacity-[0.025] select-none">
-          <span className="text-[20rem] font-black leading-none">03</span>
-        </div>
+
       </section>
 
       {/* ── CTA ───────────────────────────────────────────────────── */}
@@ -404,12 +394,10 @@ export default function ProcessPage() {
                   <FadeIn delay={0.2}><p className="text-lg text-foreground/40 leading-relaxed font-medium">Share your brief and we&apos;ll come back with a clear proposed path — team shape, milestones, and an honest estimate.</p></FadeIn>
                 </div>
                 <FadeIn delay={0.35} className="flex-shrink-0">
-                  <MagneticButton>
-                    <Link href="/contact" className="group inline-flex items-center gap-4 rounded-full bg-primary px-10 py-5 text-[11px] font-black uppercase tracking-[0.3em] text-background transition-all duration-300 hover:bg-primary/90 hover:scale-105 active:scale-95">
-                      Start the Brief
-                      <ArrowUpRight size={16} className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                    </Link>
-                  </MagneticButton>
+                  <Link href="/contact" className="group inline-flex items-center gap-4 rounded-full bg-primary px-10 py-5 text-[11px] font-black uppercase tracking-[0.3em] text-white transition-all duration-300 hover:bg-primary/90 hover:scale-105 active:scale-95 shadow-[0_20px_40px_-10px_rgba(0,68,255,0.3)]">
+                    Start the Brief
+                    <ArrowUpRight size={16} className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </Link>
                 </FadeIn>
               </div>
               <motion.div animate={{ x: ["-120%", "220%"] }} transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", repeatDelay: 3 }}

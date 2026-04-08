@@ -174,14 +174,12 @@ function CoverflowProjectCard({ project, index, activeProgress }: { project: any
           </div>
 
           <div className="mt-auto">
-            <MagneticButton>
-              <Link href="/contact" className="group/btn inline-flex items-center gap-4 text-[11px] font-black uppercase tracking-[0.3em] text-white transition-colors duration-300">
-                Explore Project
-                <span className="flex h-14 w-14 items-center justify-center rounded-full border border-white/20 bg-black/50 transition-all duration-500 group-hover/btn:border-primary group-hover/btn:bg-primary group-hover/btn:text-background group-hover/btn:rotate-45 group-hover/btn:scale-110">
-                  <ArrowUpRight size={20} />
-                </span>
-              </Link>
-            </MagneticButton>
+            <Link href="/showcase" className="group/btn inline-flex items-center gap-4 text-[11px] font-black uppercase tracking-[0.3em] text-white transition-colors duration-300">
+              Explore Project
+              <span className="flex h-14 w-14 items-center justify-center rounded-full border border-white/20 bg-black/50 transition-all duration-500 group-hover/btn:border-primary group-hover/btn:bg-primary group-hover/btn:text-background group-hover/btn:rotate-45 group-hover/btn:scale-110">
+                <ArrowUpRight size={20} />
+              </span>
+            </Link>
           </div>
         </div>
       </motion.div>
@@ -306,12 +304,10 @@ export default function PortfolioPage() {
               Partner with us to create digital experiences that command attention completely.
             </p>
             <div className="mt-12">
-              <MagneticButton>
-                <Link href="/contact" className="group inline-flex items-center gap-4 rounded-full bg-white px-10 py-5 text-[11px] font-black uppercase tracking-[0.3em] text-black transition-all duration-500 hover:bg-primary active:scale-95">
-                  Start Yours
-                  <ArrowUpRight size={16} className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
-                </Link>
-              </MagneticButton>
+              <Link href="/contact" className="group inline-flex items-center gap-4 rounded-full bg-white px-10 py-5 text-[11px] font-black uppercase tracking-[0.3em] text-black transition-all duration-500 hover:bg-primary active:scale-95">
+                Start Yours
+                <ArrowUpRight size={16} className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+              </Link>
             </div>
           </FadeIn>
         </div>

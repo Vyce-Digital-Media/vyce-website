@@ -160,8 +160,8 @@ function InfoCard({ info, index }: { info: typeof contactInfo[0]; index: number 
 
 // ─── Form ──────────────────────────────────────────────────────────────────
 
-const inputClass = "w-full border-b border-white/[0.12] bg-transparent pb-3 text-base font-medium text-foreground outline-none transition-all duration-300 focus:border-primary placeholder:text-foreground/20";
-const labelClass = "block text-[9px] font-bold uppercase tracking-[0.35em] text-foreground/30 mb-2.5";
+const inputClass = "w-full rounded-xl border border-white/[0.08] bg-white/[0.02] px-5 py-4 text-sm font-medium text-foreground outline-none transition-all duration-300 focus:border-primary/50 focus:bg-white/[0.04] placeholder:text-foreground/20 hover:border-white/[0.15]";
+const labelClass = "block text-[10px] font-bold uppercase tracking-[0.2em] text-foreground/40 mb-2.5 ml-2";
 
 function ContactForm() {
   const [selectedType, setSelectedType] = useState<string | null>(null);
@@ -198,7 +198,7 @@ function ContactForm() {
         ) : (
           <motion.form key="form" onSubmit={handleSubmit} className="relative z-10 flex flex-col gap-9">
             {/* Name + Company */}
-            <div className="grid gap-9 md:grid-cols-2">
+            <div className="grid gap-6 md:grid-cols-2">
               <FadeIn delay={0.05}>
                 <label className={labelClass}>Name</label>
                 <input type="text" placeholder="Alex Rivera" className={inputClass} required />
@@ -224,9 +224,9 @@ function ContactForm() {
                     key={type}
                     type="button"
                     onClick={() => setSelectedType(selectedType === type ? null : type)}
-                    className={`rounded-full px-4 py-1.5 text-[9px] font-bold uppercase tracking-[0.25em] transition-all duration-300 cursor-pointer ${selectedType === type
-                      ? "bg-primary text-background"
-                      : "border border-white/10 text-foreground/35 hover:border-primary/30 hover:text-foreground/65"
+                    className={`rounded-full px-5 py-2.5 text-[10px] font-bold uppercase tracking-[0.2em] transition-all duration-300 cursor-pointer ${selectedType === type
+                      ? "bg-primary text-background border-primary"
+                      : "border border-white/10 bg-white/[0.02] text-foreground/40 hover:border-white/[0.2] hover:text-foreground/80 hover:bg-white/[0.05]"
                       }`}
                   >
                     {type}
@@ -240,21 +240,19 @@ function ContactForm() {
               <label className={labelClass}>Project details</label>
               <textarea
                 placeholder="Goals, timeline, links, budget band if known..."
-                rows={4}
+                rows={5}
                 className={`${inputClass} resize-none`}
                 required
               />
             </FadeIn>
 
             {/* Submit */}
-            <FadeIn delay={0.3}>
-              <MagneticButton>
-                <button type="submit"
-                  className="group inline-flex items-center gap-4 rounded-full bg-foreground px-10 py-4 text-[10px] font-black uppercase tracking-[0.3em] text-background transition-all duration-300 hover:bg-primary hover:scale-[1.03] active:scale-95 cursor-pointer">
-                  Send message
-                  <Send size={14} strokeWidth={1.5} className="transition-transform duration-300 group-hover:translate-x-0.5" />
-                </button>
-              </MagneticButton>
+            <FadeIn delay={0.3} className="pt-2">
+              <button type="submit"
+                className="group inline-flex w-full md:w-auto items-center justify-center gap-5 rounded-xl bg-foreground px-14 py-5 text-[12px] font-black uppercase tracking-[0.3em] text-background transition-all duration-300 hover:bg-primary hover:scale-[1.02] active:scale-95 cursor-pointer shadow-[0_20px_40px_-10px_rgba(255,255,255,0.1)]">
+                Send message
+                <Send size={18} strokeWidth={2} className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-0.5" />
+              </button>
             </FadeIn>
           </motion.form>
         )}
@@ -306,9 +304,7 @@ export default function ContactPage() {
           </FadeIn>
         </motion.div>
 
-        <div className="pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 opacity-[0.025] select-none">
-          <span className="text-[20rem] font-black leading-none">00</span>
-        </div>
+
       </section>
 
       {/* ── MAIN CONTENT ──────────────────────────────────────────── */}
@@ -324,6 +320,22 @@ export default function ContactPage() {
                 <FadeIn><p className="text-[9px] font-bold uppercase tracking-[0.4em] text-foreground/30 mb-6">Reach us directly</p></FadeIn>
                 {contactInfo.map((info, i) => <InfoCard key={i} info={info} index={i} />)}
               </div>
+
+              {/* Google Map Integration */}
+              <FadeIn delay={0.25}>
+                <div className="relative overflow-hidden rounded-2xl border border-white/[0.07] h-64 w-full bg-zinc-950/40 mt-2">
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d100940.1410940735!2d-122.50764121404118!3d37.75769480119614!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80859a6d00690021%3A0x4a501367f076adff!2sSan%20Francisco%2C%20CA!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen={false}
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-background to-transparent pointer-events-none z-10" />
+                  <div className="absolute inset-x-0 top-0 h-12 bg-gradient-to-b from-background to-transparent pointer-events-none z-10 opacity-30" />
+                </div>
+              </FadeIn>
 
               {/* Office hours */}
               <FadeIn delay={0.2}>
@@ -383,9 +395,7 @@ export default function ContactPage() {
           </div>
         </div>
 
-        <div className="pointer-events-none absolute right-0 top-1/3 opacity-[0.025] select-none">
-          <span className="text-[20rem] font-black leading-none">01</span>
-        </div>
+
       </section>
     </div>
   );

@@ -14,7 +14,7 @@ gsap.registerPlugin(ScrollTrigger);
 const mouseNDC = { x: -999, y: -999 };
 
 // ─── Particle Swarm with Mouse Repulsion ─────────────────────────────────────
-function ParticleSwarm({ count = 12000 }: { count?: number }) {
+function ParticleSwarm({ count = 4000 }: { count?: number }) {
   const pointsRef = useRef<THREE.Points>(null);
 
   // Camera fov=60, z=5 → visible half-height = tan(30°)*5 ≈ 2.89, half-width ≈ 5.14 for 16:9
@@ -54,12 +54,18 @@ function ParticleSwarm({ count = 12000 }: { count?: number }) {
 
     const pos = pointsRef.current.geometry.attributes.position.array as Float32Array;
 
+    const time = state.clock.elapsedTime;
+
     for (let i = 0; i < count; i++) {
       const ix = i * 3;
 
-      // Spring back toward origin
-      const sx = (origins[ix] - pos[ix]) * SPRING;
-      const sy = (origins[ix + 1] - pos[ix + 1]) * SPRING;
+      // Slow initial drift
+      const driftX = Math.sin(time * 0.3 + i * 0.1) * 0.3;
+      const driftY = Math.cos(time * 0.2 + i * 0.1) * 0.3;
+
+      // Spring back toward origin + drift
+      const sx = (origins[ix] + driftX - pos[ix]) * SPRING;
+      const sy = (origins[ix + 1] + driftY - pos[ix + 1]) * SPRING;
       const sz = (origins[ix + 2] - pos[ix + 2]) * SPRING * 0.3;
 
       // Repulsion from cursor (2D, ignore z)

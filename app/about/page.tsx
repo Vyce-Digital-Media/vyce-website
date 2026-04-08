@@ -451,9 +451,7 @@ export default function AboutPage() {
           </div>
         </div>
 
-        <div className="pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 -translate-x-[-8%] opacity-[0.025] select-none">
-          <span className="text-[20rem] font-black leading-none">01</span>
-        </div>
+
       </section>
 
       {/* ── 02. OUR STORY ───────────────────────────────────────── */}
@@ -605,9 +603,7 @@ export default function AboutPage() {
           </div>
         </div>
 
-        <div className="pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 opacity-[0.025] select-none">
-          <span className="text-[20rem] font-black leading-none">02</span>
-        </div>
+
       </section>
 
       {/* ── 03. MISSION & VISION ─────────────────────────────────── */}
@@ -641,9 +637,7 @@ export default function AboutPage() {
           </div>
         </div>
 
-        <div className="pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 opacity-[0.025] select-none">
-          <span className="text-[20rem] font-black leading-none">03</span>
-        </div>
+
       </section>
 
       {/* ── 04. CORE VALUES ──────────────────────────────────────── */}
@@ -738,9 +732,7 @@ export default function AboutPage() {
           </div>
         </div>
 
-        <div className="pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 opacity-[0.025] select-none">
-          <span className="text-[20rem] font-black leading-none">04</span>
-        </div>
+
       </section>
 
       {/* ── 05. MEET THE TEAM ────────────────────────────────────── */}
@@ -768,9 +760,7 @@ export default function AboutPage() {
           </div>
         </div>
 
-        <div className="pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 opacity-[0.025] select-none">
-          <span className="text-[20rem] font-black leading-none">05</span>
-        </div>
+
       </section>
 
       {/* ── 06. WHY CHOOSE VYCE ──────────────────────────────────── */}
@@ -804,14 +794,12 @@ export default function AboutPage() {
             </FadeIn>
 
             <FadeIn delay={0.35}>
-              <MagneticButton>
-                <Link
-                  href="/contact"
-                  className="group inline-flex items-center gap-4 rounded-full bg-primary px-10 py-5 text-[11px] font-black uppercase tracking-[0.3em] text-background transition-all duration-300 hover:bg-primary/90 hover:scale-105 active:scale-95"
-                >
-                  Let&apos;s Talk →
-                </Link>
-              </MagneticButton>
+              <Link
+                href="/contact"
+                className="group inline-flex items-center gap-4 rounded-full bg-primary px-10 py-5 text-[11px] font-black uppercase tracking-[0.3em] text-white transition-all duration-300 hover:bg-primary/90 hover:scale-105 active:scale-95 shadow-[0_20px_40px_-10px_rgba(0,68,255,0.3)]"
+              >
+                Let&apos;s Talk →
+              </Link>
             </FadeIn>
           </div>
 
@@ -827,9 +815,7 @@ export default function AboutPage() {
           </FadeIn>
         </div>
 
-        <div className="pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 opacity-[0.025] select-none">
-          <span className="text-[20rem] font-black leading-none">06</span>
-        </div>
+
       </section>
 
     </div>

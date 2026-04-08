@@ -8,6 +8,30 @@ import ServicesGrid from "@/components/sections/ServicesGrid";
 import ExploreCollection from "@/components/sections/ImageScroller3D";
 import ScrollingText from "@/components/sections/ScrollingText";
 import Link from "next/link";
+import { useInView } from "framer-motion";
+import { useRef } from "react";
+
+function RevealLine({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
+  return (
+    <div ref={ref} className={`overflow-hidden ${className}`}>
+      <motion.div initial={{ y: "100%", opacity: 0 }} animate={isInView ? { y: "0%", opacity: 1 } : {}}
+        transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1], delay }}>{children}</motion.div>
+    </div>
+  );
+}
+
+function FadeIn({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-60px" });
+  return (
+    <motion.div ref={ref} initial={{ opacity: 0, y: 40 }} animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay }} className={className}>
+      {children}
+    </motion.div>
+  );
+}
 
 export default function Home() {
   return (
@@ -30,26 +54,34 @@ export default function Home() {
         <div className="mx-auto max-w-[1400px]">
           <div className="grid lg:grid-cols-[1.2fr_1fr] gap-24 items-start">
             {/* Split Typographic Column */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-              className="space-y-12"
-            >
+            <div className="space-y-12">
 
 
-              <h2 className="text-6xl font-black uppercase tracking-tighter sm:text-7xl md:text-8xl lg:text-[10rem] leading-[0.85]">
-                Precision <br />
-                <span className="font-playfair font-normal italic text-primary/80 lowercase">Without</span> <br />
-                Noise
-              </h2>
+              <div className="space-y-2">
+                <RevealLine>
+                  <h2 className="text-6xl font-black uppercase tracking-tighter sm:text-7xl md:text-8xl lg:text-[10rem] leading-[0.85]">
+                    Precision
+                  </h2>
+                </RevealLine>
+                <RevealLine delay={0.1}>
+                  <h2 className="text-6xl font-black uppercase tracking-tighter sm:text-7xl md:text-8xl lg:text-[10rem] leading-[0.85]">
+                    <span className="font-playfair font-normal italic text-primary/80 lowercase">Without</span>
+                  </h2>
+                </RevealLine>
+                <RevealLine delay={0.2}>
+                  <h2 className="text-6xl font-black uppercase tracking-tighter sm:text-7xl md:text-8xl lg:text-[10rem] leading-[0.85]">
+                    Noise
+                  </h2>
+                </RevealLine>
+              </div>
 
-              <p className="max-w-2xl text-xl md:text-2xl text-foreground/50 font-medium leading-relaxed">
-                We believe that the most impactful brands are built at the intersection of technical excellence and aesthetic restraint.
-              </p>
+              <FadeIn delay={0.3}>
+                <p className="max-w-2xl text-xl md:text-2xl text-foreground/50 font-medium leading-relaxed">
+                  We believe that the most impactful brands are built at the intersection of technical excellence and aesthetic restraint.
+                </p>
+              </FadeIn>
 
-              <div className="pt-8">
+              <FadeIn delay={0.4} className="pt-8">
                 <Link
                   href="/about"
                   className="group inline-flex items-center gap-4 text-[11px] font-black uppercase tracking-[0.4em] text-foreground transition-all hover:text-primary"
@@ -62,8 +94,8 @@ export default function Home() {
                     →
                   </span>
                 </Link>
-              </div>
-            </motion.div>
+              </FadeIn>
+            </div>
 
             {/* Split Pillars Grid */}
             <div className="grid gap-16 pt-12 md:pt-48">
@@ -110,23 +142,31 @@ export default function Home() {
 
       {/* Ready when you are Section */}
       <section className="flex flex-col items-center gap-14 px-6 py-40 text-center md:px-12 lg:px-16 overflow-hidden">
-        <motion.div
-          initial={{ opacity: 0, y: 60 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-          className="mx-auto max-w-5xl space-y-12"
-        >
-          <p className="text-[10px] font-bold uppercase tracking-[0.5em] text-primary">Ready?</p>
-          <h2 className="text-5xl font-black tracking-tighter sm:text-7xl md:text-8xl lg:text-[8rem] leading-[0.9]">
-            Let's Build Something <br />
-            <span className="font-playfair font-normal italic text-primary">the World Will Notice.</span>
-          </h2>
-          <p className="mx-auto max-w-2xl text-lg text-foreground/60 md:text-xl leading-relaxed font-medium">
-            Whether you're starting from scratch or levelling up an existing brand — we're the team that makes it happen. No fluff, no delays, just results.
-          </p>
+        <div className="mx-auto max-w-5xl space-y-12 flex flex-col items-center">
+          <FadeIn>
+            <p className="text-[10px] font-bold uppercase tracking-[0.5em] text-primary">Ready?</p>
+          </FadeIn>
+          
+          <div className="space-y-2 flex flex-col justify-center text-center">
+            <RevealLine>
+              <h2 className="text-5xl font-black tracking-tighter sm:text-7xl md:text-8xl lg:text-[8rem] leading-[0.9]">
+                Let's Build Something
+              </h2>
+            </RevealLine>
+            <RevealLine delay={0.1}>
+              <h2 className="text-5xl font-black tracking-tighter sm:text-7xl md:text-8xl lg:text-[8rem] leading-[0.9]">
+                <span className="font-playfair font-normal italic text-primary">the World Will Notice.</span>
+              </h2>
+            </RevealLine>
+          </div>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-8">
+          <FadeIn delay={0.2}>
+            <p className="mx-auto max-w-2xl text-lg text-foreground/60 md:text-xl leading-relaxed font-medium">
+              Whether you're starting from scratch or levelling up an existing brand — we're the team that makes it happen. No fluff, no delays, just results.
+            </p>
+          </FadeIn>
+
+          <FadeIn delay={0.3} className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-8 w-full">
             <Link
               href="/contact"
               className="inline-flex rounded-full bg-primary px-12 py-6 text-[11px] font-black uppercase tracking-[0.3em] text-white transition-all hover:bg-primary/90 hover:scale-105 active:scale-95"
@@ -139,8 +179,8 @@ export default function Home() {
             >
               View Our Services →
             </Link>
-          </div>
-        </motion.div>
+          </FadeIn>
+        </div>
       </section>
     </div>
   );
