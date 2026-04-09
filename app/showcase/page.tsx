@@ -291,121 +291,118 @@ function LightModeSection({ setGlobalTheme }: { setGlobalTheme: (theme: 'dark' |
   );
 }
 
-function CenteredGrowthSection() {
+function CenteredGrowthSection({ setGlobalTheme }: { setGlobalTheme: (theme: 'dark' | 'light') => void }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
+  const ctaContentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     let ctx = gsap.context(() => {
-      gsap.to(imageRef.current, {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top top",
+          end: "+=200%", // Longer pin for content reveal
+          pin: true,
+          scrub: 1,
+          onEnter: () => setGlobalTheme('dark'),
+          onLeaveBack: () => setGlobalTheme('light'),
+        }
+      });
+
+      tl.to(imageRef.current, {
         width: "100vw",
         height: "100vh",
         borderRadius: "0px",
         ease: "none",
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top top",
-          end: "+=150%", // pin for 150% of viewport height while growing
-          pin: true,
-          scrub: 1,
-        }
-      });
+        duration: 1
+      })
+      .to(ctaContentRef.current, {
+        opacity: 1,
+        y: 0,
+        ease: "power2.out",
+        duration: 0.4
+      }, "-=0.3"); // Fade in during the last 30% of growth
     }, containerRef);
     return () => ctx.revert();
-  }, []);
+  }, [setGlobalTheme]);
 
   return (
-    <section ref={containerRef} className="h-screen w-full relative flex items-center justify-center overflow-hidden z-30 transition-colors duration-1000">
+    <section ref={containerRef} className="h-screen w-full relative flex items-center justify-center overflow-hidden z-30">
       <div
         ref={imageRef}
         className="w-[30vw] md:w-[20vw] aspect-[4/5] rounded-[24px] overflow-hidden relative shadow-2xl"
       >
         <img
-          src="https://images.unsplash.com/photo-1541701494587-cb58502866ab?q=80&w=2000&auto=format&fit=crop"
+          src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2000&auto=format&fit=crop"
           alt="Center Growth"
           className="w-full h-full object-cover scale-110"
         />
-        <div className="absolute inset-0 bg-black/10" />
+        <div className="absolute inset-0 bg-black/40" />
+
+        {/* Integrated CTA Content */}
+        <div 
+          ref={ctaContentRef}
+          className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 opacity-0 translate-y-20 pointer-events-auto"
+        >
+          <h2 className="text-[clamp(3.5rem,10vw,12rem)] font-black uppercase tracking-tighter leading-[0.8] mb-12 relative group cursor-pointer overflow-hidden">
+            <motion.div
+              initial="initial"
+              whileHover="hovered"
+              className="relative block overflow-hidden whitespace-nowrap"
+            >
+              <div>
+                {"Let's Talk".split("").map((char, i) => (
+                  <motion.span
+                    key={i}
+                    className="inline-block"
+                    variants={{
+                      initial: { y: 0 },
+                      hovered: { y: "-100%" },
+                    }}
+                    transition={{
+                      duration: 0.3,
+                      ease: "easeInOut",
+                      delay: i * 0.02,
+                    }}
+                  >
+                    {char === " " ? "\u00A0" : char}
+                  </motion.span>
+                ))}
+              </div>
+              <div className="absolute inset-0">
+                {"Let's Talk".split("").map((char, i) => (
+                  <motion.span
+                    key={i}
+                    className="inline-block text-primary italic font-playfair font-normal"
+                    variants={{
+                      initial: { y: "100%" },
+                      hovered: { y: 0 },
+                    }}
+                    transition={{
+                      duration: 0.3,
+                      ease: "easeInOut",
+                      delay: i * 0.02,
+                    }}
+                  >
+                    {char === " " ? "\u00A0" : char}
+                  </motion.span>
+                ))}
+              </div>
+            </motion.div>
+          </h2>
+
+          <Link href="/contact" className="group inline-flex items-center gap-4 rounded-full bg-white px-10 py-5 text-[11px] font-black uppercase tracking-[0.3em] text-black transition-all duration-300 hover:bg-primary hover:text-white hover:scale-105 active:scale-95">
+            Start Project
+            <ArrowUpRight size={18} className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+          </Link>
+        </div>
       </div>
     </section>
   );
 }
 
-function CTANextJob({ setGlobalTheme }: { setGlobalTheme: (theme: 'dark' | 'light') => void }) {
-  const ctaRef = useRef(null);
 
-  useEffect(() => {
-    let ctx = gsap.context(() => {
-      ScrollTrigger.create({
-        trigger: ctaRef.current,
-        start: "top center",
-        onEnter: () => setGlobalTheme('dark'),
-        onLeaveBack: () => setGlobalTheme('light'),
-      });
-    }, ctaRef);
-    return () => ctx.revert();
-  }, [setGlobalTheme]);
-
-  return (
-    <section ref={ctaRef} className="py-40 md:py-60 px-8 md:px-20 relative z-30 bg-background overflow-hidden flex flex-col items-center text-center transition-colors duration-1000">
-      <RevealLine>
-        <h2 className="text-[clamp(3rem,8vw,10rem)] font-black uppercase tracking-tighter leading-[0.8] mb-12 relative group cursor-pointer overflow-hidden">
-          <motion.div
-            initial="initial"
-            whileHover="hovered"
-            className="relative block overflow-hidden whitespace-nowrap"
-          >
-            <div>
-              {"Let's Talk".split("").map((char, i) => (
-                <motion.span
-                  key={i}
-                  className="inline-block"
-                  variants={{
-                    initial: { y: 0 },
-                    hovered: { y: "-100%" },
-                  }}
-                  transition={{
-                    duration: 0.3,
-                    ease: "easeInOut",
-                    delay: i * 0.02,
-                  }}
-                >
-                  {char === " " ? "\u00A0" : char}
-                </motion.span>
-              ))}
-            </div>
-            <div className="absolute inset-0">
-              {"Let's Talk".split("").map((char, i) => (
-                <motion.span
-                  key={i}
-                  className="inline-block text-primary italic font-playfair font-normal"
-                  variants={{
-                    initial: { y: "100%" },
-                    hovered: { y: 0 },
-                  }}
-                  transition={{
-                    duration: 0.3,
-                    ease: "easeInOut",
-                    delay: i * 0.02,
-                  }}
-                >
-                  {char === " " ? "\u00A0" : char}
-                </motion.span>
-              ))}
-            </div>
-          </motion.div>
-        </h2>
-      </RevealLine>
-
-      <RevealLine delay={0.2}>
-        <Link href="/contact" className="group inline-flex items-center gap-4 rounded-full bg-white px-8 py-4 text-[10px] font-black uppercase tracking-[0.3em] text-black transition-all duration-300 hover:bg-primary hover:text-white hover:scale-105 active:scale-95">
-          Start Project
-          <ArrowUpRight size={16} className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
-        </Link>
-      </RevealLine>
-    </section>
-  );
-}
 
 
 // ─── MAIN PAGE ─────────────────────────────────────────────────────────────
@@ -453,8 +450,7 @@ export default function ShowcasePage() {
         <DescriptionSection />
         <FloatingGallery />
         <LightModeSection setGlobalTheme={setGlobalTheme} />
-        <CenteredGrowthSection />
-        <CTANextJob setGlobalTheme={setGlobalTheme} />
+        <CenteredGrowthSection setGlobalTheme={setGlobalTheme} />
       </div>
     </div>
   );
