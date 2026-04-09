@@ -89,41 +89,24 @@ function FadeIn({ children, delay = 0, className = "" }: { children: React.React
 
 function FloatingShapes() {
   const icoRef = useRef<THREE.Mesh>(null);
-  const torusRef = useRef<THREE.Mesh>(null);
 
   useFrame((state) => {
+    const t = state.clock.elapsedTime;
     if (icoRef.current) {
-      icoRef.current.rotation.x = state.clock.elapsedTime * 0.2;
-      icoRef.current.rotation.y = state.clock.elapsedTime * 0.25;
-    }
-    if (torusRef.current) {
-      torusRef.current.rotation.x = -state.clock.elapsedTime * 0.1;
-      torusRef.current.rotation.y = -state.clock.elapsedTime * 0.15;
+      icoRef.current.rotation.x = t * 0.2;
+      icoRef.current.rotation.y = t * 0.25;
+      // Animate position across the screen
+      icoRef.current.position.x = Math.sin(t * 0.5) * 4;
+      icoRef.current.position.y = Math.cos(t * 0.3) * 1;
     }
   });
 
   return (
     <>
-      <Float speed={2} rotationIntensity={1} floatIntensity={1}>
-        <mesh ref={icoRef} position={[-2, 0, -2]}>
-          <icosahedronGeometry args={[2, 0]} />
-          <MeshDistortMaterial color="#ffffff" wireframe={true} transparent opacity={0.15} distort={0.2} speed={2} />
-        </mesh>
-      </Float>
-      <Float speed={1.5} rotationIntensity={2} floatIntensity={2}>
-        <mesh ref={torusRef} position={[2, 0, 1]}>
-          <torusGeometry args={[1.5, 0.4, 16, 100]} />
-          <MeshTransmissionMaterial 
-            backside
-            samples={4}
-            thickness={0.5}
-            chromaticAberration={1}
-            anisotropy={0.5}
-            distortion={0.5}
-            distortionScale={0.5}
-            temporalDistortion={0.1}
-            color="#0044ff"
-          />
+      <Float speed={2} rotationIntensity={1} floatIntensity={2}>
+        <mesh ref={icoRef} position={[0, 0, -2]}>
+          <icosahedronGeometry args={[2.5, 0]} />
+          <MeshDistortMaterial color="#ffffff" wireframe={true} transparent opacity={0.12} distort={0.25} speed={2} />
         </mesh>
       </Float>
     </>
@@ -277,7 +260,6 @@ export default function BrandingPage() {
         <motion.div style={{ opacity: heroOpacity, scale: heroScale }} className="relative z-10 w-full max-w-[1600px] px-6 md:px-12 lg:px-20 text-center flex flex-col items-center">
           <FadeIn>
             <span className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/5 backdrop-blur-md px-5 py-2 text-[10px] font-bold uppercase tracking-[0.4em] text-white">
-              <span className="h-1.5 w-1.5 rounded-full bg-white animate-pulse" />
               Service // Branding
             </span>
           </FadeIn>
@@ -352,14 +334,7 @@ export default function BrandingPage() {
       {/* ── 05. CTA FINALE ────────────────────────────────────────── */}
       <section className="relative px-6 py-48 md:px-12 lg:px-20 overflow-hidden flex items-center justify-center text-center">
         {/* Animated Blue Orb */}
-        <motion.div 
-          animate={{ 
-            scale: [1, 1.2, 1],
-            opacity: [0.1, 0.25, 0.1],
-          }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[30vw] w-[30vw] rounded-full bg-primary blur-[150px]" 
-        />
+
         
         <div className="relative z-10 max-w-4xl max-auto space-y-12">
           <div>
