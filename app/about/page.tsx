@@ -513,44 +513,78 @@ export default function AboutPage() {
                 </div>
 
                 {/* Hover image (milestone) */}
-                <AnimatePresence mode="wait">
-                  {hoveredMilestone !== null && (
-                    <motion.div
-                      key={`ms-img-${hoveredMilestone}`}
-                      initial={{ clipPath: "inset(100% 0% 0% 0%)" }}
-                      animate={{ clipPath: "inset(0% 0% 0% 0%)" }}
-                      exit={{ clipPath: "inset(0% 0% 100% 0%)" }}
-                      transition={{ duration: 0.55, ease: [0.76, 0, 0.24, 1] }}
-                      className="absolute inset-0 z-20 rounded-[48px] overflow-hidden"
-                    >
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={milestones[hoveredMilestone].image}
-                        alt={milestones[hoveredMilestone].year}
-                        className="w-full h-full object-cover scale-105"
-                      />
-                      {/* Overlay with milestone label */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent" />
-                      <div className="absolute bottom-0 left-0 p-10 z-30">
-                        <motion.p
-                          initial={{ y: 20, opacity: 0 }}
-                          animate={{ y: 0, opacity: 1 }}
-                          transition={{ delay: 0.25, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                          className="text-[10px] font-bold uppercase tracking-[0.5em] text-primary mb-2"
-                        >
-                          {milestones[hoveredMilestone].year}
-                        </motion.p>
-                        <motion.p
-                          initial={{ y: 20, opacity: 0 }}
-                          animate={{ y: 0, opacity: 1 }}
-                          transition={{ delay: 0.32, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                          className="text-white font-black text-2xl md:text-3xl uppercase tracking-tighter leading-tight"
-                        >
-                          {milestones[hoveredMilestone].text}
-                        </motion.p>
-                      </div>
-                    </motion.div>
-                  )}
+                <AnimatePresence custom={hoveredMilestone}>
+                  {milestones.map((m, i) => {
+                    if (hoveredMilestone !== i) return null;
+
+                    return (
+                      <motion.div
+                        key={`ms-img-${i}`}
+                        custom={hoveredMilestone}
+                        variants={{
+                          initial: () => {
+                            let clip = "";
+                            if (i === 0) clip = "inset(0% 0% 100% 0%)";
+                            else if (i === 1) clip = "inset(0% 0% 0% 100%)";
+                            else if (i === 2) clip = "inset(100% 0% 0% 0%)";
+                            else if (i === 3) clip = "inset(0% 100% 0% 0%)";
+                            return { clipPath: clip, zIndex: 30, opacity: 1 };
+                          },
+                          animate: {
+                            clipPath: "inset(0% 0% 0% 0%)",
+                            zIndex: 30,
+                            opacity: 1,
+                            transition: { duration: 0.55, ease: [0.76, 0, 0.24, 1] }
+                          },
+                          exit: (customHovered) => {
+                            let clip = "";
+                            if (i === 0) clip = "inset(0% 0% 100% 0%)";
+                            else if (i === 1) clip = "inset(0% 0% 0% 100%)";
+                            else if (i === 2) clip = "inset(100% 0% 0% 0%)";
+                            else if (i === 3) clip = "inset(0% 100% 0% 0%)";
+                            
+                            return {
+                              clipPath: customHovered === null ? clip : "inset(0% 0% 0% 0%)",
+                              zIndex: 20,
+                              opacity: customHovered === null ? 0 : 0.99,
+                              transition: { duration: 0.55, ease: [0.76, 0, 0.24, 1] }
+                            };
+                          }
+                        }}
+                        initial="initial"
+                        animate="animate"
+                        exit="exit"
+                        className="absolute inset-0 rounded-[48px] overflow-hidden"
+                      >
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={m.image}
+                          alt={m.year}
+                          className="w-full h-full object-cover scale-105"
+                        />
+                        {/* Overlay with milestone label */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent" />
+                        <div className="absolute bottom-0 left-0 p-10 z-30">
+                          <motion.p
+                            initial={{ y: 20, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            transition={{ delay: 0.25, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                            className="text-[10px] font-bold uppercase tracking-[0.5em] text-primary mb-2"
+                          >
+                            {m.year}
+                          </motion.p>
+                          <motion.p
+                            initial={{ y: 20, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            transition={{ delay: 0.32, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                            className="text-white font-black text-2xl md:text-3xl uppercase tracking-tighter leading-tight"
+                          >
+                            {m.text}
+                          </motion.p>
+                        </div>
+                      </motion.div>
+                    );
+                  })}
                 </AnimatePresence>
 
                 {/* Light sweep */}
@@ -566,14 +600,16 @@ export default function AboutPage() {
             </div>
 
             {/* Right: Milestone items */}
-            <div className="space-y-0 divide-y divide-white/5">
+            <div 
+              className="space-y-0 divide-y divide-white/5"
+              onMouseLeave={() => setHoveredMilestone(null)}
+            >
               {milestones.map((m, i) => (
                 <FadeIn key={m.year} delay={i * 0.1}>
                   <div
                     className={`group flex items-start gap-8 cursor-default transition-all duration-300 hover:px-3 ${i === 0 ? "pt-12 md:pt-16 pb-10" : "py-10"
                       }`}
                     onMouseEnter={() => setHoveredMilestone(i)}
-                    onMouseLeave={() => setHoveredMilestone(null)}
                   >
                     <span className="font-playfair text-5xl italic text-primary/20 transition-colors duration-500 group-hover:text-primary/70 leading-none mt-1 flex-shrink-0">
                       {String(i + 1).padStart(2, "0")}

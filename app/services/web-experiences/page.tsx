@@ -22,7 +22,7 @@ const webTypes = [
   {
     title: "SaaS Platforms",
     description: "Complex dashboards, onboarding flows, and user management tools that don't feel like spreadsheets.",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=900&h=600&fit=crop&q=80"
+    image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=900&h=600&fit=crop&q=80"
   },
   {
     title: "E-Commerce",
@@ -42,7 +42,17 @@ const webTypes = [
   {
     title: "Web3 Interfaces",
     description: "DApps, wallet connectors, and minting suites boasting beautiful UX over complex smart contracts.",
-    image: "https://images.unsplash.com/photo-1614064642278-0cbced78a9c7?w=900&h=600&fit=crop&q=80"
+    image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=900&h=600&fit=crop&q=80"
+  },
+  {
+    title: "Corporate Governance",
+    description: "Premium public relations and investor relations sites to convey authority and trust.",
+    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=900&h=600&fit=crop&q=80"
+  },
+  {
+    title: "Interactive Storytelling",
+    description: "Awards-worthy digital narratives powered by WebGL and advanced scroll-triggered animations.",
+    image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=900&h=600&fit=crop&q=80"
   }
 ];
 
@@ -119,17 +129,21 @@ function HorizontalScrollSection() {
     gsap.registerPlugin(ScrollTrigger);
 
     let ctx = gsap.context(() => {
-      const scrollAmount = -(sectionRef.current!.scrollWidth - window.innerWidth + 100);
+      const getScrollAmount = () => {
+        if (!sectionRef.current) return 0;
+        return -(sectionRef.current.scrollWidth - window.innerWidth);
+      };
 
       gsap.to(sectionRef.current, {
-        x: scrollAmount,
+        x: getScrollAmount,
         ease: "none",
         scrollTrigger: {
           trigger: triggerRef.current,
           pin: true,
           scrub: 1,
           start: "center center",
-          end: `+=${Math.abs(scrollAmount)}`,
+          end: () => `+=${Math.abs(getScrollAmount())}`,
+          invalidateOnRefresh: true,
         }
       });
     }, triggerRef);
@@ -139,51 +153,83 @@ function HorizontalScrollSection() {
 
   return (
     <section ref={triggerRef} className="relative h-screen bg-background overflow-hidden flex items-center">
-      <div className="absolute top-12 left-12 lg:left-20 z-10 pointers-events-none">
+      <div className="absolute top-12 md:top-18 left-1/2 -translate-x-1/2 z-10 pointer-events-none w-full flex justify-center">
         <RevealLine>
-          <h2 className="text-3xl font-black uppercase tracking-tighter md:text-5xl text-white">Browser</h2>
-        </RevealLine>
-        <RevealLine delay={0.05}>
-          <h2 className="text-3xl font-playfair italic text-primary md:text-5xl">Ecosystems.</h2>
+          <div className="flex flex-row items-center gap-3 md:gap-5">
+            <h2 className="text-3xl sm:text-4xl lg:text-6xl font-black uppercase tracking-tighter text-white">Browser</h2>
+            <h2 className="text-3xl sm:text-4xl lg:text-6xl font-playfair italic text-primary tracking-tight">Ecosystems.</h2>
+          </div>
         </RevealLine>
       </div>
 
-      <div ref={sectionRef} className="flex gap-12 lg:gap-20 px-12 lg:px-20 h-auto items-center mt-12 w-max">
-        {webTypes.map((item, index) => (
-          <div key={index} className="w-[85vw] mt-12 lg:w-[60vw] max-w-[900px] flex-shrink-0 group">
-            {/* Fake Browser Window */}
-            <div className="rounded-[24px] overflow-hidden border border-white/10 bg-zinc-950 shadow-2xl relative">
-              {/* Browser Header */}
-              <div className="flex items-center gap-2 px-6 py-4 border-b border-white/5 bg-white/[0.02]">
-                <div className="flex gap-1.5">
-                  <div className="w-3 h-3 rounded-full bg-white/10" />
-                  <div className="w-3 h-3 rounded-full bg-white/10" />
-                  <div className="w-3 h-3 rounded-full bg-white/10" />
-                </div>
-                <div className="ml-4 flex-1 h-6 rounded-full bg-white/5 flex items-center px-4 text-[10px] font-mono text-white/30 hidden sm:flex">
-                  vyce.agency/preview/{item.title.toLowerCase().replace(/\s+/g, '-')}
-                </div>
-              </div>
+      <div ref={sectionRef} className="flex gap-4 sm:gap-8 lg:gap-12 pl-6 pr-6 lg:pl-[10vw] lg:pr-[10vw] h-[80vh] items-center mt-40 w-max">
+        {webTypes.map((item, index) => {
+          const isMac = index % 2 === 0;
 
-              {/* Browser Content */}
-              <div className="relative aspect-video overflow-hidden">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent opacity-80" />
+          return (
+            <div key={index} className={`flex-shrink-0 group flex items-center justify-center ${isMac ? "w-[85vw] md:w-[70vw] lg:w-[55vw] max-w-[800px]" : "w-[60vw] sm:w-[32vw] lg:w-[22vw] max-w-[300px]"}`}>
+              {isMac ? (
+                /* FAKE MAC */
+                <div className="w-full mt-8 rounded-[24px] overflow-hidden border border-white/10 bg-zinc-950 shadow-2xl relative">
+                  {/* Browser Header */}
+                  <div className="flex items-center gap-2 px-6 py-4 border-b border-white/5 bg-white/[0.02]">
+                    <div className="flex gap-1.5">
+                      <div className="w-3 h-3 rounded-full bg-white/10" />
+                      <div className="w-3 h-3 rounded-full bg-white/10" />
+                      <div className="w-3 h-3 rounded-full bg-white/10" />
+                    </div>
+                    <div className="ml-4 flex-1 h-6 rounded-full bg-white/5 flex items-center px-4 text-[10px] font-mono text-white/30 hidden sm:flex">
+                      vyce.agency/preview/{item.title.toLowerCase().replace(/\s+/g, '-')}
+                    </div>
+                  </div>
 
-                <div className="absolute inset-0 p-8 flex flex-col justify-end">
-                  <span className="text-primary font-mono text-xs font-bold uppercase tracking-[0.2em] mb-2">{`// ${String(index + 1).padStart(2, '0')}`}</span>
-                  <h3 className="text-3xl md:text-5xl font-black uppercase tracking-tighter mb-4">{item.title}</h3>
-                  <p className="max-w-md text-foreground/60 text-sm md:text-base font-medium leading-relaxed">{item.description}</p>
+                  {/* Browser Content */}
+                  <div className="relative aspect-[16/10] overflow-hidden">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent opacity-90" />
+
+                    <div className="absolute inset-0 p-8 lg:p-12 flex flex-col justify-end">
+                      <span className="text-primary font-mono text-xs font-bold uppercase tracking-[0.2em] mb-3">{`// ${String(index + 1).padStart(2, '0')}`}</span>
+                      <h3 className="text-3xl md:text-5xl lg:text-6xl font-black uppercase tracking-tighter mb-4">{item.title}</h3>
+                      <p className="max-w-md text-foreground/60 text-sm md:text-base font-medium leading-relaxed">{item.description}</p>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              ) : (
+                /* FAKE IPHONE */
+                <div className="w-full max-w-[200px] sm:max-w-[240px] md:max-w-[260px] lg:max-w-[280px] aspect-[9/19] rounded-[36px] md:rounded-[44px] overflow-hidden border-[6px] md:border-[8px] mt-1 border-[#1a1a1a] bg-black shadow-2xl relative mx-auto">
+                  {/* Dynamic Island */}
+                  <div className="absolute top-2 md:top-3 left-1/2 -translate-x-1/2 w-16 md:w-24 h-4 md:h-6 bg-[#0a0a0a] rounded-full z-20 flex items-center justify-between px-1.5 md:px-2">
+                    <div className="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-white/5 hidden md:block" />
+                    <div className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-[#111] border border-white/5" />
+                  </div>
+
+                  {/* Phone Content */}
+                  <div className="relative w-full h-full overflow-hidden rounded-[28px] md:rounded-[36px] bg-zinc-950">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/40 to-transparent opacity-90" />
+
+                    <div className="absolute inset-0 p-5 md:p-6 flex flex-col justify-end text-center items-center">
+                      <span className="text-primary font-mono text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] mb-2">{`// ${String(index + 1).padStart(2, '0')}`}</span>
+                      <h3 className="text-xl md:text-3xl font-black uppercase tracking-tighter mb-3">{item.title}</h3>
+                      <p className="text-foreground/60 text-[10px] md:text-xs font-medium leading-relaxed max-w-[200px]">{item.description}</p>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </section>
   );

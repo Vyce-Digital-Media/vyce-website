@@ -247,7 +247,7 @@ function ServiceRow({
       <motion.div
         ref={cardRef}
         style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-        className="relative overflow-hidden rounded-[28px] border border-white/[0.06] bg-zinc-950 p-6 md:p-8 transition-all duration-700 hover:border-primary/25 hover:shadow-[0_40px_80px_-20px_rgba(0,10,30,0.8)]"
+        className="relative overflow-hidden rounded-[28px] border border-white/[0.06] bg-zinc-950 p-6 md:p-12 min-h-[500px] md:min-h-[580px] transition-all duration-700 hover:border-primary/25 hover:shadow-[0_40px_80px_-20px_rgba(0,10,30,0.8)]"
       >
         <div
           ref={bgRef}
@@ -299,7 +299,7 @@ function ServiceRow({
 
           {/* Right column */}
           <div className="flex flex-col gap-6 lg:flex-1">
-            <p className="text-base leading-relaxed text-foreground/55 md:text-lg">
+            <p className="text-lg leading-relaxed text-foreground/55 md:text-xl">
               {service.description}
             </p>
 
@@ -311,11 +311,11 @@ function ServiceRow({
                 {service.deliverables.map((d) => (
                   <li key={d} className="flex items-center gap-3">
                     <CheckCircle2
-                      size={12}
+                      size={14}
                       className="flex-shrink-0 text-primary/60"
                       strokeWidth={2}
                     />
-                    <span className="text-xs font-medium text-foreground/50 transition-colors duration-300 group-hover:text-foreground/70">
+                    <span className="text-sm font-medium text-foreground/50 transition-colors duration-300 group-hover:text-foreground/70">
                       {d}
                     </span>
                   </li>
@@ -489,38 +489,24 @@ export default function ServicesPage() {
           <DeckingCards
             servicesList={services}
             titleNode={
-              <div className="mb-16 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-                <div>
-                  <RevealLine>
-                    <h2 className="text-5xl font-black pr-2 uppercase tracking-tighter leading-[0.9] md:text-7xl">
-                      What We Do
-                    </h2>
-                  </RevealLine>
-                  <RevealLine delay={0.08}>
-                    <h2 className="text-5xl font-playfair font-normal italic mb-8 text-primary leading-[0.9] md:text-7xl">
-                      Best.
-                    </h2>
-                  </RevealLine>
-                </div>
+              <div className="mb-16 flex justify-center w-full text-center">
+                <RevealLine>
+                  <h2 className="text-5xl font-black uppercase tracking-tighter leading-[0.9] md:text-7xl flex flex-wrap items-center justify-center gap-4">
+                    What We Do <span className="font-playfair font-normal italic text-primary mb-2 md:mb-0">Best.</span>
+                  </h2>
+                </RevealLine>
               </div>
             }
           />
 
           {/* Fallback for mobile since pinning is better on desktop */}
           <div className="relative md:hidden flex flex-col gap-8 pb-12 mt-16">
-            <div className="mb-8 flex flex-col gap-6">
-              <div>
+            <div className="mb-8 flex justify-center w-full text-center">
                 <RevealLine>
-                  <h2 className="text-5xl font-black pr-2 uppercase tracking-tighter leading-[0.9]">
-                    What We Do
+                  <h2 className="text-5xl font-black uppercase tracking-tighter leading-[0.9] flex flex-wrap items-center justify-center gap-3">
+                    What We Do <span className="font-playfair font-normal italic text-primary mt-1 md:mt-0">Best.</span>
                   </h2>
                 </RevealLine>
-                <RevealLine delay={0.08}>
-                  <h2 className="text-5xl font-playfair font-normal italic text-primary leading-[0.9]">
-                    Best.
-                  </h2>
-                </RevealLine>
-              </div>
             </div>
             {services.map((service, index) => (
               <ServiceRow key={service.num} service={service} index={index} />

@@ -12,6 +12,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 // ─── Shared mouse state (NDC: -1 to 1 on each axis) ────────────────────────
 const mouseNDC = { x: -999, y: -999 };
+const currentNDC = { x: -999, y: -999 }; // trailing state
 
 // ─── Particle Swarm with Mouse Repulsion ─────────────────────────────────────
 function ParticleSwarm({ count = 4000 }: { count?: number }) {
@@ -37,18 +38,31 @@ function ParticleSwarm({ count = 4000 }: { count?: number }) {
   useFrame((state) => {
     if (!pointsRef.current) return;
 
-    // Convert NDC mouse → world space at z = 0 plane
+    // Trailing mouse logic (produces delay effect)
+    if (mouseNDC.x === -999) {
+      currentNDC.x = -999;
+      currentNDC.y = -999;
+    } else if (currentNDC.x === -999) {
+      currentNDC.x = mouseNDC.x;
+      currentNDC.y = mouseNDC.y;
+    } else {
+      // Small factor for slow trailing delay (0.5-0.8s effectively)
+      currentNDC.x += (mouseNDC.x - currentNDC.x) * 0.05;
+      currentNDC.y += (mouseNDC.y - currentNDC.y) * 0.05;
+    }
+
+    // Convert trailing NDC → world space at z = 0 plane
     const camera = state.camera as THREE.PerspectiveCamera;
     const fovRad = (camera.fov * Math.PI) / 180;
     const camDist = Math.abs(camera.position.z);
     const halfH = camDist * Math.tan(fovRad / 2);
     const halfW = halfH * camera.aspect;
 
-    const mx = mouseNDC.x * halfW;
-    const my = mouseNDC.y * halfH;
+    const mx = currentNDC.x * halfW;
+    const my = currentNDC.y * halfH;
 
-    const REPULSION_R = 2.0;   // world-unit radius
-    const REPULSION_F = 0.12;  // max force per frame
+    const REPULSION_R = 2.8;   // world-unit radius
+    const REPULSION_F = 0.15;  // max force per frame
     const SPRING = 0.045; // restoring spring strength
     const DAMPING = 0.82;  // velocity damping
 
@@ -71,14 +85,20 @@ function ParticleSwarm({ count = 4000 }: { count?: number }) {
       // Repulsion from cursor (2D, ignore z)
       const dx = pos[ix] - mx;
       const dy = pos[ix + 1] - my;
-      const dist = Math.sqrt(dx * dx + dy * dy);
+      
+      // Use Manhattan distance to create a diamond/cross shape instead of circle
+      const dist = Math.abs(dx) + Math.abs(dy);
+      
       let rx = 0, ry = 0;
 
       if (dist < REPULSION_R && dist > 0.001) {
-        const t = 1 - dist / REPULSION_R;
-        const force = t * t * REPULSION_F;   // quadratic — sharp close, smooth far
-        rx = (dx / dist) * force;
-        ry = (dy / dist) * force;
+        const t = 1 - (dist / REPULSION_R);
+        const force = t * t * REPULSION_F; 
+        
+        // Push outward from center (using euclidean for direction)
+        const trueDist = Math.max(0.001, Math.sqrt(dx * dx + dy * dy));
+        rx = (dx / trueDist) * force;
+        ry = (dy / trueDist) * force;
       }
 
       velocities[ix] = (velocities[ix] + sx + rx) * DAMPING;
