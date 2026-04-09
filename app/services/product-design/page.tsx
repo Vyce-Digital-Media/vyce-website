@@ -125,8 +125,9 @@ export default function ProductDesignPage() {
         <div className="absolute inset-0 z-10 pointer-events-none hidden md:block">
           <div className="relative w-full h-full max-w-[1400px] mx-auto">
             <GlassWidget delay={0.8} icon={BoxSelect} title="Components" x={100} y={200} rotate={-12} />
-            <GlassWidget delay={1.0} icon={Cpu} title="Logic" x={800} y={150} rotate={8} />
+            <GlassWidget delay={1.0} icon={Cpu} title="Logic" x={950} y={180} rotate={8} />
             <GlassWidget delay={1.2} icon={Database} title="Data" x={150} y={500} rotate={15} />
+            <GlassWidget delay={1.4} icon={LayoutTemplate} title="Interface" x={1100} y={450} rotate={-5} />
           </div>
         </div>
 

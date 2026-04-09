@@ -213,11 +213,8 @@ function ServiceRow({
   const Icon = service.icon;
   const isEven = index % 2 === 0;
 
-  // Let the parent manage the complex GSAP pinning & timeline!
-  // Remove the simple scroll trigger that conflicts with parents pinning.
   useEffect(() => {
     let ctx = gsap.context(() => {
-      // Parallax inner background (still fine to keep)
       if (bgRef.current) {
         gsap.fromTo(
           bgRef.current,
@@ -241,14 +238,14 @@ function ServiceRow({
   return (
     <div
       ref={containerRef}
-      className="group w-full max-w-[1600px] mx-auto"
+      className="group w-full max-w-[1600px] mx-auto px-4 md:px-0"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
       <motion.div
         ref={cardRef}
         style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-        className="relative overflow-hidden rounded-[28px] border border-white/[0.06] bg-zinc-950 p-6 md:p-12 min-h-[500px] md:min-h-[580px] transition-all duration-700 hover:border-primary/25 hover:shadow-[0_40px_80px_-20px_rgba(0,10,30,0.8)]"
+        className="relative overflow-hidden rounded-[28px] border border-white/[0.06] bg-zinc-950 p-6 md:p-12 min-h-[280px] md:min-h-[340px] transition-all duration-700 hover:border-primary/25 hover:shadow-[0_40px_80px_-20px_rgba(0,10,30,0.8)] flex items-center justify-center"
       >
         <div
           ref={bgRef}
@@ -270,53 +267,53 @@ function ServiceRow({
           className="pointer-events-none absolute -top-1/2 left-0 h-[200%] w-1/3 bg-gradient-to-r from-transparent via-white/[0.025] to-transparent skew-x-[-25deg] z-0"
         />
 
-        <div className={`relative z-10 flex flex-col gap-6 lg:flex-row lg:items-start ${isEven ? "" : "lg:flex-row-reverse"}`}>
+        <div className={`relative z-10 flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-center ${isEven ? "" : "lg:flex-row-reverse"} max-w-7xl mx-auto`}>
           {/* Left column */}
-          <div className="flex flex-col gap-4 lg:w-[42%]">
-            <div className="flex items-end justify-between lg:flex-col lg:items-start lg:gap-6">
+          <div className="flex flex-col items-center text-center gap-8 lg:w-[45%]">
+            <div className="flex flex-col items-center justify-center gap-6">
               <div
-                className="flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 text-primary transition-all duration-500 group-hover:scale-110 group-hover:border-primary/30"
+                className="flex h-16 w-16 items-center justify-center rounded-2xl border border-white/10 text-primary transition-all duration-500 group-hover:scale-110 group-hover:border-primary/30"
                 style={{ background: service.iconColor }}
               >
-                <Icon size={24} strokeWidth={1.5} />
+                <Icon size={32} strokeWidth={1.5} />
               </div>
-              <span className="font-playfair text-[4rem] leading-none text-foreground/[0.07] transition-colors duration-500 group-hover:text-foreground/[0.12] md:text-[5.5rem]">
+              <span className="font-playfair text-[4rem] leading-none text-foreground/[0.05] md:text-[6rem]">
                 {service.num}
               </span>
             </div>
 
-            <div>
-              <h2 className="text-2xl font-black uppercase tracking-tighter text-white md:text-3xl lg:text-4xl">
+            <div className="space-y-4">
+              <h2 className="text-3xl font-black uppercase tracking-tighter text-white md:text-5xl lg:text-6xl leading-[0.95]">
                 {service.title}
               </h2>
-              <p className="mt-3 text-sm font-medium leading-relaxed text-foreground/40 md:text-base">
+              <p className="text-lg font-medium leading-relaxed text-foreground/40 md:text-xl italic font-playfair">
                 {service.summary}
               </p>
             </div>
           </div>
 
-          {/* Divider */}
-          <div className="hidden lg:block lg:w-px lg:self-stretch bg-gradient-to-b from-transparent via-white/10 to-transparent" />
+          {/* Vertical Divider */}
+          <div className="hidden lg:block w-px self-stretch bg-gradient-to-b from-transparent via-white/10 to-transparent mx-4" />
 
           {/* Right column */}
-          <div className="flex flex-col gap-6 lg:flex-1">
-            <p className="text-lg leading-relaxed text-foreground/55 md:text-xl">
+          <div className="flex flex-col items-center text-center gap-8 lg:flex-1">
+            <p className="text-lg leading-relaxed text-foreground/55 md:text-xl lg:text-2xl font-medium tracking-tight">
               {service.description}
             </p>
 
-            <div>
-              <p className="mb-3 text-[9px] font-bold uppercase tracking-[0.5em] text-foreground/30">
+            <div className="w-full">
+              <p className="mb-4 text-[10px] font-bold uppercase tracking-[0.6em] text-primary/40">
                 Typical Deliverables
               </p>
-              <ul className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+              <ul className="flex flex-wrap justify-center gap-x-8 gap-y-4">
                 {service.deliverables.map((d) => (
                   <li key={d} className="flex items-center gap-3">
                     <CheckCircle2
-                      size={14}
-                      className="flex-shrink-0 text-primary/60"
+                      size={16}
+                      className="flex-shrink-0 text-primary/40"
                       strokeWidth={2}
                     />
-                    <span className="text-sm font-medium text-foreground/50 transition-colors duration-300 group-hover:text-foreground/70">
+                    <span className="text-base font-medium text-foreground/45 transition-colors duration-300 group-hover:text-foreground/70">
                       {d}
                     </span>
                   </li>
@@ -324,10 +321,10 @@ function ServiceRow({
               </ul>
             </div>
 
-            <div className="mt-8 flex items-center">
+            <div className="mt-4">
               <Link
                 href={service.href}
-                className="group inline-flex items-center gap-3 rounded-full bg-primary/10 border border-primary/20 px-6 py-3 text-[10px] font-black uppercase tracking-[0.2em] text-primary transition-all duration-300 hover:bg-primary hover:text-background hover:scale-105"
+                className="group/btn inline-flex items-center gap-3 rounded-full bg-primary/10 border border-primary/20 px-8 py-4 text-[10px] font-black uppercase tracking-[0.2em] text-primary transition-all duration-500 hover:bg-primary hover:text-background hover:scale-105"
               >
                 View More
                 <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
@@ -427,7 +424,7 @@ export default function ServicesPage() {
   const lineScaleY = useTransform(processScroll, [0, 1], [0, 1]);
 
   return (
-    <div className="bg-background text-foreground overflow-hidden">
+    <div className="bg-background text-foreground">
 
       {/* ── 00. HERO ──────────────────────────────────────────────── */}
       <section
@@ -504,11 +501,11 @@ export default function ServicesPage() {
           {/* Fallback for mobile since pinning is better on desktop */}
           <div className="relative md:hidden flex flex-col gap-8 pb-12 mt-16">
             <div className="mb-8 flex justify-center w-full text-center">
-                <RevealLine>
-                  <h2 className="text-5xl font-black uppercase tracking-tighter leading-[0.9] flex flex-wrap items-center justify-center gap-3">
-                    What We Do <span className="font-playfair font-normal italic text-primary mt-1 md:mt-0">Best.</span>
-                  </h2>
-                </RevealLine>
+              <RevealLine>
+                <h2 className="text-5xl font-black uppercase tracking-tighter leading-[0.9] flex flex-wrap items-center justify-center gap-3">
+                  What We Do <span className="font-playfair font-normal italic text-primary mt-1 md:mt-0">Best.</span>
+                </h2>
+              </RevealLine>
             </div>
             {services.map((service, index) => (
               <ServiceRow key={service.num} service={service} index={index} />
@@ -522,22 +519,18 @@ export default function ServicesPage() {
       {/* ── 02. PROCESS ───────────────────────────────────────────── */}
       <section
         ref={processRef}
-        className="relative px-6 py-32 md:px-12 lg:px-20 overflow-hidden"
+        className="relative px-6 py-32 md:px-12 lg:px-20"
       >
-        <div className="mx-auto max-w-[1600px] grid gap-20 lg:grid-cols-[1fr_1.3fr] items-start">
+        <div className="mx-auto max-w-[1600px] grid gap-24 lg:grid-cols-[1fr_1.2fr] items-start">
           {/* Sticky left */}
-          <div className="lg:sticky lg:top-40 space-y-10">
-            <div>
-              <RevealLine>
-                <h2 className="text-5xl font-black uppercase tracking-tighter leading-[0.9] md:text-7xl">
-                  How
-                </h2>
-              </RevealLine>
-              <RevealLine delay={0.08}>
-                <h2 className="text-5xl font-playfair font-normal italic text-primary leading-[0.9] md:text-7xl">
-                  Engagements Run.
-                </h2>
-              </RevealLine>
+          <div className="lg:sticky lg:top-48 lg:h-fit space-y-12">
+            <div className="space-y-6">
+              <p className="text-[10px] font-bold uppercase tracking-[0.5em] text-primary">Engagements</p>
+              <h2 className="text-5xl font-black uppercase tracking-tighter leading-[0.9] md:text-7xl">
+                How <br />
+                <span className="font-playfair font-normal italic text-primary/80">Engagements</span> <br />
+                Run.
+              </h2>
             </div>
             <FadeIn delay={0.2}>
               <p className="max-w-md text-lg text-foreground/40 font-medium leading-relaxed">
@@ -551,8 +544,8 @@ export default function ServicesPage() {
               {phases.map((p) => {
                 const isHovered = hoveredStep === p.step;
                 return (
-                  <div 
-                    key={p.step} 
+                  <div
+                    key={p.step}
                     className={cn(
                       "flex items-center gap-5 transition-all duration-500",
                       isHovered ? "opacity-100 translate-x-4" : "opacity-30"
@@ -590,43 +583,42 @@ export default function ServicesPage() {
               />
             </div>
 
-            <div className="space-y-24 lg:space-y-32 lg:pl-16">
+            <div className="space-y-32 md:space-y-48 lg:pl-16">
               {phases.map((phase, i) => (
                 <motion.div
                   key={phase.step}
-                  initial={{ opacity: 0, x: 50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-100px" }}
                   transition={{
-                    duration: 1.0,
+                    duration: 0.8,
                     ease: [0.16, 1, 0.3, 1],
-                    delay: i * 0.05,
                   }}
                   onMouseEnter={() => setHoveredStep(phase.step)}
                   onMouseLeave={() => setHoveredStep(null)}
-                  className="group relative"
+                  className="group relative flex flex-col gap-10"
                 >
                   {/* Dot on the line */}
-                  <div className="absolute -left-[68px] top-2 hidden h-3 w-3 rounded-full border-2 border-primary/30 bg-background transition-all duration-500 group-hover:border-primary group-hover:bg-primary/20 lg:block" />
+                  <div className="absolute -left-[68px] top-4 hidden h-3 w-3 rounded-full border-2 border-primary/30 bg-background transition-all duration-500 group-hover:border-primary group-hover:bg-primary/20 lg:block" />
 
-                  <div className="flex items-start gap-6">
-                    <span className="font-playfair text-[4rem] leading-none text-primary/15 transition-colors duration-500 group-hover:text-primary/50 md:text-[5.5rem]">
+                  <div className="flex items-baseline gap-6">
+                    <span className="font-playfair text-6xl text-primary/20 md:text-8xl transition-colors duration-500 group-hover:text-primary">
                       {phase.step}
                     </span>
-                    <div className="flex-1 pt-4 space-y-4">
-                      <div className="flex items-center gap-4">
-                        <h3 className="text-2xl font-black uppercase tracking-tighter md:text-4xl">
-                          {phase.title}
-                        </h3>
-                        <span className="rounded-full border border-white/10 px-3 py-1 text-[9px] font-bold uppercase tracking-[0.3em] text-foreground/30">
-                          {phase.tag}
-                        </span>
-                      </div>
-                      <p className="max-w-md text-base leading-relaxed text-foreground/45 md:text-lg">
-                        {phase.detail}
-                      </p>
-                      <div className="h-px w-0 bg-primary/30 transition-all duration-700 group-hover:w-full" />
-                    </div>
+                    <div className="h-px flex-1 bg-white/10 transition-colors group-hover:bg-primary/40" />
+                    <span className="rounded-full border border-white/10 px-3 py-1 text-[9px] font-bold uppercase tracking-[0.3em] text-foreground/30">
+                      {phase.tag}
+                    </span>
+                  </div>
+
+                  <div className="space-y-8">
+                    <h3 className="text-3xl font-black uppercase tracking-tighter md:text-5xl lg:text-6xl">
+                      {phase.title}
+                    </h3>
+                    <p className="max-w-xl text-lg md:text-xl text-foreground/50 leading-relaxed font-medium">
+                      {phase.detail}
+                    </p>
+                    <div className="h-px w-0 bg-primary/30 transition-all duration-700 group-hover:w-full" />
                   </div>
                 </motion.div>
               ))}

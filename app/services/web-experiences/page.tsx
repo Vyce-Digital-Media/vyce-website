@@ -202,7 +202,7 @@ function HorizontalScrollSection() {
                 </div>
               ) : (
                 /* FAKE IPHONE */
-                <div className="w-full max-w-[200px] sm:max-w-[240px] md:max-w-[260px] lg:max-w-[280px] aspect-[9/19] rounded-[36px] md:rounded-[44px] overflow-hidden border-[6px] md:border-[8px] mt-1 border-[#1a1a1a] bg-black shadow-2xl relative mx-auto">
+                <div className="w-full max-w-[200px] sm:max-w-[240px] md:max-w-[270px] aspect-[9/19] rounded-[36px] md:rounded-[44px] overflow-hidden border-[6px] md:border-[8px] mt-8 border-[#1a1a1a] bg-black shadow-2xl relative mx-auto">
                   {/* Dynamic Island */}
                   <div className="absolute top-2 md:top-3 left-1/2 -translate-x-1/2 w-16 md:w-24 h-4 md:h-6 bg-[#0a0a0a] rounded-full z-20 flex items-center justify-between px-1.5 md:px-2">
                     <div className="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-white/5 hidden md:block" />
