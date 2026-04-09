@@ -22,6 +22,7 @@ import {
   ArrowRight,
   CheckCircle2,
 } from "lucide-react";
+import { cn } from "@/lib/utils";
 import MagneticButton from "@/components/ui/MagneticButton";
 
 // ─── Data ──────────────────────────────────────────────────────────────────
@@ -406,6 +407,7 @@ function DeckingCards({ servicesList, titleNode }: { servicesList: typeof servic
 }
 
 export default function ServicesPage() {
+  const [hoveredStep, setHoveredStep] = React.useState<string | null>(null);
   // Hero parallax
   const heroRef = useRef(null);
   const { scrollYProgress: heroScroll } = useScroll({
@@ -545,15 +547,37 @@ export default function ServicesPage() {
             </FadeIn>
 
             {/* Mini step map */}
-            <FadeIn delay={0.3} className="hidden lg:flex flex-col gap-5 opacity-30 hover:opacity-80 transition-opacity duration-500">
-              {phases.map((p) => (
-                <div key={p.step} className="flex items-center gap-5">
-                  <span className="font-mono text-xs font-bold">{p.step}</span>
-                  <div className="h-px w-16 bg-foreground" />
-                  <span className="text-xs uppercase tracking-widest">{p.title}</span>
-                </div>
-              ))}
-            </FadeIn>
+            <div className="hidden lg:flex flex-col gap-5">
+              {phases.map((p) => {
+                const isHovered = hoveredStep === p.step;
+                return (
+                  <div 
+                    key={p.step} 
+                    className={cn(
+                      "flex items-center gap-5 transition-all duration-500",
+                      isHovered ? "opacity-100 translate-x-4" : "opacity-30"
+                    )}
+                  >
+                    <span className={cn(
+                      "font-mono text-xs font-bold transition-colors duration-500",
+                      isHovered ? "text-primary" : "text-foreground"
+                    )}>
+                      {p.step}
+                    </span>
+                    <div className={cn(
+                      "h-px transition-all duration-500 origin-left",
+                      isHovered ? "bg-primary w-20 scale-x-110" : "bg-foreground w-16"
+                    )} />
+                    <span className={cn(
+                      "text-xs uppercase tracking-widest transition-colors duration-500",
+                      isHovered ? "text-primary" : "text-foreground"
+                    )}>
+                      {p.title}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
           </div>
 
           {/* Right: Steps with scroll-driven vertical line */}
@@ -578,6 +602,8 @@ export default function ServicesPage() {
                     ease: [0.16, 1, 0.3, 1],
                     delay: i * 0.05,
                   }}
+                  onMouseEnter={() => setHoveredStep(phase.step)}
+                  onMouseLeave={() => setHoveredStep(null)}
                   className="group relative"
                 >
                   {/* Dot on the line */}

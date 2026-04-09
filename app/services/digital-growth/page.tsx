@@ -56,20 +56,27 @@ function Counter({ from, to, duration, prefix = "", suffix = "" }: { from: numbe
 // ─── Ticker Tape ──────────────────────────────────────────────────────────
 
 function Ticker() {
+  const tickerItems = (
+    <>
+      {Array.from({ length: 6 }).map((_, i) => (
+        <span key={i} className="flex items-center gap-6 pr-6">
+          LTV/CAC OPTIMIZATION <span className="h-1.5 w-1.5 rounded-full bg-black/60" />
+          FUNNEL VELOCITY <span className="h-1.5 w-1.5 rounded-full bg-black/60" />
+          MQL TO SQL <span className="h-1.5 w-1.5 rounded-full bg-black/60" />
+        </span>
+      ))}
+    </>
+  );
+
   return (
-    <div className="relative w-full overflow-hidden bg-[#ff6a00] border-y border-[#ff6a00]/20 py-3 flex text-black">
-      <motion.div 
-        animate={{ x: [0, -1035] }} // Arbitrary width jump depending on actual content
-        transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-        className="flex whitespace-nowrap text-sm font-black uppercase tracking-[0.2em] w-max"
+    <div className="relative w-full overflow-hidden bg-[#ff6a00] border-y border-[#ff6a00]/20 py-4 flex text-black">
+      <motion.div
+        animate={{ x: [0, "-50%"] }}
+        transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+        className="flex whitespace-nowrap text-xs font-black uppercase tracking-[0.3em] w-max"
       >
-        {Array.from({ length: 10 }).map((_, i) => (
-          <span key={i} className="flex items-center gap-6 pr-6">
-            LTV/CAC OPTIMIZATION <span className="h-2 w-2 rounded-full bg-black/60" /> 
-            FUNNEL VELOCITY <span className="h-2 w-2 rounded-full bg-black/60" /> 
-            MQL TO SQL <span className="h-2 w-2 rounded-full bg-black/60" />
-          </span>
-        ))}
+        <div className="flex items-center">{tickerItems}</div>
+        <div className="flex items-center">{tickerItems}</div>
       </motion.div>
     </div>
   );
@@ -84,17 +91,21 @@ export default function DigitalGrowthPage() {
 
   // Diagram scroll hook
   const diagramRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress: diagramScroll } = useScroll({ target: diagramRef, offset: ["start end", "end center"] });
-  const graphWidth = useTransform(diagramScroll, [0.2, 0.8], ["0%", "100%"]);
+  const { scrollYProgress: diagramScroll } = useScroll({ 
+    target: diagramRef, 
+    offset: ["start center", "end 20%"] 
+  });
+  const chartProgress = useTransform(diagramScroll, [0.3, 0.65], [0, 1]);
 
   return (
     <div className="bg-background text-foreground overflow-clip">
-      
+      {/* Intense Hero Section remains same... */}
+
       {/* ── 01. INTENSE HERO ────────────────────────────────────────── */}
       <section ref={heroRef} className="relative min-h-screen w-full flex flex-col justify-center px-6 pt-32 pb-12 md:px-12 lg:px-20 overflow-hidden">
         {/* Dynamic aggressive background */}
         <div className="absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_bottom,rgba(255,106,0,0.1)_0%,transparent_60%)] pointer-events-none" />
-        
+
         {/* Fast moving vertical grids */}
         <div className="pointer-events-none absolute inset-0 opacity-[0.03] z-0">
           {Array.from({ length: 12 }).map((_, i) => (
@@ -109,7 +120,7 @@ export default function DigitalGrowthPage() {
                 Service // Digital Growth
               </span>
             </RevealLine>
-            
+
             <div className="w-full">
               <RevealLine>
                 <h1 className="text-[clamp(3.5rem,8vw,9rem)] font-black uppercase tracking-tighter leading-[0.88]">
@@ -156,7 +167,7 @@ export default function DigitalGrowthPage() {
             </div>
           </FadeIn>
         </motion.div>
-        
+
         <div className="absolute bottom-0 left-0 w-full z-20">
           <Ticker />
         </div>
@@ -165,11 +176,11 @@ export default function DigitalGrowthPage() {
       {/* ── 02. DASHBOARD / EXPERIMENTATION ───────────────────────── */}
       <section ref={diagramRef} className="py-32 px-6 md:px-12 lg:px-20 bg-zinc-950">
         <div className="mx-auto max-w-[1600px]">
-          
+
           <div className="mb-24">
             <RevealLine>
               <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-[0.9]">
-                The Experimentation <br/>
+                The Experimentation <br />
                 <span className="font-playfair font-normal italic text-[#ff6a00]">Backlog.</span>
               </h2>
             </RevealLine>
@@ -195,18 +206,44 @@ export default function DigitalGrowthPage() {
                 {Array.from({ length: 5 }).map((_, i) => (
                   <div key={i} className="absolute left-0 w-full border-t border-white/5" style={{ bottom: `${(i / 4) * 100}%` }} />
                 ))}
-                
+
                 {/* Expanding Graph Bar */}
-                <motion.div 
-                  className="absolute bottom-0 left-0 h-full w-full overflow-hidden"
-                  style={{ width: graphWidth }}
-                >
-                  <div className="absolute bottom-0 left-0 w-full h-[80%] bg-gradient-to-t from-[#ff6a00]/40 to-[#ff6a00]/0 flex items-end">
-                    <svg className="w-full h-full" preserveAspectRatio="none" viewBox="0 0 100 100">
-                      <polyline points="0,100 20,80 40,85 60,40 80,45 100,10" fill="none" stroke="#ff6a00" strokeWidth="2" vectorEffect="non-scaling-stroke" />
-                    </svg>
-                  </div>
-                </motion.div>
+                <div className="absolute bottom-0 left-0 h-full w-full flex items-end">
+                  <svg className="w-full h-[80%]" preserveAspectRatio="none" viewBox="0 0 100 100">
+                    <defs>
+                      <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#ff6a00" stopOpacity="0.2" />
+                        <stop offset="100%" stopColor="#ff6a00" stopOpacity="0" />
+                      </linearGradient>
+                      <clipPath id="chartClip">
+                        <motion.rect 
+                          width="100" 
+                          height="100" 
+                          style={{ scaleX: chartProgress, transformOrigin: "left" }} 
+                        />
+                      </clipPath>
+                    </defs>
+                    
+                    {/* The Fill Layer */}
+                    <path 
+                      d="M0,100 L20,80 L40,85 L60,40 L80,45 L100,10 V100 H0 Z" 
+                      fill="url(#chartGradient)" 
+                      clipPath="url(#chartClip)"
+                    />
+                    
+                    {/* The Drawing Line */}
+                    <motion.path
+                      d="M0,100 L20,80 L40,85 L60,40 L80,45 L100,10"
+                      fill="none"
+                      stroke="#ff6a00"
+                      strokeWidth="1.2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeOpacity={0.8}
+                      style={{ pathLength: chartProgress }}
+                    />
+                  </svg>
+                </div>
               </div>
             </div>
 
@@ -254,7 +291,7 @@ export default function DigitalGrowthPage() {
               </h2>
             </RevealLine>
           </div>
-          
+
           <FadeIn delay={0.3}>
             <Link href="/contact" className="group inline-flex items-center gap-4 rounded-full bg-white px-10 py-5 text-[11px] font-black uppercase tracking-[0.3em] text-black transition-all duration-300 hover:bg-neutral-200 shadow-[0_0_40px_-5px_rgba(255,106,0,0.4)]">
               Start the Brief

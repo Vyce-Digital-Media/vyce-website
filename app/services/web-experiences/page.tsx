@@ -153,11 +153,11 @@ function HorizontalScrollSection() {
 
   return (
     <section ref={triggerRef} className="relative h-screen bg-background overflow-hidden flex items-center">
-      <div className="absolute top-12 md:top-18 left-1/2 -translate-x-1/2 z-10 pointer-events-none w-full flex justify-center">
+      <div className="absolute top-12 md:top-20 left-1/2 -translate-x-1/2 z-10 pointer-events-none w-full flex justify-center">
         <RevealLine>
           <div className="flex flex-row items-center gap-3 md:gap-5">
-            <h2 className="text-3xl sm:text-4xl lg:text-6xl font-black uppercase tracking-tighter text-white">Browser</h2>
-            <h2 className="text-3xl sm:text-4xl lg:text-6xl font-playfair italic text-primary tracking-tight">Ecosystems.</h2>
+            <h2 className="text-3xl sm:text-4xl lg:text-7xl font-black uppercase tracking-tighter text-white">Browser</h2>
+            <h2 className="text-3xl sm:text-4xl lg:text-7xl font-playfair italic text-primary tracking-tight">Ecosystems.</h2>
           </div>
         </RevealLine>
       </div>
@@ -189,7 +189,7 @@ function HorizontalScrollSection() {
                     <img
                       src={item.image}
                       alt={item.title}
-                      className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                      className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-105 grayscale group-hover:grayscale-0"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent opacity-90" />
 
@@ -215,7 +215,7 @@ function HorizontalScrollSection() {
                     <img
                       src={item.image}
                       alt={item.title}
-                      className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                      className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-105 grayscale group-hover:grayscale-0"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/40 to-transparent opacity-90" />
 
@@ -232,6 +232,34 @@ function HorizontalScrollSection() {
         })}
       </div>
     </section>
+  );
+}
+
+function Ticker() {
+  const tickerItems = (
+    <>
+      {Array.from({ length: 6 }).map((_, i) => (
+        <span key={i} className="flex items-center gap-8 pr-8">
+          FULL-STACK ENGINEERING <span className="h-1.5 w-1.5 rounded-full bg-white/40" />
+          INTERACTIVE WEBGL <span className="h-1.5 w-1.5 rounded-full bg-white/40" />
+          GSAP ANIMATION <span className="h-1.5 w-1.5 rounded-full bg-white/40" />
+          PERFORMANCE OPTIMIZATION <span className="h-1.5 w-1.5 rounded-full bg-white/40" />
+        </span>
+      ))}
+    </>
+  );
+
+  return (
+    <div className="relative w-full overflow-hidden bg-[#0044ff] border-y border-white/10 py-4 flex text-white">
+      <motion.div
+        animate={{ x: [0, "-50%"] }}
+        transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+        className="flex whitespace-nowrap text-xs font-black uppercase tracking-[0.3em] w-max"
+      >
+        <div className="flex items-center">{tickerItems}</div>
+        <div className="flex items-center">{tickerItems}</div>
+      </motion.div>
+    </div>
   );
 }
 
@@ -291,6 +319,9 @@ export default function WebExperiencesPage() {
           </FadeIn>
         </motion.div>
 
+        <div className="absolute bottom-0 left-0 w-full z-20">
+          <Ticker />
+        </div>
 
       </section>
 

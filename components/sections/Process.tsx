@@ -57,14 +57,7 @@ export default function Process() {
               We've refined our methodology over a decade to ensure every project is launched with clinical precision and creative flair.
             </p>
 
-            <div className="hidden lg:flex flex-col gap-8 opacity-20 group hover:opacity-100 transition-opacity duration-500">
-              {processSteps.map((s) => (
-                <div key={s.step} className="flex items-center gap-6">
-                  <span className="text-xs font-bold font-mono">{s.step}</span>
-                  <div className="h-px w-24 bg-foreground" />
-                </div>
-              ))}
-            </div>
+
           </div>
 
           {/* Right Side: Step Progression */}
@@ -79,7 +72,7 @@ export default function Process() {
                 className="group relative flex flex-col gap-10"
               >
                 <div className="flex items-baseline gap-6">
-                  <span className="font-playfair text-6xl text-primary/20 md:text-8xl">
+                  <span className="font-playfair text-6xl text-primary/20 md:text-8xl transition-colors duration-500 group-hover:text-primary">
                     {step.step}
                   </span>
                   <div className="h-px flex-1 bg-border/40 transition-colors group-hover:bg-primary/40" />

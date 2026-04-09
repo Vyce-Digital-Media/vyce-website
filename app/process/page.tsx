@@ -9,6 +9,7 @@ import {
   useInView,
   AnimatePresence,
 } from "framer-motion";
+import { cn } from "@/lib/utils";
 import MagneticButton from "@/components/ui/MagneticButton";
 import { ArrowUpRight, CheckCircle2, ChevronDown } from "lucide-react";
 
@@ -158,13 +159,15 @@ function FAQItem({ item, index }: { item: typeof faqItems[0]; index: number }) {
 
 // ─── Step Card ─────────────────────────────────────────────────────────────
 
-function StepCard({ step, index, isActive }: { step: typeof processSteps[0]; index: number; isActive: boolean }) {
+function StepCard({ step, index, onHover }: { step: typeof processSteps[0]; index: number; onHover: (id: string | null) => void }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      onMouseEnter={() => onHover(step.step)}
+      onMouseLeave={() => onHover(null)}
       className="group relative flex flex-col gap-10"
     >
       <div className="flex items-baseline gap-6 leading-none">
@@ -223,6 +226,7 @@ function StepCard({ step, index, isActive }: { step: typeof processSteps[0]; ind
 export default function ProcessPage() {
   const heroRef = useRef(null);
   const processRef = useRef<HTMLDivElement>(null);
+  const [hoveredStep, setHoveredStep] = useState<string | null>(null);
 
   const { scrollYProgress: heroScroll } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
   const heroY = useTransform(heroScroll, [0, 1], [0, 200]);
@@ -303,21 +307,50 @@ export default function ProcessPage() {
               </p>
             </FadeIn>
 
-            <div className="hidden lg:flex flex-col gap-8 opacity-20 group hover:opacity-100 transition-opacity duration-500">
-              {processSteps.map((s) => (
-                <div key={s.step} className="flex items-center gap-6">
-                  <span className="text-xs font-bold font-mono">{s.step}</span>
-                  <div className="h-px w-24 bg-foreground" />
-                  <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-foreground/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500">{s.title}</span>
-                </div>
-              ))}
+            <div className="hidden lg:flex flex-col gap-8">
+              {processSteps.map((s) => {
+                const isHovered = hoveredStep === s.step;
+                return (
+                  <div 
+                    key={s.step} 
+                    className={cn(
+                      "flex items-center gap-6 transition-all duration-500",
+                      isHovered ? "opacity-100 translate-x-4" : "opacity-20 translate-x-0"
+                    )}
+                    onMouseEnter={() => setHoveredStep(s.step)}
+                    onMouseLeave={() => setHoveredStep(null)}
+                  >
+                    <span className={cn(
+                      "text-xs font-bold font-mono transition-colors duration-500",
+                      isHovered ? "text-primary scale-110" : "text-foreground"
+                    )}>
+                      {s.step}
+                    </span>
+                    <div className={cn(
+                      "h-px transition-all duration-500 origin-left",
+                      isHovered ? "bg-primary w-24 scale-x-125" : "bg-foreground w-12 opacity-30"
+                    )} />
+                    <span className={cn(
+                      "text-[10px] font-bold uppercase tracking-[0.2em] transition-all duration-500",
+                      isHovered ? "text-primary translate-x-2 opacity-100" : "text-foreground opacity-0"
+                    )}>
+                      {s.title}
+                    </span>
+                  </div>
+                );
+              })}
             </div>
           </div>
 
           {/* Right Side: Step Progression */}
           <div className="space-y-32 md:space-y-48">
             {processSteps.map((step, index) => (
-              <StepCard key={step.step} step={step} index={index} isActive={false} />
+              <StepCard 
+                key={step.step} 
+                step={step} 
+                index={index} 
+                onHover={setHoveredStep} 
+              />
             ))}
           </div>
         </div>

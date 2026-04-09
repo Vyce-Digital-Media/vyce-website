@@ -187,6 +187,23 @@ function CoverflowProjectCard({ project, index, activeProgress }: { project: any
   );
 }
 
+function NavDot({ index, activeProgress }: { index: number; activeProgress: MotionValue<number> }) {
+  const scale = useTransform(activeProgress, [index - 0.5, index, index + 0.5], [1, 1.6, 1]);
+  const opacity = useTransform(activeProgress, [index - 0.5, index, index + 0.5], [0.3, 1, 0.3]);
+  const backgroundColor = useTransform(
+    activeProgress,
+    [index - 0.5, index, index + 0.5],
+    ["rgba(255,255,255,0.15)", "rgb(0,102,255)", "rgba(255,255,255,0.15)"]
+  );
+
+  return (
+    <motion.div
+      style={{ scale, opacity, backgroundColor }}
+      className="h-2 w-2 rounded-full"
+    />
+  );
+}
+
 export default function PortfolioPage() {
   const [activeCategory, setActiveCategory] = useState("All");
 
@@ -272,6 +289,13 @@ export default function PortfolioPage() {
                 </button>
               ))}
             </div>
+          </div>
+
+          {/* Vertical Dot Navigation */}
+          <div className="absolute left-8 lg:left-12 top-1/2 -translate-y-1/2 z-30 flex flex-col gap-5">
+            {filtered.map((_, i) => (
+              <NavDot key={i} index={i} activeProgress={activeProgress} />
+            ))}
           </div>
 
           {/* Scrolling Track (Virtual relative bounds for cards) */}

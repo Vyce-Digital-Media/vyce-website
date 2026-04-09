@@ -36,7 +36,7 @@ function FadeIn({ children, delay = 0, className = "" }: { children: React.React
 
 function GlassWidget({ delay, icon: Icon, title, x, y, rotate = 0 }: { delay: number, icon: any, title: string, x: number, y: number, rotate?: number }) {
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0, scale: 0.8 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 1, delay, ease: [0.16, 1, 0.3, 1] }}
@@ -51,6 +51,34 @@ function GlassWidget({ delay, icon: Icon, title, x, y, rotate = 0 }: { delay: nu
         <div className="h-1.5 w-8 bg-white/10 rounded-full" />
       </div>
     </motion.div>
+  );
+}
+
+function Ticker() {
+  const tickerItems = (
+    <>
+      {Array.from({ length: 6 }).map((_, i) => (
+        <span key={i} className="flex items-center gap-8 pr-8">
+          UX/UI DESIGN <span className="h-1.5 w-1.5 rounded-full bg-black/40" />
+          RAPID PROTOTYPING <span className="h-1.5 w-1.5 rounded-full bg-black/40" />
+          USER RESEARCH <span className="h-1.5 w-1.5 rounded-full bg-black/40" />
+          DESIGN SYSTEMS <span className="h-1.5 w-1.5 rounded-full bg-black/40" />
+        </span>
+      ))}
+    </>
+  );
+
+  return (
+    <div className="relative w-full overflow-hidden bg-[#7c3aed] border-y border-white/10 py-4 flex text-white">
+      <motion.div
+        animate={{ x: [0, "-50%"] }}
+        transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+        className="flex whitespace-nowrap text-xs font-black uppercase tracking-[0.3em] w-max"
+      >
+        <div className="flex items-center">{tickerItems}</div>
+        <div className="flex items-center">{tickerItems}</div>
+      </motion.div>
+    </div>
   );
 }
 
@@ -70,7 +98,7 @@ export default function ProductDesignPage() {
 
   return (
     <div className="bg-background text-foreground overflow-clip">
-      
+
       {/* ── 01. HERO WITH FROSTED GLASS ─────────────────────────────── */}
       <section ref={heroRef} className="relative h-screen w-full flex items-center justify-center px-6 md:px-12 lg:px-20 overflow-hidden">
         {/* Abstract blurred background shapes */}
@@ -78,7 +106,7 @@ export default function ProductDesignPage() {
         <div className="absolute top-1/3 right-1/4 translate-x-1/2 -translate-y-1/2 w-[30vw] h-[30vw] max-w-[500px] max-h-[500px] rounded-full bg-purple-600/20 blur-[100px]" />
 
         {/* Dashboard Frame Element */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 100 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
@@ -109,14 +137,14 @@ export default function ProductDesignPage() {
               Service // Product Design
             </span>
           </RevealLine>
-          
+
           <div className="w-full">
-            <RevealLine>
+            <RevealLine className="justify-center">
               <h1 className="text-[clamp(3.5rem,8vw,9rem)] font-black uppercase tracking-tighter leading-[0.88]">
                 Interfaces
               </h1>
             </RevealLine>
-            <RevealLine delay={0.1}>
+            <RevealLine delay={0.1} className="justify-center">
               <h1 className="text-[clamp(3.5rem,8vw,9rem)] font-playfair font-normal italic text-white/40 leading-[0.88]">
                 That Perform.
               </h1>
@@ -129,26 +157,30 @@ export default function ProductDesignPage() {
             </p>
           </FadeIn>
         </motion.div>
+
+        <div className="absolute bottom-0 left-0 w-full z-20">
+          <Ticker />
+        </div>
       </section>
 
       {/* ── 02. SYSTEM ASSEMBLY DIAGRAM ───────────────────────────── */}
       <section ref={diagramRef} className="py-32 px-6 md:px-12 lg:px-20 bg-zinc-950/40 relative overflow-hidden">
         <div className="mx-auto max-w-[1600px] grid lg:grid-cols-2 gap-20 items-center">
-          
+
           <div className="space-y-12">
             <RevealLine>
               <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-[0.9]">
-                Pixels, <br/>
+                Pixels, <br />
                 <span className="font-playfair font-normal italic text-primary">Compiled.</span>
               </h2>
             </RevealLine>
-            
+
             <FadeIn delay={0.1}>
               <p className="text-xl text-foreground/60 font-medium leading-relaxed max-w-lg">
                 We don't just draw screens. We construct systemic design libraries that map directly to React components.
               </p>
             </FadeIn>
-            
+
             <div className="space-y-6">
               {[
                 { title: "User Experience (UX)", desc: "Wireframes, flow charts, and usability tests focused on task completion rates." },
@@ -168,7 +200,7 @@ export default function ProductDesignPage() {
           {/* Abstract Assembly Graphic */}
           <div className="relative aspect-square flex flex-col items-center justify-center">
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,68,255,0.05)_0%,transparent_70%)]" />
-            
+
             <motion.div style={{ y: block1Y }} className="relative z-30 w-64 h-32 rounded-2xl border border-white/20 bg-zinc-900/50 backdrop-blur shadow-2xl p-6 flex flex-col gap-4">
               <div className="flex justify-between items-center">
                 <div className="h-2 w-16 bg-white/20 rounded-full" />
@@ -176,17 +208,17 @@ export default function ProductDesignPage() {
               </div>
               <div className="h-10 w-full rounded bg-primary/20 border border-primary/30" />
             </motion.div>
-            
+
             <motion.div style={{ y: block2Y }} className="relative z-20 -mt-8 w-72 h-40 rounded-2xl border border-white/10 bg-zinc-900/40 backdrop-blur p-6 flex flex-wrap gap-4">
-               {[1,2,3,4,5,6].map(i => (
-                 <div key={i} className="h-8 w-16 rounded bg-white/5" />
-               ))}
+              {[1, 2, 3, 4, 5, 6].map(i => (
+                <div key={i} className="h-8 w-16 rounded bg-white/5" />
+              ))}
             </motion.div>
-            
+
             <motion.div style={{ y: block3Y }} className="relative z-10 -mt-12 w-80 h-48 rounded-2xl border border-white/[0.05] bg-zinc-900/30 backdrop-blur p-6 grid grid-cols-2 gap-4">
-               <div className="col-span-2 h-12 rounded bg-white/5" />
-               <div className="h-full rounded bg-white/5" />
-               <div className="h-full rounded bg-white/5" />
+              <div className="col-span-2 h-12 rounded bg-white/5" />
+              <div className="h-full rounded bg-white/5" />
+              <div className="h-full rounded bg-white/5" />
             </motion.div>
           </div>
         </div>
@@ -207,7 +239,7 @@ export default function ProductDesignPage() {
               </h2>
             </RevealLine>
           </div>
-          
+
           <FadeIn delay={0.3}>
             <Link href="/contact" className="group inline-flex items-center gap-4 rounded-full bg-white px-10 py-5 text-[11px] font-black uppercase tracking-[0.3em] text-black transition-all duration-300 hover:bg-neutral-200 shadow-[0_0_40px_-5px_rgba(255,255,255,0.4)]">
               Start the Brief

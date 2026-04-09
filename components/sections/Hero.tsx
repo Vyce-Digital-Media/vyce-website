@@ -4,9 +4,48 @@ import React, { useEffect, useRef, useMemo } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
+import { motion, useMotionValue, useSpring } from "framer-motion";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { Points, PointMaterial } from "@react-three/drei";
+
+// ─── Custom Star Cursor ──────────────────────────────────────────────────
+
+function StarCursor({ isVisible }: { isVisible: boolean }) {
+  const mouseX = useMotionValue(-100);
+  const mouseY = useMotionValue(-100);
+
+  const springConfig = { damping: 25, stiffness: 250, mass: 0.5 };
+  const springX = useSpring(mouseX, springConfig);
+  const springY = useSpring(mouseY, springConfig);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      mouseX.set(e.clientX);
+      mouseY.set(e.clientY);
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, [mouseX, mouseY]);
+
+  return (
+    <motion.div
+      style={{
+        left: springX,
+        top: springY,
+        translateX: "-50%",
+        translateY: "-50%",
+        opacity: isVisible ? 1 : 0,
+        scale: isVisible ? 1 : 0,
+      }}
+      className="pointer-events-none fixed z-[9999] h-6 w-6 mix-blend-difference"
+    >
+      <svg viewBox="0 0 24 24" fill="white" className="h-full w-full opacity-90">
+        <path d="M12 .587l3.668 7.427 8.2 1.192-5.934 5.784 1.4 8.169L12 18.897l-7.334 3.862 1.4-8.169-5.934-5.784 8.2-1.192z" />
+      </svg>
+    </motion.div>
+  );
+}
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -135,6 +174,7 @@ export default function Hero() {
   const subtitleRef = useRef<HTMLDivElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [isHovered, setIsHovered] = React.useState(false);
 
   // Track mouse NDC across the FULL hero section via window-level listener
   useEffect(() => {
@@ -192,8 +232,11 @@ export default function Hero() {
   return (
     <section
       ref={heroRef}
-      className="relative flex h-dvh min-h-[700px] w-full flex-col items-center justify-center overflow-hidden bg-background"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className={`relative flex h-dvh min-h-[700px] w-full flex-col items-center justify-center overflow-hidden bg-background ${isHovered ? 'cursor-none' : ''}`}
     >
+      <StarCursor isVisible={isHovered} />
       {/* Particle Background */}
       <div className="absolute inset-0 z-[1] opacity-55">
         <Canvas camera={{ position: [0, 0, 5], fov: 60 }}>

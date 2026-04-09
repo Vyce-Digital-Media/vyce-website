@@ -121,10 +121,10 @@ function HorizontalScrollSection() {
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
-    
+
     let ctx = gsap.context(() => {
       const scrollAmount = -(sectionRef.current!.scrollWidth - window.innerWidth + 100);
-      
+
       gsap.to(sectionRef.current, {
         x: scrollAmount,
         ease: "none",
@@ -137,7 +137,7 @@ function HorizontalScrollSection() {
         }
       });
     }, triggerRef);
-    
+
     return () => ctx.revert();
   }, []);
 
@@ -166,13 +166,13 @@ function HorizontalScrollSection() {
           <div key={index} className="w-[80vw] lg:w-[45vw] max-w-[700px] flex-shrink-0 group">
             <div className="rounded-sm overflow-hidden bg-background relative aspect-[4/3] border border-white/5 shadow-2xl">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img 
-                src={item.image} 
-                alt={item.title} 
+              <img
+                src={item.image}
+                alt={item.title}
                 className="w-full h-full object-cover transition-transform duration-[1.5s] ease-[0.16,1,0.3,1] group-hover:scale-105 grayscale group-hover:grayscale-0"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent opacity-90 transition-opacity duration-700 group-hover:opacity-60" />
-              
+
               <div className="absolute inset-0 p-8 md:p-12 flex flex-col justify-end">
                 <span className="text-primary font-mono text-xs font-bold uppercase tracking-[0.2em] mb-3">{`// Vol. ${String(index + 1).padStart(2, '0')}`}</span>
                 <h3 className="text-4xl md:text-6xl font-playfair transition-colors duration-500 group-hover:italic mb-4">{item.title}</h3>
@@ -192,15 +192,15 @@ function HorizontalScrollSection() {
 
 function ProcessAccordion({ step, index }: { step: typeof processSteps[0]; index: number }) {
   const [open, setOpen] = useState(index === 0);
-  
+
   return (
     <div className={`border-b border-white/[0.06] transition-colors duration-500 ${open ? 'border-primary/30' : ''}`}>
-      <button 
+      <button
         onClick={() => setOpen(!open)}
         className="w-full py-8 flex flex-col md:flex-row md:items-center justify-between gap-4 text-left cursor-pointer group"
       >
         <span className="text-[10px] font-mono text-primary/60 uppercase tracking-[0.2em] w-32 shrink-0">{step.phase}</span>
-        
+
         <div className="flex-1 flex items-center justify-between">
           <span className={`text-2xl md:text-4xl font-playfair transition-all duration-500 ${open ? 'text-white italic translate-x-4' : 'text-foreground/40 group-hover:text-foreground/80'}`}>
             {step.title}
@@ -232,6 +232,34 @@ function ProcessAccordion({ step, index }: { step: typeof processSteps[0]; index
   );
 }
 
+function Ticker() {
+  const tickerItems = (
+    <>
+      {Array.from({ length: 6 }).map((_, i) => (
+        <span key={i} className="flex items-center gap-8 pr-8">
+          BRAND STRATEGY <span className="h-1.5 w-1.5 rounded-full bg-black/40" />
+          VISUAL IDENTITY <span className="h-1.5 w-1.5 rounded-full bg-black/40" />
+          VERBAL IDENTITY <span className="h-1.5 w-1.5 rounded-full bg-black/40" />
+          DESIGN SYSTEMS <span className="h-1.5 w-1.5 rounded-full bg-black/40" />
+        </span>
+      ))}
+    </>
+  );
+
+  return (
+    <div className="relative w-full overflow-hidden bg-white border-y border-white/10 py-4 flex text-black">
+      <motion.div
+        animate={{ x: [0, "-50%"] }}
+        transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+        className="flex whitespace-nowrap text-xs font-black uppercase tracking-[0.3em] w-max"
+      >
+        <div className="flex items-center">{tickerItems}</div>
+        <div className="flex items-center">{tickerItems}</div>
+      </motion.div>
+    </div>
+  );
+}
+
 // ─── Main Page ────────────────────────────────────────────────────────────
 
 export default function BrandingPage() {
@@ -242,7 +270,7 @@ export default function BrandingPage() {
 
   return (
     <div className="bg-background text-foreground overflow-clip">
-      
+
       {/* ── 01. EDITORIAL HERO WITH 3D ────────────────────────────── */}
       <section ref={heroRef} className="relative h-screen w-full overflow-hidden flex items-center justify-center">
         {/* ThreeJS Background Canvas */}
@@ -263,7 +291,7 @@ export default function BrandingPage() {
               Service // Branding
             </span>
           </FadeIn>
-          
+
           <div className="mt-8 space-y-2 lg:space-y-4">
             <RevealLine>
               <h1 className="text-[clamp(3.5rem,8vw,10rem)] font-black uppercase tracking-tighter leading-[0.88]">
@@ -283,7 +311,10 @@ export default function BrandingPage() {
             </p>
           </FadeIn>
         </motion.div>
-        
+
+        <div className="absolute bottom-0 left-0 w-full z-20">
+          <Ticker />
+        </div>
 
       </section>
 
@@ -295,7 +326,7 @@ export default function BrandingPage() {
         <div className="mx-auto max-w-[1600px] grid lg:grid-cols-2 gap-20 items-center">
           <div>
             <RevealLine>
-              <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-none mb-6">Built To <br/><span className="italic font-playfair font-normal text-primary">Last.</span></h2>
+              <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-none mb-6">Built To <br /><span className="italic font-playfair font-normal text-primary">Last.</span></h2>
             </RevealLine>
             <FadeIn delay={0.1}>
               <p className="text-lg text-foreground/50 leading-relaxed font-medium max-w-md">
@@ -335,7 +366,7 @@ export default function BrandingPage() {
       <section className="relative px-6 py-48 md:px-12 lg:px-20 overflow-hidden flex items-center justify-center text-center">
         {/* Animated Blue Orb */}
 
-        
+
         <div className="relative z-10 max-w-4xl max-auto space-y-12">
           <div>
             <RevealLine>
@@ -349,7 +380,7 @@ export default function BrandingPage() {
               </h2>
             </RevealLine>
           </div>
-          
+
           <FadeIn delay={0.3}>
             <Link href="/contact" className="group inline-flex items-center gap-4 rounded-full bg-white px-10 py-5 text-[11px] font-black uppercase tracking-[0.3em] text-black transition-all duration-300 hover:bg-neutral-200 hover:scale-105 active:scale-95 shadow-[0_0_40px_-10px_rgba(255,255,255,0.3)]">
               Start the Brief

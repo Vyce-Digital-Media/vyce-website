@@ -349,11 +349,51 @@ function CTANextJob({ setGlobalTheme }: { setGlobalTheme: (theme: 'dark' | 'ligh
   return (
     <section ref={ctaRef} className="py-40 md:py-60 px-8 md:px-20 relative z-30 bg-background overflow-hidden flex flex-col items-center text-center transition-colors duration-1000">
       <RevealLine>
-        <h2 className="text-[clamp(3rem,8vw,10rem)] font-black uppercase tracking-tighter leading-[0.8] mb-12 relative group cursor-pointer">
-          <span className="block overflow-hidden relative">
-            <span className="inline-block transition-transform duration-500 group-hover:-translate-y-full">Let's Talk</span>
-            <span className="absolute top-0 left-0 inline-block translate-y-full text-primary transition-transform duration-500 group-hover:translate-y-0 italic font-playfair font-normal">Let's Talk</span>
-          </span>
+        <h2 className="text-[clamp(3rem,8vw,10rem)] font-black uppercase tracking-tighter leading-[0.8] mb-12 relative group cursor-pointer overflow-hidden">
+          <motion.div
+            initial="initial"
+            whileHover="hovered"
+            className="relative block overflow-hidden whitespace-nowrap"
+          >
+            <div>
+              {"Let's Talk".split("").map((char, i) => (
+                <motion.span
+                  key={i}
+                  className="inline-block"
+                  variants={{
+                    initial: { y: 0 },
+                    hovered: { y: "-100%" },
+                  }}
+                  transition={{
+                    duration: 0.3,
+                    ease: "easeInOut",
+                    delay: i * 0.02,
+                  }}
+                >
+                  {char === " " ? "\u00A0" : char}
+                </motion.span>
+              ))}
+            </div>
+            <div className="absolute inset-0">
+              {"Let's Talk".split("").map((char, i) => (
+                <motion.span
+                  key={i}
+                  className="inline-block text-primary italic font-playfair font-normal"
+                  variants={{
+                    initial: { y: "100%" },
+                    hovered: { y: 0 },
+                  }}
+                  transition={{
+                    duration: 0.3,
+                    ease: "easeInOut",
+                    delay: i * 0.02,
+                  }}
+                >
+                  {char === " " ? "\u00A0" : char}
+                </motion.span>
+              ))}
+            </div>
+          </motion.div>
         </h2>
       </RevealLine>
 

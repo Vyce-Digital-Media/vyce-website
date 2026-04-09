@@ -278,7 +278,7 @@ export default function ContactPage() {
     <div className="bg-background text-foreground overflow-hidden">
 
       {/* ── HERO ──────────────────────────────────────────────────── */}
-      <section ref={heroRef} className="relative flex min-h-[72vh] flex-col items-center justify-center overflow-hidden px-6 py-28">
+      <section ref={heroRef} className="relative flex h-screen flex-col items-center justify-center overflow-hidden px-6 py-28">
         <div className="pointer-events-none absolute inset-0 opacity-[0.03]">
           {Array.from({ length: 6 }).map((_, i) => (
             <div key={i} className="absolute top-0 h-full w-px bg-white" style={{ left: `${(i + 1) * (100 / 7)}%` }} />
