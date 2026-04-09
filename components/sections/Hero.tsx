@@ -9,9 +9,9 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { Points, PointMaterial } from "@react-three/drei";
 
-// ─── Custom Star Cursor ──────────────────────────────────────────────────
+// ─── Custom Dot Cursor ───────────────────────────────────────────────────
 
-function StarCursor({ isVisible }: { isVisible: boolean }) {
+function DotCursor({ isVisible }: { isVisible: boolean }) {
   const mouseX = useMotionValue(-100);
   const mouseY = useMotionValue(-100);
 
@@ -38,12 +38,8 @@ function StarCursor({ isVisible }: { isVisible: boolean }) {
         opacity: isVisible ? 1 : 0,
         scale: isVisible ? 1 : 0,
       }}
-      className="pointer-events-none fixed z-[9999] h-6 w-6 mix-blend-difference"
-    >
-      <svg viewBox="0 0 24 24" fill="white" className="h-full w-full opacity-90">
-        <path d="M12 .587l3.668 7.427 8.2 1.192-5.934 5.784 1.4 8.169L12 18.897l-7.334 3.862 1.4-8.169-5.934-5.784 8.2-1.192z" />
-      </svg>
-    </motion.div>
+      className="pointer-events-none fixed z-[9999] h-2 w-2 rounded-full bg-white shadow-[0_0_15px_rgba(255,255,255,0.5)]"
+    />
   );
 }
 
@@ -236,7 +232,7 @@ export default function Hero() {
       onMouseLeave={() => setIsHovered(false)}
       className={`relative flex h-dvh min-h-[700px] w-full flex-col items-center justify-center overflow-hidden bg-background ${isHovered ? 'cursor-none' : ''}`}
     >
-      <StarCursor isVisible={isHovered} />
+      <DotCursor isVisible={isHovered} />
       {/* Particle Background */}
       <div className="absolute inset-0 z-[1] opacity-55">
         <Canvas camera={{ position: [0, 0, 5], fov: 60 }}>
