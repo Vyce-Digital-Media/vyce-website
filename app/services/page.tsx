@@ -277,7 +277,7 @@ function ServiceRow({
               >
                 <Icon size={32} strokeWidth={1.5} />
               </div>
-              <span className="font-playfair text-[4rem] leading-none text-foreground/[0.05] md:text-[6rem]">
+              <span className="font-satoshi text-[4rem] leading-none text-foreground/[0.05] md:text-[6rem]">
                 {service.num}
               </span>
             </div>
@@ -286,7 +286,7 @@ function ServiceRow({
               <h2 className="text-3xl font-black uppercase tracking-tighter text-white md:text-5xl lg:text-6xl leading-[0.95]">
                 {service.title}
               </h2>
-              <p className="text-lg font-medium leading-relaxed text-foreground/40 md:text-xl italic font-playfair">
+              <p className="text-lg font-medium leading-relaxed text-foreground/40 md:text-xl italic font-satoshi">
                 {service.summary}
               </p>
             </div>
@@ -452,28 +452,26 @@ export default function ServicesPage() {
           <FadeIn>
             <span className="inline-flex items-center gap-3 rounded-full border border-white/10 px-5 py-2 text-[10px] font-bold uppercase tracking-[0.4em] text-foreground/40">
               <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
-              Services
+              What We Do
             </span>
           </FadeIn>
 
           <div className="space-y-2">
             <RevealLine>
-              <h1 className="text-[clamp(3rem,9vw,10rem)] font-black uppercase tracking-tighter leading-[0.88]">
-                Capabilities
+              <h1 className="text-[clamp(2rem,5.5vw,6.5rem)] font-black uppercase tracking-tighter leading-[0.88]">
+                Six ways we make your
               </h1>
             </RevealLine>
             <RevealLine delay={0.1}>
-              <h1 className="text-[clamp(3rem,9vw,10rem)] font-playfair font-normal italic text-primary leading-[0.88]">
-                End-to-end.
+              <h1 className="text-[clamp(2rem,5.5vw,6.5rem)] font-satoshi font-normal italic text-primary leading-[0.88]">
+                brand impossible to ignore.
               </h1>
             </RevealLine>
           </div>
 
           <FadeIn delay={0.3} className="max-w-2xl">
             <p className="text-base md:text-xl text-foreground/40 font-medium leading-relaxed mb-16">
-              One partner for narrative, interface, motion, and implementation.
-              Engagements are scoped as retainers or phased SOWs — always with a
-              visible critical path.
+              Strategy. Design. Content. Web. Ads. SEO. We do all of it. Together. Under one roof. So your entire digital presence actually makes sense - instead of looking like six different teams all doing their own thing.
             </p>
           </FadeIn>
 
@@ -491,7 +489,7 @@ export default function ServicesPage() {
               <div className="mb-16 flex justify-center w-full text-center">
                 <RevealLine>
                   <h2 className="text-5xl font-black uppercase tracking-tighter leading-[0.9] md:text-7xl flex flex-wrap items-center justify-center gap-4">
-                    What We Do <span className="font-playfair font-normal italic text-primary mb-2 md:mb-0">Best.</span>
+                    What We Do <span className="font-satoshi font-normal italic text-primary mb-2 md:mb-0">Best.</span>
                   </h2>
                 </RevealLine>
               </div>
@@ -503,7 +501,7 @@ export default function ServicesPage() {
             <div className="mb-8 flex justify-center w-full text-center">
               <RevealLine>
                 <h2 className="text-5xl font-black uppercase tracking-tighter leading-[0.9] flex flex-wrap items-center justify-center gap-3">
-                  What We Do <span className="font-playfair font-normal italic text-primary mt-1 md:mt-0">Best.</span>
+                  What We Do <span className="font-satoshi font-normal italic text-primary mt-1 md:mt-0">Best.</span>
                 </h2>
               </RevealLine>
             </div>
@@ -528,7 +526,7 @@ export default function ServicesPage() {
               <p className="text-[10px] font-bold uppercase tracking-[0.5em] text-primary">Engagements</p>
               <h2 className="text-5xl font-black uppercase tracking-tighter leading-[0.9] md:text-7xl">
                 How <br />
-                <span className="font-playfair font-normal italic text-primary/80">Engagements</span> <br />
+                <span className="font-satoshi font-normal italic text-primary/80">Engagements</span> <br />
                 Run.
               </h2>
             </div>
@@ -602,7 +600,7 @@ export default function ServicesPage() {
                   <div className="absolute -left-[68px] top-4 hidden h-3 w-3 rounded-full border-2 border-primary/30 bg-background transition-all duration-500 group-hover:border-primary group-hover:bg-primary/20 lg:block" />
 
                   <div className="flex items-baseline gap-6">
-                    <span className="font-playfair text-6xl text-primary/20 md:text-8xl transition-colors duration-500 group-hover:text-primary">
+                    <span className="font-satoshi text-6xl text-primary/20 md:text-8xl transition-colors duration-500 group-hover:text-primary">
                       {phase.step}
                     </span>
                     <div className="h-px flex-1 bg-white/10 transition-colors group-hover:bg-primary/40" />
@@ -651,7 +649,7 @@ export default function ServicesPage() {
                   <RevealLine>
                     <h2 className="text-4xl font-black uppercase tracking-tighter leading-[0.9] md:text-6xl">
                       Design that{" "}
-                      <span className="font-playfair font-normal italic text-primary">
+                      <span className="font-satoshi font-normal italic text-primary">
                         Ships.
                       </span>
                     </h2>

@@ -7,25 +7,31 @@ import { cn } from "@/lib/utils";
 const processSteps = [
   {
     step: "01",
-    title: "Discovery",
+    title: "Understand",
     description: "Deep diving into your brand's essence and target audience to define a clear strategic direction.",
     details: ["Audit & Research", "Competitor Analysis", "Brand Positioning", "User Persona Mapping"]
   },
   {
     step: "02",
-    title: "Strategy",
+    title: "Plan",
     description: "Mapping out the digital blueprint, from user experience paths to core technological foundations.",
     details: ["Architecture Design", "UX Workflows", "Tech Stack Selection", "Project Scoping"]
   },
   {
     step: "03",
-    title: "Design",
+    title: "Create",
     description: "Crafting visual identities and interactive prototypes that marry aesthetic luxury with peak functionality.",
     details: ["Visual Identity", "UI Systems", "Interactive Prototypes", "Motion Direction"]
   },
   {
     step: "04",
-    title: "Development",
+    title: "Launch",
+    description: "Coding high-performance, smooth, and scalable digital ecosystems with meticulous attention to detail.",
+    details: ["Frontend Craft", "Backend Systems", "Performance Tuning", "Quality Assurance"]
+  },
+  {
+    step: "05",
+    title: "Grow",
     description: "Coding high-performance, smooth, and scalable digital ecosystems with meticulous attention to detail.",
     details: ["Frontend Craft", "Backend Systems", "Performance Tuning", "Quality Assurance"]
   },
@@ -46,15 +52,15 @@ export default function Process() {
           <div className="lg:sticky lg:top-48 lg:h-fit space-y-12">
             <div className="space-y-6">
               <p className="text-[10px] font-bold uppercase tracking-[0.5em] text-primary">How we work</p>
-              <h2 className="text-5xl font-black uppercase tracking-tighter md:text-6xl lg:text-7xl leading-[0.9]">
-                The Digital <br />
-                <span className="font-playfair font-normal italic text-primary/80">Mastery</span> <br />
-                Process
+              <h2 className="text-5xl font-black uppercase tracking-tighter leading-[0.9]">
+                No black boxes. <br />
+                <span className="font-satoshi font-normal italic text-primary/80">No surprise invoices.</span> <br />
+                No "we'll figure it out as we go."
               </h2>
             </div>
 
-            <p className="max-w-md text-lg leading-relaxed text-foreground/40 font-medium">
-              We've refined our methodology over a decade to ensure every project is launched with clinical precision and creative flair.
+            <p className="max-w-md text-md leading-relaxed text-foreground/40 font-medium">
+              Every project runs through the same five phases - Understand, Plan, Create, Launch, Grow. The last one is where most agencies check out. It's where we double down.
             </p>
 
 
@@ -72,7 +78,7 @@ export default function Process() {
                 className="group relative flex flex-col gap-10"
               >
                 <div className="flex items-baseline gap-6">
-                  <span className="font-playfair text-6xl text-primary/20 md:text-8xl transition-colors duration-500 group-hover:text-primary">
+                  <span className="font-satoshi font-black text-6xl text-primary/20 md:text-8xl transition-colors duration-500 group-hover:text-primary">
                     {step.step}
                   </span>
                   <div className="h-px flex-1 bg-border/40 transition-colors group-hover:bg-primary/40" />

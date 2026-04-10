@@ -65,7 +65,7 @@ export default function Immersive3DSection() {
           <p className="text-[11px] font-bold uppercase tracking-[0.6em] text-primary">Spatial Intelligence</p>
           <h2 className="text-5xl font-black uppercase tracking-tighter sm:text-7xl md:text-8xl lg:text-9xl">
             Atmospheric <br />
-            <span className="font-playfair font-normal lowercase italic text-primary/80">interfaces</span>
+            <span className="font-satoshi font-normal lowercase italic text-primary/80">interfaces</span>
           </h2>
           <p className="mx-auto max-w-2xl text-base leading-relaxed text-foreground/40 md:text-lg">
             We don't just build sites; we architect virtual spaces. Using high-performance WebGL, 

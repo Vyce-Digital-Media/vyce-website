@@ -120,16 +120,16 @@ function ParticleSwarm({ count = 4000 }: { count?: number }) {
       // Repulsion from cursor (2D, ignore z)
       const dx = pos[ix] - mx;
       const dy = pos[ix + 1] - my;
-      
+
       // Use Manhattan distance to create a diamond/cross shape instead of circle
       const dist = Math.abs(dx) + Math.abs(dy);
-      
+
       let rx = 0, ry = 0;
 
       if (dist < REPULSION_R && dist > 0.001) {
         const t = 1 - (dist / REPULSION_R);
-        const force = t * t * REPULSION_F; 
-        
+        const force = t * t * REPULSION_F;
+
         // Push outward from center (using euclidean for direction)
         const trueDist = Math.max(0.001, Math.sqrt(dx * dx + dy * dy));
         rx = (dx / trueDist) * force;
@@ -245,33 +245,41 @@ export default function Hero() {
 
       {/* Content */}
       <div ref={containerRef} className="relative z-10 flex w-full max-w-[1400px] flex-col items-center px-6 md:px-12">
-
-
-
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
+          className="mb-0"
+        >
+          <span className="inline-flex items-center gap-3 rounded-full border border-white/10 px-5 py-2 text-[10px] font-bold uppercase tracking-[0.4em] text-foreground/40 bg-white/5 backdrop-blur-sm">
+            <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
+            Surat's Most Referred Digital Marketing Agency
+          </span>
+        </motion.div>
         {/* Title Block */}
-        <h1 className="flex flex-col items-center text-center mb-16 md:mb-20">
+        <h1 className="flex flex-col items-center text-center mt-12">
           <span className="block overflow-hidden">
             <span
               ref={(el) => { titleLinesRef.current[0] = el; }}
-              className="inline-block font-playfair font-normal mt-20 italic text-[clamp(3.5rem,12vw,14rem)] uppercase tracking-[-0.04em] leading-[0.95]"
+              className="inline-block font-satoshi font-black text-[clamp(2.2rem,8vw,9.5rem)] tracking-[-0.04em] leading-[0.95]"
             >
-              We Make
+              Your competitors
             </span>
           </span>
           <span className="block overflow-hidden -mt-1">
             <span
               ref={(el) => { titleLinesRef.current[1] = el; }}
-              className="inline-block font-playfair font-normal italic text-primary text-[clamp(3.5rem,12vw,14rem)] tracking-[-0.03em] leading-[0.85]"
+              className="inline-block font-satoshi font-black text-primary pb-8 text-[clamp(2.2rem,8vw,9.5rem)] tracking-[-0.03em] leading-[0.85]"
             >
-              Brands
+              are eating online.
             </span>
           </span>
           <span className="block overflow-hidden mt-1 md:mt-6">
             <span
               ref={(el) => { titleLinesRef.current[2] = el; }}
-              className="inline-block text-[clamp(3.2rem,5.5vw,5.5rem)] font-bold uppercase tracking-[0.02em] leading-[1] text-foreground/80"
+              className="inline-block text-[clamp(2rem,4vw,4rem)] font-bold uppercase tracking-[0.02em] leading-[1] text-foreground/80"
             >
-              Impossible to Ignore
+              Let's change that.
             </span>
           </span>
         </h1>

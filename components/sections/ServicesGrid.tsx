@@ -6,38 +6,38 @@ import { Laptop, Cpu, Layers, Palette, BarChart3, Zap } from "lucide-react";
 
 const services = [
   {
-    title: "Brand Strategy",
-    description: "We define the soul of your brand, positioning it for long-term growth and market dominance through data-driven insights.",
+    title: "Branding & Identity",
+    description: "Your brand is the first impression, the last memory, and everything in between. We build brand identities that are strategic before they're aesthetic. Logo, color system, typography, brand voice - crafted to show up consistently and confidently across every touchpoint.",
     icon: Palette,
     color: "rgba(255, 60, 0, 0.15)",
   },
   {
-    title: "Digital Design",
-    description: "High-fidelity interfaces that blend aesthetics with utility. We create designs that don't just look good, but feel premium.",
+    title: "Social Media Management",
+    description: "Posting for the sake of posting is a waste of everyone's time. We don't do that. Platform-aware, audience-first content strategy - not just a calendar filler. Reels, carousels, captions, community management - handled with an actual plan behind every post.",
     icon: Layers,
     color: "rgba(0, 200, 255, 0.15)",
   },
   {
-    title: "Creative Development",
-    description: "We bring designs to life with robust, performance-optimized code. Specialist in GSAP, Three.js, and React.",
+    title: "Website Design & Development",
+    description: "Your website is either your best salesperson or your biggest liability. Choose. We design and build websites that look premium and convert visitors into leads. Fast, mobile-first, SEO-ready, and built to actually do something for your business.",
     icon: Code,
     color: "rgba(180, 0, 255, 0.15)",
   },
   {
-    title: "3D & Immersive",
-    description: "Adding depth to the web. We build 3D environments and assets that provide a tactile, high-end feel to your project.",
+    title: "Performance Marketing",
+    description: "We turned ₹2 lakhs into ₹20 lakhs for one client. Your turn. Meta and Google campaigns built around real outcomes - sales, leads, bookings. Every rupee tracked. Every campaign optimized. No vanity metrics, no vague brand awareness.",
     icon: Cpu,
     color: "rgba(0, 255, 150, 0.15)",
   },
   {
-    title: "Growth & SEO",
-    description: "Visibility is as important as design. We optimize every pixel for search engines and conversion metrics.",
+    title: "UI/UX & Product Design",
+    description: "If users have to figure out your app, you've already lost them. Interfaces that feel intuitive - for apps, dashboards, products, and packaging. Research-backed, user-tested, friction-free.",
     icon: BarChart3,
     color: "rgba(255, 200, 0, 0.15)",
   },
   {
-    title: "Performance",
-    description: "Speed is a feature. We ensure your site loads instantly and runs at a smooth 60fps on all devices.",
+    title: "SEO",
+    description: "Page 2 of Google is basically not existing. Let's fix that. Technical SEO, on-page optimization, content strategy, and link building - so you rank for searches that actually matter to your business. Long-term, sustainable visibility.",
     icon: Zap,
     color: "rgba(255, 0, 100, 0.15)",
   },
@@ -50,9 +50,10 @@ export default function ServicesGrid() {
     <section className="bg-zinc-950/40 border-y border-white/[0.02] px-6 py-32 md:px-12 lg:px-16">
       <div className="mx-auto max-w-[1600px]">
         <div className="mb-24 flex flex-col items-center text-center">
-          <p className="mb-6 text-[10px] font-bold uppercase tracking-[0.6em] text-primary">Specializations</p>
-          <h2 className="max-w-4xl text-5xl font-black uppercase tracking-tighter sm:text-6xl md:text-7xl lg:text-8xl">
-            Elevating the <span className="font-playfair font-normal lowercase italic text-foreground/70">standard</span> of digital
+          <p className="mb-6 text-[10px] font-bold uppercase tracking-[0.6em] text-primary">What We Do</p>
+          <h2 className="max-w-5xl text-5xl font-black uppercase tracking-tighter sm:text-6xl md:text-6xl">
+            Everything your brand needs. <br />
+            <span className="font-satoshi font-normal lowercase italic text-foreground/70">Nothing it doesn't.</span>
           </h2>
         </div>
 

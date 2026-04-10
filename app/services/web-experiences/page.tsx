@@ -157,7 +157,7 @@ function HorizontalScrollSection() {
         <RevealLine>
           <div className="flex flex-row items-center gap-3 md:gap-5">
             <h2 className="text-3xl sm:text-4xl lg:text-7xl font-black uppercase tracking-tighter text-white">Browser</h2>
-            <h2 className="text-3xl sm:text-4xl lg:text-7xl font-playfair italic text-primary tracking-tight">Ecosystems.</h2>
+            <h2 className="text-3xl sm:text-4xl lg:text-7xl font-satoshi italic text-primary tracking-tight">Ecosystems.</h2>
           </div>
         </RevealLine>
       </div>
@@ -306,7 +306,7 @@ export default function WebExperiencesPage() {
               </h1>
             </RevealLine>
             <RevealLine delay={0.1}>
-              <h1 className="text-[clamp(3rem,8vw,9rem)] font-playfair font-normal italic text-white/40 leading-[0.88]">
+              <h1 className="text-[clamp(3rem,8vw,9rem)] font-satoshi font-normal italic text-white/40 leading-[0.88]">
                 Experiences.
               </h1>
             </RevealLine>
@@ -335,7 +335,7 @@ export default function WebExperiencesPage() {
             <RevealLine>
               <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-[0.9]">
                 Engineered for <br />
-                <span className="font-playfair italic text-primary font-normal">Traction.</span>
+                <span className="font-satoshi italic text-primary font-normal">Traction.</span>
               </h2>
             </RevealLine>
             <FadeIn delay={0.2} className="max-w-md">
@@ -366,7 +366,7 @@ export default function WebExperiencesPage() {
                 <div className="text-xs font-bold uppercase tracking-[0.2em] text-foreground/30">{stat.metric}</div>
                 <div>
                   <div className="text-5xl md:text-7xl font-black tracking-tighter group-hover:text-primary transition-colors duration-500">{stat.value}</div>
-                  <div className="mt-2 text-sm font-playfair italic text-white/40">{stat.brand}</div>
+                  <div className="mt-2 text-sm font-satoshi italic text-white/40">{stat.brand}</div>
                 </div>
               </motion.div>
             ))}
@@ -394,7 +394,7 @@ export default function WebExperiencesPage() {
               </h2>
             </RevealLine>
             <RevealLine delay={0.1}>
-              <h2 className="text-[clamp(2.5rem,6vw,8rem)] font-playfair font-normal italic text-primary leading-[0.88]">
+              <h2 className="text-[clamp(2.5rem,6vw,8rem)] font-satoshi font-normal italic text-primary leading-[0.88]">
                 Deep End?
               </h2>
             </RevealLine>

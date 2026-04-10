@@ -65,7 +65,7 @@ export default function Home() {
                 </RevealLine>
                 <RevealLine delay={0.1}>
                   <h2 className="text-6xl font-black uppercase tracking-tighter sm:text-7xl md:text-8xl lg:text-[10rem] leading-[0.85]">
-                    <span className="font-playfair font-normal italic text-primary/80 lowercase">Without</span>
+                    <span className="font-satoshi font-normal italic text-primary/80 lowercase">Without</span>
                   </h2>
                 </RevealLine>
                 <RevealLine delay={0.2}>
@@ -107,7 +107,7 @@ export default function Home() {
                 className="space-y-6 group"
               >
                 <div className="flex items-center gap-6">
-                  <div className="text-2xl font-playfair font-normal italic text-primary/40 transition-colors group-hover:text-primary">01</div>
+                  <div className="text-2xl font-satoshi font-normal italic text-primary/40 transition-colors group-hover:text-primary">01</div>
                   <h3 className="text-xl font-bold uppercase tracking-[0.3em]">Analytical Precision</h3>
                 </div>
                 <p className="text-foreground/45 leading-relaxed font-medium tracking-wide border-l border-border/40 pl-8 transition-colors group-hover:border-primary/40">
@@ -123,7 +123,7 @@ export default function Home() {
                 className="space-y-6 group"
               >
                 <div className="flex items-center gap-6">
-                  <div className="text-2xl font-playfair font-normal italic text-primary/40 transition-colors group-hover:text-primary">02</div>
+                  <div className="text-2xl font-satoshi font-normal italic text-primary/40 transition-colors group-hover:text-primary">02</div>
                   <h3 className="text-xl font-bold uppercase tracking-[0.3em]">Thoughtful Simplicity</h3>
                 </div>
                 <p className="text-foreground/45 leading-relaxed font-medium tracking-wide border-l border-border/40 pl-8 transition-colors group-hover:border-primary/40">
@@ -143,26 +143,23 @@ export default function Home() {
       {/* Ready when you are Section */}
       <section className="flex flex-col items-center gap-14 px-6 py-40 text-center md:px-12 lg:px-16 overflow-hidden">
         <div className="mx-auto max-w-5xl space-y-12 flex flex-col items-center">
-          <FadeIn>
-            <p className="text-[10px] font-bold uppercase tracking-[0.5em] text-primary">Ready?</p>
-          </FadeIn>
-          
+
           <div className="space-y-2 flex flex-col justify-center text-center">
             <RevealLine>
               <h2 className="text-5xl font-black tracking-tighter sm:text-7xl md:text-8xl lg:text-[8rem] leading-[0.9]">
-                Let's Build Something
+                Your brand has potential.
               </h2>
             </RevealLine>
             <RevealLine delay={0.1}>
               <h2 className="text-5xl font-black tracking-tighter sm:text-7xl md:text-8xl lg:text-[8rem] leading-[0.9]">
-                <span className="font-playfair font-normal italic text-primary">the World Will Notice.</span>
+                <span className="font-satoshi font-normal italic text-primary">It just needs the right team behind it.</span>
               </h2>
             </RevealLine>
           </div>
 
           <FadeIn delay={0.2}>
             <p className="mx-auto max-w-2xl text-lg text-foreground/60 md:text-xl leading-relaxed font-medium">
-              Whether you're starting from scratch or levelling up an existing brand — we're the team that makes it happen. No fluff, no delays, just results.
+              Whether you're starting from zero or scaling from where you are - let's figure out what the right move actually is. No pitch deck. No pressure. Just a real conversation.
             </p>
           </FadeIn>
 
@@ -171,7 +168,7 @@ export default function Home() {
               href="/contact"
               className="inline-flex rounded-full bg-primary px-12 py-6 text-[11px] font-black uppercase tracking-[0.3em] text-white transition-all hover:bg-primary/90 hover:scale-105 active:scale-95"
             >
-              Book a Free Call →
+              Start the Conversation →
             </Link>
             <Link
               href="/services"

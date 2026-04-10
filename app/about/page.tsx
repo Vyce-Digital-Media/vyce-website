@@ -308,7 +308,7 @@ function TeamCard({
             </div>
 
             <div className="mt-6 opacity-0 translate-y-4 transition-all duration-700 group-hover:opacity-60 group-hover:translate-y-0">
-              <p className="max-w-[280px] text-xs font-medium leading-relaxed tracking-tight text-white/80 italic font-playfair">
+              <p className="max-w-[280px] text-xs font-medium leading-relaxed tracking-tight text-white/80 italic font-satoshi">
                 &ldquo;{member.bio}&rdquo;
               </p>
             </div>
@@ -374,27 +374,26 @@ export default function AboutPage() {
           <FadeIn>
             <span className="inline-flex items-center gap-3 rounded-full border border-white/10 px-5 py-2 text-[10px] font-bold uppercase tracking-[0.4em] text-foreground/40">
               <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
-              About VYCE
+              About Vyce Digital Media
             </span>
           </FadeIn>
 
           <div className="space-y-2">
             <RevealLine>
-              <h1 className="text-[clamp(2.8rem,8vw,9rem)] font-black uppercase tracking-tighter leading-[0.9]">
-                The Story
+              <h1 className="text-[clamp(1.8rem,5vw,5.5rem)] font-black uppercase tracking-tighter leading-[1]">
+                We started because <br /> we kept watching
               </h1>
             </RevealLine>
             <RevealLine delay={0.1}>
-              <h1 className="text-[clamp(2.8rem,8vw,9rem)] font-playfair font-normal italic text-primary leading-[0.9]">
-                Behind the Brand.
+              <h1 className="text-[clamp(1.8rem,5vw,5.5rem)] font-satoshi font-normal italic text-primary leading-[1]">
+                great businesses get <br /> completely ignored online.
               </h1>
             </RevealLine>
           </div>
 
           <FadeIn delay={0.3} className="max-w-xl">
             <p className="text-base md:text-lg text-foreground/40 font-medium leading-relaxed">
-              This page is all about personality, purpose, and brand — we want a
-              reason to trust you before they&apos;ve seen your portfolio.
+              Turns out, the problem was never the product. It was the digital presence. So we built Vyce - and then we got to work.
             </p>
           </FadeIn>
         </motion.div>
@@ -410,7 +409,7 @@ export default function AboutPage() {
               </h2>
             </RevealLine>
             <RevealLine delay={0.08}>
-              <h2 className="text-5xl md:text-7xl font-playfair font-normal italic text-primary leading-[0.9]">
+              <h2 className="text-5xl md:text-7xl font-satoshi font-normal italic text-primary leading-[0.9]">
                 We&apos;re Your Brand&apos;s Best Decision.
               </h2>
             </RevealLine>
@@ -494,7 +493,7 @@ export default function AboutPage() {
                 >
                   <h3 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-[1.0] text-white">
                     From <span className="text-primary glow-text transition-all duration-700 group-hover:brightness-125">Static Noise</span> <br />
-                    To <span className="font-playfair font-normal italic text-primary/70">Thoughtful Simplicity.</span>
+                    To <span className="font-satoshi font-normal italic text-primary/70">Thoughtful Simplicity.</span>
                   </h3>
                   <div className="max-w-2xl">
                     <p className="text-xl md:text-2xl text-foreground/50 font-medium leading-[1.6] tracking-tight">
@@ -506,7 +505,7 @@ export default function AboutPage() {
                       So we built Vyce: a studio that combines{" "}
                       <span className="text-[#4D96FF] font-bold">strategic logic </span>
                       with
-                      <span className="font-playfair italic text-white/90"> editorial restraint </span>
+                      <span className="font-satoshi italic text-white/90"> editorial restraint </span>
                       into one cohesive story.
                     </p>
                   </div>
@@ -542,7 +541,7 @@ export default function AboutPage() {
                             else if (i === 1) clip = "inset(0% 0% 0% 100%)";
                             else if (i === 2) clip = "inset(100% 0% 0% 0%)";
                             else if (i === 3) clip = "inset(0% 100% 0% 0%)";
-                            
+
                             return {
                               clipPath: customHovered === null ? clip : "inset(0% 0% 0% 0%)",
                               zIndex: 20,
@@ -600,7 +599,7 @@ export default function AboutPage() {
             </div>
 
             {/* Right: Milestone items */}
-            <div 
+            <div
               className="space-y-0 divide-y divide-white/5"
               onMouseLeave={() => setHoveredMilestone(null)}
             >
@@ -611,7 +610,7 @@ export default function AboutPage() {
                       }`}
                     onMouseEnter={() => setHoveredMilestone(i)}
                   >
-                    <span className="font-playfair text-5xl italic text-primary/20 transition-colors duration-500 group-hover:text-primary/70 leading-none mt-1 flex-shrink-0">
+                    <span className="font-satoshi text-5xl italic text-primary/20 transition-colors duration-500 group-hover:text-primary/70 leading-none mt-1 flex-shrink-0">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <div className="flex-1">
@@ -704,7 +703,7 @@ export default function AboutPage() {
                     onMouseEnter={() => setHoveredValue(i)}
                     onMouseLeave={() => setHoveredValue(null)}
                   >
-                    <span className="font-playfair text-6xl italic text-primary/20 transition-colors duration-500 group-hover:text-primary/80 leading-none mt-1 flex-shrink-0 w-20">
+                    <span className="font-satoshi text-6xl italic text-primary/20 transition-colors duration-500 group-hover:text-primary/80 leading-none mt-1 flex-shrink-0 w-20">
                       {v.num}
                     </span>
                     <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-16 flex-1">
@@ -810,7 +809,7 @@ export default function AboutPage() {
                 </h2>
               </RevealLine>
               <RevealLine delay={0.1}>
-                <h2 className="text-5xl md:text-7xl pb-2 font-playfair font-normal italic text-primary leading-[0.9]">
+                <h2 className="text-5xl md:text-7xl pb-2 font-satoshi font-normal italic text-primary leading-[0.9]">
                   Only One is You.
                 </h2>
               </RevealLine>

@@ -30,8 +30,11 @@ export default function Footer() {
             <Link href="/" className="inline-block transition-transform hover:scale-105">
               <img src="/assets/nav-logo.png" alt="Logo" className="h-24 w-auto brightness-0 invert" />
             </Link>
-            <p className="max-w-xs text-sm leading-relaxed text-foreground/50">
-              We bridge the gap between premium aesthetics and high-performance engineering to deliver impossible-to-ignore digital experiences.
+            <p className="text-md leading-relaxed text-foreground/50">
+              Strategy. Creativity. Results. All in one place. <br />
+              Address : 903 Luxuria Business Hub, Surat, Gujarat, India. <br />
+              Email : hello@vycedigitalmedia.com <br />
+              Phone : +91 XXXXX XXXXX
             </p>
           </div>
 
@@ -51,7 +54,7 @@ export default function Footer() {
 
           {/* Column 3: Social / Community Links */}
           <div className="col-span-1 space-y-6 lg:col-span-2 transition-all duration-300">
-            <h4 className="text-base font-semibold text-foreground">Community</h4>
+            <h4 className="text-base font-semibold text-foreground">Socials</h4>
             <ul className="space-y-4 text-sm font-medium text-foreground/50">
               {socialLinks.map((link) => (
                 <li key={link.name}>
@@ -91,7 +94,7 @@ export default function Footer() {
         {/* Bottom Legal Bar */}
         <div className="mt-12 flex flex-col gap-6 border-t border-dashed border-white/10 pt-8 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-sm text-foreground/40">
-            © Copyright {year} VYCE. All rights reserved.
+            © {year} Vyce Digital Media. All rights reserved.
           </p>
           <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-foreground/40">
             <Link href="/terms" className="transition hover:text-white">Terms</Link>

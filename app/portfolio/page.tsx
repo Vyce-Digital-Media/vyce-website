@@ -151,7 +151,7 @@ function CoverflowProjectCard({ project, index, activeProgress }: { project: any
           <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/4" />
 
           <div className="flex items-center gap-4 text-[10px] font-bold uppercase tracking-[0.3em] text-white/50 mb-8">
-            <span className="font-playfair text-3xl italic text-primary drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">{String(index + 1).padStart(2, "0")}</span>
+            <span className="font-satoshi text-3xl italic text-primary drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">{String(index + 1).padStart(2, "0")}</span>
             <span className="h-px w-8 bg-white/20" />
             <span className="text-primary/80">{project.category}</span>
           </div>
@@ -258,7 +258,7 @@ export default function PortfolioPage() {
           </FadeIn>
           <div className="space-y-2">
             <RevealLine><h1 className="text-[clamp(3.5rem,10vw,12rem)] font-black uppercase tracking-tighter leading-[0.88]">Our Portfolio</h1></RevealLine>
-            <RevealLine delay={0.1}><h1 className="text-[clamp(3.5rem,10vw,12rem)] font-playfair font-normal italic text-primary leading-[0.88]">Revealed.</h1></RevealLine>
+            <RevealLine delay={0.1}><h1 className="text-[clamp(3.5rem,10vw,12rem)] font-satoshi font-normal italic text-primary leading-[0.88]">Revealed.</h1></RevealLine>
           </div>
           <FadeIn delay={0.3} className="max-w-2xl mt-6">
             <p className="text-base md:text-xl text-foreground/40 font-medium leading-relaxed">
@@ -350,7 +350,7 @@ export default function PortfolioPage() {
                     {"Let's Build".split("").map((char, i) => (
                       <motion.span
                         key={i}
-                        className="inline-block text-primary italic font-playfair font-normal"
+                        className="inline-block text-primary italic font-satoshi font-normal"
                         variants={{
                           initial: { y: "100%" },
                           hovered: { y: 0 },

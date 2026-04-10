@@ -294,12 +294,12 @@ export default function ContactPage() {
             </span>
           </FadeIn>
           <div className="space-y-2">
-            <RevealLine><h1 className="text-[clamp(3rem,9vw,10rem)] font-black uppercase tracking-tighter leading-[0.88]">Let&apos;s</h1></RevealLine>
-            <RevealLine delay={0.1}><h1 className="text-[clamp(3rem,9vw,10rem)] font-playfair font-normal italic text-primary leading-[0.88]">Build Together.</h1></RevealLine>
+            <RevealLine><h1 className="text-[clamp(2rem,5.5vw,6.5rem)] font-black uppercase tracking-tighter leading-[0.88]">Let&apos;s talk.</h1></RevealLine>
+            <RevealLine delay={0.1}><h1 className="text-[clamp(2rem,5.5vw,6.5rem)] font-satoshi font-normal italic text-primary leading-[0.88]">Seriously, we don't bite.</h1></RevealLine>
           </div>
           <FadeIn delay={0.3} className="max-w-2xl">
             <p className="text-base md:text-xl text-foreground/40 font-medium leading-relaxed">
-              Share the problem space, timeline, and what success looks like for your stakeholders. We&apos;ll follow up with a concise plan — team shape, milestones, and a transparent estimate.
+              Whether you have a fully detailed brief or just a vague idea and a rough budget - reach out. We'll help you figure out the rest. That's kind of our thing.
             </p>
           </FadeIn>
         </motion.div>
@@ -386,7 +386,7 @@ export default function ContactPage() {
               <FadeIn delay={0.1} className="mb-8">
                 <div>
                   <RevealLine><h2 className="text-4xl font-black uppercase tracking-tighter leading-[0.9] md:text-5xl">Start the</h2></RevealLine>
-                  <RevealLine delay={0.07}><h2 className="text-4xl font-playfair font-normal italic text-primary leading-[0.9] md:text-5xl">Conversation.</h2></RevealLine>
+                  <RevealLine delay={0.07}><h2 className="text-4xl font-satoshi font-normal italic text-primary leading-[0.9] md:text-5xl">Conversation.</h2></RevealLine>
                   <FadeIn delay={0.2} className="mt-5"><p className="text-sm text-foreground/40 font-medium leading-relaxed max-w-md">No long forms. No gatekeeping. Just tell us what you&apos;re working on and we&apos;ll take it from there.</p></FadeIn>
                 </div>
               </FadeIn>

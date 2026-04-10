@@ -86,7 +86,7 @@ function HeroSection() {
         </RevealLine>
         <RevealLine delay={0.1}>
           <h1 className="text-[clamp(3rem,6vw,7rem)] font-black uppercase tracking-tighter leading-[0.9]">
-            Nexus<br /><span className="font-playfair italic font-normal text-white/50">Space.</span>
+            Nexus<br /><span className="font-satoshi italic font-normal text-white/50">Space.</span>
           </h1>
         </RevealLine>
         <RevealLine delay={0.2} className="mt-8">
@@ -279,7 +279,7 @@ function LightModeSection({ setGlobalTheme }: { setGlobalTheme: (theme: 'dark' |
         <RevealLine delay={0.1}>
           <h2 className="text-[clamp(3rem,6vw,6rem)] font-black uppercase tracking-tighter leading-none mb-12">
             Minimalism <br />
-            <span className="font-playfair italic font-normal opacity-50">is complex.</span>
+            <span className="font-satoshi italic font-normal opacity-50">is complex.</span>
           </h2>
         </RevealLine>
         <RevealLine delay={0.2}>
@@ -375,7 +375,7 @@ function CenteredGrowthSection({ setGlobalTheme }: { setGlobalTheme: (theme: 'da
                 {"Let's Talk".split("").map((char, i) => (
                   <motion.span
                     key={i}
-                    className="inline-block text-primary italic font-playfair font-normal"
+                    className="inline-block text-primary italic font-satoshi font-normal"
                     variants={{
                       initial: { y: "100%" },
                       hovered: { y: 0 },

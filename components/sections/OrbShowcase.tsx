@@ -12,7 +12,7 @@ export default function OrbShowcase() {
         <div className="order-1 md:order-2">
           <p className="text-[10px] font-semibold uppercase tracking-[0.4em] text-primary">Product & launch</p>
           <h2 className="mt-5 text-3xl font-bold uppercase tracking-tighter text-foreground md:text-4xl">
-            Launch systems <span className="font-playfair lowercase text-primary">with depth</span>
+            Launch systems <span className="font-satoshi lowercase text-primary">with depth</span>
           </h2>
           <p className="mt-6 max-w-lg text-sm leading-relaxed text-foreground/55 md:text-base">
             Borrowing patterns from studios like Instrument and Active Theory, we pair cinematic motion with pragmatic

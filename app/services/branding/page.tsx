@@ -152,16 +152,16 @@ function HorizontalScrollSection() {
         ))}
       </div>
 
-      <div className="absolute top-12 left-12 lg:left-20 z-10 pointer-events-none">
+      <div className="absolute top-20 left-0 w-full z-10 pointer-events-none flex justify-center">
         <RevealLine>
-          <h2 className="text-3xl font-black uppercase tracking-tighter md:text-5xl text-white">Visual</h2>
-        </RevealLine>
-        <RevealLine delay={0.05}>
-          <h2 className="text-3xl font-playfair italic text-white/50 md:text-5xl">Vocabulary.</h2>
+          <h2 className="text-3xl md:text-5xl uppercase tracking-tighter text-white">
+            <span className="font-black">Visual</span>{" "}
+            <span className="font-satoshi italic text-white/50">Vocabulary.</span>
+          </h2>
         </RevealLine>
       </div>
 
-      <div ref={sectionRef} className="flex gap-12 lg:gap-20 px-12 lg:px-20 h-auto items-center mt-12 w-max relative z-20">
+      <div ref={sectionRef} className="flex gap-12 lg:gap-20 px-12 lg:px-20 h-auto items-center mt-24 w-max relative z-20">
         {expressions.map((item, index) => (
           <div key={index} className="w-[80vw] lg:w-[45vw] max-w-[700px] flex-shrink-0 group">
             <div className="rounded-sm overflow-hidden bg-background relative aspect-[4/3] border border-white/5 shadow-2xl">
@@ -175,7 +175,7 @@ function HorizontalScrollSection() {
 
               <div className="absolute inset-0 p-8 md:p-12 flex flex-col justify-end">
                 <span className="text-primary font-mono text-xs font-bold uppercase tracking-[0.2em] mb-3">{`// Vol. ${String(index + 1).padStart(2, '0')}`}</span>
-                <h3 className="text-4xl md:text-6xl font-playfair transition-colors duration-500 group-hover:italic mb-4">{item.title}</h3>
+                <h3 className="text-4xl md:text-6xl font-satoshi transition-colors duration-500 group-hover:italic mb-4">{item.title}</h3>
                 <p className="max-w-md text-foreground/50 text-sm md:text-base font-medium leading-relaxed opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-700 ease-[0.16,1,0.3,1]">
                   {item.description}
                 </p>
@@ -202,7 +202,7 @@ function ProcessAccordion({ step, index }: { step: typeof processSteps[0]; index
         <span className="text-[10px] font-mono text-primary/60 uppercase tracking-[0.2em] w-32 shrink-0">{step.phase}</span>
 
         <div className="flex-1 flex items-center justify-between">
-          <span className={`text-2xl md:text-4xl font-playfair transition-all duration-500 ${open ? 'text-white italic translate-x-4' : 'text-foreground/40 group-hover:text-foreground/80'}`}>
+          <span className={`text-2xl md:text-4xl font-satoshi transition-all duration-500 ${open ? 'text-white italic translate-x-4' : 'text-foreground/40 group-hover:text-foreground/80'}`}>
             {step.title}
           </span>
           <motion.div animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }} className="text-primary/50">
@@ -299,7 +299,7 @@ export default function BrandingPage() {
               </h1>
             </RevealLine>
             <RevealLine delay={0.1}>
-              <h1 className="text-[clamp(3.5rem,8vw,10rem)] font-playfair font-normal italic text-white/40 leading-[0.88]">
+              <h1 className="text-[clamp(3.5rem,8vw,10rem)] font-satoshi font-normal italic text-white/40 leading-[0.88]">
                 Positioning.
               </h1>
             </RevealLine>
@@ -326,7 +326,7 @@ export default function BrandingPage() {
         <div className="mx-auto max-w-[1600px] grid lg:grid-cols-2 gap-20 items-center">
           <div>
             <RevealLine>
-              <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-none mb-6">Built To <br /><span className="italic font-playfair font-normal text-primary">Last.</span></h2>
+              <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-none mb-6">Built To <br /><span className="italic font-satoshi font-normal text-primary">Last.</span></h2>
             </RevealLine>
             <FadeIn delay={0.1}>
               <p className="text-lg text-foreground/50 leading-relaxed font-medium max-w-md">
@@ -375,7 +375,7 @@ export default function BrandingPage() {
               </h2>
             </RevealLine>
             <RevealLine delay={0.1}>
-              <h2 className="text-[clamp(2.5rem,6vw,8rem)] font-playfair font-normal italic text-primary leading-[0.88]">
+              <h2 className="text-[clamp(2.5rem,6vw,8rem)] font-satoshi font-normal italic text-primary leading-[0.88]">
                 Legacy.
               </h2>
             </RevealLine>

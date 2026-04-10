@@ -31,7 +31,7 @@ function Counter({ value, prefix = "", suffix = "" }: { value: number; prefix?: 
   }, [isInView, spring, value]);
 
   return (
-    <motion.span ref={ref} className="font-playfair text-4xl text-foreground md:text-5xl">
+    <motion.span ref={ref} className="font-satoshi font-bold text-4xl text-foreground md:text-5xl">
       {displayValue}
     </motion.span>
   );

@@ -8,7 +8,7 @@ export default function WebGLShowcase() {
       <div className="mx-auto grid max-w-[1600px] items-center gap-14 lg:grid-cols-2 lg:gap-20">
         <div>
           <p className="text-[10px] font-semibold uppercase tracking-[0.4em] text-primary">Immersive layer</p>
-          <h2 className="mt-5 font-playfair text-3xl leading-tight text-foreground md:text-4xl">
+          <h2 className="mt-5 font-satoshi font-bold text-3xl leading-tight text-foreground md:text-4xl">
             WebGL moments that feel tactile — built for performance-first storytelling.
           </h2>
           <p className="mt-6 max-w-lg text-sm leading-relaxed text-foreground/55 md:text-base">

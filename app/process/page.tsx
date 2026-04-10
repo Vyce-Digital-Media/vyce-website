@@ -171,7 +171,7 @@ function StepCard({ step, index, onHover }: { step: typeof processSteps[0]; inde
       className="group relative flex flex-col gap-10"
     >
       <div className="flex items-baseline gap-6 leading-none">
-        <span className="font-playfair text-6xl text-primary/20 md:text-8xl transition-all duration-700 group-hover:text-primary/40 group-hover:scale-105 leading-none">
+        <span className="font-satoshi text-6xl text-primary/20 md:text-8xl transition-all duration-700 group-hover:text-primary/40 group-hover:scale-105 leading-none">
           {step.step}
         </span>
         <div className="h-px flex-1 bg-white/[0.06] transition-all duration-700 group-hover:bg-primary/40 group-hover:scale-x-105 origin-left" />
@@ -256,12 +256,12 @@ export default function ProcessPage() {
             </span>
           </FadeIn>
           <div className="space-y-2">
-            <RevealLine><h1 className="text-[clamp(3rem,9vw,10rem)] font-black uppercase tracking-tighter leading-[0.88]">The Digital</h1></RevealLine>
-            <RevealLine delay={0.1}><h1 className="text-[clamp(3rem,9vw,10rem)] font-playfair font-normal italic text-primary leading-[0.88]">Mastery Process.</h1></RevealLine>
+            <RevealLine><h1 className="text-[clamp(1.8rem,5vw,6rem)] font-black uppercase tracking-tighter leading-[0.88]">Five phases. Every project.</h1></RevealLine>
+            <RevealLine delay={0.1}><h1 className="text-[clamp(1.8rem,5vw,6rem)] font-satoshi font-normal italic text-primary leading-[0.88]">Because winging it is expensive.</h1></RevealLine>
           </div>
           <FadeIn delay={0.3} className="max-w-2xl">
             <p className="text-base md:text-xl text-foreground/40 font-medium leading-relaxed">
-              Five deliberate phases — from deep discovery to a clean launch. Refined over a decade so every project ships with clinical precision and creative flair.
+              We've refined how we work across 100+ projects in 15+ industries. The result is a process that's clear, repeatable, and - most importantly - designed to actually deliver. No black boxes. No surprises. Just a visible path from where you are to where you want to be.
             </p>
           </FadeIn>
         </motion.div>
@@ -295,7 +295,7 @@ export default function ProcessPage() {
               <RevealLine>
                 <h2 className="text-5xl font-black uppercase tracking-tighter md:text-6xl lg:text-7xl leading-none">
                   The Digital <br />
-                  <span className="font-playfair font-normal italic text-primary">Mastery</span> <br />
+                  <span className="font-satoshi font-normal italic text-primary">Mastery</span> <br />
                   Process
                 </h2>
               </RevealLine>
@@ -364,7 +364,7 @@ export default function ProcessPage() {
         <div className="mx-auto max-w-[1600px]">
           <div className="mb-20">
             <RevealLine><h2 className="text-5xl font-black uppercase tracking-tighter leading-[0.9] md:text-7xl">Why It Works</h2></RevealLine>
-            <RevealLine delay={0.08}><h2 className="text-5xl font-playfair font-normal italic text-primary leading-[0.9] md:text-7xl">Every Time.</h2></RevealLine>
+            <RevealLine delay={0.08}><h2 className="text-5xl font-satoshi font-normal italic text-primary leading-[0.9] md:text-7xl">Every Time.</h2></RevealLine>
           </div>
 
           <div className="grid gap-6 md:grid-cols-3">
@@ -375,7 +375,7 @@ export default function ProcessPage() {
             ].map((card, i) => (
               <FadeIn key={card.num} delay={i * 0.1} className="h-full">
                 <div className="group relative h-full flex flex-col overflow-hidden rounded-3xl border border-white/[0.07] bg-gradient-to-br from-zinc-950 to-zinc-900 p-10 transition-all duration-500 hover:border-primary/25">
-                  <span className="font-playfair text-6xl italic text-primary/10 group-hover:text-primary/25 transition-colors duration-700 leading-none">{card.num}</span>
+                  <span className="font-satoshi text-6xl italic text-primary/10 group-hover:text-primary/25 transition-colors duration-700 leading-none">{card.num}</span>
                   <h3 className="mt-4 text-xl font-black uppercase tracking-tighter">{card.title}</h3>
                   <p className="mt-4 text-sm leading-relaxed text-foreground/45 font-medium">{card.body}</p>
                   <div className="absolute bottom-0 right-0 h-32 w-32 rounded-full bg-primary/5 blur-2xl transition-all group-hover:bg-primary/15" />
@@ -421,7 +421,7 @@ export default function ProcessPage() {
                 <div className="max-w-2xl space-y-5">
                   <RevealLine>
                     <h2 className="text-4xl font-black uppercase tracking-tighter leading-[0.9] md:text-6xl">
-                      Ready to{" "}<span className="font-playfair font-normal italic text-primary">start?</span>
+                      Ready to{" "}<span className="font-satoshi font-normal italic text-primary">start?</span>
                     </h2>
                   </RevealLine>
                   <FadeIn delay={0.2}><p className="text-lg text-foreground/40 leading-relaxed font-medium">Share your brief and we&apos;ll come back with a clear proposed path — team shape, milestones, and an honest estimate.</p></FadeIn>

@@ -128,7 +128,7 @@ export default function DigitalGrowthPage() {
                 </h1>
               </RevealLine>
               <RevealLine delay={0.1}>
-                <h1 className="text-[clamp(3.5rem,8vw,9rem)] font-playfair font-normal italic text-white/40 leading-[0.88]">
+                <h1 className="text-[clamp(3.5rem,8vw,9rem)] font-satoshi font-normal italic text-white/40 leading-[0.88]">
                   Matter.
                 </h1>
               </RevealLine>
@@ -181,7 +181,7 @@ export default function DigitalGrowthPage() {
             <RevealLine>
               <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-[0.9]">
                 The Experimentation <br />
-                <span className="font-playfair font-normal italic text-[#ff6a00]">Backlog.</span>
+                <span className="font-satoshi font-normal italic text-[#ff6a00]">Backlog.</span>
               </h2>
             </RevealLine>
             <FadeIn delay={0.1}>
@@ -286,14 +286,14 @@ export default function DigitalGrowthPage() {
               </h2>
             </RevealLine>
             <RevealLine delay={0.1}>
-              <h2 className="text-[clamp(2.5rem,6vw,8rem)] font-playfair font-normal italic text-[#ff6a00] leading-[0.88]">
+              <h2 className="text-[clamp(2.5rem,6vw,8rem)] font-satoshi font-normal italic text-[#ff6a00] leading-[0.88]">
                 Acquisition.
               </h2>
             </RevealLine>
           </div>
 
           <FadeIn delay={0.3}>
-            <Link href="/contact" className="group inline-flex items-center gap-4 rounded-full bg-white px-10 py-5 text-[11px] font-black uppercase tracking-[0.3em] text-black transition-all duration-300 hover:bg-neutral-200 shadow-[0_0_40px_-5px_rgba(255,106,0,0.4)]">
+            <Link href="/contact" className="group inline-flex items-center gap-4 rounded-full bg-white px-10 py-5 text-[11px] font-black uppercase tracking-[0.3em] text-black transition-all duration-300 hover:bg-neutral-200 hover:scale-105 active:scale-95 shadow-[0_0_40px_-10px_rgba(255,106,0,0.3)]">
               Start the Brief
               <ArrowUpRight size={16} className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </Link>

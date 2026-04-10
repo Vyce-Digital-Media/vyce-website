@@ -5,28 +5,29 @@ import { motion, useInView, useSpring, useTransform } from "framer-motion";
 
 const stats = [
   {
-    value: 50,
+    value: 100,
     suffix: "+",
     label: "Projects Delivered"
   },
   {
-    value: 100,
-    suffix: "%",
-    label: "Client Satisfaction"
+    value: 5,
+    prefix: "₹",
+    suffix: "Cr+",
+    label: "Revenue Generated for Clients"
   },
   {
-    value: 4,
-    suffix: "",
-    label: "Core Services"
-  },
-  {
-    value: 2,
+    value: 15,
     suffix: "+",
-    label: "Years Crafting Brands"
+    label: "Industries Served"
+  },
+  {
+    value: 15,
+    suffix: "+",
+    label: "Team Members"
   },
 ];
 
-function Counter({ value, suffix }: { value: number; suffix: string }) {
+function Counter({ value, suffix, prefix = "" }: { value: number; suffix: string; prefix?: string }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
@@ -37,7 +38,7 @@ function Counter({ value, suffix }: { value: number; suffix: string }) {
   });
 
   const displayValue = useTransform(spring, (current) =>
-    `${Math.round(current).toString()}${suffix}`
+    `${prefix}${Math.round(current).toString()}${suffix}`
   );
 
   useEffect(() => {
@@ -77,7 +78,7 @@ export default function StatsBox() {
                   <div className="absolute left-0 top-1/2 h-20 w-px -translate-y-1/2 bg-white/10 hidden sm:block lg:hidden" />
                 )}
 
-                <Counter value={stat.value} suffix={stat.suffix} />
+                <Counter value={stat.value} suffix={stat.suffix} prefix={stat.prefix} />
                 <p className="mt-6 max-w-[200px] text-[10px] font-bold uppercase tracking-[0.4em] text-foreground/30 group-hover:text-foreground/80 transition-colors">
                   {stat.label}
                 </p>
