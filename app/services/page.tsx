@@ -429,7 +429,7 @@ export default function ServicesPage() {
       {/* ── 00. HERO ──────────────────────────────────────────────── */}
       <section
         ref={heroRef}
-        className="relative flex min-h-[85vh] flex-col items-center justify-center overflow-hidden px-6 py-32"
+        className="relative flex h-[100vh] flex-col items-center justify-center overflow-hidden px-6 py-32"
       >
         {/* Decorative grid lines */}
         <div className="pointer-events-none absolute inset-0 opacity-[0.03]">
@@ -447,7 +447,7 @@ export default function ServicesPage() {
 
         <motion.div
           style={{ y: heroY, opacity: heroOpacity, scale: heroScale }}
-          className="relative z-10 flex flex-col items-center gap-8 text-center"
+          className="relative z-10 flex flex-col items-center gap-8 text-center mt-16"
         >
           <FadeIn>
             <span className="inline-flex items-center gap-3 rounded-full border border-white/10 px-5 py-2 text-[10px] font-bold uppercase tracking-[0.4em] text-foreground/40">

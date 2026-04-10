@@ -240,7 +240,7 @@ export default function ProcessPage() {
     <div className="bg-background text-foreground overflow-clip">
 
       {/* ── HERO ──────────────────────────────────────────────────── */}
-      <section ref={heroRef} className="relative flex min-h-[82vh] flex-col items-center justify-center overflow-hidden px-6 py-32">
+      <section ref={heroRef} className="relative flex h-[100vh] flex-col items-center justify-center overflow-hidden px-6 py-32">
         <div className="pointer-events-none absolute inset-0 opacity-[0.03]">
           {Array.from({ length: 6 }).map((_, i) => (
             <div key={i} className="absolute top-0 h-full w-px bg-white" style={{ left: `${(i + 1) * (100 / 7)}%` }} />
@@ -311,8 +311,8 @@ export default function ProcessPage() {
               {processSteps.map((s) => {
                 const isHovered = hoveredStep === s.step;
                 return (
-                  <div 
-                    key={s.step} 
+                  <div
+                    key={s.step}
                     className={cn(
                       "flex items-center gap-6 transition-all duration-500",
                       isHovered ? "opacity-100 translate-x-4" : "opacity-20 translate-x-0"
@@ -345,11 +345,11 @@ export default function ProcessPage() {
           {/* Right Side: Step Progression */}
           <div className="space-y-32 md:space-y-48">
             {processSteps.map((step, index) => (
-              <StepCard 
-                key={step.step} 
-                step={step} 
-                index={index} 
-                onHover={setHoveredStep} 
+              <StepCard
+                key={step.step}
+                step={step}
+                index={index}
+                onHover={setHoveredStep}
               />
             ))}
           </div>

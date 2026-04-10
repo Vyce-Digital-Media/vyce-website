@@ -146,7 +146,7 @@ export default function ProjectTransitionOverlay() {
       if (currentOnComplete) currentOnComplete()
 
       if (state?.slug) {
-        router.push(`/projects/${state.slug}`)
+        router.push(`/showcase`)
         setTimeout(() => {
           document.body.style.overflow = ''
           document.documentElement.style.overflow = ''

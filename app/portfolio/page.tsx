@@ -321,7 +321,52 @@ export default function PortfolioPage() {
         <div className="mx-auto max-w-[1600px] text-center relative z-10">
           <FadeIn>
             <div className="relative inline-block">
-              <h2 className="text-[clamp(2.5rem,8vw,8rem)] font-black uppercase tracking-tighter leading-[0.9] text-white">Let&apos;s Build</h2>
+              <h2 className="text-[clamp(2.5rem,8vw,8rem)] font-black uppercase tracking-tighter leading-[0.9] text-white cursor-pointer">
+                <motion.div
+                  initial="initial"
+                  whileHover="hovered"
+                  className="relative block overflow-hidden whitespace-nowrap"
+                >
+                  <div>
+                    {"Let's Build".split("").map((char, i) => (
+                      <motion.span
+                        key={i}
+                        className="inline-block"
+                        variants={{
+                          initial: { y: 0 },
+                          hovered: { y: "-100%" },
+                        }}
+                        transition={{
+                          duration: 0.3,
+                          ease: "easeInOut",
+                          delay: i * 0.02,
+                        }}
+                      >
+                        {char === " " ? "\u00A0" : char}
+                      </motion.span>
+                    ))}
+                  </div>
+                  <div className="absolute inset-0">
+                    {"Let's Build".split("").map((char, i) => (
+                      <motion.span
+                        key={i}
+                        className="inline-block text-primary italic font-playfair font-normal"
+                        variants={{
+                          initial: { y: "100%" },
+                          hovered: { y: 0 },
+                        }}
+                        transition={{
+                          duration: 0.3,
+                          ease: "easeInOut",
+                          delay: i * 0.02,
+                        }}
+                      >
+                        {char === " " ? "\u00A0" : char}
+                      </motion.span>
+                    ))}
+                  </div>
+                </motion.div>
+              </h2>
               <div className="absolute -right-10 top-0 h-4 w-4 bg-primary animate-pulse" />
             </div>
             <p className="mt-8 text-xl text-white/40 max-w-2xl mx-auto font-medium leading-relaxed">

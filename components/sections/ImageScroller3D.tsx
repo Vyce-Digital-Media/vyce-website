@@ -319,7 +319,7 @@ function ImageScroller3D({ cards, isTransitionActive, sideGradientWidth = 80, in
       objectFit: 'contain',
     }
 
-    router.prefetch(`/projects/${card.slug}`)
+    router.prefetch(`/showcase`)
     const animationComplete = new Promise((resolve) => {
       setImageOverlay({
         img: card.imgSrc,

@@ -6,6 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion, useInView } from "framer-motion";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import { signalProjectPageReady } from "@/components/ui/ProjectTransition";
 
 // ─── UTILITIES ─────────────────────────────────────────────────────────────
 
@@ -425,6 +426,7 @@ export default function ShowcasePage() {
 
   // Reset body color on unmount just in case
   useEffect(() => {
+    signalProjectPageReady();
     return () => {
       gsap.set(document.body, { color: "#f4f4f5", backgroundColor: "#030303" });
     };

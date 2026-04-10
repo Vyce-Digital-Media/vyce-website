@@ -3,9 +3,8 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { AtSign, Globe, Menu, Share2, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { VyceLogo } from "@/components/ui/VyceLogo";
 
 const navLinks = [
   { name: "Home", href: "/" },
@@ -16,15 +15,11 @@ const navLinks = [
   { name: "Contact Us", href: "/contact" },
 ] as const;
 
-const socialLinks: {
-  name: string;
-  href: string;
-  icon: React.ComponentType<React.SVGProps<SVGSVGElement> & { size?: number }>;
-}[] = [
-    { name: "Twitter", href: "https://twitter.com", icon: Share2 },
-    { name: "Facebook", href: "https://facebook.com", icon: Globe },
-    { name: "Instagram", href: "https://instagram.com", icon: AtSign },
-  ];
+const socialLinks = [
+  { name: "Instagram", href: "https://instagram.com", iconClass: "fa-brands fa-instagram" },
+  { name: "LinkedIn", href: "https://linkedin.com", iconClass: "fa-brands fa-linkedin" },
+  { name: "WhatsApp", href: "https://wa.me/yournumber", iconClass: "fa-brands fa-whatsapp" },
+];
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -49,13 +44,12 @@ export default function Navbar() {
       <header
         className={cn(
           "fixed left-0 top-0 z-[200] w-full transition-[background-color,padding] duration-300",
-          scrolled ? "bg-transparent py-3" : "bg-transparent py-5 md:py-6"
+          scrolled ? "bg-transparent py-2" : "bg-transparent py-3 md:py-4"
         )}
       >
         <nav className="mx-auto flex max-w-[1600px] items-center justify-between px-6 md:px-12 lg:px-16">
           <Link href="/" className="flex items-center gap-4 group">
-            <VyceLogo className="h-10 w-auto text-foreground sm:h-12 md:h-14" />
-            <span className="hidden font-black uppercase tracking-[0.4em] text-2xl text-foreground sm:block">VYCE</span>
+            <img src="/assets/nav-logo.png" alt="Logo" className="h-12 w-auto text-foreground sm:h-16 md:h-20 ml-4 md:ml-8" />
           </Link>
 
           <div className="hidden items-center gap-10 rounded-full border border-foreground/10 bg-background/90 px-8 py-4 shadow-[0_24px_80px_rgba(0,0,0,0.22)] backdrop-blur-md md:flex">
@@ -73,7 +67,6 @@ export default function Navbar() {
 
           <div className="hidden items-center gap-3 md:flex">
             {socialLinks.map((social) => {
-              const Icon = social.icon;
               return (
                 <a
                   key={social.name}
@@ -81,9 +74,9 @@ export default function Navbar() {
                   target="_blank"
                   rel="noreferrer"
                   aria-label={social.name}
-                  className="group flex h-12 w-12 items-center justify-center rounded-full border border-foreground/10 bg-foreground/5 text-foreground transition-all duration-300 hover:border-primary hover:bg-primary/15 hover:text-primary hover:scale-110 hover:shadow-[0_0_20px_rgba(0,68,255,0.3)]"
+                  className="group flex h-12 w-12 items-center justify-center rounded-full border border-foreground/10 bg-foreground/5 text-foreground transition-all duration-300 hover:border-primary hover:bg-primary/15 hover:text-primary hover:shadow-[0_0_20px_rgba(0,68,255,0.3)]"
                 >
-                  <Icon size={18} className="transition-transform duration-300 group-hover:-translate-y-0.5" />
+                  <i className={cn(social.iconClass, "text-[20px] transition-transform duration-300 group-hover:scale-120")} />
                 </a>
               );
             })}
