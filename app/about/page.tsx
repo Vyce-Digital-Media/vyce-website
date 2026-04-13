@@ -389,7 +389,7 @@ export default function AboutPage() {
 
       {/* ── 02. OUR STORY ───────────────────────────────────────── */}
       <section ref={storyRef} className="relative px-6 py-32 md:px-12 lg:px-20 bg-zinc-950/30 overflow-hidden">
-        <div className="mx-auto max-w-[1300px] space-y-20">
+        <div className="mx-auto max-w-[1500px] space-y-20">
           <div>
             <RevealLine className="mt-4">
               <h2 className="text-5xl md:text-8xl lg:text-[9rem] font-black uppercase tracking-tighter leading-[0.9]">
@@ -576,7 +576,7 @@ export default function AboutPage() {
 
       {/* ── 03. MISSION & VISION ─────────────────────────────────── */}
       <section className="relative px-6 py-32 md:px-12 lg:px-20 overflow-hidden">
-        <div className="mx-auto max-w-[1300px]">
+        <div className="mx-auto max-w-[1500px]">
           <div className="mt-8 grid gap-16 lg:grid-cols-2 items-end">
             <div>
               <RevealLine>
@@ -613,7 +613,7 @@ export default function AboutPage() {
         className="relative px-6 py-32 md:px-12 lg:px-20 bg-zinc-950/30 overflow-hidden"
         onMouseLeave={() => setHoveredValue(null)}
       >
-        <div className="mx-auto max-w-[1300px]">
+        <div className="mx-auto max-w-[1500px]">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-24">
             <div>
               <RevealLine className="mt-4">
@@ -705,7 +705,7 @@ export default function AboutPage() {
 
       {/* ── 05. MEET THE TEAM ────────────────────────────────────── */}
       <section className="relative px-6 py-32 md:px-12 lg:px-20 overflow-hidden">
-        <div className="mx-auto max-w-[1300px]">
+        <div className="mx-auto max-w-[1500px]">
           <div className="mb-20">
             <RevealLine className="mt-4">
               <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter leading-[0.9]">
@@ -731,8 +731,8 @@ export default function AboutPage() {
 
       {/* ── 06. WHY CHOOSE VYCE ──────────────────────────────────── */}
       <section className="relative px-6 py-32 md:px-12 lg:px-20 bg-zinc-950/30 overflow-hidden">
-        <div className="mx-auto max-w-[1300px] grid gap-20 lg:grid-cols-2 items-center">
-          <div className="space-y-10">
+        <div className="mx-auto max-w-[1500px] w-full grid gap-12 lg:grid-cols-[1.3fr_0.7fr] items-center">
+          <div className="space-y-12">
             <div>
               <RevealLine className="mt-4">
                 <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter leading-[0.9]">
@@ -741,20 +741,20 @@ export default function AboutPage() {
               </RevealLine>
               <RevealLine delay={0.1}>
                 <h2 className="text-5xl md:text-7xl pb-2 font-satoshi font-normal italic text-primary leading-[0.9]">
-                  Here's what makes this one different.
+                  Here&apos;s what makes this one different.
                 </h2>
               </RevealLine>
             </div>
 
-            <FadeIn delay={0.2}>
-              <div className="w-full border-t border-white/10 mt-10">
-                {/* Header row */}
-                <div className="grid grid-cols-2 py-6 border-b border-white/10">
-                  <div className="text-[10px] font-bold uppercase tracking-[0.4em] text-primary text-center">What most agencies do</div>
-                  <div className="text-[10px] font-bold uppercase tracking-[0.4em] text-primary text-center">What we do</div>
-                </div>
+            <div className="w-full border-t border-white/10 mt-10">
+              {/* Header row */}
+              <div className="grid grid-cols-2 py-6 border-b border-white/10 bg-white/[0.01]">
+                <div className="text-[11px] font-bold uppercase tracking-[0.5em] text-primary/60 text-center">What most agencies do</div>
+                <div className="text-[11px] font-bold uppercase tracking-[0.5em] text-primary text-center">What we do</div>
+              </div>
 
-                {/* Table content data rows */}
+              {/* Table content data rows with animations */}
+              <div className="relative">
                 {[
                   {
                     agency: "Finish the project, send the invoice, disappear",
@@ -777,19 +777,33 @@ export default function AboutPage() {
                     vyce: "Real relationships. Ongoing conversation."
                   }
                 ].map((row, i) => (
-                  <div key={i} className="grid grid-cols-2 py-8 border-b border-white/5 group hover:bg-white/[0.02] transition-colors -mx-4 px-4 rounded-lg">
-                    <div className="text-sm md:text-base text-foreground/40 font-medium px-6 leading-relaxed text-center">
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{
+                      duration: 0.8,
+                      delay: i * 0.1,
+                      ease: [0.16, 1, 0.3, 1]
+                    }}
+                    className="grid grid-cols-2 py-8 border-b border-white/5 group hover:bg-white/[0.03] transition-all duration-500 px-4 rounded-xl relative overflow-hidden"
+                  >
+                    <div className="text-sm md:text-base text-foreground/30 font-medium px-6 leading-relaxed text-center group-hover:text-foreground/50 transition-colors duration-500">
                       {row.agency}
                     </div>
-                    <div className="text-sm md:text-base text-foreground/80 font-bold leading-relaxed group-hover:text-white transition-colors px-6 text-center">
+                    <div className="text-sm md:text-base text-foreground/70 font-bold leading-relaxed px-6 text-center group-hover:text-white transition-all duration-500 group-hover:scale-[1.02]">
                       {row.vyce}
                     </div>
-                  </div>
+
+                    {/* Subtle hover accent */}
+                    <div className="absolute left-0 top-0 w-1 h-full bg-primary opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  </motion.div>
                 ))}
               </div>
-            </FadeIn>
+            </div>
 
-            <FadeIn delay={0.35}>
+            <FadeIn delay={0.4}>
               <Link
                 href="/contact"
                 className="group inline-flex items-center gap-4 rounded-full bg-primary px-10 py-5 text-[11px] font-black uppercase tracking-[0.3em] text-white transition-all duration-300 hover:bg-primary/90 hover:scale-105 active:scale-95 shadow-[0_20px_40px_-10px_rgba(0,68,255,0.3)]"
@@ -799,8 +813,8 @@ export default function AboutPage() {
             </FadeIn>
           </div>
 
-          <FadeIn delay={0.1} className="hidden lg:flex items-center justify-center">
-            <div className="relative w-full aspect-square max-w-[480px] flex flex-col items-center justify-center">
+          <FadeIn delay={0.1} className="hidden lg:flex items-center justify-center lg:translate-x-16">
+            <div className="relative w-full aspect-square max-w-[520px] flex flex-col items-center justify-center">
               <div className="rounded-full border border-white/5 bg-zinc-900/50 w-full h-full flex flex-col items-center justify-center gap-6 p-16">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
@@ -809,10 +823,11 @@ export default function AboutPage() {
                   className="h-auto opacity-100"
                 />
               </div>
-              <div className="absolute inset-0 rounded-full bg-primary/5 blur-[80px] -z-10" />
+              <div className="absolute inset-0 rounded-full bg-primary/5 blur-[100px] -z-10" />
             </div>
           </FadeIn>
         </div>
+
 
 
       </section>
