@@ -11,7 +11,7 @@ const stats = [
   },
   {
     value: 5,
-    prefix: "₹",
+    prefix: "",
     suffix: "Cr+",
     label: "Revenue Generated for Clients"
   },
@@ -60,7 +60,7 @@ function Counter({ value, suffix, prefix = "" }: { value: number; suffix: string
 export default function StatsBox() {
   return (
     <section className="bg-background px-6 py-20 md:px-12 lg:px-16">
-      <div className="mx-auto max-w-7xl">
+      <div className="mx-auto max-w-[1500px]">
         <div className="relative overflow-hidden rounded-[32px] border border-white/10 bg-zinc-950/50 p-20 md:p-24">
           <div className="grid grid-cols-1 gap-16 sm:grid-cols-2 lg:grid-cols-4 md:gap-y-16 lg:gap-0">
             {stats.map((stat, index) => (
