@@ -122,28 +122,27 @@ function FadeIn({ children, delay = 0, className = "" }: { children: React.React
 
 // ─── FAQ Accordion ─────────────────────────────────────────────────────────
 
-function FAQItem({ item, index }: { item: typeof faqItems[0]; index: number }) {
-  const [open, setOpen] = useState(false);
+function FAQItem({ item, isOpen, onToggle }: { item: typeof faqItems[0]; isOpen: boolean; onToggle: () => void }) {
   return (
-    <FadeIn delay={index * 0.08}>
-      <div className={`border-t border-white/[0.07] transition-colors duration-300 ${open ? "border-primary/20" : ""}`}>
+    <FadeIn delay={0}>
+      <div className={`border-t border-white/[0.07] transition-colors duration-300 ${isOpen ? "border-primary/20" : ""}`}>
         <button
-          onClick={() => setOpen(!open)}
+          onClick={onToggle}
           className="flex w-full items-start justify-between gap-6 py-7 text-left cursor-pointer"
         >
-          <span className={`text-base font-semibold leading-snug transition-colors duration-300 md:text-lg ${open ? "text-white" : "text-foreground/60"}`}>
+          <span className={`text-base font-semibold leading-snug transition-colors duration-300 md:text-lg ${isOpen ? "text-white" : "text-foreground/60"}`}>
             {item.q}
           </span>
           <motion.div
-            animate={{ rotate: open ? 180 : 0 }}
+            animate={{ rotate: isOpen ? 180 : 0 }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className={`mt-1 flex-shrink-0 transition-colors duration-300 ${open ? "text-primary" : "text-foreground/30"}`}
+            className={`mt-1 flex-shrink-0 transition-colors duration-300 ${isOpen ? "text-primary" : "text-foreground/30"}`}
           >
             <ChevronDown size={18} strokeWidth={1.5} />
           </motion.div>
         </button>
         <AnimatePresence initial={false}>
-          {open && (
+          {isOpen && (
             <motion.div
               key="answer"
               initial={{ height: 0, opacity: 0 }}
@@ -231,6 +230,7 @@ export default function ProcessPage() {
   const heroRef = useRef(null);
   const processRef = useRef<HTMLDivElement>(null);
   const [hoveredStep, setHoveredStep] = useState<string | null>(null);
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
 
   const { scrollYProgress: heroScroll } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
   const heroY = useTransform(heroScroll, [0, 1], [0, 200]);
@@ -394,24 +394,33 @@ export default function ProcessPage() {
 
       {/* ── FAQ ───────────────────────────────────────────────────── */}
       <section className="relative px-6 py-32 md:px-12 lg:px-20 overflow-hidden">
-        <div className="mx-auto max-w-[1600px] grid gap-20 lg:grid-cols-[1fr_1.2fr] items-start">
-          <div className="lg:sticky lg:top-40 space-y-6">
-            <RevealLine><h2 className="text-5xl font-black uppercase tracking-tighter leading-[0.9] md:text-6xl">Questions people ask before they start.</h2></RevealLine>
-            <FadeIn delay={0.3}>
-              <Link href="/contact" className="group inline-flex items-center gap-4 text-[11px] font-black uppercase tracking-[0.4em] text-foreground/40 hover:text-primary transition-colors duration-300">
-                Ask something else
-                <span className="h-8 w-8 rounded-full border border-border flex items-center justify-center transition-all group-hover:border-primary group-hover:translate-x-2"><ArrowUpRight size={14} /></span>
-              </Link>
-            </FadeIn>
+        <div className="mx-auto max-w-[1600px] flex flex-col items-center gap-24">
+          <div className="space-y-8 text-center flex flex-col items-center">
+            <RevealLine>
+              <h2 className="max-w-4xl text-5xl font-black uppercase tracking-tighter leading-[0.9] md:text-7xl">
+                Questions people ask <br className="hidden md:block" /> before they start.
+              </h2>
+            </RevealLine>
           </div>
 
-          <div>
-            {faqItems.map((item, i) => <FAQItem key={item.q} item={item} index={i} />)}
+          <div className="w-full max-w-4xl">
+            {faqItems.map((item, i) => (
+              <FAQItem
+                key={item.q}
+                item={item}
+                isOpen={openFaqIndex === i}
+                onToggle={() => setOpenFaqIndex(openFaqIndex === i ? null : i)}
+              />
+            ))}
             <div className="border-t border-white/[0.07]" />
           </div>
+          <FadeIn delay={0.3}>
+            <Link href="/contact" className="group inline-flex items-center gap-4 text-[11px] font-black uppercase tracking-[0.4em] text-foreground/40 hover:text-primary transition-colors duration-300">
+              Ask something else
+              <span className="h-8 w-8 rounded-full border border-border flex items-center justify-center transition-all group-hover:border-primary group-hover:translate-x-2"><ArrowUpRight size={14} /></span>
+            </Link>
+          </FadeIn>
         </div>
-
-
       </section>
 
       {/* ── CTA ───────────────────────────────────────────────────── */}

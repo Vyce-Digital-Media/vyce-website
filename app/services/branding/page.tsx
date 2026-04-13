@@ -106,7 +106,7 @@ function FloatingShapes() {
       <Float speed={2} rotationIntensity={1} floatIntensity={2}>
         <mesh ref={icoRef} position={[0, 0, -2]}>
           <icosahedronGeometry args={[2.5, 0]} />
-          <MeshDistortMaterial color="#ffffff" wireframe={true} transparent opacity={0.12} distort={0.25} speed={2} />
+          <MeshDistortMaterial color="#ffffff" wireframe={true} transparent opacity={0.30} distort={0.25} speed={2} />
         </mesh>
       </Float>
     </>
@@ -190,29 +190,27 @@ function HorizontalScrollSection() {
 
 // ─── Accordion Component ──────────────────────────────────────────────────
 
-function ProcessAccordion({ step, index }: { step: typeof processSteps[0]; index: number }) {
-  const [open, setOpen] = useState(index === 0);
-
+function ProcessAccordion({ step, isOpen, onToggle }: { step: typeof processSteps[0]; isOpen: boolean; onToggle: () => void }) {
   return (
-    <div className={`border-b border-white/[0.06] transition-colors duration-500 ${open ? 'border-primary/30' : ''}`}>
+    <div className={`border-b border-white/[0.06] transition-colors duration-500 ${isOpen ? 'border-primary/30' : ''}`}>
       <button
-        onClick={() => setOpen(!open)}
+        onClick={onToggle}
         className="w-full py-8 flex flex-col md:flex-row md:items-center justify-between gap-4 text-left cursor-pointer group"
       >
         <span className="text-[10px] font-mono text-primary/60 uppercase tracking-[0.2em] w-32 shrink-0">{step.phase}</span>
 
         <div className="flex-1 flex items-center justify-between">
-          <span className={`text-2xl md:text-4xl font-satoshi transition-all duration-500 ${open ? 'text-white italic translate-x-4' : 'text-foreground/40 group-hover:text-foreground/80'}`}>
+          <span className={`text-2xl md:text-4xl font-satoshi transition-all duration-500 ${isOpen ? 'text-white italic translate-x-4' : 'text-foreground/40 group-hover:text-foreground/80'}`}>
             {step.title}
           </span>
-          <motion.div animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }} className="text-primary/50">
+          <motion.div animate={{ rotate: isOpen ? 180 : 0 }} transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }} className="text-primary/50">
             <ChevronDown strokeWidth={1.5} size={20} />
           </motion.div>
         </div>
       </button>
 
       <AnimatePresence>
-        {open && (
+        {isOpen && (
           <motion.div
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
@@ -264,6 +262,7 @@ function Ticker() {
 
 export default function BrandingPage() {
   const heroRef = useRef<HTMLElement>(null);
+  const [openProcessIndex, setOpenProcessIndex] = useState<number | null>(0);
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
   const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
   const heroScale = useTransform(scrollYProgress, [0, 1], [1, 0.95]);
@@ -356,7 +355,12 @@ export default function BrandingPage() {
           </FadeIn>
           <div className="max-w-4xl border-t border-white/[0.06]">
             {processSteps.map((step, i) => (
-              <ProcessAccordion key={step.phase} step={step} index={i} />
+              <ProcessAccordion
+                key={step.phase}
+                step={step}
+                isOpen={openProcessIndex === i}
+                onToggle={() => setOpenProcessIndex(openProcessIndex === i ? null : i)}
+              />
             ))}
           </div>
         </div>
@@ -375,7 +379,7 @@ export default function BrandingPage() {
               </h2>
             </RevealLine>
             <RevealLine delay={0.1}>
-              <h2 className="text-[clamp(2.5rem,6vw,8rem)] font-satoshi font-normal italic text-primary leading-[0.88]">
+              <h2 className="text-[clamp(2.5rem,6vw,8rem)] pb-4 font-satoshi font-normal italic text-primary leading-[0.88]">
                 Legacy.
               </h2>
             </RevealLine>

@@ -111,20 +111,19 @@ function FadeIn({ children, delay = 0, className = "" }: { children: React.React
 
 // ─── FAQ Accordion ─────────────────────────────────────────────────────────
 
-function FAQItem({ item, index }: { item: typeof faqItems[0]; index: number }) {
-  const [open, setOpen] = useState(false);
+function FAQItem({ item, isOpen, onToggle }: { item: typeof faqItems[0]; isOpen: boolean; onToggle: () => void }) {
   return (
-    <FadeIn delay={index * 0.08}>
-      <div className={`border-t border-white/[0.07] transition-colors duration-300 ${open ? "border-primary/20" : ""}`}>
-        <button onClick={() => setOpen(!open)} className="flex w-full items-start justify-between gap-6 py-6 text-left cursor-pointer">
-          <span className={`text-sm font-semibold leading-snug transition-colors duration-300 md:text-base ${open ? "text-white" : "text-foreground/55"}`}>{item.q}</span>
-          <motion.div animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className={`mt-0.5 flex-shrink-0 transition-colors duration-300 ${open ? "text-primary" : "text-foreground/25"}`}>
+    <FadeIn delay={0}>
+      <div className={`border-t border-white/[0.07] transition-colors duration-300 ${isOpen ? "border-primary/20" : ""}`}>
+        <button onClick={onToggle} className="flex w-full items-start justify-between gap-6 py-6 text-left cursor-pointer">
+          <span className={`text-sm font-semibold leading-snug transition-colors duration-300 md:text-base ${isOpen ? "text-white" : "text-foreground/55"}`}>{item.q}</span>
+          <motion.div animate={{ rotate: isOpen ? 180 : 0 }} transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            className={`mt-0.5 flex-shrink-0 transition-colors duration-300 ${isOpen ? "text-primary" : "text-foreground/25"}`}>
             <ChevronDown size={16} strokeWidth={1.5} />
           </motion.div>
         </button>
         <AnimatePresence initial={false}>
-          {open && (
+          {isOpen && (
             <motion.div key="ans" initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }} className="overflow-hidden">
               <p className="pb-7 text-sm leading-relaxed text-foreground/45 font-medium">{item.a}</p>
@@ -306,6 +305,7 @@ function ContactForm() {
 
 export default function ContactPage() {
   const heroRef = useRef(null);
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
   const { scrollYProgress: heroScroll } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
   const heroY = useTransform(heroScroll, [0, 1], [0, 180]);
   const heroOpacity = useTransform(heroScroll, [0, 0.7], [1, 0]);
@@ -403,7 +403,14 @@ export default function ContactPage() {
               {/* FAQ */}
               <div>
                 <FadeIn><p className="text-[9px] font-bold uppercase tracking-[0.4em] text-foreground/30 mb-2">FAQ</p></FadeIn>
-                {faqItems.map((item, i) => <FAQItem key={item.q} item={item} index={i} />)}
+                {faqItems.map((item, i) => (
+                  <FAQItem
+                    key={item.q}
+                    item={item}
+                    isOpen={openFaqIndex === i}
+                    onToggle={() => setOpenFaqIndex(openFaqIndex === i ? null : i)}
+                  />
+                ))}
                 <div className="border-t border-white/[0.07]" />
               </div>
 
