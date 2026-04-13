@@ -21,6 +21,8 @@ import {
   Code,
   ArrowRight,
   CheckCircle2,
+  Send,
+  CodeXml,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import MagneticButton from "@/components/ui/MagneticButton";
@@ -34,98 +36,128 @@ const services = [
     icon: Palette,
     iconColor: "rgba(255, 60, 0, 0.15)",
     summary:
-      "Positioning, verbal identity, and visual systems that feel confident on billboards and in Figma.",
+      "Your brand is the first impression, the last memory, and everything in between.",
     description:
-      "We deliver logo suites, color logic, typography stacks, and usage rules your team can enforce. Every touchpoint, intentional. Every choice, strategic.",
+      "Before anyone buys from you, they judge you. Logo, color, typography, tone of voice - all of it sends a signal before a single word is read. We make sure that signal says exactly what your business deserves to say.",
     deliverables: [
-      "Brand strategy workshop",
-      "Logo & monogram systems",
-      "Typography & color tokens",
-      "Brand guidelines site or PDF",
+      "Brand strategy & positioning",
+      "Logo & visual identity system",
+      "Color palette, typography & design tokens",
+      "Brand voice & messaging guide",
+      "Brand guidelines document",
     ],
     href: "/services/branding",
   },
   {
     num: "02",
-    title: "Web Experiences",
-    icon: Globe,
+    title: "Website Design & Development",
+    icon: CodeXml,
     iconColor: "rgba(0, 200, 255, 0.15)",
     summary:
-      "Marketing sites and immersive launches built with Next.js, WebGL, and motion.",
+      "If your website isn't bringing in leads, it's not a website. It's a bill you pay every year.",
     description:
-      "We prototype in-code early so stakeholders react to real physics, not Keynote approximations. Performance budgets are non-negotiable — so is delight.",
+      "A website that looks great but doesn't convert is just expensive decoration. We design and build websites that do both - premium aesthetics and actual business performance. Fast load times, mobile-first, SEO-ready, and built with a clear conversion path so visitors know exactly what to do next.",
     deliverables: [
-      "Information architecture",
-      "UI design & component library",
-      "Next.js implementation",
-      "Analytics & SEO foundations",
+      "UX strategy & sitemap",
+      "UI design (desktop + mobile)",
+      "Frontend & backend development",
+      "On-page SEO foundations",
+      "Speed & performance optimization",
     ],
     href: "/services/web-experiences",
   },
   {
     num: "03",
-    title: "Product Design",
+    title: "UI/UX & PRODUCT DESIGN",
     icon: Smartphone,
     iconColor: "rgba(180, 0, 255, 0.15)",
     summary:
-      "Interfaces for complex workflows — dashboards, onboarding, and companion apps.",
+      "If users need a tutorial to understand your interface, something went wrong in the design phase.",
     description:
-      "We align UX research, UI craft, and engineering constraints in the same backlog. Beautiful screens that handle real-world edge cases with grace.",
+      "Good design is invisible. Users shouldn't notice the navigation - they should just effortlessly end up where they need to be. We design interfaces, app flows, dashboards, and product experiences that feel intuitive, not figuring-it-out.",
     deliverables: [
+      "User research & persona mapping",
       "UX flows & wireframes",
-      "High-fidelity UI",
-      "Prototypes & usability tests",
-      "Design QA with engineering",
+      "High-fidelity UI design",
+      "Interactive prototyping",
+      "Usability testing & iteration",
     ],
     href: "/services/product-design",
   },
   {
     num: "04",
-    title: "Digital Growth",
+    title: "Performance Marketing",
     icon: BarChart,
     iconColor: "rgba(255, 200, 0, 0.15)",
     summary:
-      "Launch narratives, landing systems, and measurement plans that connect creative to pipeline.",
+      "Ads that don't return money aren't ads. They're donations to Meta and Google.",
     description:
-      "UTMs, events, and dashboards your growth team can trust. We connect creative output to revenue — and show the receipts.",
+      "We've turned ₹2 lakhs in ad spend into ₹20 lakhs in sales. In one year. For one client. That's not luck - that's what happens when campaigns are built on proper strategy, tested creatives, and relentless optimization.",
     deliverables: [
-      "Launch messaging",
-      "Landing page systems",
-      "Experimentation backlog",
-      "Reporting templates",
+      "Campaign strategy & audience mapping",
+      "Ad copy & creative production (static + video)",
+      "Campaign setup, targeting & launch",
+      "A/B testing & ongoing optimization",
+      "Weekly performance reporting",
     ],
     href: "/services/digital-growth",
+  },
+  {
+    num: "05",
+    title: "Social Media Management",
+    icon: Send,
+    iconColor: "rgba(255, 60, 0, 0.15)",
+    summary:
+      "Posting without a strategy is just noise. There's enough of that already.",
+    description:
+      "Social media that works isn't about volume - it's about relevance. The right content, on the right platform, to the right audience, at the right time. We handle the strategy, the creation, and the execution so you can stop spending three hours on a reel that gets twelve likes.",
+    deliverables: [
+      "Monthly content strategy & calendar",
+      "Reel & short-form video production",
+      "Carousel & static creative design",
+      "Caption & copy writing",
+      "Community management & engagement",
+    ],
+    href: "/services/",
+  },
+  {
+    num: "06",
+    title: "SEO",
+    icon: Globe,
+    iconColor: "rgba(0, 200, 255, 0.15)",
+    summary:
+      "Your customers are searching for exactly what you offer. They're just finding your competitors first.",
+    description:
+      "SEO isn't magic and it isn't fast. But it is the most sustainable, compounding investment you can make in your brand's online visibility. We handle the technical foundation, the on-page optimization, the content strategy, and the link building - so you rank for searches that actually send you business.",
+    deliverables: [
+      "Full SEO audit & strategy",
+      "Technical SEO fixes",
+      "On-page optimization",
+      "Keyword research & content strategy",
+      "Link building & authority building",
+    ],
+    href: "/services/",
   },
 ];
 
 const phases = [
   {
     step: "01",
-    title: "Immersion",
+    title: "Project-Based",
     detail:
-      "Stakeholder interviews, analytics review, and competitive landscape mapping.",
-    tag: "Week 1–2",
+      "A defined scope, a clear timeline, and a fixed deliverable. Ideal for brand builds, website launches, and one-time campaigns.",
   },
   {
     step: "02",
-    title: "Direction",
+    title: "Retainer",
     detail:
-      "Creative territories, moodfilm-style motion tests, and technical proof-of-concepts.",
-    tag: "Week 2–4",
+      "An ongoing partnership for consistent growth - monthly strategy, execution, and reporting. Ideal for social media, SEO, and performance marketing.",
   },
   {
     step: "03",
-    title: "Production",
+    title: "Consultation",
     detail:
-      "Weekly slices of shippable UI with written rationale and accessibility notes.",
-    tag: "Ongoing",
-  },
-  {
-    step: "04",
-    title: "Launch",
-    detail:
-      "Hardening, documentation, and training so your team owns the roadmap.",
-    tag: "Final Sprint",
+      "A focused strategy session if you need direction before commitment. We'll tell you exactly what we'd do if it were our business.",
   },
 ];
 
@@ -277,7 +309,7 @@ function ServiceRow({
               >
                 <Icon size={32} strokeWidth={1.5} />
               </div>
-              <span className="font-satoshi text-[4rem] leading-none text-foreground/[0.05] md:text-[6rem]">
+              <span className="font-satoshi text-[4rem] leading-none text-foreground/[0.2] md:text-[6rem]">
                 {service.num}
               </span>
             </div>
@@ -297,7 +329,7 @@ function ServiceRow({
 
           {/* Right column */}
           <div className="flex flex-col items-center text-center gap-8 lg:flex-1">
-            <p className="text-lg leading-relaxed text-foreground/55 md:text-xl lg:text-2xl font-medium tracking-tight">
+            <p className="text-sm border-white/5 pb-2 leading-relaxed text-foreground/55 md:text-base lg:text-lg font-medium tracking-tight">
               {service.description}
             </p>
 
@@ -527,13 +559,12 @@ export default function ServicesPage() {
               <h2 className="text-5xl font-black uppercase tracking-tighter leading-[0.9] md:text-7xl">
                 How <br />
                 <span className="font-satoshi font-normal italic text-primary/80">Engagements</span> <br />
-                Run.
+                Work.
               </h2>
             </div>
             <FadeIn delay={0.2}>
               <p className="max-w-md text-lg text-foreground/40 font-medium leading-relaxed">
-                Every project follows the same four-act structure — calibrated
-                for the specific scope, never cookie-cutter.
+                Every engagement starts with understanding your actual situation - your goal, your timeline, your budget, and what success looks like for you specifically. Then we recommend what makes the most sense.
               </p>
             </FadeIn>
 
@@ -604,9 +635,6 @@ export default function ServicesPage() {
                       {phase.step}
                     </span>
                     <div className="h-px flex-1 bg-white/10 transition-colors group-hover:bg-primary/40" />
-                    <span className="rounded-full border border-white/10 px-3 py-1 text-[9px] font-bold uppercase tracking-[0.3em] text-foreground/30">
-                      {phase.tag}
-                    </span>
                   </div>
 
                   <div className="space-y-8">
@@ -647,37 +675,20 @@ export default function ServicesPage() {
                   </FadeIn>
 
                   <RevealLine>
-                    <h2 className="text-4xl font-black uppercase tracking-tighter leading-[0.9] md:text-6xl">
-                      Design that{" "}
+                    <h2 className="text-2xl font-black uppercase tracking-tighter leading-[0.9] md:text-6xl">
+                      Not sure which services you need?
                       <span className="font-satoshi font-normal italic text-primary">
-                        Ships.
+                        That's exactly what the first conversation is for.
                       </span>
                     </h2>
                   </RevealLine>
 
                   <FadeIn delay={0.2}>
                     <p className="text-lg leading-relaxed text-foreground/45 md:text-xl">
-                      We speak TypeScript, Storybook, and CI. Design tokens
-                      export to code, and we pair with your engineers on edge
-                      cases — responsive behavior, reduced motion, and
-                      localization.
+                      Bring us the problem. We'll figure out the solution - together, honestly, without pushing you toward something you don't need.
                     </p>
                   </FadeIn>
 
-                  <FadeIn delay={0.3}>
-                    <div className="flex flex-wrap gap-3">
-                      {["TypeScript", "Next.js", "GSAP", "Three.js", "Storybook", "Figma"].map(
-                        (tech) => (
-                          <span
-                            key={tech}
-                            className="rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.25em] text-foreground/50 transition-colors hover:border-primary/30 hover:text-primary"
-                          >
-                            {tech}
-                          </span>
-                        )
-                      )}
-                    </div>
-                  </FadeIn>
                 </div>
 
                 <FadeIn delay={0.4} className="flex-shrink-0">
@@ -685,7 +696,7 @@ export default function ServicesPage() {
                     href="/contact"
                     className="group inline-flex items-center gap-4 rounded-full bg-primary px-10 py-5 text-[11px] font-black uppercase tracking-[0.3em] text-white transition-all duration-300 hover:bg-primary/90 hover:scale-105 active:scale-95 shadow-[0_20px_40px_-10px_rgba(0,68,255,0.3)]"
                   >
-                    Request a Scope
+                    Book a Free Call
                     <ArrowRight
                       size={16}
                       className="transition-transform duration-300 group-hover:translate-x-1"

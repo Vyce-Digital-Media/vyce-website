@@ -18,29 +18,29 @@ import MagneticButton from "@/components/ui/MagneticButton";
 const coreValues = [
   {
     num: "01",
-    title: "Growth Over Everything",
-    body: "We measure success by your growth, not just by how good the work looks.",
+    title: "We work with you. Not just for you.",
+    body: "A project isn't a transaction. We treat your business like we have skin in the game - because our reputation depends directly on your results. When you win, we both win. Simple.",
     image:
       "https://images.unsplash.com/photo-1551434678-e076c223a692?w=720&h=900&fit=crop&q=80",
   },
   {
     num: "02",
-    title: "Client First. Always.",
-    body: "You're not a ticket number. We communicate, we listen, we deliver.",
+    title: "Long relationships over quick wins. ",
+    body: "Our best clients have been with us for years. Not because we locked them in with retainer contracts, but because we kept showing up and delivering value they didn't expect. That's the goal every single time.",
     image:
       "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=720&h=900&fit=crop&q=80",
   },
   {
     num: "03",
-    title: "Creativity Loves Strategy",
-    body: "Beautiful work that doesn't convert is just decoration. We do both.",
+    title: "Strategy first. Always.",
+    body: "Pretty content that doesn't convert is expensive decoration. Beautiful websites that don't rank are digital brochures. Everything we build is working toward a real business outcome - not just looking good on a portfolio.",
     image:
       "https://images.unsplash.com/photo-1558655146-364adaf1fcc9?w=720&h=900&fit=crop&q=80",
   },
   {
     num: "04",
-    title: "No Blending. Ever.",
-    body: "We stand up for the right ideas — because safe is the riskiest move.",
+    title: "Straight talk. Even when it's uncomfortable.",
+    body: "If something won't work, we'll tell you before you spend money finding out. If there's a better way, we'll find it. We're not here to just say yes - we're here to give you the right answer.",
     image:
       "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=720&h=900&fit=crop&q=80",
   },
@@ -48,26 +48,26 @@ const coreValues = [
 
 const milestones = [
   {
-    year: "Then",
-    text: "Born from frustration with generic agencies.",
+    year: "Day One",
+    text: "Two founders. One vision. Zero clients. A lot of belief that this was worth doing.",
     image:
       "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=720&h=900&fit=crop&q=80",
   },
   {
     year: "Early Days",
-    text: "First clients — brands no one knew about, brands everyone now loves.",
+    text: "First brands - local businesses that needed someone to actually care about their growth, not just their deliverables.",
     image:
       "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=720&h=900&fit=crop&q=80",
   },
   {
-    year: "Growth",
-    text: "Expanded to video, strategy, and full digital ecosystems.",
+    year: "The Expansion",
+    text: "Services grew. Team grew. Results got louder. Referrals started rolling in before we even asked for them.",
     image:
       "https://images.unsplash.com/photo-1573164713988-8665fc963095?w=720&h=900&fit=crop&q=80",
   },
   {
     year: "Now",
-    text: "A boutique powerhouse with global ambitions.",
+    text: "15+ team members. 100+ projects. Clients across India and internationally. And a referral rate that makes us more grateful than smug.",
     image:
       "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=720&h=900&fit=crop&q=80",
   },
@@ -75,28 +75,16 @@ const milestones = [
 
 const teamMembers = [
   {
-    name: "Manav",
-    role: "Founder / Creative Director",
+    name: "Alok Gupta",
+    role: "Co-Founder | Social Media & Creative Head",
     image: "/images/team/manav.png",
-    bio: "Visionary leader pushing the boundaries of digital narrative and brand strategy.",
+    bio: "The creative half. Alok leads everything that touches content, storytelling, and social strategy. He believes every brand has a truth worth telling - and that most brands just haven't found the right way to tell it yet. If your content isn't working, Alok's the one who'll figure out exactly why, and rebuild it until it does.",
   },
   {
-    name: "Ria",
-    role: "Strategy & Growth Lead",
-    image: "/images/team/ria.png",
-    bio: "Analytic powerhouse focused on scaling brands through data-driven storytelling.",
-  },
-  {
-    name: "Dev",
-    role: "Motion Designer",
-    image: "/images/team/dev.png",
-    bio: "Master of movement, bringing static brands to life through cinematic motion design.",
-  },
-  {
-    name: "Aryan",
-    role: "Full-Stack Developer",
-    image: "/images/team/aryan.png",
-    bio: "Architect of seamless digital experiences, bridging the gap between design and tech.",
+    name: "Niraj Lalani",
+    role: "Co-Founder | Web Experiences & Technical Head",
+    image: "/images/team/manav.png",
+    bio: "The technical half. Niraj leads web design, development, and UI/UX - building digital experiences that don't just look good but actually work. He's the reason client websites rank, load fast, and convert. If your website is leaking leads, Niraj's the one who'll find the holes and close them.",
   },
 ];
 
@@ -308,7 +296,7 @@ function TeamCard({
             </div>
 
             <div className="mt-6 opacity-0 translate-y-4 transition-all duration-700 group-hover:opacity-60 group-hover:translate-y-0">
-              <p className="max-w-[280px] text-xs font-medium leading-relaxed tracking-tight text-white/80 italic font-satoshi">
+              <p className="max-w-md text-sm font-medium leading-relaxed tracking-tight text-white/80 italic font-satoshi">
                 &ldquo;{member.bio}&rdquo;
               </p>
             </div>
@@ -399,60 +387,6 @@ export default function AboutPage() {
         </motion.div>
       </section>
 
-      {/* ── 01. NOT AN AGENCY ────────────────────────────────────── */}
-      <section className="relative px-6 py-32 md:px-12 lg:px-20 md:py-44">
-        <div className="mx-auto max-w-[1300px] grid gap-20 lg:grid-cols-[1fr_1.2fr] items-start">
-          <div className="lg:sticky lg:top-40 space-y-6">
-            <RevealLine>
-              <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter leading-[0.9] mt-22">
-                Not an Agency.
-              </h2>
-            </RevealLine>
-            <RevealLine delay={0.08}>
-              <h2 className="text-5xl md:text-7xl font-satoshi font-normal italic text-primary leading-[0.9]">
-                We&apos;re Your Brand&apos;s Best Decision.
-              </h2>
-            </RevealLine>
-          </div>
-
-          <div className="space-y-12 pt-4 lg:pt-24">
-            <FadeIn>
-              <div className="space-y-2">
-                <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-foreground/30">Our Standing</p>
-                <p className="text-2xl font-medium text-foreground/60 tracking-wide">
-                  Big ideas and bigger results.
-                </p>
-              </div>
-            </FadeIn>
-
-            <FadeIn delay={0.15}>
-              <div className="space-y-2">
-                <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-foreground/30">Description</p>
-                <p className="text-xl md:text-2xl text-foreground/70 font-medium leading-relaxed">
-                  VYCE was built because we got tired of seeing great businesses
-                  with no idea to branding. We set out to fix that — one brand,
-                  one website at a time.
-                </p>
-              </div>
-            </FadeIn>
-
-            <FadeIn delay={0.25}>
-              <Link
-                href="/contact"
-                className="group inline-flex items-center gap-4 text-[11px] font-black uppercase tracking-[0.4em] text-foreground/50 hover:text-primary transition-colors"
-              >
-                See How We Work
-                <span className="h-8 w-8 rounded-full border border-border flex items-center justify-center transition-all group-hover:border-primary group-hover:translate-x-2">
-                  →
-                </span>
-              </Link>
-            </FadeIn>
-          </div>
-        </div>
-
-
-      </section>
-
       {/* ── 02. OUR STORY ───────────────────────────────────────── */}
       <section ref={storyRef} className="relative px-6 py-32 md:px-12 lg:px-20 bg-zinc-950/30 overflow-hidden">
         <div className="mx-auto max-w-[1300px] space-y-20">
@@ -492,21 +426,20 @@ export default function AboutPage() {
                     }`}
                 >
                   <h3 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-[1.0] text-white">
-                    From <span className="text-primary glow-text transition-all duration-700 group-hover:brightness-125">Static Noise</span> <br />
-                    To <span className="font-satoshi font-normal italic text-primary/70">Thoughtful Simplicity.</span>
+                    The honest <span className="text-primary glow-text transition-all duration-700 group-hover:brightness-125">origin story.</span> <br />
                   </h3>
                   <div className="max-w-2xl">
-                    <p className="text-xl md:text-2xl text-foreground/50 font-medium leading-[1.6] tracking-tight">
-                      We saw more brands struggle to get noticed —
-                      not because they weren&apos;t good, but because their{" "}
-                      <span className="text-white">digital presence lacked a core truth.</span>
+                    <p className="text-lg md:text-xl text-foreground/50 font-medium leading-[1.6] tracking-tight">
+                      Alok and Niraj started Vyce Digital Media out of Surat because they kept seeing the same thing — businesses with real value, real products, and real founders behind them, losing to competitors with better marketing. <span className="text-white">Not better products. Better marketing.</span>
                     </p>
-                    <p className="mt-10 text-xl md:text-2xl text-foreground/50 font-medium leading-[1.6] tracking-tight">
-                      So we built Vyce: a studio that combines{" "}
-                      <span className="text-[#4D96FF] font-bold">strategic logic </span>
-                      with
-                      <span className="font-satoshi italic text-white/90"> editorial restraint </span>
-                      into one cohesive story.
+                    <p className="mt-8 text-lg md:text-xl text-foreground/50 font-medium leading-[1.6] tracking-tight">
+                      That felt wrong. So they decided to do something about it.
+                    </p>
+                    <p className="mt-8 text-lg md:text-xl text-foreground/50 font-medium leading-[1.6] tracking-tight">
+                      Vyce was built to close that gap. To make sure the quality of your business matches — and eventually exceeds — the quality of how it shows up online. <span className="text-white">One brand, one strategy, one proper digital presence at a time.</span>
+                    </p>
+                    <p className="mt-8 text-lg md:text-xl text-foreground/50 font-medium leading-[1.6] tracking-tight">
+                      Three years and 100+ clients later, the frustration turned into a methodology. <span className="text-primary font-bold">And the methodology turned into results.</span>
                     </p>
                   </div>
                 </div>
@@ -656,8 +589,8 @@ export default function AboutPage() {
 
           <div className="mt-20 grid gap-6 md:grid-cols-2">
             {[
-              { label: "Mission", headline: "Empower every brand to compete at the highest level." },
-              { label: "Vision", headline: "A world where ambition and aesthetic always align." },
+              { label: "Mission", headline: "Make sure every brand we work with competes at the level it deserves - not the level its marketing currently allows." },
+              { label: "Vision", headline: "A world where ambition and digital presence are always in alignment. (We're working on it. One brand at a time.)" },
             ].map((card, i) => (
               <FadeIn key={card.label} delay={i * 0.15}>
                 <div className="group relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-zinc-950 to-zinc-900 p-12 transition-all duration-500 hover:border-primary/30">
@@ -699,11 +632,11 @@ export default function AboutPage() {
               {coreValues.map((v, i) => (
                 <FadeIn key={v.num} delay={i * 0.1}>
                   <div
-                    className="group flex items-start gap-8 py-12 transition-all duration-300 hover:pl-4 cursor-default"
+                    className="group flex items-center gap-8 py-12 transition-all duration-300 hover:pl-4 cursor-default"
                     onMouseEnter={() => setHoveredValue(i)}
                     onMouseLeave={() => setHoveredValue(null)}
                   >
-                    <span className="font-satoshi text-6xl italic text-primary/20 transition-colors duration-500 group-hover:text-primary/80 leading-none mt-1 flex-shrink-0 w-20">
+                    <span className="font-satoshi text-6xl italic text-primary/20 transition-colors duration-500 group-hover:text-primary/80 leading-none flex-shrink-0 w-20">
                       {v.num}
                     </span>
                     <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-16 flex-1">
@@ -776,19 +709,17 @@ export default function AboutPage() {
           <div className="mb-20">
             <RevealLine className="mt-4">
               <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter leading-[0.9]">
-                The Humans Behind the Work
+                The Founders
               </h2>
             </RevealLine>
             <FadeIn delay={0.2} className="mt-8">
               <p className="max-w-xl text-lg text-foreground/40 font-medium leading-relaxed">
-                We&apos;re a tight-knit crew of designers, strategists, videographers,
-                and developers who genuinely love what we do. Every project gets
-                our full attention — no token visitors.
+                The two people who will actually know your brand. (Not account managers. Not interns. Them.)
               </p>
             </FadeIn>
           </div>
 
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-1 gap-12 sm:grid-cols-2">
             {teamMembers.map((m, i) => (
               <TeamCard key={m.name} member={m} index={i} />
             ))}
@@ -805,27 +736,57 @@ export default function AboutPage() {
             <div>
               <RevealLine className="mt-4">
                 <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter leading-[0.9]">
-                  A Lot of Agencies.
+                  A lot of agencies exist.
                 </h2>
               </RevealLine>
               <RevealLine delay={0.1}>
                 <h2 className="text-5xl md:text-7xl pb-2 font-satoshi font-normal italic text-primary leading-[0.9]">
-                  Only One is You.
+                  Here's what makes this one different.
                 </h2>
               </RevealLine>
             </div>
 
-            <FadeIn delay={0.2} className="space-y-5">
-              {whyVyce.map((item, i) => (
-                <div key={i} className="group flex items-start gap-5">
-                  <span className="mt-1 h-4 w-4 rounded-full border border-primary/30 flex items-center justify-center flex-shrink-0 transition-colors group-hover:border-primary group-hover:bg-primary/10">
-                    <span className="h-1.5 w-1.5 rounded-full bg-primary/60 group-hover:bg-primary" />
-                  </span>
-                  <p className="text-foreground/50 font-medium leading-relaxed group-hover:text-foreground/80 transition-colors">
-                    {item}
-                  </p>
+            <FadeIn delay={0.2}>
+              <div className="w-full border-t border-white/10 mt-10">
+                {/* Header row */}
+                <div className="grid grid-cols-2 py-6 border-b border-white/10">
+                  <div className="text-[10px] font-bold uppercase tracking-[0.4em] text-primary text-center">What most agencies do</div>
+                  <div className="text-[10px] font-bold uppercase tracking-[0.4em] text-primary text-center">What we do</div>
                 </div>
-              ))}
+
+                {/* Table content data rows */}
+                {[
+                  {
+                    agency: "Finish the project, send the invoice, disappear",
+                    vyce: "Stay in the loop. Flag opportunities. Keep showing up."
+                  },
+                  {
+                    agency: "Assign you an account manager who barely knows your brand",
+                    vyce: "Give you direct access to the founders and leads who built your strategy"
+                  },
+                  {
+                    agency: "One service, multiple vendors",
+                    vyce: "Branding, social, web, ads, SEO - all in one place, all connected"
+                  },
+                  {
+                    agency: "We'll do what you ask for",
+                    vyce: "Here's what you actually need, and here's why"
+                  },
+                  {
+                    agency: "Quarterly check-in calls",
+                    vyce: "Real relationships. Ongoing conversation."
+                  }
+                ].map((row, i) => (
+                  <div key={i} className="grid grid-cols-2 py-8 border-b border-white/5 group hover:bg-white/[0.02] transition-colors -mx-4 px-4 rounded-lg">
+                    <div className="text-sm md:text-base text-foreground/40 font-medium px-6 leading-relaxed text-center">
+                      {row.agency}
+                    </div>
+                    <div className="text-sm md:text-base text-foreground/80 font-bold leading-relaxed group-hover:text-white transition-colors px-6 text-center">
+                      {row.vyce}
+                    </div>
+                  </div>
+                ))}
+              </div>
             </FadeIn>
 
             <FadeIn delay={0.35}>
@@ -841,9 +802,12 @@ export default function AboutPage() {
           <FadeIn delay={0.1} className="hidden lg:flex items-center justify-center">
             <div className="relative w-full aspect-square max-w-[480px] flex flex-col items-center justify-center">
               <div className="rounded-full border border-white/5 bg-zinc-900/50 w-full h-full flex flex-col items-center justify-center gap-6 p-16">
-                <span className="text-[8rem] font-black tracking-tighter leading-none text-white/10">
-                  VYCE
-                </span>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/assets/nav-logo.png"
+                  alt="Vyce Logo"
+                  className="h-auto opacity-100"
+                />
               </div>
               <div className="absolute inset-0 rounded-full bg-primary/5 blur-[80px] -z-10" />
             </div>

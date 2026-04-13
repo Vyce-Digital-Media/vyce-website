@@ -27,21 +27,21 @@ const contactInfo = [
   {
     icon: Mail,
     title: "Email",
-    value: "hello@vyce.studio",
-    href: "mailto:hello@vyce.studio",
+    value: "hello@vycedigitalmedia.com",
+    href: "mailto:hello@vycedigitalmedia.com",
     accent: "rgba(0,68,255,0.15)",
   },
   {
     icon: Phone,
     title: "Phone",
-    value: "+1 (555) 000-VYCE",
-    href: "tel:+15550000000",
+    value: "+91 XXXXX XXXXX",
+    href: "tel:+91 XXXXX XXXXX",
     accent: "rgba(0,200,100,0.15)",
   },
   {
     icon: MapPin,
     title: "Studios",
-    value: "San Francisco · New York · Lisbon",
+    value: "903 Luxuria Business Hub, Surat, Gujarat, India",
     href: "#",
     accent: "rgba(255,100,80,0.15)",
   },
@@ -49,30 +49,40 @@ const contactInfo = [
 
 const faqItems = [
   {
-    q: "What does an engagement usually look like?",
-    a: "Most projects begin with a 2-week discovery and creative direction sprint, followed by parallel design and build tracks. You will see working UI weekly, not static PDFs.",
+    q: "What does the first conversation look like?",
+    a: "A 20–30 minute call. No pitch. No pressure. We ask about your business, your goals, and your current situation. You ask whatever you need to. Then we figure out together if it makes sense to move forward - and how.",
   },
   {
-    q: "Do you work with in-house teams?",
-    a: "Yes — we often embed with product and brand teams, contribute to your design system, and document handoff so internal engineers stay unblocked.",
+    q: "Do you work with brands outside India?",
+    a: "Yes, actively. We've worked with international brands and have structured our communication and delivery to work across time zones.",
   },
   {
-    q: "How fast do you respond?",
-    a: "We reply to new business inquiries within two business days. If you are mid-launch, note it in the subject line and we will prioritize.",
+    q: "Do you require a long-term commitment?",
+    a: "Retainer services (social media, SEO) work best over 3–6 months because that's where compounding kicks in. Project-based work is scoped to a defined timeline. We'll tell you clearly what we recommend and why - you decide.",
   },
   {
-    q: "What's the minimum project size?",
-    a: "We work with brands at all stages. For discovery-only or focused sprints, minimum engagements start at around $4,000. Full brand and web builds vary significantly by scope.",
+    q: "We've had bad experiences with agencies before. How are you different?",
+    a: "Honestly, every agency says this. The real answer is: most of our clients come from referrals from people we've already worked with. That's the most honest proof we can offer. Talk to us, and then judge for yourself.",
   },
 ];
 
 const projectTypes = [
-  "Brand Identity",
-  "Website",
-  "Product Design",
-  "Motion",
-  "Campaign",
-  "Other",
+  "Branding & Identity",
+  "Social Media Management",
+  "Website Design & Development",
+  "Performance Marketing",
+  "UI/UX & Product Design",
+  "SEO",
+  "Not sure yet - need guidance",
+  "Multiple services",
+];
+
+const budgetRanges = [
+  "Under ₹50,000",
+  "₹50,000 – ₹2,00,000",
+  "₹2,00,000 – ₹5,00,000",
+  "₹5,00,000+",
+  "Let's discuss on the call",
 ];
 
 // ─── Primitives ────────────────────────────────────────────────────────────
@@ -165,6 +175,7 @@ const labelClass = "block text-[10px] font-bold uppercase tracking-[0.2em] text-
 
 function ContactForm() {
   const [selectedType, setSelectedType] = useState<string | null>(null);
+  const [selectedBudget, setSelectedBudget] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -200,24 +211,30 @@ function ContactForm() {
             {/* Name + Company */}
             <div className="grid gap-6 md:grid-cols-2">
               <FadeIn delay={0.05}>
-                <label className={labelClass}>Name</label>
+                <label className={labelClass}>Your Name</label>
                 <input type="text" placeholder="Alex Rivera" className={inputClass} required />
               </FadeIn>
               <FadeIn delay={0.1}>
-                <label className={labelClass}>Company</label>
+                <label className={labelClass}>Brand / Company Name</label>
                 <input type="text" placeholder="Studio / brand" className={inputClass} />
               </FadeIn>
             </div>
 
-            {/* Email */}
-            <FadeIn delay={0.15}>
-              <label className={labelClass}>Email</label>
-              <input type="email" placeholder="you@company.com" className={inputClass} required />
-            </FadeIn>
+            {/* Email + WhatsApp */}
+            <div className="grid gap-6 md:grid-cols-2">
+              <FadeIn delay={0.15}>
+                <label className={labelClass}>Email Address</label>
+                <input type="email" placeholder="you@company.com" className={inputClass} required />
+              </FadeIn>
+              <FadeIn delay={0.18}>
+                <label className={labelClass}>WhatsApp Number</label>
+                <input type="tel" placeholder="+91 XXXXX XXXXX" className={inputClass} required />
+              </FadeIn>
+            </div>
 
             {/* Project type */}
             <FadeIn delay={0.2}>
-              <label className={labelClass}>Project type</label>
+              <label className={labelClass}>What are you looking for?</label>
               <div className="flex flex-wrap gap-2 pt-1">
                 {projectTypes.map((type) => (
                   <button
@@ -235,9 +252,29 @@ function ContactForm() {
               </div>
             </FadeIn>
 
+            {/* Budget Range */}
+            <FadeIn delay={0.22}>
+              <label className={labelClass}>Rough budget range (helps us scope properly)</label>
+              <div className="flex flex-wrap gap-2 pt-1">
+                {budgetRanges.map((range) => (
+                  <button
+                    key={range}
+                    type="button"
+                    onClick={() => setSelectedBudget(selectedBudget === range ? null : range)}
+                    className={`rounded-full px-5 py-2.5 text-[10px] font-bold uppercase tracking-[0.2em] transition-all duration-300 cursor-pointer ${selectedBudget === range
+                      ? "bg-primary text-background border-primary"
+                      : "border border-white/10 bg-white/[0.02] text-foreground/40 hover:border-white/[0.2] hover:text-foreground/80 hover:bg-white/[0.05]"
+                      }`}
+                  >
+                    {range}
+                  </button>
+                ))}
+              </div>
+            </FadeIn>
+
             {/* Message */}
             <FadeIn delay={0.25}>
-              <label className={labelClass}>Project details</label>
+              <label className={labelClass}>Tell us about your project or goal</label>
               <textarea
                 placeholder="Goals, timeline, links, budget band if known..."
                 rows={5}
@@ -347,7 +384,7 @@ export default function ContactPage() {
                     <div>
                       <p className="text-sm font-semibold text-foreground">Office hours</p>
                       <p className="mt-2 text-sm leading-relaxed text-foreground/40 font-medium">
-                        Monday–Friday, 9am–6pm PT / ET. Lisbon covers EU-friendly windows for standups.
+                        Monday–Saturday, 10am–7pm IST (We usually respond faster than that.)
                       </p>
                     </div>
                   </div>
@@ -385,9 +422,9 @@ export default function ContactPage() {
             <div className="lg:col-span-7">
               <FadeIn delay={0.1} className="mb-8">
                 <div>
-                  <RevealLine><h2 className="text-4xl font-black uppercase tracking-tighter leading-[0.9] md:text-5xl">Start the</h2></RevealLine>
-                  <RevealLine delay={0.07}><h2 className="text-4xl font-satoshi font-normal italic text-primary leading-[0.9] md:text-5xl">Conversation.</h2></RevealLine>
-                  <FadeIn delay={0.2} className="mt-5"><p className="text-sm text-foreground/40 font-medium leading-relaxed max-w-md">No long forms. No gatekeeping. Just tell us what you&apos;re working on and we&apos;ll take it from there.</p></FadeIn>
+                  <RevealLine><h2 className="text-4xl font-black uppercase tracking-tighter leading-[0.9] md:text-5xl">Tell us what</h2></RevealLine>
+                  <RevealLine delay={0.07}><h2 className="text-4xl font-satoshi pb-2 font-normal italic text-primary leading-[0.9] md:text-5xl">you're working on.</h2></RevealLine>
+                  <FadeIn delay={0.2} className="mt-5"><p className="text-sm text-foreground/40 font-medium leading-relaxed max-w-md">No long forms. No confusing dropdowns. Just the basics - so we can come to the first conversation actually prepared.</p></FadeIn>
                 </div>
               </FadeIn>
               <ContactForm />

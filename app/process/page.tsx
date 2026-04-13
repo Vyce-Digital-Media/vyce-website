@@ -18,56 +18,56 @@ import { ArrowUpRight, CheckCircle2, ChevronDown } from "lucide-react";
 const processSteps = [
   {
     step: "01",
-    title: "Discovery",
+    title: "UNDERSTAND",
     tagline: "Know before you build.",
     duration: "Week 1–2",
     description:
-      "We start by listening — really listening. Stakeholder interviews, brand audits, competitive landscape mapping, and analytics review to surface what's actually happening versus what you assume.",
-    details: ["Stakeholder interviews", "Brand & UX audit", "Competitor mapping", "Persona definition"],
+      "We start by listening - genuinely listening. To your business, your goals, your audience, your competition, what's worked, and what hasn't. We don't come in with a template. We come in with questions. And we don't move until we have real answers. Most problems in digital marketing are solved here - in the understanding phase. Executing on the wrong insight is how budgets disappear.",
+    details: ["Founder & stakeholder discovery call", "Business, brand & digital audit", "Competitor landscape mapping", "Target audience & persona definition"],
     image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=900&h=600&fit=crop&q=80",
     color: "rgba(0,68,255,0.12)",
   },
   {
     step: "02",
-    title: "Strategy",
-    tagline: "Direction before decoration.",
+    title: "PLAN",
+    tagline: "Direction before action.",
     duration: "Week 2–4",
     description:
-      "We map the entire digital blueprint — user experience flows, information architecture, content hierarchy, and the technical foundation. No guess work. No pivots mid-build.",
-    details: ["Information architecture", "UX flow mapping", "Tech stack selection", "Project scoping & SOW"],
+      "No pixel moves, no rupee gets spent, and no content gets created before we have a clear map. We define the strategy, the structure, the platforms, the content pillars, the campaign approach, and the success metrics - all locked before execution begins.This is how we avoid the painful mid-project pivot. And how we avoid even more painful 'we need to redo everything' conversations.",
+    details: ["Strategic roadmap & plan of action", "Platform, channel & format selection", "Content pillars & campaign framework", "Detailed project scope & timeline"],
     image: "https://images.unsplash.com/photo-1551434678-e076c223a692?w=900&h=600&fit=crop&q=80",
     color: "rgba(255,140,0,0.12)",
   },
   {
     step: "03",
-    title: "Design",
-    tagline: "Craft meets intention.",
+    title: "CREATE",
+    tagline: "Craft with intention.",
     duration: "Parallel track",
     description:
-      "Visual identities, interactive prototypes, motion systems — we craft every pixel with purpose. Working UI weekly, not static PDFs. Stakeholders react to real things.",
-    details: ["Visual identity & UI", "Interactive prototypes", "Motion direction", "Design system tokens"],
+      "This is where strategy becomes real. Design, copy, content, code - everything built with the plan front of mind, not as an afterthought. You'll see real work in regular cycles. Structured feedback. Clear revisions. No waiting three weeks for a first draft.",
+    details: ["Visual identity & UI design", "Content production (reels, carousels, copy)", "Website design & development", "Ad creative & campaign build"],
     image: "https://images.unsplash.com/photo-1558655146-364adaf1fcc9?w=900&h=600&fit=crop&q=80",
     color: "rgba(200,50,255,0.12)",
   },
   {
     step: "04",
-    title: "Development",
-    tagline: "Code that performs.",
+    title: "LAUNCH",
+    tagline: "Go live properly.",
     duration: "Ongoing sprint",
     description:
-      "High-performance, accessible, and scalable digital ecosystems built with meticulous attention to detail. Design tokens export to code, and we pair with your engineers on every edge case.",
-    details: ["Next.js & TypeScript", "Performance budgets", "Accessibility (WCAG)", "QA & cross-browser"],
+      "Going live isn't the finish line - it's the starting gun. We make sure everything is tested, tracked, and working before anything goes public. QA, analytics, tracking, final review. 'No we'll fix it after launch.' We fix it before.",
+    details: ["Pre-launch quality assurance", "Analytics & conversion tracking setup", "Campaign activation & monitoring", "Final client review & sign-off"],
     image: "https://images.unsplash.com/photo-1573164713988-8665fc963095?w=900&h=600&fit=crop&q=80",
     color: "rgba(0,200,100,0.12)",
   },
   {
     step: "05",
-    title: "Launch",
-    tagline: "Ship, then sustain.",
+    title: "GROW",
+    tagline: "The part most agencies skip. We don't.",
     duration: "Final sprint",
     description:
-      "Hardening, documentation, and training so your team owns the roadmap. Analytics instrumentation, SEO baselines, and a handoff so clean your engineers will thank us.",
-    details: ["Launch QA & hardening", "Analytics setup", "Team training & docs", "Post-launch monitoring"],
+      "This is the phase that separates agencies from partners. Once we launch, we don't file the project and move on. We track performance. We flag what's working and what isn't. We optimize. We bring the next opportunity before you even know to ask about it. This is why most of our client relationships are measured in years, not projects. And why most of our new clients come from someone we already work with.",
+    details: ["Performance monitoring & reporting", "Ongoing optimization & iteration", "Monthly strategy reviews", "Expansion scope identification"],
     image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=900&h=600&fit=crop&q=80",
     color: "rgba(255,60,80,0.12)",
   },
@@ -76,19 +76,23 @@ const processSteps = [
 const faqItems = [
   {
     q: "How long does a typical project take?",
-    a: "Most full-brand and web projects run 8–16 weeks. We're direct about timelines in the first conversation — if a 6-week miracle is possible, we'll say so.",
+    a: "Depends on the scope. A brand identity: 3–4 weeks. A website: 6–10 weeks. A social media retainer: ongoing from month one, results visible from month two or three. We'll give you an honest timeline during the scoping call - no inflated estimates, no 'we'll figure it out.'",
   },
   {
-    q: "Do you take on smaller projects?",
-    a: "Yes. We offer focused sprints for identity, landing pages, and motion work that don't need the full five-act structure.",
+    q: "Do you work with international clients?",
+    a: "Yes. We work with brands in India and internationally. Time zones, communication cadences, and currency - we've handled all of it. If you're building something serious, geography isn't a barrier.",
   },
   {
-    q: "Can we embed with your existing team?",
-    a: "Absolutely — we often embed with product or brand teams, contribute to existing design systems, and document handoffs so internal engineers stay unblocked.",
+    q: "What's the minimum budget to work with Vyce?",
+    a: "We work with medium to large-budget projects - not MNC-scale, but not ₹5,000-a-month budgets either. The right answer depends on your scope. Best to have a 15-minute call and find out together.",
   },
   {
-    q: "What does the weekly cadence look like?",
-    a: "Working sessions, async Loom updates, and a shared Figma + Notion workspace. You'll never be waiting on us.",
+    q: "Will I be working directly with the founders?",
+    a: "Yes, especially in the strategy and planning phases. And you'll always have direct access to the leads on your project throughout. We don't hand you off to a junior and disappear.",
+  },
+  {
+    q: "What if the project needs to change mid-wa",
+    a: "It happens. We build flexibility into our process - but also do thorough upfront scoping precisely to reduce surprises. When scope does change, we're transparent about what that means for timeline and budget. No hidden costs.",
   },
 ];
 
@@ -186,7 +190,7 @@ function StepCard({ step, index, onHover }: { step: typeof processSteps[0]; inde
             </h3>
           </div>
 
-          <p className="max-w-xl text-lg md:text-xl text-foreground/50 leading-relaxed font-medium transition-colors duration-500 group-hover:text-foreground/75">
+          <p className="max-w-xl text-md md:text-lg text-foreground/50 leading-relaxed font-medium transition-colors duration-500 group-hover:text-foreground/75">
             {step.description}
           </p>
 
@@ -369,9 +373,9 @@ export default function ProcessPage() {
 
           <div className="grid gap-6 md:grid-cols-3">
             {[
-              { num: "01", title: "No Surprises", body: "Weekly working sessions and shared documentation mean you always know where the project stands." },
-              { num: "02", title: "Parallel Tracks", body: "Design and development run in parallel from week two — cutting delivery time without cutting corners." },
-              { num: "03", title: "Clean Handoffs", body: "Every deliverable is documented, versioned, and handed off with training so your team is never left stranded." },
+              { num: "01", title: "You always know where things stand.", body: "Regular check-ins, shared timelines, documented deliverables. You're never in the dark about where your project is - or waiting on a response to find out." },
+              { num: "02", title: "Strategy and execution stay connected.", body: "The people who planned your project are involved in building it. No briefing gaps. No 'that's not what we discussed.' What was planned is what gets built." },
+              { num: "03", title: "We stay when others leave.", body: "Most agencies stop at launch. We treat launch as the beginning - because that's when the real data starts coming in and the real optimization starts." },
             ].map((card, i) => (
               <FadeIn key={card.num} delay={i * 0.1} className="h-full">
                 <div className="group relative h-full flex flex-col overflow-hidden rounded-3xl border border-white/[0.07] bg-gradient-to-br from-zinc-950 to-zinc-900 p-10 transition-all duration-500 hover:border-primary/25">
@@ -392,8 +396,7 @@ export default function ProcessPage() {
       <section className="relative px-6 py-32 md:px-12 lg:px-20 overflow-hidden">
         <div className="mx-auto max-w-[1600px] grid gap-20 lg:grid-cols-[1fr_1.2fr] items-start">
           <div className="lg:sticky lg:top-40 space-y-6">
-            <RevealLine><h2 className="text-5xl font-black uppercase tracking-tighter leading-[0.9] md:text-6xl">Common<br />Questions</h2></RevealLine>
-            <FadeIn delay={0.2}><p className="text-lg text-foreground/40 font-medium leading-relaxed">Everything you need before the first conversation.</p></FadeIn>
+            <RevealLine><h2 className="text-5xl font-black uppercase tracking-tighter leading-[0.9] md:text-6xl">Questions people ask before they start.</h2></RevealLine>
             <FadeIn delay={0.3}>
               <Link href="/contact" className="group inline-flex items-center gap-4 text-[11px] font-black uppercase tracking-[0.4em] text-foreground/40 hover:text-primary transition-colors duration-300">
                 Ask something else
@@ -420,11 +423,11 @@ export default function ProcessPage() {
               <div className="relative z-10 flex flex-col items-start gap-10 md:flex-row md:items-center md:justify-between">
                 <div className="max-w-2xl space-y-5">
                   <RevealLine>
-                    <h2 className="text-4xl font-black uppercase tracking-tighter leading-[0.9] md:text-6xl">
-                      Ready to{" "}<span className="font-satoshi font-normal italic text-primary">start?</span>
+                    <h2 className="text-3xl font-black uppercase tracking-tighter leading-[0.9] md:text-6xl">
+                      Ready to{" "}<span className="font-satoshi font-normal italic text-primary">actually start?</span>
                     </h2>
                   </RevealLine>
-                  <FadeIn delay={0.2}><p className="text-lg text-foreground/40 leading-relaxed font-medium">Share your brief and we&apos;ll come back with a clear proposed path — team shape, milestones, and an honest estimate.</p></FadeIn>
+                  <FadeIn delay={0.2}><p className="text-lg text-foreground/40 leading-relaxed font-medium">Tell us about your project and we'll come back with a clear path forward - scope, timeline, team, and an honest estimate. No pitch deck. No jargon. Just what makes sense for you.</p></FadeIn>
                 </div>
                 <FadeIn delay={0.35} className="flex-shrink-0">
                   <Link href="/contact" className="group inline-flex items-center gap-4 rounded-full bg-primary px-10 py-5 text-[11px] font-black uppercase tracking-[0.3em] text-white transition-all duration-300 hover:bg-primary/90 hover:scale-105 active:scale-95 shadow-[0_20px_40px_-10px_rgba(0,68,255,0.3)]">
