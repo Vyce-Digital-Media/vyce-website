@@ -96,7 +96,7 @@ function HeroSection() {
           </p>
         </RevealLine>
 
-        <div className="flex items-start gap-10 mt-10 border-t border-white/5 pt-10">
+        <div className="flex items-start gap-10 mt-10 border-t border-white/20 pt-10">
           <RevealLine delay={0.35} className="mr-4">
             <div className="w-16 h-16 rounded-2xl overflow-hidden bg-white/5 flex items-center justify-center p-3 border border-white/10 shadow-2xl backdrop-blur-sm">
               <img
@@ -110,7 +110,7 @@ function HeroSection() {
           <div className="grid grid-cols-2 gap-8 max-w-xs">
             <div>
               <RevealLine delay={0.4}>
-                <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-white/30 block mb-2">Client</span>
+                <span className="text-[11px] font-mono uppercase tracking-[0.3em] text-white/60 block mb-2">Client</span>
               </RevealLine>
               <RevealLine delay={0.5}>
                 <span className="text-sm uppercase font-bold tracking-widest text-white">Nexus Space Corp.</span>
@@ -118,7 +118,7 @@ function HeroSection() {
             </div>
             <div>
               <RevealLine delay={0.45}>
-                <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-white/30 block mb-2">Industry</span>
+                <span className="text-[11px] font-mono uppercase tracking-[0.3em] text-white/60 block mb-2">Industry</span>
               </RevealLine>
               <RevealLine delay={0.55}>
                 <span className="text-sm uppercase font-bold tracking-widest text-white">Spatial Tech</span>
@@ -260,7 +260,7 @@ function ProjectTableSection() {
         {/* Header */}
         <div ref={headingRef} className="flex flex-col items-center justify-center text-center mb-14">
           <h2 className="text-[clamp(2.2rem,4.5vw,4.5rem)] font-black uppercase tracking-tighter leading-none">
-            Scope &amp; <span className="font-satoshi italic font-normal text-white/25">Deliverables.</span>
+            Scope &amp; <span className="font-satoshi italic font-normal text-white/25">Deliverables</span>
           </h2>
         </div>
 
@@ -281,7 +281,7 @@ function ProjectTableSection() {
               {/* Label: Right aligned */}
               <div className="text-left">
                 <span
-                  className="text-[11px] font-mono uppercase tracking-[0.3em] text-white/25
+                  className="text-[12px] font-mono uppercase tracking-[0.3em] text-white/60
                      group-hover:text-primary/70 transition-colors duration-300"
                 >
                   {row.label}
@@ -342,16 +342,19 @@ function DescriptionSection() {
       {/* Header */}
       <div className="flex flex-col items-center justify-center text-center mb-14">
         <h2 className="text-[clamp(2.2rem,4.5vw,4.5rem)] font-black uppercase tracking-tighter leading-none">
-          Problem &amp; <span className="font-satoshi italic font-normal text-white/25">Statement.</span>
+          Problem <span className="font-satoshi italic font-normal text-white/25">Statement</span>
         </h2>
       </div>
       {/* Animated word reveal */}
       <div className="max-w-4/5 w-full">
-        <p className="text-[clamp(1rem,2vw,2rem)] font-black uppercase text-justify tracking-tighter leading-[1.2] flex flex-wrap gap-x-[clamp(0.3rem,1vw,1rem)]">
+        <p className="text-[clamp(1rem,2vw,1.8rem)] font-black uppercase text-justify tracking-tighter leading-[1.1] w-full">
           {words.map((word, i) => (
-            <span key={i} className="desc-word text-white/10 transition-colors duration-300">
-              {word}
-            </span>
+            <React.Fragment key={i}>
+              <span className="desc-word text-white/10 transition-colors duration-300 inline-block">
+                {word}
+              </span>
+              {" "}
+            </React.Fragment>
           ))}
         </p>
       </div>
@@ -475,8 +478,35 @@ function FloatingGallery() {
   );
 }
 
+// ─── TIMELINE SECTION ────────────────────────────────────────────────────────
+
+const timelineData = [
+  {
+    weeks: "Week 1–2",
+    title: "Research & Planning",
+    description: "Deep dive into the spatial tech landscape, audience mapping, and architecting the core user journey.",
+    tags: ["Strategy", "UX Design"]
+  },
+  {
+    weeks: "Week 3–5",
+    title: "Design & Development",
+    description: "Translating insights into high-fidelity components. Implementing the WebGL core and organic physics.",
+    tags: ["WebGL", "Next.js", "Three.js"]
+  },
+  {
+    weeks: "Week 6–12",
+    title: "Execution & Optimization",
+    description: "Scaling the platform, running performance audits, and executing the cross-channel growth campaign.",
+    tags: ["Growth", "SEO", "Performance"]
+  },
+];
+
+
 function LightModeSection({ setGlobalTheme }: { setGlobalTheme: (theme: 'dark' | 'light') => void }) {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const lineRef = useRef<HTMLDivElement>(null);
+  const itemsRef = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     let ctx = gsap.context(() => {
@@ -490,23 +520,98 @@ function LightModeSection({ setGlobalTheme }: { setGlobalTheme: (theme: 'dark' |
     return () => ctx.revert();
   }, [setGlobalTheme]);
 
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+    const ctx = gsap.context(() => {
+      // Growing center line
+      gsap.fromTo(lineRef.current,
+        { scaleY: 0 },
+        {
+          scaleY: 1,
+          ease: "none",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 20%",
+            end: "bottom 80%",
+            scrub: true,
+          }
+        }
+      );
+
+      itemsRef.current.forEach((item, i) => {
+        if (!item) return;
+        gsap.from(item, {
+          y: 60,
+          opacity: 0,
+          duration: 1,
+          ease: "power4.out",
+          scrollTrigger: {
+            trigger: item,
+            start: "top 85%",
+          }
+        });
+      });
+    }, containerRef);
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section ref={sectionRef} className="py-40 md:py-60 px-8 md:px-20 relative z-30 transition-colors duration-1000">
+    <section ref={sectionRef} className="pt-30 px-8 md:px-20 relative z-30 transition-colors duration-1000">
       <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center text-center">
         <RevealLine>
           <span className="text-current font-mono text-xs uppercase tracking-[0.3em] opacity-40 mb-8 block">The Architecture</span>
         </RevealLine>
         <RevealLine delay={0.1}>
-          <h2 className="text-[clamp(3rem,6vw,6rem)] font-black uppercase tracking-tighter leading-none mb-12">
-            Minimalism <br />
-            <span className="font-satoshi italic font-normal opacity-50">is complex.</span>
+          <h2 className="text-[clamp(2.5rem,4.5vw,4.5rem)] font-black uppercase tracking-tighter leading-none mb-6">
+            Project <span className="font-satoshi italic font-normal text-black/20 px-4">Execution</span>
           </h2>
         </RevealLine>
         <RevealLine delay={0.2}>
-          <p className="text-xl md:text-2xl font-medium opacity-60 max-w-2xl leading-relaxed">
-            Stripping away the noise requires a robust technical foundation. We utilized edge routing and native compiled animations to ensure 60fps performance across 99% of devices.
+          <p className="text-black/60 text-base md:text-lg max-w-xl leading-relaxed">
+            How we moved from raw concept to a high-performance digital ecosystem in 12 weeks.
           </p>
         </RevealLine>
+      </div>
+      <div ref={containerRef} className="max-w-6xl mx-auto relative pt-30">
+        {/* The Timeline */}
+        <div className="relative">
+          {/* Center Line */}
+          <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-black/10 -translate-x-1/2 overflow-hidden origin-top" ref={lineRef}>
+            <div className="absolute inset-0 bg-primary" />
+          </div>
+
+          <div className="space-y-24">
+            {timelineData.map((item, i) => (
+              <div
+                key={i}
+                ref={(el) => { itemsRef.current[i] = el; }}
+                className={`relative flex flex-col ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} items-center`}
+              >
+                {/* Visual Connector Dot */}
+                <div className="absolute left-4 md:left-1/2 w-3 h-3 rounded-full bg-primary border-4 border-white -translate-x-1/2 z-10" />
+
+                <div className={`w-full md:w-1/2 pl-12 md:pl-0 ${i % 2 === 0 ? 'md:pr-24 text-left md:text-right' : 'md:pl-24 text-left'}`}>
+                  <span className="text-primary font-mono text-sm tracking-widest block mb-2">{item.weeks}</span>
+                  <h3 className="text-2xl md:text-4xl font-black uppercase tracking-tight text-black mb-4">
+                    {item.title}
+                  </h3>
+                  <p className="text-black/50 text-lg leading-relaxed max-w-md mx-auto md:mx-0">
+                    {item.description}
+                  </p>
+                  <div className={`flex flex-wrap gap-2 mt-6 ${i % 2 === 0 ? 'md:justify-end' : 'md:justify-start'}`}>
+                    {item.tags.map(tag => (
+                      <span key={tag} className="px-3 py-1 rounded-full border border-black/10 text-[10px] font-mono uppercase tracking-widest text-black/40">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="hidden md:block md:w-1/2" />
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -614,7 +719,7 @@ function CenteredGrowthSection({ setGlobalTheme }: { setGlobalTheme: (theme: 'da
           </h2>
 
           <Link href="/contact" className="group inline-flex items-center gap-4 rounded-full bg-white px-10 py-5 text-[11px] font-black uppercase tracking-[0.3em] text-black transition-all duration-300 hover:bg-primary hover:text-white hover:scale-105 active:scale-95">
-            Start Project
+            Book Your Free Call Now
             <ArrowUpRight size={18} className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
           </Link>
         </div>
@@ -632,7 +737,6 @@ const strategyPillars = [
   {
     num: "01",
     title: ["Research", "& Insights"],
-    tagline: "Know before you act",
     color: "#7c3aed",
     items: [
       "Competitor landscape mapping",
@@ -644,7 +748,6 @@ const strategyPillars = [
   {
     num: "02",
     title: ["Strategic", "Direction"],
-    tagline: "Purpose behind every decision",
     color: "#f97316",
     items: [
       "Full-funnel strategy architecture",
@@ -656,7 +759,6 @@ const strategyPillars = [
   {
     num: "03",
     title: ["Execution", "Plan"],
-    tagline: "Precision at every sprint",
     color: "#10b981",
     items: [
       "Technology stack selection",
@@ -718,7 +820,7 @@ function StrategySection() {
 
       <div ref={headingRef} className="flex flex-col items-center text-center mb-20 max-w-5xl mx-auto">
         <h2 className="text-[clamp(2.2rem,4.5vw,4.5rem)] font-black uppercase tracking-tighter leading-none mb-6">
-          Strategy &amp; <span className="font-satoshi italic font-normal text-white/25">Approach.</span>
+          Strategy &amp; <span className="font-satoshi italic font-normal text-white/25">Approach</span>
         </h2>
         <p className="text-white/40 text-base md:text-lg max-w-xl leading-relaxed">
           This is where most agencies fail. We don&apos;t skip depth — every decision is traceable back to data, intent, and craft.
@@ -751,12 +853,6 @@ function StrategySection() {
             {/* Number + tagline */}
             <div className="flex items-center justify-between mb-8">
               <span className="font-mono text-[10px] tracking-[0.35em] text-white/20">{pillar.num}</span>
-              <span
-                className="text-[8px] font-mono uppercase tracking-[0.2em] px-2.5 py-1 rounded-full border opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                style={{ borderColor: `${pillar.color}50`, color: pillar.color }}
-              >
-                {pillar.tagline}
-              </span>
             </div>
 
             {/* Title */}
@@ -793,294 +889,7 @@ function StrategySection() {
   );
 }
 
-// ─── EXECUTION BREAKDOWN ─────────────────────────────────────────────────────
 
-const executionModules = [
-  {
-    num: "01",
-    service: "Website / UI-UX",
-    tag: "Design & Dev",
-    color: "#7c3aed",
-    items: [
-      "Wireframes → Final UI delivery",
-      "UX audit & improvement mapping",
-      "Core Web Vitals performance pass",
-      "Before → After transformation audit",
-    ],
-  },
-  {
-    num: "02",
-    service: "Performance Marketing",
-    tag: "Paid Acquisition",
-    color: "#f97316",
-    items: [
-      "Full-funnel campaign architecture",
-      "Ad creative direction & A/B testing",
-      "Retargeting & lookalike audiences",
-      "ROAS-driven budget allocation",
-    ],
-  },
-  {
-    num: "03",
-    service: "Content & Social",
-    tag: "Organic Growth",
-    color: "#ec4899",
-    items: [
-      "Content pillar strategy (4 pillars)",
-      "Visual direction & brand voice guide",
-      "Platform-native posting cadence",
-      "Engagement loop & community design",
-    ],
-  },
-  {
-    num: "04",
-    service: "Automation & Tech",
-    tag: "Systems & Stack",
-    color: "#0ea5e9",
-    items: [
-      "CRM & email workflow architecture",
-      "Tool stack selection & integration",
-      "Lead nurturing sequence design",
-      "Reporting dashboards & live alerts",
-    ],
-  },
-];
-
-function ExecutionSection() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const headingRef = useRef<HTMLDivElement>(null);
-  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
-
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-    const ctx = gsap.context(() => {
-      gsap.from(headingRef.current, {
-        y: 70,
-        opacity: 0,
-        duration: 1.3,
-        ease: "power4.out",
-        scrollTrigger: { trigger: headingRef.current, start: "top 90%" },
-      });
-
-      cardsRef.current.forEach((card, i) => {
-        if (!card) return;
-        gsap.from(card, {
-          x: i % 2 === 0 ? -60 : 60,
-          opacity: 0,
-          duration: 0.8,
-          ease: "power3.out",
-          delay: Math.floor(i / 2) * 0.1,
-          scrollTrigger: { trigger: card, start: "top 98%" },
-        });
-      });
-    }, sectionRef);
-    return () => ctx.revert();
-  }, []);
-
-  return (
-    <section ref={sectionRef} className="relative z-30 bg-background px-8 md:px-20 py-28 overflow-hidden">
-      <div className="pointer-events-none absolute top-0 right-0 w-[500px] h-[500px] bg-sky-500/[0.03] rounded-full blur-[140px]" />
-      <div className="pointer-events-none absolute bottom-0 left-0 w-[400px] h-[400px] bg-pink-500/[0.03] rounded-full blur-[120px]" />
-
-      <div ref={headingRef} className="flex flex-col items-center text-center mb-20 max-w-5xl mx-auto">
-        <h2 className="text-[clamp(2.2rem,4.5vw,4.5rem)] font-black uppercase tracking-tighter leading-none mb-6">
-          Execution <span className="font-satoshi italic font-normal text-white/25">Breakdown.</span>
-        </h2>
-        <p className="text-white/40 text-base md:text-lg max-w-xl leading-relaxed">
-          Modular delivery across every service layer — each engineered for traceable, measurable impact.
-        </p>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-6xl mx-auto">
-        {executionModules.map((mod, i) => (
-          <div
-            key={mod.num}
-            ref={(el) => { cardsRef.current[i] = el; }}
-            className="group relative rounded-2xl border border-white/[0.06] bg-white/[0.02] p-8 cursor-default transition-all duration-500 hover:border-white/[0.13] hover:bg-white/[0.03] overflow-hidden"
-          >
-            {/* Top-left glow on hover */}
-            <div
-              className="pointer-events-none absolute -top-16 -left-16 w-44 h-44 rounded-full blur-3xl opacity-0 group-hover:opacity-25 transition-opacity duration-700"
-              style={{ backgroundColor: mod.color }}
-            />
-            {/* Bottom-right glow on hover */}
-            <div
-              className="pointer-events-none absolute -bottom-10 -right-10 w-32 h-32 rounded-full blur-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-700"
-              style={{ backgroundColor: mod.color }}
-            />
-
-            {/* Large ghost number + tag */}
-            <div className="flex items-start justify-between mb-6">
-              <span className="font-mono text-[52px] font-black leading-none text-white/[0.04] group-hover:text-white/[0.09] transition-colors duration-500 select-none -mt-2">
-                {mod.num}
-              </span>
-              <span
-                className="mt-2 text-[9px] font-mono uppercase tracking-[0.25em] px-3 py-1.5 rounded-full border flex-shrink-0"
-                style={{ borderColor: `${mod.color}40`, color: `${mod.color}CC` }}
-              >
-                {mod.tag}
-              </span>
-            </div>
-
-            {/* Service name */}
-            <h3 className="text-[clamp(1.2rem,2vw,1.7rem)] font-black uppercase tracking-tight mb-5 text-white leading-tight">
-              {mod.service}
-            </h3>
-
-            {/* Divider draws in on hover */}
-            <div
-              className="h-px w-full mb-6 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-700"
-              style={{ backgroundColor: `${mod.color}40` }}
-            />
-
-            {/* Items */}
-            <ul className="space-y-3">
-              {mod.items.map((item, j) => (
-                <li
-                  key={j}
-                  className="flex items-start gap-3 text-[13px] text-white/30 group-hover:text-white/60 transition-colors duration-300"
-                  style={{ transitionDelay: `${j * 60}ms` }}
-                >
-                  <span
-                    className="mt-[5px] w-1 h-1 rounded-full flex-shrink-0"
-                    style={{ backgroundColor: mod.color, opacity: 0.75 }}
-                  />
-                  {item}
-                </li>
-              ))}
-            </ul>
-
-            {/* Bottom shimmer on hover */}
-            <div
-              className="absolute bottom-0 left-0 right-0 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-              style={{ background: `linear-gradient(90deg, transparent, ${mod.color}60, transparent)` }}
-            />
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-
-// ─── TIMELINE SECTION ────────────────────────────────────────────────────────
-
-const timelineData = [
-  {
-    weeks: "Week 1–2",
-    title: "Research & Planning",
-    description: "Deep dive into the spatial tech landscape, audience mapping, and architecting the core user journey.",
-    tags: ["Strategy", "UX Design"]
-  },
-  {
-    weeks: "Week 3–5",
-    title: "Design & Development",
-    description: "Translating insights into high-fidelity components. Implementing the WebGL core and organic physics.",
-    tags: ["WebGL", "Next.js", "Three.js"]
-  },
-  {
-    weeks: "Week 6–12",
-    title: "Execution & Optimization",
-    description: "Scaling the platform, running performance audits, and executing the cross-channel growth campaign.",
-    tags: ["Growth", "SEO", "Performance"]
-  },
-];
-
-function TimelineSection() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const lineRef = useRef<HTMLDivElement>(null);
-  const itemsRef = useRef<(HTMLDivElement | null)[]>([]);
-
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-    const ctx = gsap.context(() => {
-      // Growing center line
-      gsap.fromTo(lineRef.current,
-        { scaleY: 0 },
-        {
-          scaleY: 1,
-          ease: "none",
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top 20%",
-            end: "bottom 80%",
-            scrub: true,
-          }
-        }
-      );
-
-      itemsRef.current.forEach((item, i) => {
-        if (!item) return;
-        gsap.from(item, {
-          y: 60,
-          opacity: 0,
-          duration: 1,
-          ease: "power4.out",
-          scrollTrigger: {
-            trigger: item,
-            start: "top 85%",
-          }
-        });
-      });
-    }, containerRef);
-    return () => ctx.revert();
-  }, []);
-
-  return (
-    <section ref={containerRef} className="relative z-30 bg-white px-8 md:px-20 py-32 overflow-hidden text-black">
-      <div className="max-w-6xl mx-auto relative">
-        <div className="flex flex-col items-center text-center mb-24">
-          <h2 className="text-[clamp(2.5rem,4.5vw,4.5rem)] font-black uppercase tracking-tighter leading-none mb-6">
-            Project <span className="font-satoshi italic font-normal text-black/20">Timeline.</span>
-          </h2>
-          <p className="text-black/60 text-base md:text-lg max-w-xl leading-relaxed">
-            How we moved from raw concept to a high-performance digital ecosystem in 12 weeks.
-          </p>
-        </div>
-
-        {/* The Timeline */}
-        <div className="relative">
-          {/* Center Line */}
-          <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-black/10 -translate-x-1/2 overflow-hidden origin-top" ref={lineRef}>
-            <div className="absolute inset-0 bg-primary" />
-          </div>
-
-          <div className="space-y-24">
-            {timelineData.map((item, i) => (
-              <div
-                key={i}
-                ref={(el) => { itemsRef.current[i] = el; }}
-                className={`relative flex flex-col ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} items-center`}
-              >
-                {/* Visual Connector Dot */}
-                <div className="absolute left-4 md:left-1/2 w-3 h-3 rounded-full bg-primary border-4 border-white -translate-x-1/2 z-10" />
-
-                <div className={`w-full md:w-1/2 pl-12 md:pl-0 ${i % 2 === 0 ? 'md:pr-24 text-left md:text-right' : 'md:pl-24 text-left'}`}>
-                  <span className="text-primary font-mono text-sm tracking-widest block mb-2">{item.weeks}</span>
-                  <h3 className="text-2xl md:text-4xl font-black uppercase tracking-tight text-black mb-4">
-                    {item.title}
-                  </h3>
-                  <p className="text-black/50 text-lg leading-relaxed max-w-md mx-auto md:mx-0">
-                    {item.description}
-                  </p>
-                  <div className={`flex flex-wrap gap-2 mt-6 ${i % 2 === 0 ? 'md:justify-end' : 'md:justify-start'}`}>
-                    {item.tags.map(tag => (
-                      <span key={tag} className="px-3 py-1 rounded-full border border-black/10 text-[10px] font-mono uppercase tracking-widest text-black/40">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="hidden md:block md:w-1/2" />
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
 
 // ─── RESULTS SECTION ────────────────────────────────────────────────────────
 
@@ -1144,7 +953,7 @@ function ResultsSection() {
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col items-center text-center mb-24">
           <h2 className="text-[clamp(2.5rem,6vw,6rem)] font-black uppercase tracking-tighter leading-none mb-8">
-            Measured <span className="font-satoshi italic font-normal text-black/30">Impact.</span>
+            Measured <span className="font-satoshi italic font-normal text-black/30">Impact</span>
           </h2>
           <div className="w-24 h-px bg-black/10" />
         </div>
@@ -1159,7 +968,7 @@ function ResultsSection() {
               <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-black/40 mb-4">
                 {item.label}
               </span>
-              <div className="metric-value text-[clamp(2.5rem,4vw,4.5rem)] font-black tracking-tighter leading-none mb-2">
+              <div className="metric-value text-[clamp(2.5rem,4vw,4.5rem)] group-hover:text-primary transition-colors duration-300 font-black tracking-tighter leading-none mb-2">
                 0
               </div>
               <div className="w-6 h-px bg-black/10 group-hover:w-12 transition-all duration-500" />
@@ -1234,7 +1043,7 @@ function RelatedProjectsSection() {
         <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-8">
           <div className="max-w-xl text-left">
             <h2 className="text-[clamp(2.2rem,4.5vw,5rem)] font-black uppercase tracking-tighter leading-none">
-              Explore <span className="font-satoshi italic font-normal text-black/30">Related.</span>
+              Explore <span className="font-satoshi italic font-normal text-black/30">Related</span>
             </h2>
           </div>
           <Link href="/portfolio" className="group flex items-center gap-4 text-[11px] font-black uppercase tracking-[0.3em] pb-2 border-b border-black/10 hover:border-black transition-colors">
@@ -1248,7 +1057,7 @@ function RelatedProjectsSection() {
             <div
               key={i}
               ref={(el) => { cardsRef.current[i] = el; }}
-              className={`group relative flex flex-col bg-zinc-100 border border-black/[0.08] rounded-[40px] p-4 pb-10 shadow-2xl shadow-black/[0.03] transition-all duration-500 hover:bg-white hover:border-black/10 hover:shadow-2xl hover:shadow-black/8 ${i === 1 ? 'md:mt-12' : ''}`}
+              className={`group relative flex flex-col bg-zinc-100 border border-black/[0.08] rounded-[40px] p-4 pb-10 shadow-2xl shadow-black/[0.03] transition-all duration-500 hover:bg-white hover:border-black/10 hover:shadow-2xl hover:shadow-black/8`}
             >
               <Link href={project.link} className="block relative aspect-video overflow-hidden rounded-[30px] rp-mask cursor-pointer">
                 <motion.div
@@ -1337,10 +1146,8 @@ export default function ShowcasePage() {
         <ProjectTableSection />
         <DescriptionSection />
         <StrategySection />
-        <ExecutionSection />
         <FloatingGallery />
         <LightModeSection setGlobalTheme={setGlobalTheme} />
-        <TimelineSection />
         <ResultsSection />
         <RelatedProjectsSection />
         <CenteredGrowthSection setGlobalTheme={setGlobalTheme} />

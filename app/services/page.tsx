@@ -32,21 +32,21 @@ import MagneticButton from "@/components/ui/MagneticButton";
 const services = [
   {
     num: "01",
-    title: "Branding & Identity",
-    icon: Palette,
+    title: "Social Media Management",
+    icon: Send,
     iconColor: "rgba(255, 60, 0, 0.15)",
     summary:
-      "Your brand is the first impression, the last memory, and everything in between.",
+      "Posting without a strategy is just noise. There's enough of that already.",
     description:
-      "Before anyone buys from you, they judge you. Logo, color, typography, tone of voice - all of it sends a signal before a single word is read. We make sure that signal says exactly what your business deserves to say.",
+      "Social media that works isn't about volume - it's about relevance. The right content, on the right platform, to the right audience, at the right time. We handle the strategy, the creation, and the execution so you can stop spending three hours on a reel that gets twelve likes.",
     deliverables: [
-      "Brand strategy & positioning",
-      "Logo & visual identity system",
-      "Color palette, typography & design tokens",
-      "Brand voice & messaging guide",
-      "Brand guidelines document",
+      "Monthly content strategy & calendar",
+      "Reel & short-form video production",
+      "Carousel & static creative design",
+      "Caption & copy writing",
+      "Community management & engagement",
     ],
-    href: "/services/branding",
+    href: "/services/",
   },
   {
     num: "02",
@@ -68,24 +68,6 @@ const services = [
   },
   {
     num: "03",
-    title: "UI/UX & PRODUCT DESIGN",
-    icon: Smartphone,
-    iconColor: "rgba(180, 0, 255, 0.15)",
-    summary:
-      "If users need a tutorial to understand your interface, something went wrong in the design phase.",
-    description:
-      "Good design is invisible. Users shouldn't notice the navigation - they should just effortlessly end up where they need to be. We design interfaces, app flows, dashboards, and product experiences that feel intuitive, not figuring-it-out.",
-    deliverables: [
-      "User research & persona mapping",
-      "UX flows & wireframes",
-      "High-fidelity UI design",
-      "Interactive prototyping",
-      "Usability testing & iteration",
-    ],
-    href: "/services/product-design",
-  },
-  {
-    num: "04",
     title: "Performance Marketing",
     icon: BarChart,
     iconColor: "rgba(255, 200, 0, 0.15)",
@@ -103,23 +85,43 @@ const services = [
     href: "/services/digital-growth",
   },
   {
-    num: "05",
-    title: "Social Media Management",
-    icon: Send,
+    num: "04",
+    title: "Branding & Identity",
+    icon: Palette,
     iconColor: "rgba(255, 60, 0, 0.15)",
     summary:
-      "Posting without a strategy is just noise. There's enough of that already.",
+      "Your brand is the first impression, the last memory, and everything in between.",
     description:
-      "Social media that works isn't about volume - it's about relevance. The right content, on the right platform, to the right audience, at the right time. We handle the strategy, the creation, and the execution so you can stop spending three hours on a reel that gets twelve likes.",
+      "Before anyone buys from you, they judge you. Logo, color, typography, tone of voice - all of it sends a signal before a single word is read. We make sure that signal says exactly what your business deserves to say.",
     deliverables: [
-      "Monthly content strategy & calendar",
-      "Reel & short-form video production",
-      "Carousel & static creative design",
-      "Caption & copy writing",
-      "Community management & engagement",
+      "Brand strategy & positioning",
+      "Logo & visual identity system",
+      "Color palette, typography & design tokens",
+      "Brand voice & messaging guide",
+      "Brand guidelines document",
     ],
-    href: "/services/",
+    href: "/services/branding",
   },
+  {
+    num: "05",
+    title: "UI/UX & PRODUCT DESIGN",
+    icon: Smartphone,
+    iconColor: "rgba(180, 0, 255, 0.15)",
+    summary:
+      "If users need a tutorial to understand your interface, something went wrong in the design phase.",
+    description:
+      "Good design is invisible. Users shouldn't notice the navigation - they should just effortlessly end up where they need to be. We design interfaces, app flows, dashboards, and product experiences that feel intuitive, not figuring-it-out.",
+    deliverables: [
+      "User research & persona mapping",
+      "UX flows & wireframes",
+      "High-fidelity UI design",
+      "Interactive prototyping",
+      "Usability testing & iteration",
+    ],
+    href: "/services/product-design",
+  },
+
+
   {
     num: "06",
     title: "SEO",
