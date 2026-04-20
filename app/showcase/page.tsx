@@ -334,6 +334,11 @@ function DescriptionSection() {
 
   return (
     <section ref={containerRef} className="h-screen w-full flex flex-col items-center justify-center px-8 md:px-20 relative z-30 bg-background gap-10">
+
+      {/* Ambient blobs */}
+      <div className="pointer-events-none absolute top-0 right-0 w-[500px] h-[500px] bg-primary/4 rounded-full blur-[140px]" />
+      <div className="pointer-events-none absolute bottom-0 left-0 w-[400px] h-[350px] bg-violet-600/5 rounded-full blur-[110px]" />
+
       {/* Header */}
       <div className="flex flex-col items-center justify-center text-center mb-14">
         <h2 className="text-[clamp(2.2rem,4.5vw,4.5rem)] font-black uppercase tracking-tighter leading-none">
@@ -682,12 +687,12 @@ function StrategySection() {
         if (!card) return;
         // Card slide-up reveal
         gsap.from(card, {
-          y: 80,
+          y: 70,
           opacity: 0,
-          duration: 1.0,
+          duration: 0.8,
           ease: "power3.out",
-          delay: i * 0.12,
-          scrollTrigger: { trigger: card, start: "top 92%" },
+          delay: i * 0.1,
+          scrollTrigger: { trigger: card, start: "top 98%" },
         });
         // Accent line draws in
         const line = card.querySelector(".s-accent-line");
@@ -712,7 +717,6 @@ function StrategySection() {
       <div className="pointer-events-none absolute bottom-0 right-0 w-[400px] h-[400px] bg-orange-500/[0.03] rounded-full blur-[120px]" />
 
       <div ref={headingRef} className="flex flex-col items-center text-center mb-20 max-w-5xl mx-auto">
-        <span className="text-primary font-mono text-[10px] tracking-[0.35em] uppercase mb-4 block">Section 05</span>
         <h2 className="text-[clamp(2.2rem,4.5vw,4.5rem)] font-black uppercase tracking-tighter leading-none mb-6">
           Strategy &amp; <span className="font-satoshi italic font-normal text-white/25">Approach.</span>
         </h2>
@@ -861,12 +865,12 @@ function ExecutionSection() {
       cardsRef.current.forEach((card, i) => {
         if (!card) return;
         gsap.from(card, {
-          x: i % 2 === 0 ? -80 : 80,
+          x: i % 2 === 0 ? -60 : 60,
           opacity: 0,
-          duration: 1.1,
+          duration: 0.8,
           ease: "power3.out",
-          delay: Math.floor(i / 2) * 0.15,
-          scrollTrigger: { trigger: card, start: "top 92%" },
+          delay: Math.floor(i / 2) * 0.1,
+          scrollTrigger: { trigger: card, start: "top 98%" },
         });
       });
     }, sectionRef);
@@ -879,7 +883,6 @@ function ExecutionSection() {
       <div className="pointer-events-none absolute bottom-0 left-0 w-[400px] h-[400px] bg-pink-500/[0.03] rounded-full blur-[120px]" />
 
       <div ref={headingRef} className="flex flex-col items-center text-center mb-20 max-w-5xl mx-auto">
-        <span className="text-primary font-mono text-[10px] tracking-[0.35em] uppercase mb-4 block">Section 06</span>
         <h2 className="text-[clamp(2.2rem,4.5vw,4.5rem)] font-black uppercase tracking-tighter leading-none mb-6">
           Execution <span className="font-satoshi italic font-normal text-white/25">Breakdown.</span>
         </h2>
@@ -1027,7 +1030,6 @@ function TimelineSection() {
     <section ref={containerRef} className="relative z-30 bg-white px-8 md:px-20 py-32 overflow-hidden text-black">
       <div className="max-w-6xl mx-auto relative">
         <div className="flex flex-col items-center text-center mb-24">
-          <span className="text-black/30 font-mono text-[10px] tracking-[0.35em] uppercase mb-4 block">Section 07</span>
           <h2 className="text-[clamp(2.5rem,4.5vw,4.5rem)] font-black uppercase tracking-tighter leading-none mb-6">
             Project <span className="font-satoshi italic font-normal text-black/20">Timeline.</span>
           </h2>
@@ -1141,7 +1143,6 @@ function ResultsSection() {
     <section ref={containerRef} className="relative z-30 bg-white px-8 md:px-20 py-32 h-screen overflow-hidden text-black">
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col items-center text-center mb-24">
-          <span className="text-black/30 font-mono text-[10px] tracking-[0.35em] uppercase mb-4 block">Section 08</span>
           <h2 className="text-[clamp(2.5rem,6vw,6rem)] font-black uppercase tracking-tighter leading-none mb-8">
             Measured <span className="font-satoshi italic font-normal text-black/30">Impact.</span>
           </h2>
@@ -1204,17 +1205,17 @@ function RelatedProjectsSection() {
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: card,
-            start: "top 85%",
+            start: "top 95%",
           }
         });
 
         tl.fromTo(mask,
           { clipPath: "inset(0% 100% 0% 0%)" },
-          { clipPath: "inset(0% 0% 0% 0%)", duration: 1.5, ease: "expo.inOut" }
+          { clipPath: "inset(0% 0% 0% 0%)", duration: 1.0, ease: "expo.inOut" }
         )
           .fromTo(img,
             { scale: 1.4 },
-            { scale: 1, duration: 1.5, ease: "expo.inOut" },
+            { scale: 1, duration: 1.0, ease: "expo.inOut" },
             0
           )
           .fromTo(content,
@@ -1232,7 +1233,6 @@ function RelatedProjectsSection() {
       <div className="max-w-7xl mx-auto w-full">
         <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-8">
           <div className="max-w-xl text-left">
-            <span className="text-black/30 font-mono text-[10px] tracking-[0.35em] uppercase mb-4 block">Section 09</span>
             <h2 className="text-[clamp(2.2rem,4.5vw,5rem)] font-black uppercase tracking-tighter leading-none">
               Explore <span className="font-satoshi italic font-normal text-black/30">Related.</span>
             </h2>
@@ -1243,7 +1243,7 @@ function RelatedProjectsSection() {
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 items-start gap-8 md:gap-12">
           {relatedProjects.map((project, i) => (
             <div
               key={i}
