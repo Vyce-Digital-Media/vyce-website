@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Plus } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
@@ -52,10 +52,11 @@ export default function Navbar() {
 
   return (
     <>
+      {/* Standard Header (Hides on Scroll) */}
       <header
         className={cn(
-          "fixed left-0 top-0 z-[200] w-full transition-[background-color,padding] duration-300",
-          scrolled ? "bg-transparent py-2" : "bg-transparent py-3 md:py-4"
+          "fixed left-0 top-0 z-[190] w-full transition-all duration-500",
+          scrolled ? "-translate-y-full opacity-0 pointer-events-none" : "translate-y-0 opacity-100 bg-transparent py-3 md:py-4"
         )}
       >
         <nav className="mx-auto flex max-w-[1600px] items-center justify-between px-6 md:px-12 lg:px-16">
@@ -116,61 +117,163 @@ export default function Navbar() {
 
           <button
             type="button"
-            onClick={() => setIsOpen((v) => !v)}
+            onClick={() => setIsOpen(true)}
             className="absolute right-6 top-1/2 -translate-y-1/2 flex h-10 w-10 items-center justify-center text-foreground md:hidden"
-            aria-expanded={isOpen}
-            aria-label={isOpen ? "Close menu" : "Open menu"}
+            aria-label="Open menu"
           >
-            {isOpen ? <X size={22} strokeWidth={1.25} /> : <Menu size={22} strokeWidth={1.25} />}
+            <Menu size={22} strokeWidth={1.25} />
           </button>
         </nav>
       </header>
 
+      {/* Floating Action Button (Shows on Scroll) */}
+      <AnimatePresence>
+        {scrolled && !isOpen && (
+          <motion.button
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0, opacity: 0 }}
+            transition={{ type: "spring", stiffness: 260, damping: 20 }}
+            onClick={() => setIsOpen(true)}
+            className="fixed top-6 right-6 md:top-8 md:right-12 z-[205] flex h-14 w-14 items-center justify-center rounded-full bg-white text-black shadow-[0_0_40px_rgba(0,0,0,0.3)] hover:scale-110 transition-transform cursor-pointer"
+            aria-label="Open fullscreen menu"
+          >
+            <Plus size={32} strokeWidth={1.5} />
+          </motion.button>
+        )}
+      </AnimatePresence>
+
+      {/* Close Button inside Menu */}
       <AnimatePresence>
         {isOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
-            className="fixed inset-0 z-[190] flex flex-col bg-background px-8 pt-24 md:hidden"
+          <motion.button
+            initial={{ scale: 0, opacity: 0, rotate: -90 }}
+            animate={{ scale: 1, opacity: 1, rotate: 0 }}
+            exit={{ scale: 0, opacity: 0, rotate: 90 }}
+            transition={{ delay: 0.6, type: "spring", stiffness: 200, damping: 20 }}
+            onClick={() => setIsOpen(false)}
+            className="fixed top-6 right-6 md:top-8 md:right-12 z-[210] flex h-14 w-14 items-center justify-center rounded-full bg-black text-white shadow-2xl hover:scale-110 transition-transform cursor-pointer"
+            aria-label="Close fullscreen menu"
           >
-            <div className="flex flex-col gap-6">
-              {navLinks.map((link, index) => (
-                <motion.div
-                  key={link.href}
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.06 * index, duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
-                >
-                  <Link
-                    href={link.href}
-                    onClick={() => setIsOpen(false)}
-                    className={cn(
-                      "block border-b border-border/60 py-5 text-3xl font-medium tracking-tight transition-colors duration-200",
-                      isActive(link.href) ? "text-primary border-primary/20" : "text-foreground"
-                    )}
-                  >
-                    {link.name}
+            <X size={28} strokeWidth={1.5} />
+          </motion.button>
+        )}
+      </AnimatePresence>
+
+      {/* Epic Fullscreen Circular Reveal Menu */}
+      <AnimatePresence>
+        {isOpen && (
+          <>
+            {/* Black Reveal Layer */}
+            <motion.div
+              initial={{ clipPath: "circle(0px at calc(100% - 50px) 50px)" }}
+              animate={{ clipPath: "circle(150% at calc(100% - 50px) 50px)" }}
+              exit={{ clipPath: "circle(0px at calc(100% - 50px) 50px)", transition: { delay: 0.2, duration: 0.6, ease: [0.76, 0, 0.24, 1] } }}
+              transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
+              className="fixed inset-0 z-[200] bg-black pointer-events-none"
+            />
+
+            {/* White Reveal Layer (with menu content) */}
+            <motion.div
+              initial={{ clipPath: "circle(0px at calc(100% - 50px) 50px)" }}
+              animate={{ clipPath: "circle(150% at calc(100% - 50px) 50px)" }}
+              exit={{ clipPath: "circle(0px at calc(100% - 50px) 50px)", transition: { duration: 0.6, ease: [0.76, 0, 0.24, 1] } }}
+              transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1], delay: 0.1 }}
+              className="fixed inset-0 z-[201] bg-white text-black flex flex-col px-8 md:px-24 py-24 md:py-12 overflow-y-auto overflow-x-hidden"
+            >
+
+              <div className="flex flex-col md:flex-row items-start justify-between max-w-[1600px] w-full mx-auto gap-16 md:gap-24 pt-12 md:pt-16 pb-16">
+                
+                {/* Huge Vertically Centered Logo on Left */}
+                <div className="flex w-full md:w-1/2 justify-center md:justify-start items-center md:sticky top-auto md:top-1/2 md:-translate-y-1/2">
+                  <Link href="/" onClick={() => setIsOpen(false)}>
+                    <motion.img 
+                      src="/assets/nav-logo.png" 
+                      alt="Logo" 
+                      className="h-28 sm:h-36 md:h-64 w-auto brightness-0"
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.2 } }}
+                      transition={{ delay: 0.8, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                    />
                   </Link>
-                </motion.div>
-              ))}
-            </div>
+                </div>
 
-            <div className="mt-10 border-t border-border/60 pt-8">
-              <Link
-                href="/contact"
-                onClick={() => setIsOpen(false)}
-                className="inline-flex rounded-full border border-foreground/20 bg-foreground/5 px-6 py-4 text-[10px] font-semibold uppercase tracking-[0.3em] text-foreground transition-colors hover:border-foreground hover:bg-foreground/10"
-              >
-                Start a project
-              </Link>
-            </div>
+                {/* Main Links & Services Subpages */}
+                <div className="flex flex-col w-full md:w-1/2 items-start justify-start gap-3 md:gap-4">
+                  {navLinks.map((link, index) => (
+                    <motion.div
+                      key={link.href}
+                      initial={{ opacity: 0, y: 40 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 20, transition: { duration: 0.2 } }}
+                      transition={{ delay: 0.5 + (index * 0.08), duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                      className="w-full"
+                    >
+                      <Link
+                        href={link.href}
+                        onClick={() => setIsOpen(false)}
+                        className="group relative inline-block text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-medium tracking-tight text-black transition-colors hover:text-black/60"
+                      >
+                        {link.name}
+                        {isActive(link.href) && (
+                          <span className="absolute -right-6 md:-right-8 top-0 text-[16px] md:text-[20px] uppercase tracking-widest text-primary font-bold">
+                            *
+                          </span>
+                        )}
+                      </Link>
 
-            <p className="mt-auto pb-10 text-[10px] uppercase tracking-[0.35em] text-foreground/35">
-              Premium digital experiences built with clarity and craft.
-            </p>
-          </motion.div>
+                      {/* Render Service Subpages nicely nested if this is the Services link */}
+                      {link.name === "Services" && (
+                        <div className="flex flex-col gap-3 mt-4 ml-6 md:ml-10 border-l-[3px] border-black/10 pl-6 md:pl-8">
+                          {[
+                            { name: "Web Experiences", href: "/services/web-experiences" },
+                            { name: "Digital Growth", href: "/services/digital-growth" },
+                            { name: "Branding", href: "/services/branding" },
+                            { name: "Product Design", href: "/services/product-design" },
+                            { name: "SEO", href: "/services/seo" },
+                            { name: "Social Media", href: "/services/social-media-management" }
+                          ].map((subLink, subIndex) => (
+                            <Link
+                              key={subLink.href}
+                              href={subLink.href}
+                              onClick={() => setIsOpen(false)}
+                              className="text-xl sm:text-2xl md:text-3xl lg:text-[2rem] leading-tight font-medium text-black/50 hover:text-black transition-colors"
+                            >
+                              {subLink.name}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </motion.div>
+                  ))}
+
+                  {/* Secondary/Social Links aligned below */}
+                  <div className="flex flex-row flex-wrap items-center gap-6 md:gap-10 mt-12 md:mt-20 w-full">
+                    {socialLinks.map((social, index) => (
+                      <motion.div
+                        key={social.name}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 10, transition: { duration: 0.2 } }}
+                        transition={{ delay: 1.0 + (index * 0.08), duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                      >
+                        <a
+                          href={social.href}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-lg sm:text-xl md:text-2xl font-semibold tracking-wider text-black/70 hover:text-black transition-colors"
+                        >
+                          {social.name}
+                        </a>
+                      </motion.div>
+                    ))}
+                  </div>
+
+                </div>
+              </div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </>
