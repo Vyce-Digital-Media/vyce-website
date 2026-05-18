@@ -18,51 +18,51 @@ const categories = ["All", "Web", "Branding", "Product", "Motion"];
 
 const projects = [
   {
-    id: 1, title: "Aura Luxury Watches", category: "Web",
-    tags: ["Web Design", "WebGL", "Commerce"], year: "2025",
+    id: 1, title: "Earthy Crafts", category: "Web",
+    tags: ["Web Design", "WebGL", "Commerce"], year: "2026",
     image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=1400&h=900&fit=crop&q=80",
-    summary: "A cinematic product world built around tactile materials and real-time lighting. Modular storytelling blocks so the marketing team can launch capsules without engineering support.",
+    summary: "Earthy Crafts is a luxury handcrafted decor platform that blends timeless artistry with modern design, showcasing premium marble sculptures and artisan-crafted home decor pieces.",
     scope: ["Creative direction", "3D art direction", "Next.js front-end"],
     accent: "rgba(255,180,80,0.15)", // Warm Gold
   },
   {
-    id: 2, title: "Elysian Interiors", category: "Branding",
-    tags: ["Brand System", "Spatial Design"], year: "2024",
+    id: 2, title: "Global Peace Ministry", category: "Web",
+    tags: ["Brand System", "Spatial Design"], year: "2026",
     image: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1400&h=900&fit=crop&q=80",
-    summary: "Editorial typography, restrained motion, and a flexible grid for case studies. The identity scales from signage to digital — one voice, many surfaces.",
-    scope: ["Identity refresh", "Design system", "Site architecture"],
+    summary: "Designed and developed a modern nonprofit website for Global Peace Ministry, focused on spreading peace, community empowerment, and spiritual values through an engaging and user-friendly digital experience.",
+    scope: ["Creative direction", "3D art direction", "Next.js front-end"],
     accent: "rgba(180,120,100,0.15)", // Terracotta
   },
   {
-    id: 3, title: "Venture Mobile Suite", category: "Product",
-    tags: ["Product Design", "Design Ops"], year: "2024",
+    id: 3, title: "Ecotellus", category: "Web",
+    tags: ["Product Design", "Design Ops"], year: "2026",
     image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=1400&h=900&fit=crop&q=80",
-    summary: "End-to-end UI for a fintech workflow: dense data, calm hierarchy, and motion that clarifies state changes instead of decorating them.",
-    scope: ["UX audit", "UI kit", "Prototyping"],
+    summary: "Built a modern sustainability-focused website for Ecotellus, showcasing eco-friendly solutions and innovative environmental initiatives through a clean, conversion-focused digital experience.",
+    scope: ["Creative direction", "3D art direction", "Next.js front-end"],
     accent: "rgba(100,150,255,0.15)", // Soft Blue
   },
   {
-    id: 4, title: "Project Zero", category: "Motion",
-    tags: ["Launch Campaign", "Motion"], year: "2023",
+    id: 4, title: "Kena Impex", category: "Web",
+    tags: ["Launch Campaign", "Motion"], year: "2026",
     image: "https://images.unsplash.com/photo-1558655146-364adaf1fcc9?w=1400&h=900&fit=crop&q=80",
-    summary: "A six-week launch: teaser site, announcement visuals, and a reusable motion library for paid and organic channels.",
-    scope: ["Campaign site", "Motion toolkit", "Social cut-downs"],
+    summary: "Developed a professional corporate website for Kena Impex, showcasing their global import-export services with a modern design, clear branding, and conversion-focused user experience.",
+    scope: ["Creative direction", "3D art direction", "Next.js front-end"],
     accent: "rgba(255,100,100,0.15)", // Red
   },
   {
-    id: 5, title: "Mern Brand Identity", category: "Branding",
-    tags: ["Identity", "Strategy"], year: "2023",
+    id: 5, title: "HVH Globals", category: "Web",
+    tags: ["Identity", "Strategy"], year: "2026",
     image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=1400&h=900&fit=crop&q=80",
-    summary: "A complete brand overhaul for a sustainability consultancy — positioning strategy to visual language and brand voice guidelines.",
-    scope: ["Brand strategy", "Visual identity", "Guidelines & toolkit"],
+    summary: "Created a modern and high-performance web experience for HVH, featuring smooth animations, premium visuals, and a conversion-focused UI with a sleek futuristic design.",
+    scope: ["Creative direction", "3D art direction", "Next.js front-end"],
     accent: "rgba(80,200,150,0.15)", // Emerald
   },
   {
-    id: 6, title: "Atlas Digital Platform", category: "Web",
-    tags: ["Web App", "UX Research"], year: "2023",
+    id: 6, title: "EYVE", category: "Web",
+    tags: ["Web App", "UX Research"], year: "2026",
     image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1400&h=900&fit=crop&q=80",
-    summary: "A next-gen digital workspace for distributed creative teams — real-time collaboration, asset management, and project tracking.",
-    scope: ["UX research", "UI design", "Component library"],
+    summary: "Designed a premium beauty eCommerce website for EYVE, focused on showcasing skincare and beauty products through a modern, elegant, and conversion-driven shopping experience.",
+    scope: ["Creative direction", "3D art direction", "Next.js front-end"],
     accent: "rgba(180,100,255,0.15)", // Purple
   },
 ];
@@ -174,7 +174,7 @@ function CoverflowProjectCard({ project, index, activeProgress }: { project: any
           </div>
 
           <div className="mt-auto">
-            <Link href="/showcase" className="group/btn inline-flex items-center gap-4 text-[11px] font-black uppercase tracking-[0.3em] text-white transition-colors duration-300">
+            <Link href={`/showcase/${project.title.toLowerCase().replace(/\s+/g, '-')}`} className="group/btn inline-flex items-center gap-4 text-[11px] font-black uppercase tracking-[0.3em] text-white transition-colors duration-300">
               Explore Project
               <span className="flex h-14 w-14 items-center justify-center rounded-full border border-white/20 bg-black/50 transition-all duration-500 group-hover/btn:border-primary group-hover/btn:bg-primary group-hover/btn:text-background group-hover/btn:rotate-45 group-hover/btn:scale-110">
                 <ArrowUpRight size={20} />
