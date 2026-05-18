@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -23,6 +24,17 @@ const socialLinks = [
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [hoveredLink, setHoveredLink] = useState<string | null>(null);
+  const pathname = usePathname();
+
+  const isActive = (linkHref: string) => {
+    if (linkHref === "/") {
+      return pathname === "/";
+    }
+    return pathname.startsWith(linkHref);
+  };
+
+  const activeLink = navLinks.find((link) => isActive(link.href))?.href || null;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -51,17 +63,38 @@ export default function Navbar() {
             <img src="/assets/nav-logo.png" alt="Logo" className="h-12 w-auto text-foreground sm:h-16 md:h-20 ml-4 md:ml-8" />
           </Link>
 
-          <div className="hidden items-center gap-10 rounded-full border border-foreground/10 bg-background/90 px-8 py-4 shadow-[0_24px_80px_rgba(0,0,0,0.22)] backdrop-blur-md md:flex">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="group relative flex flex-col items-start gap-1 text-sm font-semibold uppercase tracking-[0.32em] text-foreground/70 transition-all duration-300 hover:text-primary hover:scale-105"
-              >
-                <span>{link.name}</span>
-                <span className="absolute -bottom-1 left-0 h-px w-0 rounded-full bg-primary shadow-[0_0_10px_rgba(0,68,255,0.5)] transition-all duration-300 group-hover:w-full" />
-              </Link>
-            ))}
+          <div 
+            onMouseLeave={() => setHoveredLink(null)}
+            className="hidden items-center gap-2 rounded-full border border-white/10 bg-zinc-950/80 p-1.5 shadow-[0_24px_80px_rgba(0,0,0,0.6)] backdrop-blur-md md:flex relative"
+          >
+            {navLinks.map((link) => {
+              const isSelected = hoveredLink ? hoveredLink === link.href : activeLink === link.href;
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onMouseEnter={() => setHoveredLink(link.href)}
+                  className={cn(
+                    "relative px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-[0.25em] transition-colors duration-200 z-10",
+                    isSelected ? "text-black" : "text-white/60 hover:text-white"
+                  )}
+                >
+                  <span className="relative z-20">{link.name}</span>
+                  
+                  {isSelected && (
+                    <motion.div
+                      layoutId="navHoverPill"
+                      className="absolute inset-0 rounded-full bg-white z-10"
+                      transition={{
+                        type: "spring",
+                        stiffness: 300,
+                        damping: 30
+                      }}
+                    />
+                  )}
+                </Link>
+              );
+            })}
           </div>
 
           <div className="hidden items-center gap-3 md:flex">
@@ -113,7 +146,10 @@ export default function Navbar() {
                   <Link
                     href={link.href}
                     onClick={() => setIsOpen(false)}
-                    className="block border-b border-border/60 py-5 text-3xl font-medium tracking-tight text-foreground"
+                    className={cn(
+                      "block border-b border-border/60 py-5 text-3xl font-medium tracking-tight transition-colors duration-200",
+                      isActive(link.href) ? "text-primary border-primary/20" : "text-foreground"
+                    )}
                   >
                     {link.name}
                   </Link>

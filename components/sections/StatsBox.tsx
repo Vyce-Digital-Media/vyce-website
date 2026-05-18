@@ -71,10 +71,10 @@ export default function StatsBox() {
         ))}
       </div>
 
-      <div className="mx-auto w-full max-w-[800px] relative z-10">
+      <div className="mx-auto w-[90%] relative z-10">
         <div className="relative overflow-hidden rounded-[32px] border border-white/10 bg-zinc-950/50 p-10 md:p-16 shadow-[0_30px_100px_rgba(0,0,0,0.8)] backdrop-blur-md">
-          
-          <div className="relative grid grid-cols-2 gap-10 md:gap-16 max-w-[650px] mx-auto">
+
+          <div className="relative grid grid-cols-2 gap-10 md:gap-16 w-full mx-auto">
             {/* Perfect continuous "+" divider in the center */}
             <div className="absolute left-1/2 top-4 bottom-4 w-px bg-white/10 -translate-x-1/2 pointer-events-none" />
             <div className="absolute top-1/2 left-4 right-4 h-px bg-white/10 -translate-y-1/2 pointer-events-none" />
