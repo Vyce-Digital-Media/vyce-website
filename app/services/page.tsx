@@ -46,7 +46,7 @@ const services = [
       "Caption & copy writing",
       "Community management & engagement",
     ],
-    href: "/services/",
+    href: "/services/social-media-management",
   },
   {
     num: "02",
@@ -138,7 +138,7 @@ const services = [
       "Keyword research & content strategy",
       "Link building & authority building",
     ],
-    href: "/services/",
+    href: "/services/seo",
   },
 ];
 

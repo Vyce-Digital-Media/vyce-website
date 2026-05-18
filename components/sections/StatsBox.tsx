@@ -59,27 +59,33 @@ function Counter({ value, suffix, prefix = "" }: { value: number; suffix: string
 
 export default function StatsBox() {
   return (
-    <section className="bg-background px-6 py-20 md:px-12 lg:px-16">
-      <div className="mx-auto max-w-[1500px]">
-        <div className="relative overflow-hidden rounded-[32px] border border-white/10 bg-zinc-950/50 p-20 md:p-24">
-          <div className="grid grid-cols-1 gap-16 sm:grid-cols-2 lg:grid-cols-4 md:gap-y-16 lg:gap-0">
+    <section className="relative h-screen min-h-[600px] w-full flex items-center justify-center bg-background px-6 md:px-12 lg:px-16 overflow-hidden">
+      {/* Decorative brand mesh grid lines */}
+      <div className="pointer-events-none absolute inset-0 opacity-[0.03]">
+        {Array.from({ length: 6 }).map((_, i) => (
+          <div
+            key={i}
+            className="absolute top-0 h-full w-px bg-white"
+            style={{ left: `${(i + 1) * (100 / 7)}%` }}
+          />
+        ))}
+      </div>
+
+      <div className="mx-auto w-full max-w-[800px] relative z-10">
+        <div className="relative overflow-hidden rounded-[32px] border border-white/10 bg-zinc-950/50 p-10 md:p-16 shadow-[0_30px_100px_rgba(0,0,0,0.8)] backdrop-blur-md">
+          
+          <div className="relative grid grid-cols-2 gap-10 md:gap-16 max-w-[650px] mx-auto">
+            {/* Perfect continuous "+" divider in the center */}
+            <div className="absolute left-1/2 top-4 bottom-4 w-px bg-white/10 -translate-x-1/2 pointer-events-none" />
+            <div className="absolute top-1/2 left-4 right-4 h-px bg-white/10 -translate-y-1/2 pointer-events-none" />
+
             {stats.map((stat, index) => (
               <div
                 key={index}
-                className="relative flex flex-col items-center justify-center text-center md:px-10 group cursor-pointer"
+                className="relative flex flex-col items-center justify-center text-center p-4 md:p-8 group cursor-pointer"
               >
-                {/* Vertical Divider for desktop (4 columns) */}
-                {index !== 0 && (
-                  <div className="absolute left-0 top-1/2 h-20 w-px -translate-y-1/2 bg-white/10 hidden lg:block" />
-                )}
-
-                {/* Vertical Divider for tablet (2 columns) */}
-                {index % 2 !== 0 && (
-                  <div className="absolute left-0 top-1/2 h-20 w-px -translate-y-1/2 bg-white/10 hidden sm:block lg:hidden" />
-                )}
-
                 <Counter value={stat.value} suffix={stat.suffix} prefix={stat.prefix} />
-                <p className="mt-6 max-w-[200px] text-[10px] font-bold uppercase tracking-[0.4em] text-foreground/30 group-hover:text-foreground/80 transition-colors">
+                <p className="mt-6 max-w-[160px] text-[10px] font-bold uppercase tracking-[0.4em] text-foreground/30 group-hover:text-foreground/80 transition-colors">
                   {stat.label}
                 </p>
               </div>
