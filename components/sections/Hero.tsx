@@ -301,80 +301,107 @@ export default function Hero() {
 
       const finalX = card.fx * W;
       const finalY = card.fy * H;
-      // High drift multiplier to send them completely off-screen
+      // We drift them far outwards so they physically leave the screen
       const driftX = finalX * 2.8;
       const driftY = finalY * 2.8;
 
-      const zIndex = 50 + (card.depth || 0) + (CARDS.length - index);
-      const spinDirection = card.fx > 0 ? 15 : -15; // Natural outward spin
+      const spinDirection = card.fx > 0 ? 15 : -15;
 
-      const isInitial = index < 8; // First 8 cards are visible on load
+      // Small organic stagger so they don't move as perfectly flat planes
+      const stagger = (index % 5) * 0.015;
 
-      if (isInitial) {
-        // Starts fully visible at its spread position
+      if (card.wave === 0) {
+        // Wave 0 (Foreground)
         gsap.set(el, {
           x: finalX, y: finalY,
           xPercent: -50, yPercent: -50,
           scale: 1, opacity: 1,
           rotate: card.rotate,
-          zIndex: zIndex,
-          force3D: true, // Hardware acceleration for smoother pixels
-        });
-
-        // Drift outward all at once
-        tl.to(el, {
-          x: driftX, y: driftY,
-          opacity: 0,
-          rotate: card.rotate + spinDirection,
-          duration: 0.4,
-          ease: "power2.inOut",
-        }, 0);
-
-      } else {
-        // Starts hidden in the center
-        gsap.set(el, {
-          x: 0, y: 0,
-          xPercent: -50, yPercent: -50,
-          scale: 0.2, opacity: 0,
-          rotate: card.rotate + (spinDirection < 0 ? 10 : -10),
-          zIndex: zIndex,
+          zIndex: 50 + (card.depth || 0),
           force3D: true,
         });
 
-        const remainingIndex = index - 8;
-        const totalRemaining = CARDS.length - 8;
-        
-        // Distribute entry times evenly across the scroll timeline
-        const entryTime = 0.05 + (remainingIndex / totalRemaining) * 0.60;
-        
-        // 1. Emerge smoothly
+        // Phase 1: Foreground to Off-screen
         tl.to(el, {
-          x: finalX, y: finalY,
-          scale: 1, opacity: 1,
-          rotate: card.rotate,
-          duration: 0.4,
-          ease: "power3.out",
-        }, entryTime);
+          scale: 1.5,
+          x: driftX, y: driftY,
+          rotate: card.rotate + spinDirection,
+          opacity: 0,
+          duration: 0.33,
+          ease: "none", 
+        }, 0 + stagger);
+      } 
+      else if (card.wave === 1) {
+        // Wave 1 (Midground)
+        gsap.set(el, {
+          x: finalX * 0.2, y: finalY * 0.2, 
+          xPercent: -50, yPercent: -50,
+          scale: 0.2, opacity: 0, 
+          rotate: card.rotate - 10,
+          zIndex: 40 + (card.depth || 0),
+          force3D: true,
+        });
 
-        // 2. Drift off-screen (except for the last 4 cards which stay to populate the end state)
-        if (remainingIndex < totalRemaining - 4) {
-           const leaveTime = entryTime + 0.35; // Leave shortly after emerging
-           tl.to(el, {
-             x: driftX, y: driftY,
-             opacity: 0,
-             rotate: card.rotate + spinDirection,
-             duration: 0.4,
-             ease: "power2.inOut",
-           }, leaveTime);
-        } else {
-           // The last few cards stay on screen but drift slightly for parallax effect
-           tl.to(el, {
-             x: finalX * 1.15, y: finalY * 1.15,
-             rotate: card.rotate + (spinDirection * 0.3),
-             duration: 0.15,
-             ease: "sine.inOut",
-           }, 0.85);
-        }
+        // Phase 1: Midground to Foreground (Reaches original size exactly halfway)
+        tl.to(el, {
+          scale: 1,
+          x: finalX, y: finalY,
+          rotate: card.rotate,
+          opacity: 1,
+          duration: 0.33,
+          ease: "none",
+        }, 0 + stagger);
+
+        // Phase 2: Foreground to Off-screen
+        tl.to(el, {
+          scale: 1.5,
+          x: driftX, y: driftY,
+          rotate: card.rotate + spinDirection,
+          opacity: 0,
+          duration: 0.33,
+          ease: "none",
+        }, 0.33 + stagger);
+      }
+      else if (card.wave === 2) {
+        // Wave 2 (Background)
+        gsap.set(el, {
+          x: 0, y: 0, 
+          xPercent: -50, yPercent: -50,
+          scale: 0.0, opacity: 0, 
+          rotate: card.rotate - 20,
+          zIndex: 30 + (card.depth || 0),
+          force3D: true,
+        });
+
+        // Phase 1: Background to Midground
+        tl.to(el, {
+          scale: 0.2,
+          x: finalX * 0.2, y: finalY * 0.2,
+          rotate: card.rotate - 10,
+          opacity: 0,
+          duration: 0.33,
+          ease: "none",
+        }, 0 + stagger);
+
+        // Phase 2: Midground to Foreground (Reaches original size exactly halfway)
+        tl.to(el, {
+          scale: 1,
+          x: finalX, y: finalY,
+          rotate: card.rotate,
+          opacity: 1,
+          duration: 0.33,
+          ease: "none",
+        }, 0.33 + stagger);
+
+        // Phase 3: Foreground to Off-screen
+        tl.to(el, {
+          scale: 1.5,
+          x: driftX, y: driftY,
+          rotate: card.rotate + spinDirection,
+          opacity: 0,
+          duration: 0.33,
+          ease: "none",
+        }, 0.66 + stagger);
       }
     });
 
@@ -445,13 +472,6 @@ export default function Hero() {
             style={{
               display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center",
               maxWidth: 680, padding: "56px 48px", pointerEvents: "auto",
-              // Glassmorphism box to keep text highly legible as cards slide behind
-              background: "rgba(255, 255, 255, 0.45)",
-              backdropFilter: "blur(24px)",
-              WebkitBackdropFilter: "blur(24px)",
-              borderRadius: "40px",
-              border: "1px solid rgba(255, 255, 255, 0.7)",
-              boxShadow: "0 30px 60px rgba(0,0,0,0.08)",
             }}
           >
             {/* Badge pill */}
