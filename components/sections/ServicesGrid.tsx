@@ -47,7 +47,7 @@ import { Code } from "lucide-react";
 
 export default function ServicesGrid() {
   return (
-    <section className="bg-zinc-950/40 border-y border-white/[0.02] px-6 py-32 md:px-12 lg:px-16">
+    <section className="bg-zinc-950 relative z-10 border-y border-white/[0.02] px-6 py-32 md:px-12 lg:px-16">
       <div className="mx-auto max-w-[1600px]">
         <div className="mb-24 flex flex-col items-center text-center">
           <p className="mb-6 text-[10px] font-bold uppercase tracking-[0.6em] text-primary">What We Do</p>

@@ -289,7 +289,7 @@ export default function Hero() {
       scrollTrigger: {
         trigger: wrapper,
         start: "top top",
-        end: "bottom bottom",
+        end: "+=400%", // Restrict the scroll animation distance to 400vh
         scrub: 2.5, // Increased scrub for much smoother catch-up effect
       },
     });
@@ -324,8 +324,8 @@ export default function Hero() {
           x: driftX, y: driftY,
           opacity: 0,
           rotate: card.rotate + spinDirection,
-          duration: 0.7, // Gone by 70% of scroll
-          ease: "power2.inOut", // Smoother easing
+          duration: 0.3,
+          ease: "power2.inOut",
         }, 0);
       }
       else if (card.wave === 1) {
@@ -396,8 +396,9 @@ export default function Hero() {
   }, []);
 
   return (
-    // 400vh provides a balanced scroll duration without being too long
-    <div ref={wrapperRef} style={{ height: "400vh", position: "relative" }}>
+    // 600vh height + margin-bottom -100vh = 500vh effective height.
+    // The first 400vh plays the animation (end: +=400%), the last 100vh is for the next section to slide over it!
+    <div ref={wrapperRef} style={{ height: "600vh", position: "relative", marginBottom: "-100vh", zIndex: 0 }}>
       <section
         id="hero"
         aria-label="Hero"
