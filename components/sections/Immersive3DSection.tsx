@@ -23,7 +23,7 @@ function ParticleSwarm({ count = 5000 }) {
     if (!points.current) return;
     points.current.rotation.x = state.clock.elapsedTime * 0.05;
     points.current.rotation.y = state.clock.elapsedTime * 0.03;
-    
+
     // Wave effect
     const positions = points.current.geometry.attributes.position.array as Float32Array;
     for (let i = 0; i < count; i++) {
@@ -52,7 +52,7 @@ export default function Immersive3DSection() {
   return (
     <section className="relative h-[80vh] w-full overflow-hidden bg-black py-32">
       <div className="absolute inset-0 z-0 bg-gradient-to-b from-background via-black to-background opacity-80" />
-      
+
       <div className="absolute inset-0 z-10 opacity-60">
         <Canvas camera={{ position: [0, 0, 5], fov: 60 }}>
           <ambientLight intensity={0.5} />
@@ -68,7 +68,7 @@ export default function Immersive3DSection() {
             <span className="font-satoshi font-normal lowercase italic text-primary/80">interfaces</span>
           </h2>
           <p className="mx-auto max-w-2xl text-base leading-relaxed text-foreground/40 md:text-lg">
-            We don't just build sites; we architect virtual spaces. Using high-performance WebGL, 
+            We don't just build sites; we architect virtual spaces. Using high-performance WebGL,
             we create tactile dimensions that respond to your intent.
           </p>
         </div>

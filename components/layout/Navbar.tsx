@@ -64,7 +64,7 @@ export default function Navbar() {
             <img src="/assets/nav-logo.png" alt="Logo" className="h-12 w-auto text-foreground sm:h-16 md:h-20 ml-4 md:ml-8" />
           </Link>
 
-          <div 
+          <div
             onMouseLeave={() => setHoveredLink(null)}
             className="hidden items-center gap-2 rounded-full border border-white/10 bg-zinc-950/80 p-1.5 shadow-[0_24px_80px_rgba(0,0,0,0.6)] backdrop-blur-md md:flex relative"
           >
@@ -81,7 +81,7 @@ export default function Navbar() {
                   )}
                 >
                   <span className="relative z-20">{link.name}</span>
-                  
+
                   {isSelected && (
                     <motion.div
                       layoutId="navHoverPill"
@@ -183,93 +183,93 @@ export default function Navbar() {
             >
               <div className="h-full w-full flex flex-col px-6 md:px-16 lg:px-24 py-16 md:py-8 justify-center">
                 <div className="flex flex-col md:flex-row items-center justify-between max-w-[1600px] w-full mx-auto gap-8 md:gap-16 flex-1">
-                {/* Huge Vertically Centered Logo on Left */}
-                <div className="flex w-full md:w-1/2 justify-center items-center">
-                  <Link href="/" onClick={() => setIsOpen(false)}>
-                    <motion.img 
-                      src="/assets/nav-logo.png" 
-                      alt="Logo" 
-                      className="h-16 sm:h-24 md:h-32 lg:h-48 w-auto brightness-0"
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.2 } }}
-                      transition={{ delay: 0.8, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-                    />
-                  </Link>
-                </div>
-
-                {/* Main Links & Services Subpages */}
-                <div className="flex flex-col w-full md:w-1/2 items-start justify-center gap-1 sm:gap-2">
-                  {navLinks.map((link, index) => (
-                    <motion.div
-                      key={link.href}
-                      initial={{ opacity: 0, y: 40 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 20, transition: { duration: 0.2 } }}
-                      transition={{ delay: 0.5 + (index * 0.08), duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                      className="w-full"
-                    >
-                      <Link
-                        href={link.href}
-                        onClick={() => setIsOpen(false)}
-                        className="group relative inline-block text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium tracking-tight text-black transition-colors hover:text-black/60"
-                      >
-                        {link.name}
-                        {isActive(link.href) && (
-                          <span className="absolute -right-6 md:-right-8 top-0 text-[16px] md:text-[20px] uppercase tracking-widest text-primary font-bold">
-                            *
-                          </span>
-                        )}
-                      </Link>
-
-                      {/* Render Service Subpages nicely nested if this is the Services link */}
-                      {link.name === "Services" && (
-                        <div className="flex flex-col gap-1 sm:gap-2 mt-1 sm:mt-2 ml-4 md:ml-8 border-l-[2px] border-black/10 pl-4 md:pl-6">
-                          {[
-                            { name: "Web Experiences", href: "/services/web-experiences" },
-                            { name: "Digital Growth", href: "/services/digital-growth" },
-                            { name: "Branding", href: "/services/branding" },
-                            { name: "Product Design", href: "/services/product-design" },
-                            { name: "SEO", href: "/services/seo" },
-                            { name: "Social Media", href: "/services/social-media-management" }
-                          ].map((subLink, subIndex) => (
-                            <Link
-                              key={subLink.href}
-                              href={subLink.href}
-                              onClick={() => setIsOpen(false)}
-                              className="text-base sm:text-lg md:text-xl lg:text-2xl leading-tight font-medium text-black/50 hover:text-black transition-colors"
-                            >
-                              {subLink.name}
-                            </Link>
-                          ))}
-                        </div>
-                      )}
-                    </motion.div>
-                  ))}
-
-                  {/* Secondary/Social Links aligned below */}
-                  <div className="flex flex-row flex-wrap items-center gap-4 md:gap-8 mt-4 sm:mt-6 md:mt-10 w-full">
-                    {socialLinks.map((social, index) => (
-                      <motion.div
-                        key={social.name}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 10, transition: { duration: 0.2 } }}
-                        transition={{ delay: 1.0 + (index * 0.08), duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                      >
-                        <a
-                          href={social.href}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="text-sm sm:text-base md:text-lg font-semibold tracking-wider text-black/70 hover:text-black transition-colors"
-                        >
-                          {social.name}
-                        </a>
-                      </motion.div>
-                    ))}
+                  {/* Huge Vertically Centered Logo on Left */}
+                  <div className="flex w-full md:w-1/2 justify-center items-center">
+                    <Link href="/" onClick={() => setIsOpen(false)}>
+                      <motion.img
+                        src="/assets/nav-logo.png"
+                        alt="Logo"
+                        className="h-16 sm:h-24 md:h-32 lg:h-48 w-auto brightness-0"
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.2 } }}
+                        transition={{ delay: 0.8, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                      />
+                    </Link>
                   </div>
 
-                </div>
+                  {/* Main Links & Services Subpages */}
+                  <div className="flex flex-col w-full md:w-1/2 items-start justify-center gap-1 sm:gap-2">
+                    {navLinks.map((link, index) => (
+                      <motion.div
+                        key={link.href}
+                        initial={{ opacity: 0, y: 40 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 20, transition: { duration: 0.2 } }}
+                        transition={{ delay: 0.5 + (index * 0.08), duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                        className="w-full"
+                      >
+                        <Link
+                          href={link.href}
+                          onClick={() => setIsOpen(false)}
+                          className="group relative inline-block text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium tracking-tight text-black transition-colors hover:text-black/60"
+                        >
+                          {link.name}
+                          {isActive(link.href) && (
+                            <span className="absolute -right-6 md:-right-8 top-0 text-[16px] md:text-[20px] uppercase tracking-widest text-primary font-bold">
+                              *
+                            </span>
+                          )}
+                        </Link>
+
+                        {/* Render Service Subpages nicely nested if this is the Services link */}
+                        {link.name === "Services" && (
+                          <div className="flex flex-col gap-1 sm:gap-2 mt-1 sm:mt-2 ml-4 md:ml-8 border-l-[2px] border-black/10 pl-4 md:pl-6">
+                            {[
+                              { name: "Web Experiences", href: "/services/web-experiences" },
+                              { name: "Digital Growth", href: "/services/digital-growth" },
+                              { name: "Branding", href: "/services/branding" },
+                              { name: "Product Design", href: "/services/product-design" },
+                              { name: "SEO", href: "/services/seo" },
+                              { name: "Social Media", href: "/services/social-media-management" }
+                            ].map((subLink, subIndex) => (
+                              <Link
+                                key={subLink.href}
+                                href={subLink.href}
+                                onClick={() => setIsOpen(false)}
+                                className="text-base sm:text-lg md:text-xl lg:text-2xl leading-tight font-medium text-black/50 hover:text-black transition-colors"
+                              >
+                                {subLink.name}
+                              </Link>
+                            ))}
+                          </div>
+                        )}
+                      </motion.div>
+                    ))}
+
+                    {/* Secondary/Social Links aligned below */}
+                    <div className="flex flex-row flex-wrap items-center gap-4 md:gap-8 mt-4 sm:mt-6 md:mt-10 w-full">
+                      {socialLinks.map((social, index) => (
+                        <motion.div
+                          key={social.name}
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: 10, transition: { duration: 0.2 } }}
+                          transition={{ delay: 1.0 + (index * 0.08), duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                        >
+                          <a
+                            href={social.href}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="text-sm sm:text-base md:text-lg font-semibold tracking-wider text-black/70 hover:text-black transition-colors"
+                          >
+                            {social.name}
+                          </a>
+                        </motion.div>
+                      ))}
+                    </div>
+
+                  </div>
                 </div>
               </div>
             </motion.div>
