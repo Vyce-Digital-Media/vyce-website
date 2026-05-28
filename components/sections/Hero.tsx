@@ -295,7 +295,7 @@ export default function Hero() {
     });
 
     // ── Initial setup & Animation ─────────────────────────────────────────────
-    CARDS.forEach((card) => {
+    CARDS.forEach((card, index) => {
       const el = cardRefs.current.get(card.id);
       if (!el) return;
 
@@ -305,11 +305,13 @@ export default function Hero() {
       const driftX = finalX * 2.8;
       const driftY = finalY * 2.8;
 
-      const zIndex = (card.wave * -10) + 50 + (card.depth || 0);
+      const zIndex = 50 + (card.depth || 0) + (CARDS.length - index);
       const spinDirection = card.fx > 0 ? 15 : -15; // Natural outward spin
 
-      if (card.wave === 0) {
-        // Wave 0 starts fully visible at its spread position
+      const isInitial = index < 8; // First 8 cards are visible on load
+
+      if (isInitial) {
+        // Starts fully visible at its spread position
         gsap.set(el, {
           x: finalX, y: finalY,
           xPercent: -50, yPercent: -50,
@@ -319,71 +321,60 @@ export default function Hero() {
           force3D: true, // Hardware acceleration for smoother pixels
         });
 
-        // Drift outward off-screen and fade out to avoid clutter
+        // Drift outward all at once
         tl.to(el, {
           x: driftX, y: driftY,
           opacity: 0,
           rotate: card.rotate + spinDirection,
-          duration: 0.3,
+          duration: 0.4,
           ease: "power2.inOut",
         }, 0);
-      }
-      else if (card.wave === 1) {
-        // Wave 1 starts hidden in the center
+
+      } else {
+        // Starts hidden in the center
         gsap.set(el, {
           x: 0, y: 0,
           xPercent: -50, yPercent: -50,
           scale: 0.2, opacity: 0,
-          rotate: card.rotate - 10,
+          rotate: card.rotate + (spinDirection < 0 ? 10 : -10),
           zIndex: zIndex,
           force3D: true,
         });
 
-        // 1. Emerge very slowly
+        const remainingIndex = index - 8;
+        const totalRemaining = CARDS.length - 8;
+        
+        // Distribute entry times evenly across the scroll timeline
+        const entryTime = 0.05 + (remainingIndex / totalRemaining) * 0.60;
+        
+        // 1. Emerge smoothly
         tl.to(el, {
           x: finalX, y: finalY,
           scale: 1, opacity: 1,
           rotate: card.rotate,
-          duration: 0.3,
-          ease: "power3.out", // Extra smooth pop-out
-        }, 0.1); // Peaks around 0.4
-
-        // 2. Drift completely off-screen
-        tl.to(el, {
-          x: driftX, y: driftY,
-          opacity: 0,
-          rotate: card.rotate + spinDirection,
-          duration: 0.3,
-          ease: "power2.inOut",
-        }, 0.55); // Starts leaving at 0.55 (stays on screen from 0.4 to 0.55)
-      }
-      else if (card.wave === 2) {
-        // Wave 2 starts hidden in the center
-        gsap.set(el, {
-          x: 0, y: 0,
-          xPercent: -50, yPercent: -50,
-          scale: 0.2, opacity: 0,
-          rotate: card.rotate + 10,
-          zIndex: zIndex,
-          force3D: true,
-        });
-
-        // 1. Emerge very slowly
-        tl.to(el, {
-          x: finalX, y: finalY,
-          scale: 1, opacity: 1,
-          rotate: card.rotate,
-          duration: 0.3,
+          duration: 0.4,
           ease: "power3.out",
-        }, 0.65); // Enter only after Wave 1 has started leaving to prevent overlap
+        }, entryTime);
 
-        // 2. Drift just slightly outward at the very end to stay visible
-        tl.to(el, {
-          x: finalX * 1.3, y: finalY * 1.3,
-          rotate: card.rotate + (spinDirection * 0.4),
-          duration: 0.05,
-          ease: "sine.inOut",
-        }, 0.95);
+        // 2. Drift off-screen (except for the last 4 cards which stay to populate the end state)
+        if (remainingIndex < totalRemaining - 4) {
+           const leaveTime = entryTime + 0.35; // Leave shortly after emerging
+           tl.to(el, {
+             x: driftX, y: driftY,
+             opacity: 0,
+             rotate: card.rotate + spinDirection,
+             duration: 0.4,
+             ease: "power2.inOut",
+           }, leaveTime);
+        } else {
+           // The last few cards stay on screen but drift slightly for parallax effect
+           tl.to(el, {
+             x: finalX * 1.15, y: finalY * 1.15,
+             rotate: card.rotate + (spinDirection * 0.3),
+             duration: 0.15,
+             ease: "sine.inOut",
+           }, 0.85);
+        }
       }
     });
 
