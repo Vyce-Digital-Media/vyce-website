@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import Hero from "@/components/sections/Hero";
 import Process from "@/components/sections/Process";
-import StatsBox from "@/components/sections/StatsBox";
+
 import ServicesGrid from "@/components/sections/ServicesGrid";
 import ExploreCollection from "@/components/sections/ImageScroller3D";
 import ScrollingText from "@/components/sections/ScrollingText";
@@ -39,8 +39,6 @@ export default function Home() {
       <Hero />
 
       <ServicesGrid />
-
-      <StatsBox />
 
       {/* New 3D ImageScroller Portfolio Experience */}
       <ExploreCollection />

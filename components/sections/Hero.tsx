@@ -341,10 +341,14 @@ export default function Hero() {
           scale: 1.5,
           x: driftX, y: driftY,
           rotate: card.rotate + spinDirection,
-          opacity: 0,
           duration: 0.33,
           ease: "none",
         }, 0 + stagger);
+        tl.to(el, {
+          opacity: 0,
+          duration: 0.1,
+          ease: "none",
+        }, 0.23 + stagger);
       }
       else if (card.wave === 1) {
         // Wave 1 (Midground)
@@ -362,8 +366,12 @@ export default function Hero() {
           scale: 1,
           x: finalX, y: finalY,
           rotate: card.rotate,
-          opacity: 1,
           duration: 0.33,
+          ease: "none",
+        }, 0 + stagger);
+        tl.to(el, {
+          opacity: 1,
+          duration: 0.1,
           ease: "none",
         }, 0 + stagger);
 
@@ -372,10 +380,14 @@ export default function Hero() {
           scale: 1.5,
           x: driftX, y: driftY,
           rotate: card.rotate + spinDirection,
-          opacity: 0,
           duration: 0.33,
           ease: "none",
         }, 0.33 + stagger);
+        tl.to(el, {
+          opacity: 0,
+          duration: 0.1,
+          ease: "none",
+        }, 0.56 + stagger);
       }
       else if (card.wave === 2) {
         // Wave 2 (Background)
@@ -403,8 +415,12 @@ export default function Hero() {
           scale: 1,
           x: finalX, y: finalY,
           rotate: card.rotate,
-          opacity: 1,
           duration: 0.33,
+          ease: "none",
+        }, 0.33 + stagger);
+        tl.to(el, {
+          opacity: 1,
+          duration: 0.1,
           ease: "none",
         }, 0.33 + stagger);
 
@@ -413,10 +429,14 @@ export default function Hero() {
           scale: 1.5,
           x: driftX, y: driftY,
           rotate: card.rotate + spinDirection,
-          opacity: 0,
           duration: 0.33,
           ease: "none",
         }, 0.66 + stagger);
+        tl.to(el, {
+          opacity: 0,
+          duration: 0.1,
+          ease: "none",
+        }, 0.89 + stagger);
       }
     });
 

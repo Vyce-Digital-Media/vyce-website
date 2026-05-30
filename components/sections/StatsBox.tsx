@@ -59,7 +59,7 @@ function Counter({ value, suffix, prefix = "" }: { value: number; suffix: string
 
 export default function StatsBox() {
   return (
-    <section className="relative h-screen min-h-[600px] w-full flex items-center justify-center bg-background px-6 md:px-12 lg:px-16 overflow-hidden">
+    <div className="relative w-full h-full flex items-center justify-center px-6 md:px-12 lg:px-16">
       {/* Decorative brand mesh grid lines */}
       <div className="pointer-events-none absolute inset-0 opacity-[0.03]">
         {Array.from({ length: 6 }).map((_, i) => (
@@ -72,7 +72,14 @@ export default function StatsBox() {
       </div>
 
       <div className="mx-auto w-[90%] relative z-10">
-        <div className="relative overflow-hidden rounded-[32px] border border-white/10 bg-zinc-950/50 p-10 md:p-16 shadow-[0_30px_100px_rgba(0,0,0,0.8)] backdrop-blur-md">
+        <div 
+          className="relative overflow-hidden rounded-[32px] border border-white/10 p-10 md:p-16 shadow-[0_30px_100px_rgba(0,0,0,0.8)]"
+          style={{
+            backgroundColor: "rgba(10, 10, 10, 0.75)",
+            backdropFilter: "blur(120px)",
+            WebkitBackdropFilter: "blur(120px)"
+          }}
+        >
 
           <div className="relative grid grid-cols-2 gap-10 md:gap-16 w-full mx-auto">
             {/* Perfect continuous "+" divider in the center */}
@@ -97,6 +104,6 @@ export default function StatsBox() {
           <div className="absolute -right-24 -top-24 h-96 w-96 rounded-full bg-primary/5 blur-[120px] pointer-events-none" />
         </div>
       </div>
-    </section>
+    </div>
   );
 }
