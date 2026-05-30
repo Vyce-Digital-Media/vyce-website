@@ -36,13 +36,15 @@ const CARDS: CardDef[] = [
   // ════════ WAVE 0 (Always visible on load) ════════
   {
     id: "w0-img-tl", wave: 0, type: "image",
-    src: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=400&q=82&auto=format",
-    fx: -0.36, fy: -0.28, width: 220, height: 280, rotate: -4, depth: 1,
+    src: "/hero1.png",
+    // hero1: portrait ~1:1.25 (fashion bag)
+    fx: -0.36, fy: -0.28, width: 220, height: 275, rotate: -4, depth: 1,
   },
   {
     id: "w0-img-bl", wave: 0, type: "image",
-    src: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&q=82&auto=format",
-    fx: -0.32, fy: 0.24, width: 200, height: 260, rotate: 4, depth: 1,
+    src: "/hero2.png",
+    // hero2: portrait ~4:5 (real estate teaser)
+    fx: -0.32, fy: 0.24, width: 210, height: 263, rotate: 4, depth: 1,
   },
   {
     id: "w0-chart-bl", wave: 0, type: "chart",
@@ -54,13 +56,15 @@ const CARDS: CardDef[] = [
   },
   {
     id: "w0-img-tr", wave: 0, type: "image",
-    src: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=82&auto=format",
-    fx: 0.38, fy: -0.29, width: 200, height: 260, rotate: 5, depth: 1,
+    src: "/hero3.jpeg",
+    // hero3: portrait ~4:5 (leather goods)
+    fx: 0.38, fy: -0.29, width: 210, height: 263, rotate: 5, depth: 1,
   },
   {
     id: "w0-img-br", wave: 0, type: "image",
-    src: "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=400&q=82&auto=format",
-    fx: 0.35, fy: 0.22, width: 210, height: 240, rotate: -3, depth: 1,
+    src: "/hero4.jpeg",
+    // hero4: portrait ~4:5 (perfume dark)
+    fx: 0.35, fy: 0.22, width: 200, height: 250, rotate: -3, depth: 1,
   },
   {
     id: "w0-text-r", wave: 0, type: "text",
@@ -71,9 +75,9 @@ const CARDS: CardDef[] = [
   {
     id: "w0-folder-bc", wave: 0, type: "folder", title: "References",
     avatars: [
-      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&q=80",
-      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&q=80",
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80",
+      "/hero1.png",
+      "/hero2.png",
+      "/hero3.jpeg",
     ],
     fx: 0.03, fy: 0.38, width: 130, height: 90, rotate: 3, depth: 3,
   },
@@ -85,26 +89,29 @@ const CARDS: CardDef[] = [
   // ════════ WAVE 1 (Emerges on scroll) ════════
   {
     id: "w1-img-tl", wave: 1, type: "image",
-    src: "https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=400&q=82&auto=format",
-    fx: -0.28, fy: -0.24, width: 180, height: 180, rotate: -2, depth: 1,
+    src: "/hero5.jpeg",
+    // hero5: portrait ~4:5 (perfume hands)
+    fx: -0.28, fy: -0.24, width: 200, height: 250, rotate: -2, depth: 1,
   },
   {
     id: "w1-folder-l", wave: 1, type: "folder", title: "Product",
     avatars: [
-      "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=100&q=80",
-      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=100&q=80",
+      "/hero1.png",
+      "/hero2.png",
     ],
     fx: -0.36, fy: 0.15, width: 120, height: 80, rotate: -4, depth: 3,
   },
   {
     id: "w1-img-bl", wave: 1, type: "image",
-    src: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=82&auto=format",
-    fx: -0.26, fy: 0.22, width: 200, height: 160, rotate: 5, depth: 1,
+    src: "/hero6.jpg",
+    // hero6: portrait ~4:5 (RC car racing)
+    fx: -0.26, fy: 0.22, width: 205, height: 256, rotate: 5, depth: 1,
   },
   {
     id: "w1-img-tr", wave: 1, type: "image",
-    src: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&q=82&auto=format",
-    fx: 0.28, fy: -0.25, width: 180, height: 180, rotate: 6, depth: 1,
+    src: "/hero7.jpg",
+    // hero7: portrait ~4:5 (RC car teaser)
+    fx: 0.28, fy: -0.25, width: 205, height: 256, rotate: 6, depth: 1,
   },
   {
     id: "w1-text-tr", wave: 1, type: "text",
@@ -114,15 +121,17 @@ const CARDS: CardDef[] = [
   },
   {
     id: "w1-img-br", wave: 1, type: "image",
-    src: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&q=82&auto=format",
-    fx: 0.30, fy: 0.24, width: 190, height: 260, rotate: -4, depth: 1,
+    src: "/hero1.png",
+    // hero1 repeated for wave 1 right-bottom slot
+    fx: 0.30, fy: 0.24, width: 190, height: 238, rotate: -4, depth: 1,
   },
 
   // ════════ WAVE 2 (Emerges on further scroll) ════════
   {
     id: "w2-img-tl", wave: 2, type: "image",
-    src: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&q=82&auto=format",
-    fx: -0.32, fy: -0.26, width: 220, height: 160, rotate: 3, depth: 1,
+    src: "/hero2.png",
+    // hero2: portrait ~4:5 (real estate teaser)
+    fx: -0.32, fy: -0.26, width: 210, height: 263, rotate: 3, depth: 1,
   },
   {
     id: "w2-chart-bl", wave: 2, type: "chart",
@@ -130,8 +139,9 @@ const CARDS: CardDef[] = [
   },
   {
     id: "w2-img-tr", wave: 2, type: "image",
-    src: "https://images.unsplash.com/photo-1493612276216-ee3925520721?w=400&q=82&auto=format",
-    fx: 0.35, fy: -0.28, width: 200, height: 150, rotate: -6, depth: 1,
+    src: "/hero3.jpeg",
+    // hero3: portrait ~4:5 (leather goods)
+    fx: 0.35, fy: -0.28, width: 200, height: 250, rotate: -6, depth: 1,
   },
   {
     id: "w2-icon-tr", wave: 2, type: "icon", Icon: Activity,
@@ -140,14 +150,15 @@ const CARDS: CardDef[] = [
   {
     id: "w2-folder-bc", wave: 2, type: "folder", title: "Fonts",
     avatars: [
-      "https://images.unsplash.com/photo-1616423640778-28d1b53229bd?w=100&q=80",
+      "/hero4.jpeg",
     ],
     fx: -0.05, fy: 0.35, width: 100, height: 80, rotate: -3, depth: 2,
   },
   {
     id: "w2-img-br", wave: 2, type: "image",
-    src: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=400&q=82&auto=format",
-    fx: 0.28, fy: 0.28, width: 190, height: 190, rotate: 4, depth: 1,
+    src: "/hero4.jpeg",
+    // hero4: portrait ~4:5 (perfume dark)
+    fx: 0.28, fy: 0.28, width: 200, height: 250, rotate: 4, depth: 1,
   },
 ];
 
@@ -328,15 +339,15 @@ export default function Hero() {
           rotate: card.rotate + spinDirection,
           opacity: 0,
           duration: 0.33,
-          ease: "none", 
+          ease: "none",
         }, 0 + stagger);
-      } 
+      }
       else if (card.wave === 1) {
         // Wave 1 (Midground)
         gsap.set(el, {
-          x: finalX * 0.2, y: finalY * 0.2, 
+          x: finalX * 0.2, y: finalY * 0.2,
           xPercent: -50, yPercent: -50,
-          scale: 0.2, opacity: 0, 
+          scale: 0.2, opacity: 0,
           rotate: card.rotate - 10,
           zIndex: 40 + (card.depth || 0),
           force3D: true,
@@ -365,9 +376,9 @@ export default function Hero() {
       else if (card.wave === 2) {
         // Wave 2 (Background)
         gsap.set(el, {
-          x: 0, y: 0, 
+          x: 0, y: 0,
           xPercent: -50, yPercent: -50,
-          scale: 0.0, opacity: 0, 
+          scale: 0.0, opacity: 0,
           rotate: card.rotate - 20,
           zIndex: 30 + (card.depth || 0),
           force3D: true,
