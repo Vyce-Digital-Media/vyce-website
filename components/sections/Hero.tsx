@@ -287,6 +287,10 @@ function CardRenderer({ card }: { card: CardDef }) {
 export default function Hero() {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<Map<string, HTMLDivElement>>(new Map());
+  const sectionRef = useRef<HTMLElement>(null);
+  const dotRevealRef = useRef<HTMLDivElement>(null);
+  const parallaxRef = useRef<HTMLDivElement>(null);
+  const mouseRef = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
     const wrapper = wrapperRef.current;
@@ -424,52 +428,119 @@ export default function Hero() {
     };
   }, []);
 
+  // ── Mouse-tracking: dot spotlight mask + card parallax ──────────────────────
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    let rafId: number;
+    let lerpX = 0;
+    let lerpY = 0;
+
+    const onMouseMove = (e: MouseEvent) => {
+      const rect = section.getBoundingClientRect();
+      // Position relative to section for dot mask
+      const relX = e.clientX - rect.left;
+      const relY = e.clientY - rect.top;
+      if (dotRevealRef.current) {
+        dotRevealRef.current.style.setProperty("--mx", `${relX}px`);
+        dotRevealRef.current.style.setProperty("--my", `${relY}px`);
+      }
+      // Normalized offset from center (-0.5 to 0.5) for parallax
+      mouseRef.current = {
+        x: (e.clientX - rect.left) / rect.width - 0.5,
+        y: (e.clientY - rect.top) / rect.height - 0.5,
+      };
+    };
+
+    const tick = () => {
+      // Lerp toward target — easing factor 0.06 gives silky smoothness
+      lerpX += (mouseRef.current.x - lerpX) * 0.06;
+      lerpY += (mouseRef.current.y - lerpY) * 0.06;
+
+      if (parallaxRef.current) {
+        // Move opposite to cursor, max ±20px
+        parallaxRef.current.style.transform =
+          `translate(${-lerpX * 40}px, ${-lerpY * 40}px)`;
+      }
+      rafId = requestAnimationFrame(tick);
+    };
+
+    section.addEventListener("mousemove", onMouseMove, { passive: true });
+    rafId = requestAnimationFrame(tick);
+
+    return () => {
+      section.removeEventListener("mousemove", onMouseMove);
+      cancelAnimationFrame(rafId);
+    };
+  }, []);
+
   return (
     // 600vh height + margin-bottom -100vh = 500vh effective height.
     // The first 400vh plays the animation (end: +=400%), the last 100vh is for the next section to slide over it!
     <div ref={wrapperRef} style={{ height: "600vh", position: "relative", marginBottom: "-100vh", zIndex: 0 }}>
       <section
         id="hero"
+        ref={sectionRef}
         aria-label="Hero"
         style={{
           position: "sticky", top: 0, height: "100dvh", width: "100%", overflow: "hidden",
           background: "linear-gradient(160deg, #f5f5f3 0%, #ededeb 50%, #f0f0ee 100%)",
         }}
       >
-        {/* Dot grid */}
+        {/* Dot grid — base faint layer (always visible) */}
         <div aria-hidden style={{
           position: "absolute", inset: 0,
-          backgroundImage: "radial-gradient(circle, rgba(0,0,0,0.07) 1px, transparent 1px)",
+          backgroundImage: "radial-gradient(circle, rgba(0,0,0,0.06) 1.5px, transparent 1.5px)",
           backgroundSize: "28px 28px", pointerEvents: "none", zIndex: 0,
         }} />
 
-        {/* Top + bottom vignette */}
+        {/* Dot grid — bright revealed layer (cursor spotlight mask) */}
+        <div
+          ref={dotRevealRef}
+          aria-hidden
+          style={{
+            position: "absolute", inset: 0,
+            backgroundImage: "radial-gradient(circle, rgba(0,0,0,0.55) 1.5px, transparent 1.5px)",
+            backgroundSize: "28px 28px",
+            pointerEvents: "none", zIndex: 0,
+            // CSS custom properties default to centre; updated on mousemove
+            WebkitMaskImage: "radial-gradient(circle 280px at var(--mx, 50%) var(--my, 50%), black 0%, transparent 100%)",
+            maskImage: "radial-gradient(circle 280px at var(--mx, 50%) var(--my, 50%), black 0%, transparent 100%)",
+          } as React.CSSProperties}
+        />
+
+        {/* Edge vignette — very subtle feather only at corners */}
         <div aria-hidden style={{
           position: "absolute", inset: 0,
-          background: "radial-gradient(ellipse 80% 60% at 50% 50%, transparent 40%, rgba(240,240,238,0.6) 100%)",
+          background: "radial-gradient(ellipse 80% 60% at 50% 50%, transparent 50%, rgba(240,240,238,0.25) 100%)",
           pointerEvents: "none", zIndex: 1,
         }} />
 
-        {/* Centre spotlight */}
-        <div aria-hidden style={{
-          position: "absolute", inset: 0,
-          background: "radial-gradient(ellipse 45% 45% at 50% 50%, rgba(245,245,243,0.95) 25%, transparent 100%)",
-          pointerEvents: "none", zIndex: 11,
-        }} />
 
-        {/* ── Card layer ────────────────────────────────────────────────────────── */}
-        {CARDS.map((card) => (
-          <div
-            key={card.id}
-            ref={(el) => { if (el) cardRefs.current.set(card.id, el); }}
-            style={{
-              position: "absolute", top: "50%", left: "50%",
-              willChange: "transform, opacity",
-            }}
-          >
-            <CardRenderer card={card} />
-          </div>
-        ))}
+        {/* ── Card layer (wrapped for mouse parallax) ──────────────────────────── */}
+        <div
+          ref={parallaxRef}
+          style={{
+            position: "absolute", inset: 0,
+            willChange: "transform",
+            // transition adds gentle lag on mouse leave
+            transition: "transform 0.1s linear",
+          }}
+        >
+          {CARDS.map((card) => (
+            <div
+              key={card.id}
+              ref={(el) => { if (el) cardRefs.current.set(card.id, el); }}
+              style={{
+                position: "absolute", top: "50%", left: "50%",
+                willChange: "transform, opacity",
+              }}
+            >
+              <CardRenderer card={card} />
+            </div>
+          ))}
+        </div>
 
         {/* ── Static Center Content (Always on top) ────────────────────────────── */}
         <div style={{
