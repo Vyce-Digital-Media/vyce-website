@@ -71,7 +71,7 @@ export default function StatsBox() {
         ))}
       </div>
 
-      <div className="mx-auto w-[90%] relative z-10">
+      <div className="mx-auto w-full relative z-10">
         <div 
           className="relative overflow-hidden rounded-[32px] border border-white/10 p-10 md:p-16 shadow-[0_30px_100px_rgba(0,0,0,0.8)]"
           style={{

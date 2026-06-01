@@ -70,7 +70,7 @@ function ImageScroller3D({ cards, isTransitionActive, sideGradientWidth = 80, in
     return () => window.removeEventListener('resize', update)
   }, [])
 
-  const offsetRef = useRef(0)
+  const offsetRef = useRef(infiniteLoop ? 0 : 250)
   const [isDragging, setIsDragging] = useState(false)
   const dragStartRef = useRef({ x: 0, offset: 0 })
   const velocityRef = useRef(0)
@@ -106,7 +106,10 @@ function ImageScroller3D({ cards, isTransitionActive, sideGradientWidth = 80, in
   const oneSetWidth = baseCards.length * effectiveCardWidth
   const containerWidth = viewport.width
   const totalCardsWidth = baseCards.length * effectiveCardWidth
-  const maxNegativeOffset = Math.min(0, containerWidth - totalCardsWidth - 150)
+  const maxOffset = infiniteLoop ? 0 : (viewport.isMobile ? 80 : 250)
+  const minOffset = infiniteLoop 
+    ? Math.min(0, containerWidth - totalCardsWidth - 150)
+    : Math.min(maxOffset, containerWidth - totalCardsWidth - (viewport.isMobile ? 100 : 300))
 
   useEffect(() => {
     if (isRestoring && !isInitialAnimationDone) return
@@ -203,8 +206,8 @@ function ImageScroller3D({ cards, isTransitionActive, sideGradientWidth = 80, in
         while (newOffset < -oneSetWidth * 2) newOffset += oneSetWidth
       }
     } else {
-      newOffset = Math.max(maxNegativeOffset, Math.min(0, newOffset))
-      if (newOffset === 0 || newOffset === maxNegativeOffset) {
+      newOffset = Math.max(minOffset, Math.min(maxOffset, newOffset))
+      if (newOffset === maxOffset || newOffset === minOffset) {
         velocityRef.current = 0
       }
     }
@@ -246,7 +249,7 @@ function ImageScroller3D({ cards, isTransitionActive, sideGradientWidth = 80, in
         while (newOffset < -oneSetWidth * 2) newOffset += oneSetWidth
       }
     } else {
-      newOffset = Math.max(maxNegativeOffset, Math.min(0, newOffset))
+      newOffset = Math.max(minOffset, Math.min(maxOffset, newOffset))
     }
     updateScrollPosition(newOffset)
   }
@@ -333,16 +336,25 @@ function ImageScroller3D({ cards, isTransitionActive, sideGradientWidth = 80, in
   }
 
   const handleWheel = useCallback((e) => {
-    if (!infiniteLoop) return
-    e.preventDefault()
-    e.stopPropagation()
-
     const absX = Math.abs(e.deltaX)
     const absY = Math.abs(e.deltaY)
     const isHorizontal = absX > absY
 
     const prev = offsetRef.current
     let scrollDelta = isHorizontal ? e.deltaX : e.deltaY
+    
+    if (!infiniteLoop) {
+      if (prev >= maxOffset && scrollDelta < 0) {
+        return // At start, scrolling up/left: let native scroll happen
+      }
+      if (prev <= minOffset && scrollDelta > 0) {
+        return // At end, scrolling down/right: let native scroll happen
+      }
+    }
+
+    e.preventDefault()
+    e.stopPropagation()
+
     let newOffset = prev - scrollDelta
 
     if (infiniteLoop) {
@@ -351,12 +363,12 @@ function ImageScroller3D({ cards, isTransitionActive, sideGradientWidth = 80, in
         while (newOffset < -oneSetWidth * 2) newOffset += oneSetWidth
       }
     } else {
-      newOffset = Math.max(maxNegativeOffset, Math.min(0, newOffset))
+      newOffset = Math.max(minOffset, Math.min(maxOffset, newOffset))
     }
 
     updateScrollPosition(newOffset)
     detectCardUnderCursor()
-  }, [infiniteLoop, oneSetWidth, maxNegativeOffset, updateScrollPosition, detectCardUnderCursor])
+  }, [infiniteLoop, oneSetWidth, maxOffset, minOffset, updateScrollPosition, detectCardUnderCursor])
 
   const handleGesture = useCallback((e) => {
     e.preventDefault()
@@ -365,7 +377,7 @@ function ImageScroller3D({ cards, isTransitionActive, sideGradientWidth = 80, in
 
   useEffect(() => {
     const section = sectionRef.current
-    if (!section || !infiniteLoop) return
+    if (!section) return
     section.addEventListener('wheel', handleWheel, { passive: false })
     section.addEventListener('gesturestart', handleGesture, { passive: false })
     section.addEventListener('gesturechange', handleGesture, { passive: false })
@@ -403,10 +415,10 @@ function ImageScroller3D({ cards, isTransitionActive, sideGradientWidth = 80, in
       while (newOffset > 0) newOffset -= oneSetWidth
       while (newOffset < -oneSetWidth * 2) newOffset += oneSetWidth
     } else if (!infiniteLoop) {
-      newOffset = Math.max(maxNegativeOffset, Math.min(0, newOffset))
+      newOffset = Math.max(minOffset, Math.min(maxOffset, newOffset))
     }
     updateScrollPosition(newOffset)
-  }, [isDragging, infiniteLoop, oneSetWidth, maxNegativeOffset, updateScrollPosition])
+  }, [isDragging, infiniteLoop, oneSetWidth, minOffset, maxOffset, updateScrollPosition])
 
   const handleTouchEnd = useCallback((e) => {
     const touchDuration = Date.now() - (dragStartRef.current.time || 0)
@@ -434,7 +446,7 @@ function ImageScroller3D({ cards, isTransitionActive, sideGradientWidth = 80, in
 
   useEffect(() => {
     const section = sectionRef.current
-    if (!section || !infiniteLoop) return
+    if (!section) return
     section.addEventListener('touchstart', handleTouchStart, { passive: false })
     section.addEventListener('touchmove', handleTouchMove, { passive: false })
     section.addEventListener('touchend', handleTouchEnd, { passive: false })
@@ -472,7 +484,7 @@ function ImageScroller3D({ cards, isTransitionActive, sideGradientWidth = 80, in
     const startOffset = offsetRef.current
     const totalDistance = infiniteLoop
       ? -oneSetWidth * 0.295
-      : Math.max(maxNegativeOffset * 0.5, -oneSetWidth * 0.15)
+      : Math.max(minOffset * 0.5, -oneSetWidth * 0.15)
 
     const animate = (t) => {
       const elapsed = t - startTime
@@ -481,7 +493,7 @@ function ImageScroller3D({ cards, isTransitionActive, sideGradientWidth = 80, in
       let newOffset = startOffset + totalDistance * eased
 
       if (!infiniteLoop) {
-        newOffset = Math.max(maxNegativeOffset, Math.min(0, newOffset))
+        newOffset = Math.max(minOffset, Math.min(maxOffset, newOffset))
       }
 
       updateScrollPosition(newOffset)
@@ -575,12 +587,12 @@ function ImageScroller3D({ cards, isTransitionActive, sideGradientWidth = 80, in
   return (
     <div
       ref={sectionRef}
-      className={`w-full bg-transparent transition-opacity duration-300 ease-out relative ${infiniteLoop ? 'cursor-grab active:cursor-grabbing' : ''}`}
+      className={`w-full bg-transparent transition-opacity duration-300 ease-out relative cursor-grab active:cursor-grabbing`}
       style={{ touchAction: 'none', WebkitTouchCallout: 'none', WebkitUserSelect: 'none', overscrollBehavior: 'none' }}
-      onMouseDown={infiniteLoop ? handleMouseDown : undefined}
-      onMouseUp={infiniteLoop ? handleMouseUp : undefined}
-      onMouseLeave={infiniteLoop ? handleMouseUp : undefined}
-      onMouseMove={infiniteLoop ? handleMouseMove : undefined}
+      onMouseDown={handleMouseDown}
+      onMouseUp={handleMouseUp}
+      onMouseLeave={handleMouseUp}
+      onMouseMove={handleMouseMove}
     >
       <div className="w-full max-w-full overflow-hidden relative">
         <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(circle at center, rgba(255,255,255,0.08), transparent 70%)', zIndex: 0, filter: 'blur(140px)', transform: 'translateZ(0)', willChange: 'transform' }} />
@@ -601,7 +613,7 @@ function ImageScroller3D({ cards, isTransitionActive, sideGradientWidth = 80, in
             justifyContent: infiniteLoop ? 'flex-start' : 'center',
           }}
         >
-          <div ref={trackRef} className="inline-flex" style={{ transformStyle: 'preserve-3d', transform: 'none', willChange: infiniteLoop ? 'transform' : 'auto', justifyContent: infiniteLoop ? 'flex-start' : 'center' }}>
+          <div ref={trackRef} className="inline-flex" style={{ transformStyle: 'preserve-3d', transform: infiniteLoop ? 'none' : `translateX(${infiniteLoop ? 0 : 250}px)`, willChange: infiniteLoop ? 'transform' : 'auto', justifyContent: 'flex-start' }}>
             {loopCards.map((card, idx) => renderCard(card, idx))}
           </div>
         </div>
@@ -666,7 +678,7 @@ export default function ExploreCollection() {
         </div>
         <div className={`transition-opacity duration-500 ${isReady ? 'opacity-100' : 'opacity-0'}`}>
           {isReady && (
-            <ImageScroller3D key={selectedTopic || 'all'} cards={topicCards} viewport={viewport} infiniteLoop={topicCards.length >= 6} />
+            <ImageScroller3D key={selectedTopic || 'all'} cards={topicCards} viewport={viewport} infiniteLoop={false} />
           )}
         </div>
       </div>

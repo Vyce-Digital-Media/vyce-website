@@ -292,7 +292,15 @@ export default function ServicesGrid() {
                 }}
               >
                 {/* Foreground colored number */}
-                <div style={{ color: s.accent, position: "relative", zIndex: 1 }}>
+                <div style={{
+                  position: "relative",
+                  zIndex: 1,
+                  color: "transparent",
+                  WebkitTextStroke: `2px ${s.accent}`,
+                  backgroundImage: `linear-gradient(180deg, ${s.accent}00 0%, ${s.accent} 100%)`,
+                  WebkitBackgroundClip: "text",
+                  backgroundClip: "text",
+                }}>
                   {s.index}
                 </div>
               </div>
