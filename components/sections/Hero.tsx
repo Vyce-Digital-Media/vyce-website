@@ -36,13 +36,13 @@ const CARDS: CardDef[] = [
   // ════════ WAVE 0 (Always visible on load) ════════
   {
     id: "w0-img-tl", wave: 0, type: "image",
-    src: "/hero1.png",
+    src: "/hero1.webp",
     // hero1: portrait ~1:1.25 (fashion bag)
     fx: -0.36, fy: -0.28, width: 220, height: 275, rotate: -4, depth: 1,
   },
   {
     id: "w0-img-bl", wave: 0, type: "image",
-    src: "/hero2.png",
+    src: "/hero2.webp",
     // hero2: portrait ~4:5 (real estate teaser)
     fx: -0.32, fy: 0.24, width: 210, height: 263, rotate: 4, depth: 1,
   },
@@ -56,13 +56,13 @@ const CARDS: CardDef[] = [
   },
   {
     id: "w0-img-tr", wave: 0, type: "image",
-    src: "/hero3.jpeg",
+    src: "/hero3.webp",
     // hero3: portrait ~4:5 (leather goods)
     fx: 0.38, fy: -0.29, width: 210, height: 263, rotate: 5, depth: 1,
   },
   {
     id: "w0-img-br", wave: 0, type: "image",
-    src: "/hero4.jpeg",
+    src: "/hero4.webp",
     // hero4: portrait ~4:5 (perfume dark)
     fx: 0.35, fy: 0.22, width: 200, height: 250, rotate: -3, depth: 1,
   },
@@ -75,9 +75,9 @@ const CARDS: CardDef[] = [
   {
     id: "w0-folder-bc", wave: 0, type: "folder", title: "References",
     avatars: [
-      "/hero1.png",
-      "/hero2.png",
-      "/hero3.jpeg",
+      "/hero1.webp",
+      "/hero2.webp",
+      "/hero3.webp",
     ],
     fx: 0.03, fy: 0.38, width: 130, height: 90, rotate: 3, depth: 3,
   },
@@ -89,27 +89,27 @@ const CARDS: CardDef[] = [
   // ════════ WAVE 1 (Emerges on scroll) ════════
   {
     id: "w1-img-tl", wave: 1, type: "image",
-    src: "/hero5.jpeg",
+    src: "/hero5.webp",
     // hero5: portrait ~4:5 (perfume hands)
     fx: -0.28, fy: -0.24, width: 200, height: 250, rotate: -2, depth: 1,
   },
   {
     id: "w1-folder-l", wave: 1, type: "folder", title: "Product",
     avatars: [
-      "/hero1.png",
-      "/hero2.png",
+      "/hero1.webp",
+      "/hero2.webp",
     ],
     fx: -0.36, fy: 0.15, width: 120, height: 80, rotate: -4, depth: 3,
   },
   {
     id: "w1-img-bl", wave: 1, type: "image",
-    src: "/hero6.jpg",
+    src: "/hero6.webp",
     // hero6: portrait ~4:5 (RC car racing)
     fx: -0.26, fy: 0.22, width: 205, height: 256, rotate: 5, depth: 1,
   },
   {
     id: "w1-img-tr", wave: 1, type: "image",
-    src: "/hero7.jpg",
+    src: "/hero7.webp",
     // hero7: portrait ~4:5 (RC car teaser)
     fx: 0.28, fy: -0.25, width: 205, height: 256, rotate: 6, depth: 1,
   },
@@ -121,7 +121,7 @@ const CARDS: CardDef[] = [
   },
   {
     id: "w1-img-br", wave: 1, type: "image",
-    src: "/hero1.png",
+    src: "/hero8.webp",
     // hero1 repeated for wave 1 right-bottom slot
     fx: 0.30, fy: 0.24, width: 190, height: 238, rotate: -4, depth: 1,
   },
@@ -129,7 +129,7 @@ const CARDS: CardDef[] = [
   // ════════ WAVE 2 (Emerges on further scroll) ════════
   {
     id: "w2-img-tl", wave: 2, type: "image",
-    src: "/hero2.png",
+    src: "/hero9.webp",
     // hero2: portrait ~4:5 (real estate teaser)
     fx: -0.32, fy: -0.26, width: 210, height: 263, rotate: 3, depth: 1,
   },
@@ -139,7 +139,7 @@ const CARDS: CardDef[] = [
   },
   {
     id: "w2-img-tr", wave: 2, type: "image",
-    src: "/hero3.jpeg",
+    src: "/hero7.webp",
     // hero3: portrait ~4:5 (leather goods)
     fx: 0.35, fy: -0.28, width: 200, height: 250, rotate: -6, depth: 1,
   },
@@ -150,13 +150,13 @@ const CARDS: CardDef[] = [
   {
     id: "w2-folder-bc", wave: 2, type: "folder", title: "Fonts",
     avatars: [
-      "/hero4.jpeg",
+      "/hero8.webp",
     ],
     fx: -0.05, fy: 0.35, width: 100, height: 80, rotate: -3, depth: 2,
   },
   {
     id: "w2-img-br", wave: 2, type: "image",
-    src: "/hero4.jpeg",
+    src: "/hero10.webp",
     // hero4: portrait ~4:5 (perfume dark)
     fx: 0.28, fy: 0.28, width: 200, height: 250, rotate: 4, depth: 1,
   },
