@@ -12,8 +12,8 @@ gsap.registerPlugin(ScrollTrigger);
 const SERVICES = [
   {
     index: "01",
-    title: "Branding & Identity",
-    tag: "Brand Strategy",
+    title: "Brand Identity & Package Design",
+    tag: "Research & Strategy",
     line: "Your brand is the first impression, the last memory, and everything in between. We build brand identities that are strategic before they're aesthetic. Logo, color system, typography, brand voice — crafted to show up consistently and confidently across every touchpoint.",
     detail: "Logo · Color System · Typography · Brand Voice · Guidelines",
     accent: "#FF3C00",
@@ -21,7 +21,7 @@ const SERVICES = [
   },
   {
     index: "02",
-    title: "Social Media",
+    title: "Social Media Management",
     tag: "Content & Growth",
     line: "Posting for the sake of posting is a waste of everyone's time. We don't do that. Platform-aware, audience-first content strategy — not just a calendar filler. Reels, carousels, captions, community management — handled with an actual plan behind every post.",
     detail: "Reels · Carousels · Captions · Community · Strategy",
@@ -30,7 +30,7 @@ const SERVICES = [
   },
   {
     index: "03",
-    title: "Website Design",
+    title: "Website Design & Development",
     tag: "Web & Dev",
     line: "Your website is either your best salesperson or your biggest liability. Choose. We design and build websites that look premium and convert visitors into leads. Fast, mobile-first, SEO-ready, and built to actually do something for your business.",
     detail: "UX Design · Next.js Dev · SEO · Speed · Conversions",
