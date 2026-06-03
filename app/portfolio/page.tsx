@@ -11,61 +11,9 @@ import {
   MotionValue,
   useSpring,
 } from "framer-motion";
-import MagneticButton from "@/components/ui/MagneticButton";
 import { ArrowUpRight } from "lucide-react";
 
-const categories = ["All", "Web", "Branding", "Product", "Motion"];
-
-const projects = [
-  {
-    id: 1, title: "Earthy Crafts", category: "Web",
-    tags: ["Web Design", "WebGL", "Commerce"], year: "2026",
-    image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=1400&h=900&fit=crop&q=80",
-    summary: "Earthy Crafts is a luxury handcrafted decor platform that blends timeless artistry with modern design, showcasing premium marble sculptures and artisan-crafted home decor pieces.",
-    scope: ["Creative direction", "3D art direction", "Next.js front-end"],
-    accent: "rgba(255,180,80,0.15)", // Warm Gold
-  },
-  {
-    id: 2, title: "Global Peace Ministry", category: "Web",
-    tags: ["Brand System", "Spatial Design"], year: "2026",
-    image: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1400&h=900&fit=crop&q=80",
-    summary: "Designed and developed a modern nonprofit website for Global Peace Ministry, focused on spreading peace, community empowerment, and spiritual values through an engaging and user-friendly digital experience.",
-    scope: ["Creative direction", "3D art direction", "Next.js front-end"],
-    accent: "rgba(180,120,100,0.15)", // Terracotta
-  },
-  {
-    id: 3, title: "Ecotellus", category: "Web",
-    tags: ["Product Design", "Design Ops"], year: "2026",
-    image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=1400&h=900&fit=crop&q=80",
-    summary: "Built a modern sustainability-focused website for Ecotellus, showcasing eco-friendly solutions and innovative environmental initiatives through a clean, conversion-focused digital experience.",
-    scope: ["Creative direction", "3D art direction", "Next.js front-end"],
-    accent: "rgba(100,150,255,0.15)", // Soft Blue
-  },
-  {
-    id: 4, title: "Kena Impex", category: "Web",
-    tags: ["Launch Campaign", "Motion"], year: "2026",
-    image: "https://images.unsplash.com/photo-1558655146-364adaf1fcc9?w=1400&h=900&fit=crop&q=80",
-    summary: "Developed a professional corporate website for Kena Impex, showcasing their global import-export services with a modern design, clear branding, and conversion-focused user experience.",
-    scope: ["Creative direction", "3D art direction", "Next.js front-end"],
-    accent: "rgba(255,100,100,0.15)", // Red
-  },
-  {
-    id: 5, title: "HVH Globals", category: "Web",
-    tags: ["Identity", "Strategy"], year: "2026",
-    image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=1400&h=900&fit=crop&q=80",
-    summary: "Created a modern and high-performance web experience for HVH, featuring smooth animations, premium visuals, and a conversion-focused UI with a sleek futuristic design.",
-    scope: ["Creative direction", "3D art direction", "Next.js front-end"],
-    accent: "rgba(80,200,150,0.15)", // Emerald
-  },
-  {
-    id: 6, title: "EYVE", category: "Web",
-    tags: ["Web App", "UX Research"], year: "2026",
-    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1400&h=900&fit=crop&q=80",
-    summary: "Designed a premium beauty eCommerce website for EYVE, focused on showcasing skincare and beauty products through a modern, elegant, and conversion-driven shopping experience.",
-    scope: ["Creative direction", "3D art direction", "Next.js front-end"],
-    accent: "rgba(180,100,255,0.15)", // Purple
-  },
-];
+import { categories, projects } from "@/constants/portfolio";
 
 function RevealLine({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
   const ref = useRef(null);

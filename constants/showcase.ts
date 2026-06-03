@@ -165,7 +165,7 @@ export const projectsData: Record<string, ProjectShowcase> = {
     details: {
       client: "Earthy Crafts",
       industry: "Handcrafted Decor",
-      services: ["Web Design", "Commerce", "WebGL"],
+      services: ["Web Design", "Commerce", "WebGL", "Social Media", "Performance Marketing"],
       startDate: "Jan 2026",
       endDate: "Mar 2026",
       duration: "3 Months",
@@ -300,13 +300,283 @@ export const projectsData: Record<string, ProjectShowcase> = {
     details: {
       client: "EYVE Beauty",
       industry: "Luxury eCommerce",
-      services: ["Web", "SEO", "Branding"],
+      services: ["Web", "SEO", "Branding", "Social Media"],
       startDate: "Sep 2026",
       endDate: "Dec 2026",
       duration: "4 Months",
       year: "2026"
     },
     problemStatement: "EYVE required an elegant, seamless eCommerce journey. We conducted extensive UX research to understand beauty consumers, leading to a highly refined, conversion-driven web application with a deeply premium aesthetic.",
+    gallery: defaultGallery,
+    execution: defaultExecution,
+    strategy: defaultStrategy,
+    impact: defaultImpact,
+    relatedProjects: defaultRelatedProjects,
+    cta: defaultCta
+  },
+  "stt-hair": {
+    slug: "stt-hair",
+    hero: {
+      tagLine: "SEO Strategy & Optimization",
+      titleFirstPart: "STT.",
+      titleSecondPart: "Hair",
+      summary: "Developed a comprehensive SEO strategy for STT Hair to drive organic growth, improve search visibility, and increase online bookings.",
+      bgImage: "https://images.unsplash.com/photo-1519699047748-de8e457a634e?w=2000&h=1200&fit=crop&q=80",
+      clientLogoBase64: defaultLogo
+    },
+    details: {
+      client: "STT Hair",
+      industry: "Beauty & Salon",
+      services: ["SEO", "Growth Strategy"],
+      startDate: "Oct 2026",
+      endDate: "Ongoing",
+      duration: "Ongoing",
+      year: "2026"
+    },
+    problemStatement: "STT Hair needed stronger online visibility to attract local clients. We implemented a robust SEO strategy targeting high-intent keywords, optimizing local search presence, and enhancing technical site health to drive sustainable organic traffic.",
+    gallery: defaultGallery,
+    execution: defaultExecution,
+    strategy: defaultStrategy,
+    impact: defaultImpact,
+    relatedProjects: defaultRelatedProjects,
+    cta: defaultCta
+  },
+  "xavion": {
+    slug: "xavion",
+    hero: {
+      tagLine: "Technical SEO & Growth",
+      titleFirstPart: "Xav",
+      titleSecondPart: "ion.",
+      summary: "Executed a high-impact technical SEO campaign for Xavion, focusing on performance, site architecture, and content optimization to dominate search results.",
+      bgImage: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=2000&h=1200&fit=crop&q=80",
+      clientLogoBase64: defaultLogo
+    },
+    details: {
+      client: "Xavion",
+      industry: "Technology",
+      services: ["SEO", "Performance Marketing"],
+      startDate: "Sep 2026",
+      endDate: "Ongoing",
+      duration: "Ongoing",
+      year: "2026"
+    },
+    problemStatement: "Xavion required a technical SEO overhaul to compete in a saturated tech market. We conducted extensive audits, restructured the site architecture, and implemented a content strategy that significantly boosted their domain authority and search rankings.",
+    gallery: defaultGallery,
+    execution: defaultExecution,
+    strategy: defaultStrategy,
+    impact: defaultImpact,
+    relatedProjects: defaultRelatedProjects,
+    cta: defaultCta
+  },
+  "rajlaxmi": {
+    slug: "rajlaxmi",
+    hero: {
+      tagLine: "Social Media Management",
+      titleFirstPart: "Raj",
+      titleSecondPart: "laxmi.",
+      summary: "Elevated Rajlaxmi's brand presence through strategic social media management, engaging content creation, and community building.",
+      bgImage: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=2000&h=1200&fit=crop&q=80",
+      clientLogoBase64: defaultLogo
+    },
+    details: {
+      client: "Rajlaxmi",
+      industry: "Retail / Fashion",
+      services: ["Social Media", "Content Strategy"],
+      startDate: "Jul 2026",
+      endDate: "Ongoing",
+      duration: "Ongoing",
+      year: "2026"
+    },
+    problemStatement: "Rajlaxmi sought to modernize its brand image and connect with a younger demographic. We developed a vibrant social media strategy centered around high-quality visuals, influencer partnerships, and interactive campaigns that revitalized their online community.",
+    gallery: defaultGallery,
+    execution: defaultExecution,
+    strategy: defaultStrategy,
+    impact: defaultImpact,
+    relatedProjects: defaultRelatedProjects,
+    cta: defaultCta
+  },
+  "ecoplanet-motors": {
+    slug: "ecoplanet-motors",
+    hero: {
+      tagLine: "Social & Performance Marketing",
+      titleFirstPart: "Eco",
+      titleSecondPart: "planet.",
+      summary: "Drove sales and brand awareness for Ecoplanet motors through a combined approach of targeted performance marketing and dynamic social media engagement.",
+      bgImage: "https://images.unsplash.com/photo-1560958089-b8a1929cea89?w=2000&h=1200&fit=crop&q=80",
+      clientLogoBase64: defaultLogo
+    },
+    details: {
+      client: "Ecoplanet Motors",
+      industry: "Automotive / EV",
+      services: ["Social Media", "Performance Marketing"],
+      startDate: "Jun 2026",
+      endDate: "Ongoing",
+      duration: "Ongoing",
+      year: "2026"
+    },
+    problemStatement: "Ecoplanet motors needed to launch their new EV line with maximum impact. We deployed a highly targeted performance marketing campaign synchronized with an aggressive social media rollout, generating thousands of qualified leads and significantly boosting presales.",
+    gallery: defaultGallery,
+    execution: defaultExecution,
+    strategy: defaultStrategy,
+    impact: defaultImpact,
+    relatedProjects: defaultRelatedProjects,
+    cta: defaultCta
+  },
+  "eminence": {
+    slug: "eminence",
+    hero: {
+      tagLine: "Social Media Strategy",
+      titleFirstPart: "Emi",
+      titleSecondPart: "nence.",
+      summary: "Crafted a luxury social media narrative for Eminence, focusing on aesthetic consistency and premium audience engagement.",
+      bgImage: "https://images.unsplash.com/photo-1555529771-835f59bfc50c?w=2000&h=1200&fit=crop&q=80",
+      clientLogoBase64: defaultLogo
+    },
+    details: {
+      client: "Eminence",
+      industry: "Luxury Goods",
+      services: ["Social Media", "Branding"],
+      startDate: "Aug 2026",
+      endDate: "Ongoing",
+      duration: "Ongoing",
+      year: "2026"
+    },
+    problemStatement: "Eminence required a social presence that matched their premium product line. We established a strict visual language and tone of voice, curating a feed that speaks directly to high-net-worth individuals and fosters exclusive community engagement.",
+    gallery: defaultGallery,
+    execution: defaultExecution,
+    strategy: defaultStrategy,
+    impact: defaultImpact,
+    relatedProjects: defaultRelatedProjects,
+    cta: defaultCta
+  },
+  "monkda": {
+    slug: "monkda",
+    hero: {
+      tagLine: "Community & Social Media",
+      titleFirstPart: "Mon",
+      titleSecondPart: "kda.",
+      summary: "Grew Monkda's digital footprint through authentic social media storytelling and viral content campaigns.",
+      bgImage: "https://images.unsplash.com/photo-1616469829581-73993eb86b02?w=2000&h=1200&fit=crop&q=80",
+      clientLogoBase64: defaultLogo
+    },
+    details: {
+      client: "Monkda",
+      industry: "Lifestyle",
+      services: ["Social Media", "Content Creation"],
+      startDate: "May 2026",
+      endDate: "Ongoing",
+      duration: "Ongoing",
+      year: "2026"
+    },
+    problemStatement: "Monkda wanted to transition from a local favorite to a recognized lifestyle brand. By leveraging short-form video content and user-generated campaigns, we exponentially increased their reach and established a loyal online following.",
+    gallery: defaultGallery,
+    execution: defaultExecution,
+    strategy: defaultStrategy,
+    impact: defaultImpact,
+    relatedProjects: defaultRelatedProjects,
+    cta: defaultCta
+  },
+  "silver-rionest": {
+    slug: "silver-rionest",
+    hero: {
+      tagLine: "Social & Performance Ads",
+      titleFirstPart: "Silver",
+      titleSecondPart: "Rionest.",
+      summary: "Accelerated Silver Rionest's growth with data-driven performance marketing and high-converting social media creatives.",
+      bgImage: "https://images.unsplash.com/photo-1533575770077-052fa2c609fc?w=2000&h=1200&fit=crop&q=80",
+      clientLogoBase64: defaultLogo
+    },
+    details: {
+      client: "Silver Rionest",
+      industry: "Jewelry",
+      services: ["Social Media", "Performance Marketing"],
+      startDate: "Apr 2026",
+      endDate: "Ongoing",
+      duration: "Ongoing",
+      year: "2026"
+    },
+    problemStatement: "Silver Rionest needed to scale their e-commerce operations efficiently. We built a full-funnel strategy combining aspirational social content with aggressive retargeting ads, resulting in a dramatic increase in ROAS and customer lifetime value.",
+    gallery: defaultGallery,
+    execution: defaultExecution,
+    strategy: defaultStrategy,
+    impact: defaultImpact,
+    relatedProjects: defaultRelatedProjects,
+    cta: defaultCta
+  },
+  "360-eye": {
+    slug: "360-eye",
+    hero: {
+      tagLine: "Social Media Management",
+      titleFirstPart: "360",
+      titleSecondPart: "Eye.",
+      summary: "Developed a comprehensive social media presence for 360 Eye, highlighting their innovative services through engaging digital content.",
+      bgImage: "https://images.unsplash.com/photo-1550051287-797746535565?w=2000&h=1200&fit=crop&q=80",
+      clientLogoBase64: defaultLogo
+    },
+    details: {
+      client: "360 Eye",
+      industry: "Healthcare / Tech",
+      services: ["Social Media"],
+      startDate: "Jul 2026",
+      endDate: "Ongoing",
+      duration: "Ongoing",
+      year: "2026"
+    },
+    problemStatement: "360 Eye required a strategy to educate and engage their audience on complex services. We created a content mix of educational infographics, behind-the-scenes videos, and patient testimonials to build trust and authority.",
+    gallery: defaultGallery,
+    execution: defaultExecution,
+    strategy: defaultStrategy,
+    impact: defaultImpact,
+    relatedProjects: defaultRelatedProjects,
+    cta: defaultCta
+  },
+  "daiki-digital": {
+    slug: "daiki-digital",
+    hero: {
+      tagLine: "Branding & Identity",
+      titleFirstPart: "Daiki",
+      titleSecondPart: "Digital.",
+      summary: "Reimagined the brand identity for Daiki Digital, creating a cohesive visual system that communicates innovation and reliability.",
+      bgImage: "https://images.unsplash.com/photo-1557683311-eac922347aa1?w=2000&h=1200&fit=crop&q=80",
+      clientLogoBase64: defaultLogo
+    },
+    details: {
+      client: "Daiki Digital",
+      industry: "Digital Agency",
+      services: ["Branding", "Identity System"],
+      startDate: "Feb 2026",
+      endDate: "Apr 2026",
+      duration: "3 Months",
+      year: "2026"
+    },
+    problemStatement: "Daiki Digital's outdated branding no longer reflected their cutting-edge services. We designed a dynamic identity system featuring a modern logo, vibrant color palette, and bespoke typography that positioned them as industry leaders.",
+    gallery: defaultGallery,
+    execution: defaultExecution,
+    strategy: defaultStrategy,
+    impact: defaultImpact,
+    relatedProjects: defaultRelatedProjects,
+    cta: defaultCta
+  },
+  "vachhani-foods": {
+    slug: "vachhani-foods",
+    hero: {
+      tagLine: "Brand Strategy & Design",
+      titleFirstPart: "Vachhani",
+      titleSecondPart: "Foods.",
+      summary: "Revitalized Vachhani Foods' brand identity with a fresh, appetizing visual language and strategic market positioning.",
+      bgImage: "https://images.unsplash.com/photo-1606787366850-de6330128bfc?w=2000&h=1200&fit=crop&q=80",
+      clientLogoBase64: defaultLogo
+    },
+    details: {
+      client: "Vachhani Foods",
+      industry: "FMCG / Food",
+      services: ["Branding", "Packaging Design"],
+      startDate: "Jan 2026",
+      endDate: "Mar 2026",
+      duration: "3 Months",
+      year: "2026"
+    },
+    problemStatement: "Vachhani Foods needed a brand refresh to stand out on crowded supermarket shelves. We redesigned their packaging and corporate identity, focusing on natural ingredients and heritage, which successfully increased shelf appeal and market share.",
     gallery: defaultGallery,
     execution: defaultExecution,
     strategy: defaultStrategy,

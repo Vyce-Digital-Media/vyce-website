@@ -107,7 +107,7 @@ function ImageScroller3D({ cards, isTransitionActive, sideGradientWidth = 80, in
   const containerWidth = viewport.width
   const totalCardsWidth = baseCards.length * effectiveCardWidth
   const maxOffset = infiniteLoop ? 0 : (viewport.isMobile ? 80 : 250)
-  const minOffset = infiniteLoop 
+  const minOffset = infiniteLoop
     ? Math.min(0, containerWidth - totalCardsWidth - 150)
     : Math.min(maxOffset, containerWidth - totalCardsWidth - (viewport.isMobile ? 100 : 300))
 
@@ -342,7 +342,7 @@ function ImageScroller3D({ cards, isTransitionActive, sideGradientWidth = 80, in
 
     const prev = offsetRef.current
     let scrollDelta = isHorizontal ? e.deltaX : e.deltaY
-    
+
     if (!infiniteLoop) {
       if (prev >= maxOffset && scrollDelta < 0) {
         return // At start, scrolling up/left: let native scroll happen
