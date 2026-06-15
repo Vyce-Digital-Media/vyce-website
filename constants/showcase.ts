@@ -672,7 +672,7 @@ export const projectsData: Record<string, ProjectShowcase> = {
       buttonText: "Start a project",
       link: "/contact"
     }
-  },
+  },   
 
   "pesto-pavilion": {
     id: 6,
