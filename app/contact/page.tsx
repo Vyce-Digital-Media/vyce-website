@@ -49,20 +49,20 @@ const contactInfo = [
 
 const faqItems = [
   {
-    q: "What does the first conversation look like?",
-    a: "A 20–30 minute call. No pitch. No pressure. We ask about your business, your goals, and your current situation. You ask whatever you need to. Then we figure out together if it makes sense to move forward - and how.",
+    q: "What actually happens on the first call?",
+    a: "Thirty minutes. No pitch. No 12-slide deck. We ask about your business, your goals, what's been tried, what bombed. You ask whatever you want. Then we both decide honestly if it makes sense to work together.",
   },
   {
     q: "Do you work with brands outside India?",
-    a: "Yes, actively. We've worked with international brands and have structured our communication and delivery to work across time zones.",
+    a: "Yes, actively. We've worked with international brands and have communication and delivery structured to work across time zones. Distance hasn't been a problem.",
   },
   {
-    q: "Do you require a long-term commitment?",
-    a: "Retainer services (social media, SEO) work best over 3–6 months because that's where compounding kicks in. Project-based work is scoped to a defined timeline. We'll tell you clearly what we recommend and why - you decide.",
+    q: "Do you lock clients into long-term contracts?",
+    a: "Retainer services work best over 3–6 months because that's where compounding results kick in. Project work is scoped to a defined timeline. We'll recommend what makes sense and explain exactly why — you decide.",
   },
   {
-    q: "We've had bad experiences with agencies before. How are you different?",
-    a: "Honestly, every agency says this. The real answer is: most of our clients come from referrals from people we've already worked with. That's the most honest proof we can offer. Talk to us, and then judge for yourself.",
+    q: "We got burned by an agency before. Why should we trust you?",
+    a: "Honestly? Don't take our word for it. Every agency says they're different. The most honest proof we can give you is our referral rate — most of our new clients come from existing ones. Talk to us first. Judge after.",
   },
 ];
 
@@ -331,12 +331,12 @@ export default function ContactPage() {
             </span>
           </FadeIn>
           <div className="space-y-2">
-            <RevealLine><h1 className="text-[clamp(2rem,5.5vw,6.5rem)] font-black uppercase tracking-tighter leading-[0.88]">Let&apos;s talk.</h1></RevealLine>
-            <RevealLine delay={0.1}><h1 className="text-[clamp(2rem,5.5vw,6.5rem)] font-satoshi font-normal italic text-primary leading-[0.88]">Seriously, we don't bite.</h1></RevealLine>
+            <RevealLine><h1 className="text-[clamp(2rem,5.5vw,6.5rem)] font-black uppercase tracking-tighter leading-[0.88]">Let&apos;s actually talk.</h1></RevealLine>
+            <RevealLine delay={0.1}><h1 className="text-[clamp(2rem,5.5vw,6.5rem)] font-satoshi font-normal italic text-primary leading-[0.88]">We promise we&apos;re not salesy.</h1></RevealLine>
           </div>
           <FadeIn delay={0.3} className="max-w-2xl">
             <p className="text-base md:text-xl text-foreground/40 font-medium leading-relaxed">
-              Whether you have a fully detailed brief or just a vague idea and a rough budget - reach out. We'll help you figure out the rest. That's kind of our thing.
+              Whether you have a detailed brief or just a vague idea and a rough budget — reach out. We'll help you figure out the next step. That's genuinely part of the service.
             </p>
           </FadeIn>
         </motion.div>
@@ -429,9 +429,9 @@ export default function ContactPage() {
             <div className="lg:col-span-7">
               <FadeIn delay={0.1} className="mb-8">
                 <div>
-                  <RevealLine><h2 className="text-4xl font-black uppercase tracking-tighter leading-[0.9] md:text-5xl">Tell us what</h2></RevealLine>
-                  <RevealLine delay={0.07}><h2 className="text-4xl font-satoshi pb-2 font-normal italic text-primary leading-[0.9] md:text-5xl">you're working on.</h2></RevealLine>
-                  <FadeIn delay={0.2} className="mt-5"><p className="text-sm text-foreground/40 font-medium leading-relaxed max-w-md">No long forms. No confusing dropdowns. Just the basics - so we can come to the first conversation actually prepared.</p></FadeIn>
+                  <RevealLine><h2 className="text-4xl font-black uppercase tracking-tighter leading-[0.9] md:text-5xl">Tell us what you&apos;re</h2></RevealLine>
+                  <RevealLine delay={0.07}><h2 className="text-4xl font-satoshi pb-2 font-normal italic text-primary leading-[0.9] md:text-5xl">actually trying to fix.</h2></RevealLine>
+                  <FadeIn delay={0.2} className="mt-5"><p className="text-sm text-foreground/40 font-medium leading-relaxed max-w-md">No 47-field forms. Just the basics — so we can show up to the first call actually knowing something about you.</p></FadeIn>
                 </div>
               </FadeIn>
               <ContactForm />

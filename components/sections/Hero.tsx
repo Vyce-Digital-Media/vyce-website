@@ -69,7 +69,7 @@ const CARDS: CardDef[] = [
   {
     id: "w0-text-r", wave: 0, type: "text",
     title: "Audience",
-    content: "Primary audience: people who own four pairs of sunglasses and can never find any of them. High purchase intent, low drawer organization.",
+    content: "Primary audience: people who've been burned by 3 agencies already and are quietly hoping this one is different. Spoiler: it is.",
     fx: 0.41, fy: 0.05, width: 190, rotate: -2, depth: 5,
   },
   {
@@ -116,7 +116,7 @@ const CARDS: CardDef[] = [
   {
     id: "w1-text-tr", wave: 1, type: "text",
     title: "Q2 Campaign",
-    content: "The campaign will target adults aged 25 to 54 who drink coffee and have strong opinions about typefaces. Mostly confirmed.",
+    content: "The campaign targets founders who've said 'we'll handle marketing later' for 18 months straight. Urgency: overdue.",
     fx: 0.22, fy: -0.10, width: 170, rotate: -3, depth: 4,
   },
   {
@@ -588,8 +588,8 @@ export default function Hero() {
               }}
             >
               <span style={{ width: 7, height: 7, borderRadius: "50%", background: "#0044ff", animation: "pulse 2s infinite", display: "block", flexShrink: 0 }} />
-              <span style={{ fontSize: 12, fontWeight: 600, color: "#444", letterSpacing: "0.02em" }}>Surat&apos;s most referred digital agency</span>
-              <Link href="/about" style={{ fontSize: 12, fontWeight: 700, color: "#0044ff", textDecoration: "none" }}>Learn more</Link>
+              <span style={{ fontSize: 12, fontWeight: 600, color: "#444", letterSpacing: "0.02em" }}>Surat&apos;s most referred. Not just claimed — referred.</span>
+              <Link href="/about" style={{ fontSize: 12, fontWeight: 700, color: "#0044ff", textDecoration: "none" }}>Proof →</Link>
             </motion.div>
 
             {/* Headline */}
@@ -599,17 +599,17 @@ export default function Hero() {
               transition={{ duration: 1.0, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
               style={{ fontSize: "clamp(2.6rem, 6.5vw, 5.2rem)", fontWeight: 900, lineHeight: 1.05, letterSpacing: "-0.03em", color: "#111", margin: "0 0 18px 0" }}
             >
-              Build your<br /><span style={{ color: "#111" }}>brand system</span>
+              <span style={{ whiteSpace: "nowrap" }}>Stop blending in.</span><br /><span style={{ color: "#111" }}>Start owning it.</span>
             </motion.h1>
 
             {/* Sub-copy */}
             <motion.p
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 24 }} 
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.0, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
               style={{ fontSize: "clamp(0.95rem, 1.8vw, 1.1rem)", color: "#666", lineHeight: 1.65, marginBottom: 32, maxWidth: 440 }}
             >
-              Premium web experiences, brand identities, and growth strategies orchestrated for brands that demand excellence.
+              We build brands, websites, and campaigns that actually do something. Novel concept, we know.
             </motion.p>
 
             {/* CTA Buttons */}
@@ -625,7 +625,7 @@ export default function Hero() {
                 onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(0,0,0,0.05)"; e.currentTarget.style.borderColor = "rgba(0,0,0,0.3)"; }}
                 onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.borderColor = "rgba(0,0,0,0.18)"; }}
               >
-                Talk to VYCE experts
+                Talk to us (we&apos;re nice)
               </Link>
               <Link
                 href="/portfolio"

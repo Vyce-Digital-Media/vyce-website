@@ -7,7 +7,7 @@ const stats = [
   {
     value: 100,
     suffix: "+",
-    label: "Projects Delivered"
+    label: "Projects. All Delivered."
   },
   {
     value: 5,
@@ -18,12 +18,12 @@ const stats = [
   {
     value: 15,
     suffix: "+",
-    label: "Industries Served"
+    label: "Industries. Still Counting."
   },
   {
     value: 15,
     suffix: "+",
-    label: "Team Members"
+    label: "Team Members Who Actually Care"
   },
 ];
 

@@ -154,7 +154,7 @@ export default function ProductDesignPage() {
 
           <FadeIn delay={0.3} className="mt-8 max-w-2xl px-4">
             <p className="text-base md:text-xl text-foreground/50 font-medium leading-relaxed">
-              We design complex dashboards, onboarding flows, and internal tools that align business logic with human behavior.
+              If your onboarding flow needs a video tutorial, you haven&apos;t built a product — you&apos;ve built a puzzle. We design interfaces so frictionless that users feel smart for using them. That&apos;s the trick. That&apos;s also how you retain customers.
             </p>
           </FadeIn>
         </motion.div>
@@ -178,15 +178,15 @@ export default function ProductDesignPage() {
 
             <FadeIn delay={0.1}>
               <p className="text-xl text-foreground/60 font-medium leading-relaxed max-w-lg">
-                We don't just draw screens. We construct systemic design libraries that map directly to React components.
+                We don&apos;t hand you static mockups and disappear. We build complete design systems that map 1:1 with your components, so your engineering team can ship fast and your users can just… use the thing.
               </p>
             </FadeIn>
 
             <div className="space-y-6">
               {[
-                { title: "User Experience (UX)", desc: "Wireframes, flow charts, and usability tests focused on task completion rates." },
-                { title: "Design Systems", desc: "Tokenized Figma files that your engineering team will actually enjoy using." },
-                { title: "Interactive Prototypes", desc: "High-fidelity, clickable models to secure stakeholder buy-in before code." }
+                { title: "User Experience (UX)", desc: "Wireframes, user flows, and usability tests that ruthlessly eliminate every moment of friction between your user and their goal." },
+                { title: "Design Systems", desc: "Tokenized Figma component libraries that your devs will actually use instead of ignoring and reinventing on every sprint." },
+                { title: "Interactive Prototypes", desc: "High-fidelity, clickable prototypes to test assumptions and get stakeholder sign-off before a single line of code gets written." }
               ].map((item, i) => (
                 <FadeIn key={item.title} delay={0.2 + (i * 0.1)}>
                   <div className="border-l-2 border-primary/30 pl-6 py-2 hover:border-primary transition-colors duration-300">
@@ -231,12 +231,12 @@ export default function ProductDesignPage() {
           <div>
             <RevealLine>
               <h2 className="text-[clamp(2.5rem,6vw,8rem)] font-black uppercase tracking-tighter leading-[0.88]">
-                Ship less
+                Bad UX is a
               </h2>
             </RevealLine>
             <RevealLine delay={0.1}>
               <h2 className="text-[clamp(2.5rem,6vw,8rem)] font-satoshi font-normal italic text-primary leading-[0.88]">
-                Fiction.
+                silent churn machine. Switch it off.
               </h2>
             </RevealLine>
           </div>

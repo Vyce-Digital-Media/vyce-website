@@ -83,16 +83,16 @@ function HeroSection() {
       {/* Left Text */}
       <div ref={textRef} className="w-full md:w-1/2 px-8 md:px-20 z-10 relative">
         <RevealLine>
-          <span className="text-primary font-mono text-sm tracking-[0.2em] uppercase mb-6 block mt-8">Web Development and SEO</span>
+          <span className="text-primary font-mono text-sm tracking-[0.2em] uppercase mb-6 block mt-8">Stop Scrolling. Start Scaling.</span>
         </RevealLine>
         <RevealLine delay={0.1}>
           <h1 className="text-[clamp(3rem,6vw,7rem)] font-black uppercase tracking-tighter leading-[0.9]">
-            Nexus<br /><span className="font-satoshi italic font-normal text-white/50">Space.</span>
+            We didn't buy a $40 template.<br /><span className="font-satoshi italic font-normal text-white/50">We coded this while you slept.</span>
           </h1>
         </RevealLine>
         <RevealLine delay={0.2} className="mt-8">
           <p className="max-w-md text-foreground/60 text-lg">
-            Redefining spatial architecture through immersive webGL experiences and precision-crafted interfaces.
+            This is what happens when you stop hiring cheap freelancers and hire actual digital assassins.
           </p>
         </RevealLine>
 
@@ -329,7 +329,7 @@ function DescriptionSection() {
     return () => ctx.revert();
   }, []);
 
-  const text = "We approached this challenge by dismantling the conventional grid. Every element was designed to float, react, and breathe, creating an organic journey rather than a rigid layout. We approached this challenge by dismantling the conventional grid. Every element was designed to float, react, and breathe, creating an organic journey rather than a rigid layout. We approached this challenge by dismantling the conventional grid. Every element was designed to float, react, and breathe, creating an organic journey rather than a rigid layout.";
+  const text = "Most agencies just slap some colors together and call it a 'rebrand'. We ripped this company down to the studs, interrogated their business model, and built a digital weapon. We dug into the users, the competition, the deep inefficiencies. Then we built something that actually performs. Not just looks good in a mockup, but converts, retains, and scales. We don't do 'pretty'. We do 'profitable'. That's the difference between decoration and domination.";
   const words = text.split(" ");
 
   return (
@@ -568,7 +568,7 @@ function LightModeSection({ setGlobalTheme }: { setGlobalTheme: (theme: 'dark' |
         </RevealLine>
         <RevealLine delay={0.2}>
           <p className="text-black/60 text-base md:text-lg max-w-xl leading-relaxed">
-            How we moved from raw concept to a high-performance digital ecosystem in 12 weeks.
+            No guesswork. No pivoting at week 8. Just a clear, staged process where every sprint has a defined output.
           </p>
         </RevealLine>
       </div>
@@ -719,7 +719,7 @@ function CenteredGrowthSection({ setGlobalTheme }: { setGlobalTheme: (theme: 'da
           </h2>
 
           <Link href="/contact" className="group inline-flex items-center gap-4 rounded-full bg-white px-10 py-5 text-[11px] font-black uppercase tracking-[0.3em] text-black transition-all duration-300 hover:bg-primary hover:text-white hover:scale-105 active:scale-95">
-            Book Your Free Call Now
+            We're ready if you are.
             <ArrowUpRight size={18} className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
           </Link>
         </div>
@@ -820,7 +820,7 @@ function StrategySection() {
 
       <div ref={headingRef} className="flex flex-col items-center text-center mb-20 max-w-5xl mx-auto">
         <h2 className="text-[clamp(2.2rem,4.5vw,4.5rem)] font-black uppercase tracking-tighter leading-none mb-6">
-          Strategy &amp; <span className="font-satoshi italic font-normal text-white/25">Approach</span>
+          Our God-Complex <span className="font-satoshi italic font-normal text-white/25">Strategy</span>
         </h2>
         <p className="text-white/40 text-base md:text-lg max-w-xl leading-relaxed">
           This is where most agencies fail. We don&apos;t skip depth — every decision is traceable back to data, intent, and craft.
@@ -953,7 +953,7 @@ function ResultsSection() {
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col items-center text-center mb-24">
           <h2 className="text-[clamp(2.5rem,6vw,6rem)] font-black uppercase tracking-tighter leading-none mb-8">
-            Measured <span className="font-satoshi italic font-normal text-black/30">Impact</span>
+            Numbers Don't <span className="font-satoshi italic font-normal text-black/30">Lie. Ours Just Flex.</span>
           </h2>
           <div className="w-24 h-px bg-black/10" />
         </div>
@@ -1043,7 +1043,7 @@ function RelatedProjectsSection() {
         <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-8">
           <div className="max-w-xl text-left">
             <h2 className="text-[clamp(2.2rem,4.5vw,5rem)] font-black uppercase tracking-tighter leading-none">
-              Explore <span className="font-satoshi italic font-normal text-black/30">Related</span>
+              More <span className="font-satoshi italic font-normal text-black/30">Flexing</span>
             </h2>
           </div>
           <Link href="/portfolio" className="group flex items-center gap-4 text-[11px] font-black uppercase tracking-[0.3em] pb-2 border-b border-black/10 hover:border-black transition-colors">
@@ -1086,9 +1086,9 @@ function RelatedProjectsSection() {
                 <h3 className="text-3xl font-black uppercase tracking-tight text-black group-hover:text-primary transition-colors duration-300">
                   {project.title}
                 </h3>
-                <p className="mt-4 text-black/50 text-sm font-medium leading-relaxed max-w-sm">
-                  Pushing the boundaries of digital space with precision and immersive design.
-                </p>
+                  <p className="mt-4 text-black/50 text-sm font-medium leading-relaxed max-w-sm">
+                    Another project. Another brand that stopped blending in. Click to see how.
+                  </p>
               </div>
             </div>
           ))}

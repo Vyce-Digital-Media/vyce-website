@@ -56,9 +56,9 @@ export default function ScrollingText() {
   return (
     <section className="relative z-10 overflow-hidden bg-background py-16 md:py-24 lg:py-32">
       <div className="flex flex-col gap-0 -space-y-4 md:-space-y-8 lg:-space-y-12">
-        <RollingText text="Curious" direction="left" />
-        <RollingText text="Creative" direction="right" invert />
-        <RollingText text="Innovative" direction="left" />
+        <RollingText text="Scroll-stopping" direction="left" />
+        <RollingText text="Strategy-first" direction="right" invert />
+        <RollingText text="Results-obsessed" direction="left" />
       </div>
 
       {/* Background radial gradient to add depth */}

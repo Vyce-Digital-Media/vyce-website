@@ -314,7 +314,7 @@ export default function WebExperiencesPage() {
 
           <FadeIn delay={0.3} className="mt-8 max-w-2xl px-4">
             <p className="text-base md:text-xl text-foreground/50 font-medium leading-relaxed">
-              We engineer scalable, high-performance web applications that blur the line between immersive marketing and functional software.
+              Your website has one job: make people take action. If it&apos;s not doing that, it&apos;s not a website. It&apos;s a liability. We turn liabilities into your best-performing salesperson.
             </p>
           </FadeIn>
         </motion.div>
@@ -340,7 +340,7 @@ export default function WebExperiencesPage() {
             </RevealLine>
             <FadeIn delay={0.2} className="max-w-md">
               <p className="text-lg text-foreground/50 font-medium leading-relaxed">
-                Design without execution is just theory. We use battle-tested, edge-deployed technology to ensure lightning fast load times, robust SEO, and flawless accessibility scores.
+                Most agencies hand you a Figma file and wave goodbye. We engineer, deploy, and obsess over performance metrics until your site is genuinely embarrassing for your competitors to look at.
               </p>
             </FadeIn>
 
@@ -390,12 +390,12 @@ export default function WebExperiencesPage() {
           <div>
             <RevealLine>
               <h2 className="text-[clamp(2.5rem,6vw,8rem)] font-black uppercase tracking-tighter leading-[0.88]">
-                Ready for the
+                A bad website is
               </h2>
             </RevealLine>
             <RevealLine delay={0.1}>
               <h2 className="text-[clamp(2.5rem,6vw,8rem)] font-satoshi font-normal italic text-primary leading-[0.88]">
-                Deep End?
+                just an expensive apology.
               </h2>
             </RevealLine>
           </div>

@@ -58,24 +58,24 @@ export default function Home() {
               <div className="space-y-2">
                 <RevealLine>
                   <h2 className="text-6xl font-black uppercase tracking-tighter sm:text-7xl md:text-8xl lg:text-[10rem] leading-[0.85]">
-                    Precision
+                    Results
                   </h2>
                 </RevealLine>
                 <RevealLine delay={0.1}>
                   <h2 className="text-6xl font-black uppercase tracking-tighter sm:text-7xl md:text-8xl lg:text-[10rem] leading-[0.85]">
-                    <span className="font-satoshi font-normal italic text-primary/80 lowercase">Without</span>
+                    <span className="font-satoshi font-normal italic text-primary/80 lowercase">Not</span>
                   </h2>
                 </RevealLine>
                 <RevealLine delay={0.2}>
                   <h2 className="text-6xl font-black uppercase tracking-tighter sm:text-7xl md:text-8xl lg:text-[10rem] leading-[0.85]">
-                    Noise
+                    Excuses
                   </h2>
                 </RevealLine>
               </div>
 
               <FadeIn delay={0.3}>
                 <p className="max-w-2xl text-xl md:text-2xl text-foreground/50 font-medium leading-relaxed">
-                  We believe that the most impactful brands are built at the intersection of technical excellence and aesthetic restraint.
+                  The internet is already full of brands that look okay and do nothing. We refuse to add to the pile.
                 </p>
               </FadeIn>
 
@@ -106,10 +106,10 @@ export default function Home() {
               >
                 <div className="flex items-center gap-6">
                   <div className="text-2xl font-satoshi font-normal italic text-primary/40 transition-colors group-hover:text-primary">01</div>
-                  <h3 className="text-xl font-bold uppercase tracking-[0.3em]">Analytical Precision</h3>
+                  <h3 className="text-xl font-bold uppercase tracking-[0.3em]">We measure everything</h3>
                 </div>
                 <p className="text-foreground/45 leading-relaxed font-medium tracking-wide border-l border-border/40 pl-8 transition-colors group-hover:border-primary/40">
-                  Every interaction is engineered for performance. We remove traditional overhead to deliver websites that function as high-performance products.
+                  Gut feelings are great. Data-backed gut feelings are better. Every decision we make is grounded in numbers, not vibes — because your budget deserves better than someone's hunch.
                 </p>
               </motion.div>
 
@@ -122,10 +122,10 @@ export default function Home() {
               >
                 <div className="flex items-center gap-6">
                   <div className="text-2xl font-satoshi font-normal italic text-primary/40 transition-colors group-hover:text-primary">02</div>
-                  <h3 className="text-xl font-bold uppercase tracking-[0.3em]">Thoughtful Simplicity</h3>
+                  <h3 className="text-xl font-bold uppercase tracking-[0.3em]">We don&apos;t do pretty for the sake of pretty</h3>
                 </div>
                 <p className="text-foreground/45 leading-relaxed font-medium tracking-wide border-l border-border/40 pl-8 transition-colors group-hover:border-primary/40">
-                  Aesthetic luxury isn't about more; it's about less. We lean into negative space and rhythmic typography to let your brand's truth speak.
+                  Beautiful work that doesn't convert is decoration. We lean into restraint and strategy so your brand earns attention — and then keeps it.
                 </p>
               </motion.div>
             </div>
@@ -145,19 +145,19 @@ export default function Home() {
           <div className="space-y-2 flex flex-col justify-center text-center">
             <RevealLine>
               <h2 className="text-5xl font-black tracking-tighter sm:text-7xl md:text-8xl lg:text-[8rem] leading-[0.9]">
-                Your brand has potential.
+                Your brand is losing
               </h2>
             </RevealLine>
             <RevealLine delay={0.1}>
               <h2 className="text-5xl font-black tracking-tighter sm:text-7xl md:text-8xl lg:text-[8rem] leading-[0.9]">
-                <span className="font-satoshi font-normal italic text-primary">It just needs the right team behind it.</span>
+                <span className="font-satoshi font-normal italic text-primary">to worse brands with better marketing.</span>
               </h2>
             </RevealLine>
           </div>
 
           <FadeIn delay={0.2}>
             <p className="mx-auto max-w-2xl text-lg text-foreground/60 md:text-xl leading-relaxed font-medium">
-              Whether you're starting from zero or scaling from where you are - let's figure out what the right move actually is. No pitch deck. No pressure. Just a real conversation.
+              Annoying, isn't it? Let's do something about it. No pitch deck. No pressure. Just a call where we figure out exactly what's holding you back — and whether we're the ones to fix it.
             </p>
           </FadeIn>
 

@@ -36,9 +36,9 @@ const services = [
     icon: Send,
     iconColor: "rgba(255, 60, 0, 0.15)",
     summary:
-      "Posting without a strategy is just noise. There's enough of that already.",
+      "Posting without a strategy is just noise. We make yours impossible to scroll past.",
     description:
-      "Social media that works isn't about volume - it's about relevance. The right content, on the right platform, to the right audience, at the right time. We handle the strategy, the creation, and the execution so you can stop spending three hours on a reel that gets twelve likes.",
+      "We run social media like a precision operation — engineered content, zero cringe, and a distribution engine that makes the algorithm work for you. Strategy, creation, and community management. You focus on the business. We handle the audience.",
     deliverables: [
       "Monthly content strategy & calendar",
       "Reel & short-form video production",
@@ -54,9 +54,9 @@ const services = [
     icon: CodeXml,
     iconColor: "rgba(0, 200, 255, 0.15)",
     summary:
-      "If your website isn't bringing in leads, it's not a website. It's a bill you pay every year.",
+      "A beautiful website that doesn't convert is just expensive decoration. We fix that.",
     description:
-      "A website that looks great but doesn't convert is just expensive decoration. We design and build websites that do both - premium aesthetics and actual business performance. Fast load times, mobile-first, SEO-ready, and built with a clear conversion path so visitors know exactly what to do next.",
+      "We build WebGL-powered, fast, and meticulously crafted websites that turn visitors into customers. Not a template. Not a theme. A high-performance digital product engineered to make every second a visitor spends on it count.",
     deliverables: [
       "UX strategy & sitemap",
       "UI design (desktop + mobile)",
@@ -72,9 +72,9 @@ const services = [
     icon: BarChart,
     iconColor: "rgba(255, 200, 0, 0.15)",
     summary:
-      "Ads that don't return money aren't ads. They're donations to Meta and Google.",
+      "Ad spend without tracking is just a donation. We make every rupee accountable.",
     description:
-      "We've turned ₹2 lakhs in ad spend into ₹20 lakhs in sales. In one year. For one client. That's not luck - that's what happens when campaigns are built on proper strategy, tested creatives, and relentless optimization.",
+      "We run ROI-obsessed, data-driven campaigns — testing every creative, cutting what underperforms, and scaling what wins. No vanity metrics. No inflated reports. Just measurable revenue growth and a strategy that compounds over time.",
     deliverables: [
       "Campaign strategy & audience mapping",
       "Ad copy & creative production (static + video)",
@@ -90,9 +90,9 @@ const services = [
     icon: Palette,
     iconColor: "rgba(255, 60, 0, 0.15)",
     summary:
-      "Your brand is the first impression, the last memory, and everything in between.",
+      "Your brand is what people say about you when you're not in the room. Make it count.",
     description:
-      "Before anyone buys from you, they judge you. Logo, color, typography, tone of voice - all of it sends a signal before a single word is read. We make sure that signal says exactly what your business deserves to say.",
+      "We build identities that command attention from the first impression. Typography, colour systems, tone of voice — every detail engineered to position you exactly where you deserve to be, and make sure your audience never forgets you.",
     deliverables: [
       "Brand strategy & positioning",
       "Logo & visual identity system",
@@ -108,9 +108,9 @@ const services = [
     icon: Smartphone,
     iconColor: "rgba(180, 0, 255, 0.15)",
     summary:
-      "If users need a tutorial to understand your interface, something went wrong in the design phase.",
+      "Great design is invisible. Your users should just feel it working.",
     description:
-      "Good design is invisible. Users shouldn't notice the navigation - they should just effortlessly end up where they need to be. We design interfaces, app flows, dashboards, and product experiences that feel intuitive, not figuring-it-out.",
+      "We design interfaces, app flows, and dashboards that are intuitive enough to disappear — so your users stay focused on the outcome, not the interface. From wireframe to high-fidelity, we solve the hard design problems so you don't have to.",
     deliverables: [
       "User research & persona mapping",
       "UX flows & wireframes",
@@ -128,9 +128,9 @@ const services = [
     icon: Globe,
     iconColor: "rgba(0, 200, 255, 0.15)",
     summary:
-      "Your customers are searching for exactly what you offer. They're just finding your competitors first.",
+      "Page 1 doesn't happen by accident. It takes strategy, authority, and relentless execution.",
     description:
-      "SEO isn't magic and it isn't fast. But it is the most sustainable, compounding investment you can make in your brand's online visibility. We handle the technical foundation, the on-page optimization, the content strategy, and the link building - so you rank for searches that actually send you business.",
+      "We do technical, content-led, authority-building SEO that compounds over time. Fixing what's broken under the hood, creating content that ranks for the right keywords, and building the kind of domain authority that keeps you at the top — long after the campaign ends.",
     deliverables: [
       "Full SEO audit & strategy",
       "Technical SEO fixes",
@@ -147,19 +147,19 @@ const phases = [
     step: "01",
     title: "Project-Based",
     detail:
-      "A defined scope, a clear timeline, and a fixed deliverable. Ideal for brand builds, website launches, and one-time campaigns.",
+      "One clear brief. One focused engagement. We scope the work, execute at full intensity, and deliver something your industry will be talking about. Clean, contained, and done properly.",
   },
   {
     step: "02",
     title: "Retainer",
     detail:
-      "An ongoing partnership for consistent growth - monthly strategy, execution, and reporting. Ideal for social media, SEO, and performance marketing.",
+      "We become an extension of your team — monthly strategy, consistent execution, and the kind of compounding momentum that turns brands into market leaders. Long-term thinking. Measurable results.",
   },
   {
     step: "03",
     title: "Consultation",
     detail:
-      "A focused strategy session if you need direction before commitment. We'll tell you exactly what we'd do if it were our business.",
+      "You get our full attention, honest assessment, and a clear roadmap for what needs to change. No upselling. No fluff. Just expert perspective on where your strategy is leaking and how to fix it.",
   },
 ];
 
@@ -213,225 +213,119 @@ function FadeIn({
   );
 }
 
-// ─── Service Card (horizontal full-bleed rows with stagger) ──────────────
+// ─── Horizontal Service Gallery ─────────────────────────────────────────────────
 
-function ServiceRow({
-  service,
-  index,
-}: {
-  service: (typeof services)[0];
-  index: number;
-}) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const cardRef = useRef<HTMLDivElement>(null);
-  const bgRef = useRef<HTMLDivElement>(null);
-
-  // 3D tilt on hover
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const mouseXSpring = useSpring(x, { stiffness: 150, damping: 20 });
-  const mouseYSpring = useSpring(y, { stiffness: 150, damping: 20 });
-  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], [6, -6]);
-  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], [-6, 6]);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    x.set(e.clientX / rect.width - rect.left / rect.width - 0.5);
-    y.set(e.clientY / rect.height - rect.top / rect.height - 0.5);
-  };
-  const handleMouseLeave = () => {
-    x.set(0);
-    y.set(0);
-  };
-
-  const Icon = service.icon;
-  const isEven = index % 2 === 0;
-
-  useEffect(() => {
-    let ctx = gsap.context(() => {
-      if (bgRef.current) {
-        gsap.fromTo(
-          bgRef.current,
-          { y: "-10%" },
-          {
-            y: "10%",
-            ease: "none",
-            scrollTrigger: {
-              trigger: containerRef.current,
-              start: "top bottom",
-              end: "bottom top",
-              scrub: true,
-            },
-          }
-        );
-      }
-    }, containerRef);
-    return () => ctx.revert();
-  }, []);
-
+function ServiceGalleryCard({ service, index }: { service: typeof services[0], index: number }) {
   return (
-    <div
-      ref={containerRef}
-      className="group w-full max-w-[1600px] mx-auto px-4 md:px-0"
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
+    <Link 
+      href={service.href}
+      className="horizontal-card relative block cursor-pointer w-[85vw] md:w-[70vw] lg:w-[60vw] h-full flex-shrink-0 rounded-[40px] overflow-hidden border border-white/10 group shadow-2xl"
     >
-      <motion.div
-        ref={cardRef}
-        style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-        className="relative overflow-hidden rounded-[28px] border border-white/[0.06] bg-zinc-950 p-6 md:p-12 min-h-[280px] md:min-h-[340px] transition-all duration-700 hover:border-primary/25 hover:shadow-[0_40px_80px_-20px_rgba(0,10,30,0.8)] flex items-center justify-center"
-      >
-        <div
-          ref={bgRef}
-          className="absolute -inset-[20%] z-0 bg-gradient-to-br from-zinc-950 to-zinc-900/80 pointer-events-none"
-        />
+      {/* Background Parallax Image */}
+      <div className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
+        <div className="parallax-bg absolute inset-0 w-[130%] -left-[15%] h-full bg-cover bg-center" style={{ backgroundImage: `url(/hero${(index % 9) + 1}.webp)` }} />
+      </div>
 
-        {/* Animated glow */}
-        <div
-          className="absolute inset-0 z-0 opacity-0 transition-opacity duration-700 group-hover:opacity-100 mix-blend-screen pointer-events-none"
-          style={{
-            background: `radial-gradient(circle at ${isEven ? "20% 50%" : "80% 50%"}, ${service.iconColor.replace("0.15", "0.08")} 0%, transparent 60%)`,
-          }}
-        />
-
-        {/* Sweeping light */}
-        <motion.div
-          animate={{ x: ["-120%", "220%"] }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", repeatDelay: 2 }}
-          className="pointer-events-none absolute -top-1/2 left-0 h-[200%] w-1/3 bg-gradient-to-r from-transparent via-white/[0.025] to-transparent skew-x-[-25deg] z-0"
-        />
-
-        <div className={`relative z-10 flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-center ${isEven ? "" : "lg:flex-row-reverse"} max-w-7xl mx-auto`}>
-          {/* Left column */}
-          <div className="flex flex-col items-center text-center gap-8 lg:w-[45%]">
-            <div className="flex flex-col items-center justify-center gap-6">
-              <div
-                className="flex h-16 w-16 items-center justify-center rounded-2xl border border-white/10 text-primary transition-all duration-500 group-hover:scale-110 group-hover:border-primary/30"
-                style={{ background: service.iconColor }}
-              >
-                <Icon size={32} strokeWidth={1.5} />
-              </div>
-              <span className="font-satoshi text-[4rem] leading-none text-foreground/[0.2] md:text-[6rem]">
-                {service.num}
-              </span>
-            </div>
-
-            <div className="space-y-4">
-              <h2 className="text-3xl font-black uppercase tracking-tighter text-white md:text-5xl lg:text-6xl leading-[0.95]">
-                {service.title}
-              </h2>
-              <p className="text-lg font-medium leading-relaxed text-foreground/40 md:text-xl italic font-satoshi">
-                {service.summary}
-              </p>
-            </div>
-          </div>
-
-          {/* Vertical Divider */}
-          <div className="hidden lg:block w-px self-stretch bg-gradient-to-b from-transparent via-white/10 to-transparent mx-4" />
-
-          {/* Right column */}
-          <div className="flex flex-col items-center text-center gap-8 lg:flex-1">
-            <p className="text-sm border-white/5 pb-2 leading-relaxed text-foreground/55 md:text-base lg:text-lg font-medium tracking-tight">
-              {service.description}
-            </p>
-
-            <div className="w-full">
-              <p className="mb-4 text-[10px] font-bold uppercase tracking-[0.6em] text-primary/40">
-                Typical Deliverables
-              </p>
-              <ul className="flex flex-wrap justify-center gap-x-8 gap-y-4">
-                {service.deliverables.map((d) => (
-                  <li key={d} className="flex items-center gap-3">
-                    <CheckCircle2
-                      size={16}
-                      className="flex-shrink-0 text-primary/40"
-                      strokeWidth={2}
-                    />
-                    <span className="text-base font-medium text-foreground/45 transition-colors duration-300 group-hover:text-foreground/70">
-                      {d}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="mt-4">
-              <Link
-                href={service.href}
-                className="group/btn inline-flex items-center gap-3 rounded-full bg-primary/10 border border-primary/20 px-8 py-4 text-[10px] font-black uppercase tracking-[0.2em] text-primary transition-all duration-500 hover:bg-primary hover:text-background hover:scale-105"
-              >
-                View More
-                <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
-              </Link>
-            </div>
-          </div>
+      {/* Content */}
+      <div className="relative z-10 flex flex-col justify-between h-full w-full pointer-events-none">
+        {/* Top: Title */}
+        <div className="w-full p-8 md:p-14">
+          <h2 className="text-4xl font-black uppercase tracking-tighter text-white md:text-6xl lg:text-7xl leading-[0.95] max-w-3xl drop-shadow-2xl">
+            {service.title}
+          </h2>
         </div>
-      </motion.div>
-    </div>
+
+        {/* Bottom: Description (Full width, fades in/out based on center position) */}
+        <div className="service-text w-full mt-auto opacity-0 translate-y-[40px] bg-gradient-to-t from-[#09090b] via-[#09090b]/80 to-transparent pt-24 pb-8 px-8 md:pt-40 md:pb-14 md:px-14">
+          <p className="text-sm md:text-lg lg:text-xl leading-relaxed text-white/95 font-medium tracking-tight drop-shadow-md w-full">
+            {service.description}
+          </p>
+        </div>
+      </div>
+    </Link>
   );
 }
 
-// ─── Page ─────────────────────────────────────────────────────────────────
-
-function DeckingCards({ servicesList, titleNode }: { servicesList: typeof services; titleNode: React.ReactNode }) {
+function HorizontalServiceGallery({ servicesList, titleNode }: { servicesList: typeof services; titleNode: React.ReactNode }) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const scrollSectionRef = useRef<HTMLDivElement>(null);
+  const scrollWrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     let ctx = gsap.context(() => {
-      const cards = gsap.utils.toArray<HTMLElement>('.deck-card');
+      const cards = gsap.utils.toArray<HTMLElement>(".horizontal-card");
 
-      const tl = gsap.timeline({
+      const getScrollAmount = () => {
+        let scrollWidth = scrollWrapperRef.current?.scrollWidth || 0;
+        return scrollWidth - window.innerWidth;
+      };
+
+      const tween = gsap.to(cards, {
+        xPercent: -100 * (cards.length - 1),
+        ease: "none",
         scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 12%", // Pin when the title reaches the top
-          end: `+=${cards.length * 90}%`,
+          trigger: scrollSectionRef.current,
           pin: true,
-          scrub: 1, // Slight scrub delay for smoother feeling
+          scrub: 1,
+          end: () => `+=${getScrollAmount()}`,
         }
       });
 
+      // Parallax effect and text animations inside the cards
       cards.forEach((card, i) => {
-        if (i > 0) {
-          // Add a label for this card's entrance
-          tl.addLabel(`card-${i}`);
+        const img = card.querySelector('.parallax-bg');
+        if (img) {
+          gsap.fromTo(img, 
+            { xPercent: -15 },
+            { 
+              xPercent: 15, 
+              ease: "none", 
+              scrollTrigger: {
+                trigger: card,
+                containerAnimation: tween,
+                start: "left right",
+                end: "right left",
+                scrub: true,
+              }
+            }
+          );
+        }
 
-          // Card enters from bottom
-          tl.from(card, {
-            y: window.innerHeight,
-            ease: "power2.out"
-          }, `card-${i}`);
-
-          // Simultaneously scale down ALL previous cards
-          for (let j = 0; j < i; j++) {
-            tl.to(cards[j], {
-              scale: "-=0.04", // Shrink further with each new card
-              y: "-=15",      // Move up slightly with each new card
-              opacity: "-=0.15", // Dim further with each new card
-              ease: "power2.out"
-            }, `card-${i}`);
-          }
+        const textBlock = card.querySelector('.service-text');
+        if (textBlock) {
+          gsap.to(textBlock, {
+            y: 0,
+            opacity: 1,
+            duration: 0.6,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: card,
+              containerAnimation: tween,
+              start: "center 75%", // Triggers when the card center hits 75% of viewport width
+              end: "center 25%",   // Triggers leave when card center passes 25% of viewport width
+              toggleActions: "play reverse play reverse", // Fades out before the next card comes in
+            }
+          });
         }
       });
+
     }, containerRef);
     return () => ctx.revert();
   }, [servicesList]);
 
   return (
-    <div ref={containerRef} className="relative w-full hidden md:block">
-      {/* Pinned Title Layer */}
-      {titleNode}
+    <div ref={containerRef} className="relative w-full bg-zinc-950 overflow-hidden pb-32">
+      {/* Title */}
+      <div className="pt-24 pb-12 w-full flex justify-center text-center">
+         {titleNode}
+      </div>
 
-      {/* Pinned Stacking Cards Layer */}
-      <div className="relative h-[75vh] w-full mt-0 lg:-mt-4">
-        {servicesList.map((service, index) => (
-          <div
-            key={service.num}
-            className="deck-card absolute w-full top-0 left-0"
-            style={{ zIndex: index + 1 }}
-          >
-            <ServiceRow service={service} index={index} />
-          </div>
-        ))}
+      <div ref={scrollSectionRef} className="h-screen flex items-center overflow-hidden bg-zinc-950">
+        <div ref={scrollWrapperRef} className="flex h-[75vh] px-[5vw] gap-12 w-[fit-content] items-center">
+          {servicesList.map((service, index) => (
+             <ServiceGalleryCard key={service.num} service={service} index={index} />
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -493,19 +387,19 @@ export default function ServicesPage() {
           <div className="space-y-2">
             <RevealLine>
               <h1 className="text-[clamp(2rem,5.5vw,6.5rem)] font-black uppercase tracking-tighter leading-[0.88]">
-                Six ways we make your
+                Built for brands that
               </h1>
             </RevealLine>
             <RevealLine delay={0.1}>
               <h1 className="text-[clamp(2rem,5.5vw,6.5rem)] font-satoshi font-normal italic text-primary leading-[0.88]">
-                brand impossible to ignore.
+                refuse to be ignored.
               </h1>
             </RevealLine>
           </div>
 
           <FadeIn delay={0.3} className="max-w-2xl">
             <p className="text-base md:text-xl text-foreground/40 font-medium leading-relaxed mb-16">
-              Strategy. Design. Content. Web. Ads. SEO. We do all of it. Together. Under one roof. So your entire digital presence actually makes sense - instead of looking like six different teams all doing their own thing.
+              We don&apos;t sell packages. We sell outcomes. Strategy, design, code, and content — executed without hand-holding, pointless meetings, or a single mediocre deliverable. You bring the ambition. We bring the rest.
             </p>
           </FadeIn>
 
@@ -515,37 +409,19 @@ export default function ServicesPage() {
       </section>
 
       {/* ── 01. SERVICE CARDS ─────────────────────────────────────── */}
-      <section className="relative px-6 py-24 md:px-12 lg:px-20 bg-zinc-950/30 overflow-hidden">
-        <div className="mx-auto max-w-[1600px]">
-          <DeckingCards
-            servicesList={services}
-            titleNode={
-              <div className="mb-16 flex justify-center w-full text-center">
-                <RevealLine>
-                  <h2 className="text-5xl font-black uppercase tracking-tighter leading-[0.9] md:text-7xl flex flex-wrap items-center justify-center gap-4">
-                    What We Do <span className="font-satoshi font-normal italic text-primary mb-2 md:mb-0">Best.</span>
-                  </h2>
-                </RevealLine>
-              </div>
-            }
-          />
-
-          {/* Fallback for mobile since pinning is better on desktop */}
-          <div className="relative md:hidden flex flex-col gap-8 pb-12 mt-16">
+      <section className="relative bg-zinc-950 overflow-hidden">
+        <HorizontalServiceGallery
+          servicesList={services}
+          titleNode={
             <div className="mb-8 flex justify-center w-full text-center">
               <RevealLine>
-                <h2 className="text-5xl font-black uppercase tracking-tighter leading-[0.9] flex flex-wrap items-center justify-center gap-3">
-                  What We Do <span className="font-satoshi font-normal italic text-primary mt-1 md:mt-0">Best.</span>
+                <h2 className="text-5xl font-black uppercase tracking-tighter leading-[0.9] md:text-7xl flex flex-wrap items-center justify-center gap-4">
+                  What We Do <span className="font-satoshi font-normal italic text-primary mb-2 md:mb-0">Best.</span>
                 </h2>
               </RevealLine>
             </div>
-            {services.map((service, index) => (
-              <ServiceRow key={service.num} service={service} index={index} />
-            ))}
-          </div>
-        </div>
-
-
+          }
+        />
       </section>
 
       {/* ── 02. PROCESS ───────────────────────────────────────────── */}
@@ -560,13 +436,13 @@ export default function ServicesPage() {
               <p className="text-[10px] font-bold uppercase tracking-[0.5em] text-primary">Engagements</p>
               <h2 className="text-5xl font-black uppercase tracking-tighter leading-[0.9] md:text-7xl">
                 How <br />
-                <span className="font-satoshi font-normal italic text-primary/80">Engagements</span> <br />
-                Work.
+                <span className="font-satoshi font-normal italic text-primary/80">We Work</span> <br />
+                (Mercilessly).
               </h2>
             </div>
             <FadeIn delay={0.2}>
               <p className="max-w-md text-lg text-foreground/40 font-medium leading-relaxed">
-                Every engagement starts with understanding your actual situation - your goal, your timeline, your budget, and what success looks like for you specifically. Then we recommend what makes the most sense.
+                No decks that look impressive but say nothing. We diagnose what&apos;s broken, quote what it costs to fix it, and then execute until the results make you slightly emotional. Three engagement models. All lethal.
               </p>
             </FadeIn>
 
@@ -678,16 +554,16 @@ export default function ServicesPage() {
 
                   <RevealLine>
                     <h2 className="text-2xl font-black uppercase tracking-tighter leading-[0.9] md:text-6xl">
-                      Not sure which services you need?
+                      Not sure where to start?
                       <span className="font-satoshi font-normal italic text-primary">
-                        That's exactly what the first conversation is for.
+                        That&apos;s exactly why we exist.
                       </span>
                     </h2>
                   </RevealLine>
 
                   <FadeIn delay={0.2}>
                     <p className="text-lg leading-relaxed text-foreground/45 md:text-xl">
-                      Bring us the problem. We'll figure out the solution - together, honestly, without pushing you toward something you don't need.
+                      Dump your mess on us. We&apos;ll sort through the wreckage, tell you what&apos;s salvageable, and build something your competitors will spend months trying to reverse-engineer. No fluff. No bloated retainers. Just ruthless output.
                     </p>
                   </FadeIn>
 

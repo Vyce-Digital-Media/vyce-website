@@ -18,29 +18,29 @@ import MagneticButton from "@/components/ui/MagneticButton";
 const coreValues = [
   {
     num: "01",
-    title: "We work with you. Not just for you.",
-    body: "A project isn't a transaction. We treat your business like we have skin in the game - because our reputation depends directly on your results. When you win, we both win. Simple.",
+    title: "We're invested. Not just hired.",
+    body: "A project isn't a transaction. We treat your business like we have actual skin in the game — because our reputation depends directly on your results. When you win, we both win. When you don't, we lose sleep about it.",
     image:
       "https://images.unsplash.com/photo-1551434678-e076c223a692?w=720&h=900&fit=crop&q=80",
   },
   {
     num: "02",
-    title: "Long relationships over quick wins. ",
-    body: "Our best clients have been with us for years. Not because we locked them in with retainer contracts, but because we kept showing up and delivering value they didn't expect. That's the goal every single time.",
+    title: "Long relationships. Not quick invoices.",
+    body: "Our best clients have been with us for years. Not because of lock-in contracts, but because we kept showing up, kept delivering, and kept giving a damn. That's the goal every single time.",
     image:
       "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=720&h=900&fit=crop&q=80",
   },
   {
     num: "03",
-    title: "Strategy first. Always.",
-    body: "Pretty content that doesn't convert is expensive decoration. Beautiful websites that don't rank are digital brochures. Everything we build is working toward a real business outcome - not just looking good on a portfolio.",
+    title: "Strategy first. Pretty second. Always.",
+    body: "Pretty content that doesn't convert is expensive decoration. Beautiful websites that don't rank are digital brochures. Everything we build is working toward a real business outcome — not just looking good on a portfolio.",
     image:
       "https://images.unsplash.com/photo-1558655146-364adaf1fcc9?w=720&h=900&fit=crop&q=80",
   },
   {
     num: "04",
-    title: "Straight talk. Even when it's uncomfortable.",
-    body: "If something won't work, we'll tell you before you spend money finding out. If there's a better way, we'll find it. We're not here to just say yes - we're here to give you the right answer.",
+    title: "Honest. Even when it hurts a little.",
+    body: "If something won't work, we'll say it before you spend the money finding out the hard way. We're not here to just agree with everything you say. We're here to give you the right answer — which is occasionally inconvenient.",
     image:
       "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=720&h=900&fit=crop&q=80",
   },
@@ -49,25 +49,25 @@ const coreValues = [
 const milestones = [
   {
     year: "Day One",
-    text: "Two founders. One vision. Zero clients. A lot of belief that this was worth doing.",
+    text: "Two founders. One strong opinion that most agencies were doing it wrong. Zero clients. A laptop and a lot of energy.",
     image:
       "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=720&h=900&fit=crop&q=80",
   },
   {
     year: "Early Days",
-    text: "First brands - local businesses that needed someone to actually care about their growth, not just their deliverables.",
+    text: "First clients — local businesses that needed someone who actually cared about their growth, not just their deliverables. They stuck around.",
     image:
       "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=720&h=900&fit=crop&q=80",
   },
   {
     year: "The Expansion",
-    text: "Services grew. Team grew. Results got louder. Referrals started rolling in before we even asked for them.",
+    text: "Services grew. Team grew. Results got loud. Referrals started arriving before we even asked for them. That's when we knew we were onto something.",
     image:
       "https://images.unsplash.com/photo-1573164713988-8665fc963095?w=720&h=900&fit=crop&q=80",
   },
   {
     year: "Now",
-    text: "15+ team members. 100+ projects. Clients across India and internationally. And a referral rate that makes us more grateful than smug.",
+    text: "15+ team members. 100+ projects. Clients across India and internationally. And a referral rate that makes our sales team irrelevant.",
     image:
       "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=720&h=900&fit=crop&q=80",
   },
@@ -89,10 +89,10 @@ const teamMembers = [
 ];
 
 const whyVyce = [
-  "Always invested in your success — not a one-time interaction",
-  "Full-stack creativity: strategy, design, and motion under one roof",
-  "We move at your pace, always",
-  "You're with us from day one — transparent throughout",
+  "You talk to the founders, not a third-party account manager",
+  "Strategy, design, content, web, ads — all connected, all under one roof",
+  "We say no when no is the right answer",
+  "Our clients stay because we keep delivering, not because contracts say so",
 ];
 
 // ─── Sub-components ─────────────────────────────────────────────────────────
@@ -369,19 +369,19 @@ export default function AboutPage() {
           <div className="space-y-2">
             <RevealLine>
               <h1 className="text-[clamp(1.8rem,5vw,5.5rem)] font-black uppercase tracking-tighter leading-[1]">
-                We started because <br /> we kept watching
+                We got tired of watching
               </h1>
             </RevealLine>
             <RevealLine delay={0.1}>
               <h1 className="text-[clamp(1.8rem,5vw,5.5rem)] font-satoshi font-normal italic text-primary leading-[1]">
-                great businesses get <br /> completely ignored online.
+                good businesses get<br /> digitally ghosted.
               </h1>
             </RevealLine>
           </div>
 
           <FadeIn delay={0.3} className="max-w-xl">
             <p className="text-base md:text-lg text-foreground/40 font-medium leading-relaxed">
-              Turns out, the problem was never the product. It was the digital presence. So we built Vyce - and then we got to work.
+              Great product. Terrible online presence. Losing to competitors with mediocre products and better marketing. We've seen it a thousand times. We built Vyce to fix it.
             </p>
           </FadeIn>
         </motion.div>
@@ -430,16 +430,16 @@ export default function AboutPage() {
                   </h3>
                   <div className="max-w-2xl">
                     <p className="text-lg md:text-xl text-foreground/50 font-medium leading-[1.6] tracking-tight">
-                      Alok and Niraj started Vyce Digital Media out of Surat because they kept seeing the same thing — businesses with real value, real products, and real founders behind them, losing to competitors with better marketing. <span className="text-white">Not better products. Better marketing.</span>
+                      Alok and Niraj started Vyce Digital Media out of Surat because they kept seeing the same thing — businesses with genuinely better products losing to competitors who just marketed better. <span className="text-white">Not a better product. Better marketing.</span>
                     </p>
                     <p className="mt-8 text-lg md:text-xl text-foreground/50 font-medium leading-[1.6] tracking-tight">
-                      That felt wrong. So they decided to do something about it.
+                      That felt deeply unfair. So they decided to do something about it.
                     </p>
                     <p className="mt-8 text-lg md:text-xl text-foreground/50 font-medium leading-[1.6] tracking-tight">
-                      Vyce was built to close that gap. To make sure the quality of your business matches — and eventually exceeds — the quality of how it shows up online. <span className="text-white">One brand, one strategy, one proper digital presence at a time.</span>
+                      Vyce was built to level that playing field. To make sure the quality of your business actually matches — and then exceeds — how it shows up online. <span className="text-white">One brand at a time. Done properly.</span>
                     </p>
                     <p className="mt-8 text-lg md:text-xl text-foreground/50 font-medium leading-[1.6] tracking-tight">
-                      Three years and 100+ clients later, the frustration turned into a methodology. <span className="text-primary font-bold">And the methodology turned into results.</span>
+                      100+ clients and several years later, the frustration became a methodology. <span className="text-primary font-bold">And the methodology became results you can actually measure.</span>
                     </p>
                   </div>
                 </div>
@@ -589,8 +589,8 @@ export default function AboutPage() {
 
           <div className="mt-20 grid gap-6 md:grid-cols-2">
             {[
-              { label: "Mission", headline: "Make sure every brand we work with competes at the level it deserves - not the level its marketing currently allows." },
-              { label: "Vision", headline: "A world where ambition and digital presence are always in alignment. (We're working on it. One brand at a time.)" },
+              { label: "Mission", headline: "Make sure every brand we work with competes at the level it deserves — not the level its current marketing allows." },
+              { label: "Vision", headline: "A world where the best businesses actually win. Not just the ones with the biggest ad budgets. (We're working on it.)" },
             ].map((card, i) => (
               <FadeIn key={card.label} delay={i * 0.15}>
                 <div className="group relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-zinc-950 to-zinc-900 p-12 transition-all duration-500 hover:border-primary/30">
@@ -714,7 +714,7 @@ export default function AboutPage() {
             </RevealLine>
             <FadeIn delay={0.2} className="mt-8">
               <p className="max-w-xl text-lg text-foreground/40 font-medium leading-relaxed">
-                The two people who will actually know your brand. (Not account managers. Not interns. Them.)
+                The two people who will actually know your brand. Not account managers. Not interns. The actual founders who built the strategy and care whether it works.
               </p>
             </FadeIn>
           </div>
@@ -734,14 +734,14 @@ export default function AboutPage() {
         <div className="mx-auto max-w-[1500px] w-full grid gap-12 lg:grid-cols-[1.3fr_0.7fr] items-center">
           <div className="space-y-12">
             <div>
-              <RevealLine className="mt-4">
+              <RevealLine>
                 <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter leading-[0.9]">
-                  A lot of agencies exist.
+                  Most agencies talk.
                 </h2>
               </RevealLine>
               <RevealLine delay={0.1}>
                 <h2 className="text-5xl md:text-7xl pb-2 font-satoshi font-normal italic text-primary leading-[0.9]">
-                  Here&apos;s what makes this one different.
+                  Here&apos;s what we actually do differently.
                 </h2>
               </RevealLine>
             </div>
@@ -757,24 +757,24 @@ export default function AboutPage() {
               <div className="relative">
                 {[
                   {
-                    agency: "Finish the project, send the invoice, disappear",
+                    agency: "Deliver the project, send the invoice, vanish",
                     vyce: "Stay in the loop. Flag opportunities. Keep showing up."
                   },
                   {
                     agency: "Assign you an account manager who barely knows your brand",
-                    vyce: "Give you direct access to the founders and leads who built your strategy"
+                    vyce: "Direct access to the founders who built your strategy"
                   },
                   {
-                    agency: "One service, multiple vendors",
-                    vyce: "Branding, social, web, ads, SEO - all in one place, all connected"
+                    agency: "One service, multiple scattered vendors",
+                    vyce: "Branding, social, web, ads, SEO — all in one place, all actually connected"
                   },
                   {
-                    agency: "We'll do what you ask for",
-                    vyce: "Here's what you actually need, and here's why"
+                    agency: "\"We'll do whatever you ask for\"",
+                    vyce: "\"Here's what you actually need, and here's why\""
                   },
                   {
-                    agency: "Quarterly check-in calls",
-                    vyce: "Real relationships. Ongoing conversation."
+                    agency: "Quarterly check-in calls you have to chase",
+                    vyce: "Real conversations. Proactive updates. No chasing."
                   }
                 ].map((row, i) => (
                   <motion.div

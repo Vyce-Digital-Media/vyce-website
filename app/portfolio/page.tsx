@@ -201,16 +201,16 @@ export default function PortfolioPage() {
           <FadeIn>
             <span className="inline-flex items-center gap-3 rounded-full border border-white/10 px-5 py-2 mt-8 text-[10px] font-bold uppercase tracking-[0.4em] text-foreground/40 bg-white/5 backdrop-blur-md">
               <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
-              Focus & Detail
+              No Fake Mockups. Just Raw Dominance.
             </span>
           </FadeIn>
           <div className="space-y-2">
-            <RevealLine><h1 className="text-[clamp(3.5rem,10vw,12rem)] font-black uppercase tracking-tighter leading-[0.88]">Our Portfolio</h1></RevealLine>
-            <RevealLine delay={0.1}><h1 className="text-[clamp(3.5rem,10vw,12rem)] font-satoshi font-normal italic text-primary leading-[0.88]">Revealed.</h1></RevealLine>
+            <RevealLine><h1 className="text-[clamp(3.5rem,10vw,12rem)] font-black uppercase tracking-tighter leading-[0.88]">Talk is cheap.</h1></RevealLine>
+            <RevealLine delay={0.1}><h1 className="text-[clamp(3.5rem,10vw,12rem)] font-satoshi font-normal italic text-primary leading-[0.88]">Look at the receipts.</h1></RevealLine>
           </div>
           <FadeIn delay={0.3} className="max-w-2xl mt-6">
             <p className="text-base md:text-xl text-foreground/40 font-medium leading-relaxed">
-              We present our case studies with extreme focus. Scroll down to cycle through each project, one by one.
+              We didn't just 'make these look pretty.' We resurrected dead brands, hijacked search rankings, and made clients stupid amounts of money. Scroll and weep.
             </p>
           </FadeIn>
         </motion.div>
@@ -318,11 +318,11 @@ export default function PortfolioPage() {
               <div className="absolute -right-10 top-0 h-4 w-4 bg-primary animate-pulse" />
             </div>
             <p className="mt-8 text-xl text-white/40 max-w-2xl mx-auto font-medium leading-relaxed">
-              Partner with us to create digital experiences that command attention completely.
+              Your brand could be our next masterpiece. Or we could work for your competitor and ruin your life. Your call.
             </p>
             <div className="mt-12">
               <Link href="/contact" className="group inline-flex items-center gap-4 rounded-full bg-white px-10 py-5 text-[11px] font-black uppercase tracking-[0.3em] text-black transition-all duration-500 hover:bg-primary active:scale-95">
-                Start Yours
+                Stop Waiting
                 <ArrowUpRight size={16} className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
               </Link>
             </div>

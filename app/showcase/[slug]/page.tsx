@@ -422,7 +422,7 @@ function FloatingGallery() {
       </div>
 
       {/* CENTER */}
-      <div className="absolute top-[75%] left-[50%] -translate-x-1/2 w-[320px] md:w-[450px] aspect-video float-wrapper z-30" data-speed="1.2">
+      <div className="absolute top-[65%] left-[50%] -translate-x-1/2 w-[260px] md:w-[320px] aspect-[4/5] float-wrapper z-30" data-speed="1.2">
         <motion.div
           drag dragConstraints={{ top: -150, bottom: 150, left: -200, right: 200 }} dragElastic={0.1}
           whileHover={{ scale: 1.02 }} whileDrag={{ scale: 1.1, rotate: -1, zIndex: 50, cursor: "grabbing" }}
@@ -546,16 +546,16 @@ function LightModeSection({ setGlobalTheme }: { setGlobalTheme: (theme: 'dark' |
     <section ref={sectionRef} className="pt-30 px-8 md:px-20 relative z-30 transition-colors duration-1000">
       <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center text-center">
         <RevealLine>
-          <span className="text-current font-mono text-xs uppercase tracking-[0.3em] opacity-40 mb-8 block">The Architecture</span>
+          <span className="text-current font-mono text-xs uppercase tracking-[0.3em] opacity-40 mb-8 block">The Autopsy</span>
         </RevealLine>
         <RevealLine delay={0.1}>
           <h2 className="text-[clamp(2.5rem,4.5vw,4.5rem)] font-black uppercase tracking-tighter leading-none mb-6">
-            Project <span className="font-satoshi italic font-normal text-black/20 px-4">Execution</span>
+            How We <span className="font-satoshi italic font-normal text-black/20 px-4">Pulled It Off</span>
           </h2>
         </RevealLine>
         <RevealLine delay={0.2}>
           <p className="text-black/60 text-base md:text-lg max-w-xl leading-relaxed">
-            How we moved from raw concept to a high-performance digital ecosystem in 12 weeks.
+            No excuses. No 'the dog ate my code'. Just military-grade execution shipped on time. Deal with it.
           </p>
         </RevealLine>
       </div>
@@ -648,7 +648,7 @@ function CenteredGrowthSection({ setGlobalTheme }: { setGlobalTheme: (theme: 'da
         className="w-[30vw] md:w-[20vw] aspect-[4/5] rounded-[24px] overflow-hidden relative shadow-2xl"
       >
         <img
-          src={project.cta.bgImage}
+          src={project.hero.bgImage}
           alt="Center Growth"
           className="w-full h-full object-cover scale-110"
         />
@@ -707,7 +707,7 @@ function CenteredGrowthSection({ setGlobalTheme }: { setGlobalTheme: (theme: 'da
           </h2>
 
           <Link href="/contact" className="group inline-flex items-center gap-4 rounded-full bg-white px-10 py-5 text-[11px] font-black uppercase tracking-[0.3em] text-black transition-all duration-300 hover:bg-primary hover:text-white hover:scale-105 active:scale-95">
-            Book Your Free Call Now
+            Click here before your competitor does.
             <ArrowUpRight size={18} className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
           </Link>
         </div>
@@ -1019,9 +1019,9 @@ function RelatedProjectsSection() {
               </Link>
 
               <div className="rp-content mt-10 px-6 text-left">
-                <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-black/40 mb-3 block">
-                  {project.industry}
-                </span>
+                  <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-white/40 block mb-2">
+                    {project.category}
+                  </span>
                 <h3 className="text-3xl font-black uppercase tracking-tight text-black group-hover:text-primary transition-colors duration-300">
                   {project.title}
                 </h3>

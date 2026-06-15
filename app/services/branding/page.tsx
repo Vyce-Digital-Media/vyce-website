@@ -16,23 +16,23 @@ import * as THREE from "three";
 const processSteps = [
   {
     phase: "01 // Immersion",
-    title: "Understanding the Core",
-    description: "We don't start with moodboards. We start with stakeholder interviews, landscape analysis, and uncovering the actual narrative you're trying to tell versus the one you're currently projecting.",
+    title: "We actually listen first",
+    description: "No moodboards on day one. No Pinterest boards of other people's brands. We conduct brutal stakeholder interviews, dissect your market, and diagnose the gap between the story you're telling and the one people are actually hearing. Most agencies skip this step. That's why most rebrands fail.",
   },
   {
     phase: "02 // Strategy",
     title: "Positioning & Voice",
-    description: "Defining the unshakeable foundation: verbal identity, core archetype, and strategic positioning. If the words don't work, the visuals won't matter.",
+    description: "If the words don't land, the logo won't save you. We define your verbal identity, strategic positioning, and brand archetype before anyone opens Figma. Strategy isn't a slide deck. It's the foundation that stops everything else from collapsing six months later.",
   },
   {
     phase: "03 // Expression",
     title: "Visual Systems",
-    description: "Crafting the visual language. Logo suites, typography stacks, color logic, and compositional systems that scale from a tiny favicon to a Times Square billboard.",
+    description: "Now we design. Logo suites that scale from 16px to a building-sized billboard. Typography stacks. Color logic. Compositional systems. Not pretty for the sake of pretty — functional, bulletproof, and unmistakably yours.",
   },
   {
     phase: "04 // Rollout",
     title: "Guidelines & Governance",
-    description: "Creating the rulebook. In-depth brand guidelines (PDF or living web portals) ensuring your internal teams never dilute the craft we've built together.",
+    description: "We hand over a rulebook your team will actually open. Detailed brand guidelines — as a polished PDF or a living web portal — so that nobody ever accidentally destroys what we built together through laziness, good intentions, or an intern with Canva.",
   }
 ];
 
@@ -306,7 +306,7 @@ export default function BrandingPage() {
 
           <FadeIn delay={0.3} className="mt-8 max-w-2xl px-4">
             <p className="text-base md:text-xl text-foreground/50 font-medium leading-relaxed">
-              We design visual systems and verbal unshakeability that command attention and sustain trust across every medium.
+              Your logo is not your brand. Your Instagram grid is not your brand. Your brand is what people say about you in the group chat when you&apos;re not in it. Let&apos;s make sure that conversation is worth having.
             </p>
           </FadeIn>
         </motion.div>
@@ -325,11 +325,11 @@ export default function BrandingPage() {
         <div className="mx-auto max-w-[1600px] grid lg:grid-cols-2 gap-20 items-center">
           <div>
             <RevealLine>
-              <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-none mb-6">Built To <br /><span className="italic font-satoshi font-normal text-primary">Last.</span></h2>
+              <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-none mb-6">Built To <br /><span className="italic font-satoshi font-normal text-primary">Outlast Trends.</span></h2>
             </RevealLine>
             <FadeIn delay={0.1}>
               <p className="text-lg text-foreground/50 leading-relaxed font-medium max-w-md">
-                A brand is not a logo. It’s an operating system for your company's perception. We engineer brands that act as moats, driving measurable equity and customer loyalty.
+                Logos fade. Trends expire. A brand built on genuine strategy outlasts all of it — across platforms, across years, across every economic mood swing your industry throws at you.
               </p>
             </FadeIn>
           </div>
@@ -375,12 +375,12 @@ export default function BrandingPage() {
           <div>
             <RevealLine>
               <h2 className="text-[clamp(2.5rem,6vw,8rem)] font-black uppercase tracking-tighter leading-[0.88]">
-                Define Your
+                Bland brands
               </h2>
             </RevealLine>
             <RevealLine delay={0.1}>
               <h2 className="text-[clamp(2.5rem,6vw,8rem)] pb-4 font-satoshi font-normal italic text-primary leading-[0.88]">
-                Legacy.
+                get forgotten. Build one that haunts.
               </h2>
             </RevealLine>
           </div>

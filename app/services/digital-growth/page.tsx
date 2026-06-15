@@ -136,7 +136,7 @@ export default function DigitalGrowthPage() {
 
             <FadeIn delay={0.3} className="mt-8 max-w-xl">
               <p className="text-base md:text-xl text-foreground/50 font-medium leading-relaxed">
-                We design and engineer launch narratives, high-converting landing systems, and sophisticated instrumentation so you can tie every creative drop to revenue.
+                We converted ₹2L into ₹20L for a client in 12 months. Not with luck—with data, discipline, and a refusal to tolerate underperforming creative. We track every rupee. We kill every loser. We scale every winner.
               </p>
             </FadeIn>
           </div>
@@ -186,7 +186,7 @@ export default function DigitalGrowthPage() {
             </RevealLine>
             <FadeIn delay={0.1}>
               <p className="mt-8 text-xl text-foreground/60 font-medium leading-relaxed max-w-2xl">
-                Creative without instrumentation is blind. We hook up robust analytics, heatmaps, and A/B testing infrastructure from day one. Every hypothesis is tested. Every win is scaled.
+                Running ads without testing is like throwing darts blindfolded and calling it a strategy. We wire up real analytics, heatmaps, and systematic A/B testing from day one. Every hypothesis tested. Every winner scaled. Every loser fired.
               </p>
             </FadeIn>
           </div>
@@ -282,12 +282,12 @@ export default function DigitalGrowthPage() {
           <div>
             <RevealLine>
               <h2 className="text-[clamp(2.5rem,6vw,8rem)] font-black uppercase tracking-tighter leading-[0.88]">
-                Scale Your
+                Your ad budget is
               </h2>
             </RevealLine>
             <RevealLine delay={0.1}>
               <h2 className="text-[clamp(2.5rem,6vw,8rem)] font-satoshi font-normal italic text-[#ff6a00] leading-[0.88]">
-                Acquisition.
+                bleeding. Let&apos;s tourniquet it.
               </h2>
             </RevealLine>
           </div>

@@ -308,7 +308,7 @@ export default function SEOPage() {
 
           <FadeIn delay={0.3} className="mt-8 max-w-2xl px-4">
             <p className="text-base md:text-xl text-foreground/50 font-medium leading-relaxed">
-              SEO isn't magic, and it isn't fast. But it is the most sustainable investment you can make in your brand's online visibility. We handle technicals, content, and authority.
+              Page 1 isn&apos;t a lottery. It&apos;s the result of someone doing the technical groundwork, writing content that actually answers questions, and building authority that Google can&apos;t ignore. We do all three. And we track every position gained.
             </p>
           </FadeIn>
         </motion.div>
@@ -333,7 +333,7 @@ export default function SEOPage() {
             </RevealLine>
             <FadeIn delay={0.2} className="max-w-md">
               <p className="text-lg text-foreground/50 font-medium leading-relaxed">
-                Rankings mean nothing if they don't bring in qualified traffic. We focus on search intent, mapping keywords to buyer journeys, ensuring the traffic you gain actually converts.
+                A ranking that doesn&apos;t convert is just a vanity metric with a better address. We map keywords to actual buyer intent, fix the technical rot your current agency ignored, and build the kind of authority that compounds for years.
               </p>
             </FadeIn>
           </div>
@@ -405,12 +405,12 @@ export default function SEOPage() {
           <div>
             <RevealLine>
               <h2 className="text-[clamp(2.5rem,6vw,8rem)] font-black uppercase tracking-tighter leading-[0.88]">
-                Dominate
+                While you&apos;re reading this,
               </h2>
             </RevealLine>
             <RevealLine delay={0.1}>
               <h2 className="text-[clamp(2.5rem,6vw,8rem)] font-satoshi font-normal italic text-[#00aaff] leading-[0.88]">
-                Your Niche.
+                your competitor just ranked above you.
               </h2>
             </RevealLine>
           </div>

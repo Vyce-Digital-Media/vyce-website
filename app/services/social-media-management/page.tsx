@@ -330,7 +330,7 @@ export default function SocialMediaManagementPage() {
 
           <FadeIn delay={0.3} className="mt-8 max-w-2xl px-4">
             <p className="text-base md:text-xl text-foreground/50 font-medium leading-relaxed">
-              We engineer attention. Stop fighting algorithms and start leveraging them with data-backed content architectures that turn audiences into cults.
+              Most brands post. Some brands go viral. Almost none build an actual audience. Guess which category you&apos;re in right now. We&apos;re here to fix that.
             </p>
           </FadeIn>
         </motion.div>
@@ -355,7 +355,7 @@ export default function SocialMediaManagementPage() {
             </RevealLine>
             <FadeIn delay={0.2} className="max-w-md">
               <p className="text-lg text-foreground/50 font-medium leading-relaxed">
-                Likes are vanity. Engagement is sanity. We focus on deep funnel metrics, transforming passive scrollers into active advocates and measurable revenue.
+                Likes are vanity. Engagement is sanity. Revenue is the point. We engineer content that moves people down the funnel—from passive scrollers to obsessed buyers—and we make it look effortless.
               </p>
             </FadeIn>
           </div>
@@ -427,12 +427,12 @@ export default function SocialMediaManagementPage() {
           <div>
             <RevealLine>
               <h2 className="text-[clamp(2.5rem,6vw,8rem)] font-black uppercase tracking-tighter leading-[0.88]">
-                Start A
+                Your feed is a
               </h2>
             </RevealLine>
             <RevealLine delay={0.1}>
               <h2 className="text-[clamp(2.5rem,6vw,8rem)] font-satoshi font-normal italic text-[#ff0055] leading-[0.88]">
-                Movement.
+                ghost town. Let&apos;s fix that.
               </h2>
             </RevealLine>
           </div>

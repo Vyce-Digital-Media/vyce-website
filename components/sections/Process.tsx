@@ -11,10 +11,10 @@ const processSteps = [
   {
     step: "01",
     title: "UNDERSTAND",
-    tagline: "Know before you build.",
+    tagline: "We ask first. We charge later.",
     duration: "Week 1–2",
     description:
-      "We start by listening - genuinely listening. To your business, your goals, your audience, your competition, what's worked, and what hasn't. We don't come in with a template. We come in with questions. And we don't move until we have real answers. Most problems in digital marketing are solved here - in the understanding phase. Executing on the wrong insight is how budgets disappear.",
+      "Before touching a single pixel, we listen. Actually listen — to your business, your goals, what you've tried, what bombed, and what your competition is doing better than you right now. Most agencies skip this part. That's why most agency projects fail. We don't move until we understand what we're actually solving.",
     details: ["Founder & stakeholder discovery call", "Business, brand & digital audit", "Competitor landscape mapping", "Target audience & persona definition"],
     image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=900&h=600&fit=crop&q=80",
     color: "rgba(0,68,255,0.12)",
@@ -22,10 +22,10 @@ const processSteps = [
   {
     step: "02",
     title: "PLAN",
-    tagline: "Direction before action.",
+    tagline: "Strategy before pixels. Always.",
     duration: "Week 2–4",
     description:
-      "No pixel moves, no rupee gets spent, and no content gets created before we have a clear map. We define the strategy, the structure, the platforms, the content pillars, the campaign approach, and the success metrics - all locked before execution begins.This is how we avoid the painful mid-project pivot. And how we avoid even more painful 'we need to redo everything' conversations.",
+      "Zero pixels move, zero rupees get spent, and zero content gets created before there's a clear plan. We define the strategy, the platforms, the content pillars, the campaign structure, and what success actually looks like — in writing, before anything gets built. This is how we avoid the 'we need to redo everything' conversation at month 3.",
     details: ["Strategic roadmap & plan of action", "Platform, channel & format selection", "Content pillars & campaign framework", "Detailed project scope & timeline"],
     image: "https://images.unsplash.com/photo-1551434678-e076c223a692?w=900&h=600&fit=crop&q=80",
     color: "rgba(255,140,0,0.12)",
@@ -33,10 +33,10 @@ const processSteps = [
   {
     step: "03",
     title: "CREATE",
-    tagline: "Craft with intention.",
+    tagline: "Where strategy stops being theory.",
     duration: "Parallel track",
     description:
-      "This is where strategy becomes real. Design, copy, content, code - everything built with the plan front of mind, not as an afterthought. You'll see real work in regular cycles. Structured feedback. Clear revisions. No waiting three weeks for a first draft.",
+      "This is where the plan becomes something your customers actually see. Design, copy, content, code — built with the strategy front of mind, not stapled on at the end. You'll see real work in regular cycles. Structured feedback. Clear revisions. No 'we'll show you something next week' for six weeks straight.",
     details: ["Visual identity & UI design", "Content production (reels, carousels, copy)", "Website design & development", "Ad creative & campaign build"],
     image: "https://images.unsplash.com/photo-1558655146-364adaf1fcc9?w=900&h=600&fit=crop&q=80",
     color: "rgba(200,50,255,0.12)",
@@ -44,10 +44,10 @@ const processSteps = [
   {
     step: "04",
     title: "LAUNCH",
-    tagline: "Go live properly.",
+    tagline: "Live. Tested. Actually working.",
     duration: "Ongoing sprint",
     description:
-      "Going live isn't the finish line - it's the starting gun. We make sure everything is tested, tracked, and working before anything goes public. QA, analytics, tracking, final review. 'No we'll fix it after launch.' We fix it before.",
+      "Going live is not the finish line — it's just where amateurs start celebrating. We test everything before it goes public. QA, analytics, tracking, speed, forms, conversions — all confirmed. Because 'we'll fix it after launch' is not a sentence we say. Ever.",
     details: ["Pre-launch quality assurance", "Analytics & conversion tracking setup", "Campaign activation & monitoring", "Final client review & sign-off"],
     image: "https://images.unsplash.com/photo-1573164713988-8665fc963095?w=900&h=600&fit=crop&q=80",
     color: "rgba(0,200,100,0.12)",
@@ -55,10 +55,10 @@ const processSteps = [
   {
     step: "05",
     title: "GROW",
-    tagline: "The part most agencies skip. We don't.",
+    tagline: "The part most agencies invoice for and ghost on.",
     duration: "Final sprint",
     description:
-      "This is the phase that separates agencies from partners. Once we launch, we don't file the project and move on. We track performance. We flag what's working and what isn't. We optimize. We bring the next opportunity before you even know to ask about it. This is why most of our client relationships are measured in years, not projects. And why most of our new clients come from someone we already work with.",
+      "Most agencies close the project file, send the invoice, and disappear. We track performance, flag what's working, kill what isn't, and bring you the next opportunity before you even know to ask. This is why our client relationships are measured in years. And why most of our new business comes from people we already work with.",
     details: ["Performance monitoring & reporting", "Ongoing optimization & iteration", "Monthly strategy reviews", "Expansion scope identification"],
     image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=900&h=600&fit=crop&q=80",
     color: "rgba(255,60,80,0.12)",
@@ -176,19 +176,19 @@ export default function Process() {
         {/* Left Side: Sticky Title & Info */}
         <div className="lg:sticky lg:top-48 lg:h-fit space-y-12">
           <div className="space-y-6">
-            <p className="text-[10px] font-bold uppercase tracking-[0.5em] text-primary">How we work</p>
+            <p className="text-[10px] font-bold uppercase tracking-[0.5em] text-primary">How we actually work</p>
             <RevealLine>
               <h2 className="text-5xl font-black uppercase tracking-tighter md:text-6xl lg:text-7xl leading-none">
-                The Digital <br />
-                <span className="font-satoshi font-normal italic text-primary">Mastery</span> <br />
-                Process
+                No vague vibes. <br />
+                <span className="font-satoshi font-normal italic text-primary">Just process.</span> <br />
+                Actual process.
               </h2>
             </RevealLine>
           </div>
 
           <FadeIn delay={0.2}>
             <p className="max-w-md text-lg leading-relaxed text-foreground/40 font-medium">
-              We&apos;ve refined our methodology over a decade to ensure every project is launched with clinical precision and creative flair.
+              Five steps. No shortcuts. No hand-waving. This is how every project goes — whether it's a logo or a full-stack campaign. Boring? Maybe. Effective? Absolutely.
             </p>
           </FadeIn>
 
