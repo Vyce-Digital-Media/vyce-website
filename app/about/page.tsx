@@ -12,6 +12,7 @@ import {
   AnimatePresence,
 } from "framer-motion";
 import MagneticButton from "@/components/ui/MagneticButton";
+import { ArrowRight } from "lucide-react";
 
 // ─── Data ──────────────────────────────────────────────────────────────────
 
@@ -343,49 +344,102 @@ export default function AboutPage() {
       {/* ── 00. HERO ──────────────────────────────────────────────── */}
       <section
         ref={heroRef}
-        className="relative flex h-[100vh] min-h-[640px] flex-col items-center justify-center overflow-hidden"
+        className="relative flex h-screen min-h-[640px] overflow-hidden"
+        style={{ background: "#f5f5f0" }}
       >
-        <div className="pointer-events-none absolute inset-0 opacity-[0.03]">
-          {Array.from({ length: 6 }).map((_, i) => (
-            <div
-              key={i}
-              className="absolute top-0 h-full w-px bg-white"
-              style={{ left: `${(i + 1) * (100 / 7)}%` }}
-            />
-          ))}
-        </div>
-
+        {/* LEFT: Text Content */}
         <motion.div
-          style={{ y: heroY, opacity: heroOpacity, scale: heroScale }}
-          className="relative z-10 flex flex-col items-center gap-10 px-6 text-center"
+          style={{ y: heroY, opacity: heroOpacity }}
+          className="relative z-10 flex flex-col justify-center px-8 md:px-16 lg:px-20 w-full lg:w-[55%] shrink-0"
         >
-          <FadeIn>
-            <span className="inline-flex items-center gap-3 rounded-full border border-white/10 px-5 py-2 text-[10px] font-bold uppercase tracking-[0.4em] text-foreground/40">
-              <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
-              About Vyce Digital Media
-            </span>
-          </FadeIn>
 
-          <div className="space-y-2">
+          {/* Headline */}
+          <div className="space-y-1">
             <RevealLine>
-              <h1 className="text-[clamp(1.8rem,5vw,5.5rem)] font-black uppercase tracking-tighter leading-[1]">
-                We got tired of watching
-              </h1>
-            </RevealLine>
-            <RevealLine delay={0.1}>
-              <h1 className="text-[clamp(1.8rem,5vw,5.5rem)] font-satoshi font-normal italic text-primary leading-[1]">
-                good businesses get<br /> digitally ghosted.
-              </h1>
+              <motion.h1
+                style={{ fontSize: "clamp(2rem, 3.8vw, 4.2rem)", fontWeight: 900, lineHeight: 1.05, letterSpacing: "-0.03em", color: "#111", margin: "0 0 18px 0" }}
+              >
+                <span>We got tired of watching</span><br />
+                <span style={{ color: "#111" }}>good businesses get</span><br />
+                <span style={{ color: "#111" }}>digitally ghosted.</span>
+              </motion.h1>
             </RevealLine>
           </div>
 
-          <FadeIn delay={0.3} className="max-w-xl">
-            <p className="text-base md:text-lg text-foreground/40 font-medium leading-relaxed">
+          {/* Subtext */}
+          <FadeIn delay={0.3}>
+            <motion.p
+              style={{ fontSize: "clamp(0.95rem, 1.6vw, 1.1rem)", color: "#666", lineHeight: 1.65, marginBottom: 32, maxWidth: 480 }}
+            >
               Great product. Terrible online presence. Losing to competitors with mediocre products and better marketing. We've seen it a thousand times. We built Vyce to fix it.
-            </p>
+            </motion.p>
+          </FadeIn>
+
+          {/* CTA Buttons */}
+          <FadeIn delay={0.45}>
+            <motion.div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+              <Link
+                href="/contact"
+                style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "13px 26px", borderRadius: 10, background: "#111", color: "#fff", fontSize: 14, fontWeight: 700, textDecoration: "none", transition: "all 0.2s ease", letterSpacing: "0.01em" }}
+                onMouseEnter={(e) => { e.currentTarget.style.background = "#222"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.background = "#111"; }}
+              >
+                Work With Us
+              </Link>
+              <Link
+                href="/portfolio"
+                style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "13px 26px", borderRadius: 10, border: "1.5px solid rgba(0,0,0,0.18)", background: "transparent", color: "#111", fontSize: 14, fontWeight: 700, textDecoration: "none", transition: "all 0.2s ease", letterSpacing: "0.01em" }}
+                onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(0,0,0,0.05)"; e.currentTarget.style.borderColor = "rgba(0,0,0,0.3)"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.borderColor = "rgba(0,0,0,0.18)"; }}
+              >
+                View Work <ArrowRight size={15} />
+              </Link>
+            </motion.div>
           </FadeIn>
         </motion.div>
+
+        {/* RIGHT: Two infinite-scroll image columns */}
+        <div className="hidden lg:flex gap-3 w-[45%] shrink-0 overflow-hidden relative pointer-events-none">
+          {/* Fade edges */}
+          <div className="absolute inset-x-0 top-0 h-32 z-10 pointer-events-none" style={{ background: "linear-gradient(to bottom, #f5f5f0, transparent)" }} />
+          <div className="absolute inset-x-0 bottom-0 h-32 z-10 pointer-events-none" style={{ background: "linear-gradient(to top, #f5f5f0, transparent)" }} />
+
+          {/* Column 1 — scrolls UP */}
+          <div className="flex-1 overflow-hidden">
+            <motion.div
+              animate={{ y: ["0%", "-50%"] }}
+              transition={{ duration: 18, ease: "linear", repeat: Infinity }}
+              className="flex flex-col gap-3"
+            >
+              {["/hero1.webp", "/hero2.webp", "/hero3.webp", "/hero4.webp", "/hero5.webp",
+                "/hero1.webp", "/hero2.webp", "/hero3.webp", "/hero4.webp", "/hero5.webp"].map((src, i) => (
+                  <div key={i} className="w-full aspect-[3/4] rounded-2xl overflow-hidden shadow-lg flex-shrink-0">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={src} alt="" className="w-full h-full object-cover" />
+                  </div>
+                ))}
+            </motion.div>
+          </div>
+
+          {/* Column 2 — scrolls DOWN */}
+          <div className="flex-1 overflow-hidden mt-12">
+            <motion.div
+              animate={{ y: ["-50%", "0%"] }}
+              transition={{ duration: 22, ease: "linear", repeat: Infinity }}
+              className="flex flex-col gap-3"
+            >
+              {["/hero6.webp", "/hero7.webp", "/hero8.webp", "/hero9.webp", "/hero10.webp",
+                "/hero6.webp", "/hero7.webp", "/hero8.webp", "/hero9.webp", "/hero10.webp"].map((src, i) => (
+                  <div key={i} className="w-full aspect-[3/4] rounded-2xl overflow-hidden shadow-lg flex-shrink-0">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={src} alt="" className="w-full h-full object-cover" />
+                  </div>
+                ))}
+            </motion.div>
+          </div>
+        </div>
       </section>
+
 
       {/* ── 02. OUR STORY ───────────────────────────────────────── */}
       <section ref={storyRef} className="relative px-6 py-32 md:px-12 lg:px-20 bg-zinc-950/30 overflow-hidden">

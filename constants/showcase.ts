@@ -1026,7 +1026,7 @@ export const projectsData: Record<string, ProjectShowcase> = {
       link: "/contact"
     }
   },
-
+  
   "global-peace-web": {
     id: 9,
     slug: "global-peace-web",
