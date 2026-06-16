@@ -304,77 +304,44 @@ function ContactForm() {
 // ─── Page ──────────────────────────────────────────────────────────────────
 
 export default function ContactPage() {
-  const heroRef = useRef(null);
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
-  const { scrollYProgress: heroScroll } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
-  const heroY = useTransform(heroScroll, [0, 1], [0, 180]);
-  const heroOpacity = useTransform(heroScroll, [0, 0.7], [1, 0]);
-  const heroScale = useTransform(heroScroll, [0, 1], [1, 0.93]);
 
   return (
     <div className="bg-background text-foreground overflow-hidden">
 
-      {/* ── HERO ──────────────────────────────────────────────────── */}
-      <section ref={heroRef} className="relative flex h-screen flex-col items-center justify-center overflow-hidden px-6 py-28">
-        <div className="pointer-events-none absolute inset-0 opacity-[0.03]">
-          {Array.from({ length: 6 }).map((_, i) => (
-            <div key={i} className="absolute top-0 h-full w-px bg-white" style={{ left: `${(i + 1) * (100 / 7)}%` }} />
-          ))}
-        </div>
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,68,255,0.06)_0%,transparent_65%)]" />
-
-        <motion.div style={{ y: heroY, opacity: heroOpacity, scale: heroScale }} className="relative z-10 flex flex-col items-center gap-8 text-center">
-          <FadeIn>
-            <span className="inline-flex items-center gap-3 rounded-full border border-white/10 px-5 py-2 text-[10px] font-bold uppercase tracking-[0.4em] text-foreground/40">
-              <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
-              Contact Us
-            </span>
-          </FadeIn>
-          <div className="space-y-2">
-            <RevealLine><h1 className="text-[clamp(2rem,5.5vw,6.5rem)] font-black uppercase tracking-tighter leading-[0.88]">Let&apos;s actually talk.</h1></RevealLine>
-            <RevealLine delay={0.1}><h1 className="text-[clamp(2rem,5.5vw,6.5rem)] font-satoshi font-normal italic text-primary leading-[0.88]">We promise we&apos;re not salesy.</h1></RevealLine>
-          </div>
-          <FadeIn delay={0.3} className="max-w-2xl">
-            <p className="text-base md:text-xl text-foreground/40 font-medium leading-relaxed">
-              Whether you have a detailed brief or just a vague idea and a rough budget — reach out. We'll help you figure out the next step. That's genuinely part of the service.
-            </p>
-          </FadeIn>
-        </motion.div>
-
-
-      </section>
-
       {/* ── MAIN CONTENT ──────────────────────────────────────────── */}
-      <section className="relative px-6 py-20 md:px-12 lg:px-20">
-        <div className="mx-auto max-w-[1600px]">
-          <div className="grid gap-16 lg:grid-cols-12 lg:gap-20">
+      <section className="relative px-6 pt-32 pb-20 md:px-12 md:pt-40 lg:px-20">
+        <div className="mx-auto max-w-[1500px] flex flex-col gap-20 lg:gap-32">
 
-            {/* Left column */}
-            <div className="flex flex-col gap-12 lg:col-span-5">
+          {/* Top: form */}
+          <div className="w-full">
+            <FadeIn delay={0.1} className="mb-12 flex flex-col items-center text-center">
+              <div>
+                <RevealLine><h2 className="text-4xl font-black uppercase tracking-tighter leading-[0.9] md:text-6xl lg:text-7xl">Tell us what you&apos;re</h2></RevealLine>
+                <RevealLine delay={0.07}><h2 className="text-4xl font-satoshi pb-2 font-normal italic text-primary leading-[0.9] md:text-6xl lg:text-7xl">actually trying to fix.</h2></RevealLine>
+                <FadeIn delay={0.2} className="mt-6 flex justify-center">
+                  <p className="text-sm md:text-base text-foreground/50 font-medium leading-relaxed max-w-lg text-center">
+                    No 47-field forms. Just the basics — so we can show up to the first call actually knowing something about you.
+                  </p>
+                </FadeIn>
+              </div>
+            </FadeIn>
+            <div className="mx-auto w-full">
+              <ContactForm />
+            </div>
+          </div>
 
-              {/* Contact cards */}
+          <div className="w-full h-px bg-white/[0.05]" />
+
+          {/* Bottom: details */}
+          <div className="grid gap-16 lg:grid-cols-2 lg:gap-20 mx-auto w-full">
+            {/* Column A: Contact & Office Hours */}
+            <div className="flex flex-col gap-12">
               <div className="space-y-4">
                 <FadeIn><p className="text-[9px] font-bold uppercase tracking-[0.4em] text-foreground/30 mb-6">Reach us directly</p></FadeIn>
                 {contactInfo.map((info, i) => <InfoCard key={i} info={info} index={i} />)}
               </div>
 
-              {/* Google Map Integration */}
-              <FadeIn delay={0.25}>
-                <div className="relative overflow-hidden rounded-2xl border border-white/[0.07] h-64 w-full bg-zinc-950/40 mt-2">
-                  <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3721.135854977098!2d72.7596652!3d21.1469911!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be04d80f5d96493%3A0x5f79790a213bd724!2sLuxuria%20Business%20Hub!5e0!3m2!1sen!2sin!4v1776070850466!5m2!1sen!2sin"
-                    width="100%"
-                    height="100%"
-                    style={{ border: 0 }}
-                    allowFullScreen={false}
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-background to-transparent pointer-events-none z-10" />
-                  <div className="absolute inset-x-0 top-0 h-12 bg-gradient-to-b from-background to-transparent pointer-events-none z-10 opacity-30" />
-                </div>
-              </FadeIn>
-
-              {/* Office hours */}
               <FadeIn delay={0.2}>
                 <div className="rounded-2xl border border-white/[0.07] bg-zinc-950/50 p-7 space-y-6">
                   <div className="flex items-start gap-4">
@@ -399,8 +366,25 @@ export default function ContactPage() {
                   </div>
                 </div>
               </FadeIn>
+            </div>
 
-              {/* FAQ */}
+            {/* Column B: Map & FAQ */}
+            <div className="flex flex-col gap-12">
+              <FadeIn delay={0.25}>
+                <div className="relative overflow-hidden rounded-2xl border border-white/[0.07] h-64 w-full bg-zinc-950/40 mt-2">
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3721.135854977098!2d72.7596652!3d21.1469911!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be04d80f5d96493%3A0x5f79790a213bd724!2sLuxuria%20Business%20Hub!5e0!3m2!1sen!2sin!4v1776070850466!5m2!1sen!2sin"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen={false}
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-background to-transparent pointer-events-none z-10" />
+                  <div className="absolute inset-x-0 top-0 h-12 bg-gradient-to-b from-background to-transparent pointer-events-none z-10 opacity-30" />
+                </div>
+              </FadeIn>
+
               <div>
                 <FadeIn><p className="text-[9px] font-bold uppercase tracking-[0.4em] text-foreground/30 mb-2">FAQ</p></FadeIn>
                 {faqItems.map((item, i) => (
@@ -414,7 +398,6 @@ export default function ContactPage() {
                 <div className="border-t border-white/[0.07]" />
               </div>
 
-              {/* Portfolio link */}
               <FadeIn delay={0.1}>
                 <Link href="/portfolio" className="group inline-flex items-center gap-4 text-[10px] font-black uppercase tracking-[0.4em] text-foreground/35 hover:text-primary transition-colors duration-300">
                   View selected work
@@ -424,22 +407,8 @@ export default function ContactPage() {
                 </Link>
               </FadeIn>
             </div>
-
-            {/* Right column: form */}
-            <div className="lg:col-span-7">
-              <FadeIn delay={0.1} className="mb-8">
-                <div>
-                  <RevealLine><h2 className="text-4xl font-black uppercase tracking-tighter leading-[0.9] md:text-5xl">Tell us what you&apos;re</h2></RevealLine>
-                  <RevealLine delay={0.07}><h2 className="text-4xl font-satoshi pb-2 font-normal italic text-primary leading-[0.9] md:text-5xl">actually trying to fix.</h2></RevealLine>
-                  <FadeIn delay={0.2} className="mt-5"><p className="text-sm text-foreground/40 font-medium leading-relaxed max-w-md">No 47-field forms. Just the basics — so we can show up to the first call actually knowing something about you.</p></FadeIn>
-                </div>
-              </FadeIn>
-              <ContactForm />
-            </div>
           </div>
         </div>
-
-
       </section>
     </div>
   );

@@ -35,6 +35,8 @@ const services = [
     title: "Social Media Management",
     icon: Send,
     iconColor: "rgba(255, 60, 0, 0.15)",
+    themeColor: "#ff5000",
+    bgTo: "#ffd6c2",
     summary:
       "Posting without a strategy is just noise. We make yours impossible to scroll past.",
     description:
@@ -53,6 +55,8 @@ const services = [
     title: "Website Design & Development",
     icon: CodeXml,
     iconColor: "rgba(0, 200, 255, 0.15)",
+    themeColor: "#00aaff",
+    bgTo: "#c2edff",
     summary:
       "A beautiful website that doesn't convert is just expensive decoration. We fix that.",
     description:
@@ -71,6 +75,8 @@ const services = [
     title: "Performance Marketing",
     icon: BarChart,
     iconColor: "rgba(255, 200, 0, 0.15)",
+    themeColor: "#cc9900",
+    bgTo: "#fff0ad",
     summary:
       "Ad spend without tracking is just a donation. We make every rupee accountable.",
     description:
@@ -89,6 +95,8 @@ const services = [
     title: "Branding & Identity",
     icon: Palette,
     iconColor: "rgba(255, 60, 0, 0.15)",
+    themeColor: "#ff3300",
+    bgTo: "#ffcfc2",
     summary:
       "Your brand is what people say about you when you're not in the room. Make it count.",
     description:
@@ -107,6 +115,8 @@ const services = [
     title: "UI/UX & PRODUCT DESIGN",
     icon: Smartphone,
     iconColor: "rgba(180, 0, 255, 0.15)",
+    themeColor: "#aa00ff",
+    bgTo: "#ecc2ff",
     summary:
       "Great design is invisible. Your users should just feel it working.",
     description:
@@ -127,6 +137,8 @@ const services = [
     title: "SEO",
     icon: Globe,
     iconColor: "rgba(0, 200, 255, 0.15)",
+    themeColor: "#0088ff",
+    bgTo: "#c2e0ff",
     summary:
       "Page 1 doesn't happen by accident. It takes strategy, authority, and relentless execution.",
     description:
@@ -217,7 +229,7 @@ function FadeIn({
 
 function ServiceGalleryCard({ service, index }: { service: typeof services[0], index: number }) {
   return (
-    <Link 
+    <Link
       href={service.href}
       className="horizontal-card relative block cursor-pointer w-[85vw] md:w-[70vw] lg:w-[60vw] h-full flex-shrink-0 rounded-[40px] overflow-hidden border border-white/10 group shadow-2xl"
     >
@@ -275,11 +287,11 @@ function HorizontalServiceGallery({ servicesList, titleNode }: { servicesList: t
       cards.forEach((card, i) => {
         const img = card.querySelector('.parallax-bg');
         if (img) {
-          gsap.fromTo(img, 
+          gsap.fromTo(img,
             { xPercent: -15 },
-            { 
-              xPercent: 15, 
-              ease: "none", 
+            {
+              xPercent: 15,
+              ease: "none",
               scrollTrigger: {
                 trigger: card,
                 containerAnimation: tween,
@@ -317,13 +329,13 @@ function HorizontalServiceGallery({ servicesList, titleNode }: { servicesList: t
     <div ref={containerRef} className="relative w-full bg-zinc-950 overflow-hidden pb-32">
       {/* Title */}
       <div className="pt-24 pb-12 w-full flex justify-center text-center">
-         {titleNode}
+        {titleNode}
       </div>
 
       <div ref={scrollSectionRef} className="h-screen flex items-center overflow-hidden bg-zinc-950">
         <div ref={scrollWrapperRef} className="flex h-[75vh] px-[5vw] gap-12 w-[fit-content] items-center">
           {servicesList.map((service, index) => (
-             <ServiceGalleryCard key={service.num} service={service} index={index} />
+            <ServiceGalleryCard key={service.num} service={service} index={index} />
           ))}
         </div>
       </div>
@@ -334,14 +346,35 @@ function HorizontalServiceGallery({ servicesList, titleNode }: { servicesList: t
 export default function ServicesPage() {
   const [hoveredStep, setHoveredStep] = React.useState<string | null>(null);
   // Hero parallax
-  const heroRef = useRef(null);
+  const heroRef = useRef<HTMLElement>(null);
   const { scrollYProgress: heroScroll } = useScroll({
     target: heroRef,
     offset: ["start start", "end start"],
   });
   const heroY = useTransform(heroScroll, [0, 1], [0, 180]);
   const heroOpacity = useTransform(heroScroll, [0, 0.7], [1, 0]);
-  const heroScale = useTransform(heroScroll, [0, 1], [1, 0.93]);
+
+  // Interactive dots for hero
+  const dotRevealRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const section = heroRef.current;
+    if (!section) return;
+
+    const onMouseMove = (e: MouseEvent) => {
+      const rect = section.getBoundingClientRect();
+      const relX = e.clientX - rect.left;
+      const relY = e.clientY - rect.top;
+      if (dotRevealRef.current) {
+        dotRevealRef.current.style.setProperty("--mx", `${relX}px`);
+        dotRevealRef.current.style.setProperty("--my", `${relY}px`);
+      }
+    };
+
+    section.addEventListener("mousemove", onMouseMove, { passive: true });
+    return () => {
+      section.removeEventListener("mousemove", onMouseMove);
+    };
+  }, []);
 
   // Process section scroll-driven line fill
   const processRef = useRef<HTMLDivElement>(null);
@@ -357,55 +390,126 @@ export default function ServicesPage() {
       {/* ── 00. HERO ──────────────────────────────────────────────── */}
       <section
         ref={heroRef}
-        className="relative flex h-[100vh] flex-col items-center justify-center overflow-hidden px-6 py-32"
+        className="relative flex h-screen min-h-[640px] overflow-hidden"
+        style={{ background: "#f5f5f0" }}
       >
-        {/* Decorative grid lines */}
-        <div className="pointer-events-none absolute inset-0 opacity-[0.03]">
-          {Array.from({ length: 6 }).map((_, i) => (
-            <div
-              key={i}
-              className="absolute top-0 h-full w-px bg-white"
-              style={{ left: `${(i + 1) * (100 / 7)}%` }}
-            />
-          ))}
-        </div>
+        {/* Dot grid — base faint layer (always visible) */}
+        <div aria-hidden style={{
+          position: "absolute", inset: 0,
+          backgroundImage: "radial-gradient(circle, rgba(0,0,0,0.06) 1.5px, transparent 1.5px)",
+          backgroundSize: "28px 28px", pointerEvents: "none", zIndex: 0,
+        }} />
 
-        {/* Blue radial glow */}
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,68,255,0.07)_0%,transparent_65%)]" />
+        {/* Dot grid — bright revealed layer (cursor spotlight mask) */}
+        <div
+          ref={dotRevealRef}
+          aria-hidden
+          style={{
+            position: "absolute", inset: 0,
+            backgroundImage: "radial-gradient(circle, rgba(0,0,0,0.55) 1.5px, transparent 1.5px)",
+            backgroundSize: "28px 28px",
+            pointerEvents: "none", zIndex: 0,
+            WebkitMaskImage: "radial-gradient(circle 280px at var(--mx, 50%) var(--my, 50%), black 0%, transparent 100%)",
+            maskImage: "radial-gradient(circle 280px at var(--mx, 50%) var(--my, 50%), black 0%, transparent 100%)",
+          } as React.CSSProperties}
+        />
 
+        {/* Edge vignette */}
+        <div aria-hidden style={{
+          position: "absolute", inset: 0,
+          background: "radial-gradient(ellipse 80% 60% at 50% 50%, transparent 50%, rgba(245,245,240,0.4) 100%)",
+          pointerEvents: "none", zIndex: 1,
+        }} />
+
+        {/* LEFT: Text Content */}
         <motion.div
-          style={{ y: heroY, opacity: heroOpacity, scale: heroScale }}
-          className="relative z-10 flex flex-col items-center gap-8 text-center mt-16"
+          style={{ y: heroY, opacity: heroOpacity }}
+          className="relative z-10 flex flex-col justify-center px-8 md:px-16 lg:px-20 w-full lg:w-[45%] shrink-0"
         >
-          <FadeIn>
-            <span className="inline-flex items-center gap-3 rounded-full border border-white/10 px-5 py-2 text-[10px] font-bold uppercase tracking-[0.4em] text-foreground/40">
-              <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
-              What We Do
-            </span>
-          </FadeIn>
 
-          <div className="space-y-2">
+          {/* Headline */}
+          <div className="space-y-1">
             <RevealLine>
-              <h1 className="text-[clamp(2rem,5.5vw,6.5rem)] font-black uppercase tracking-tighter leading-[0.88]">
-                Built for brands that
-              </h1>
-            </RevealLine>
-            <RevealLine delay={0.1}>
-              <h1 className="text-[clamp(2rem,5.5vw,6.5rem)] font-satoshi font-normal italic text-primary leading-[0.88]">
-                refuse to be ignored.
-              </h1>
+              <motion.h1
+                style={{ fontSize: "clamp(2rem, 3.5vw, 4rem)", fontWeight: 900, lineHeight: 1.05, letterSpacing: "-0.03em", color: "#111", margin: "0 0 18px 0" }}
+              >
+                <span>Built for brands that</span><br />
+                <span style={{ color: "#111" }}>refuse to be ignored.</span>
+              </motion.h1>
             </RevealLine>
           </div>
 
-          <FadeIn delay={0.3} className="max-w-2xl">
-            <p className="text-base md:text-xl text-foreground/40 font-medium leading-relaxed mb-16">
+          {/* Subtext */}
+          <FadeIn delay={0.3}>
+            <motion.p
+              style={{ fontSize: "clamp(0.95rem, 1.4vw, 1.1rem)", color: "#666", lineHeight: 1.65, marginBottom: 32, maxWidth: 480 }}
+            >
               We don&apos;t sell packages. We sell outcomes. Strategy, design, code, and content — executed without hand-holding, pointless meetings, or a single mediocre deliverable. You bring the ambition. We bring the rest.
-            </p>
+            </motion.p>
           </FadeIn>
 
+          {/* CTA Buttons */}
+          <FadeIn delay={0.45}>
+            <motion.div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+              <Link
+                href="/contact"
+                style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "13px 26px", borderRadius: 10, background: "#111", color: "#fff", fontSize: 14, fontWeight: 700, textDecoration: "none", transition: "all 0.2s ease", letterSpacing: "0.01em" }}
+                onMouseEnter={(e) => { e.currentTarget.style.background = "#222"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.background = "#111"; }}
+              >
+                Work With Us
+              </Link>
+              <Link
+                href="/portfolio"
+                style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "13px 26px", borderRadius: 10, border: "1.5px solid rgba(0,0,0,0.18)", background: "transparent", color: "#111", fontSize: 14, fontWeight: 700, textDecoration: "none", transition: "all 0.2s ease", letterSpacing: "0.01em" }}
+                onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(0,0,0,0.05)"; e.currentTarget.style.borderColor = "rgba(0,0,0,0.3)"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.borderColor = "rgba(0,0,0,0.18)"; }}
+              >
+                View Work <ArrowRight size={15} />
+              </Link>
+            </motion.div>
+          </FadeIn>
         </motion.div>
 
+        {/* RIGHT: 6 Boxes Grid */}
+        <div className="hidden lg:flex w-[55%] shrink-0 items-center justify-center p-8 relative z-10">
+          <div className="grid grid-cols-3 grid-rows-2 gap-4 lg:gap-6 w-full h-full max-h-[700px]">
+            {services.slice(0, 6).map((service, i) => (
+              <motion.div
+                key={service.num}
+                initial={{ opacity: 0, scale: 0.9, y: 30 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                transition={{ delay: 0.4 + i * 0.1, duration: 0.6, type: "spring", stiffness: 200, damping: 20 }}
+                className="relative rounded-[32px] overflow-hidden border border-black/5 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 flex flex-col items-center pt-8 group cursor-pointer"
+                style={{
+                  background: `linear-gradient(135deg, #ffffff 0%, ${service.bgTo} 100%)`,
+                  "--hover-color": service.themeColor
+                } as React.CSSProperties}
+              >
+                {/* Text inside the box */}
+                <div className="px-5 text-center z-10 mb-6 h-12 flex items-center justify-center transform transition-all duration-500 group-hover:-translate-y-2 group-hover:scale-110">
+                  <h3 className="font-bold text-zinc-800 text-[15px] tracking-tight leading-snug transition-colors duration-500 group-hover:text-[var(--hover-color)]">{service.title}</h3>
+                </div>
 
+                {/* Phone Skeleton */}
+                <div className="relative w-[75%] max-w-[160px] aspect-[1/2] rounded-t-[28px] border-[6px] border-b-0 border-[#1a1f2c] bg-white shadow-2xl overflow-hidden mt-auto flex flex-col transform origin-bottom transition-transform duration-500 group-hover:scale-110">
+                  {/* Notch */}
+                  <div className="absolute top-2 left-1/2 -translate-x-1/2 w-[35%] h-[10px] bg-[#1a1f2c] rounded-full z-20" />
+
+                  {/* Screen Image */}
+                  <div className="w-full h-full relative">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={`/hero${i + 1}.webp`}
+                      alt={service.title}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
       </section>
 
       {/* ── 01. SERVICE CARDS ─────────────────────────────────────── */}
