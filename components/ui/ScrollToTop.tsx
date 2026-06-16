@@ -15,6 +15,8 @@ export default function ScrollToTop() {
   const lenis = useLenis();
 
   useEffect(() => {
+    if (pathname === '/portfolio') return;
+    
     if (lenis) {
       lenis.scrollTo(0, { immediate: true });
     } else {

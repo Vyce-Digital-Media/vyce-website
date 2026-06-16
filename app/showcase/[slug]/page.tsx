@@ -366,6 +366,72 @@ function DescriptionSection() {
   );
 }
 
+// ─── DYNAMIC-ASPECT GALLERY IMAGE ────────────────────────────────────────────
+
+function useImageOrientation(src: string): "landscape" | "portrait" | "square" | null {
+  const [orientation, setOrientation] = React.useState<"landscape" | "portrait" | "square" | null>(null);
+  useEffect(() => {
+    if (!src) return;
+    const img = new window.Image();
+    img.onload = () => {
+      const { naturalWidth: w, naturalHeight: h } = img;
+      if (w > h * 1.1) setOrientation("landscape");
+      else if (h > w * 1.1) setOrientation("portrait");
+      else setOrientation("square");
+    };
+    img.src = src;
+  }, [src]);
+  return orientation;
+}
+
+function GalleryCard({
+  src,
+  alt,
+  wrapperClass,
+  speed,
+  rotate = 0,
+  zIndex = "z-20",
+  landscapeOffset,
+}: {
+  src: string;
+  alt: string;
+  wrapperClass: string;
+  speed: string;
+  rotate?: number;
+  zIndex?: string;
+  landscapeOffset?: { left?: string; right?: string };
+}) {
+  const orientation = useImageOrientation(src);
+
+  // Aspect ratios: landscape → 16/9 (slightly bigger), portrait → 4/5, square → 1/1
+  const aspectStyle: React.CSSProperties =
+    orientation === "landscape"
+      ? { aspectRatio: "16/9", width: "clamp(300px, 32vw, 450px)" }
+      : orientation === "square"
+      ? { aspectRatio: "1/1" }
+      : { aspectRatio: "4/5" }; // portrait or loading
+
+  if (orientation === "landscape" && landscapeOffset) {
+    if (landscapeOffset.left) aspectStyle.marginLeft = landscapeOffset.left;
+    if (landscapeOffset.right) aspectStyle.marginRight = landscapeOffset.right;
+  }
+
+  return (
+    <div className={`absolute float-wrapper ${zIndex} ${wrapperClass}`} data-speed={speed} style={aspectStyle}>
+      <motion.div
+        drag
+        dragConstraints={{ top: -150, bottom: 150, left: -200, right: 200 }}
+        dragElastic={0.1}
+        whileHover={{ scale: 1.02 }}
+        whileDrag={{ scale: 1.1, rotate, zIndex: 50, cursor: "grabbing" }}
+        className="w-full h-full cursor-grab overflow-hidden rounded-[30px] border border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.5)]"
+      >
+        <img src={src} alt={alt} className="w-full h-full object-cover pointer-events-none" />
+      </motion.div>
+    </div>
+  );
+}
+
 function FloatingGallery() {
   const project = useProject();
   const containerRef = useRef<HTMLDivElement>(null);
@@ -376,14 +442,14 @@ function FloatingGallery() {
       wrappers.forEach((wrapper) => {
         const speed = parseFloat(wrapper.dataset.speed || "1");
         gsap.to(wrapper, {
-          y: -1000 * speed, // Move up significantly while scrolling
+          y: -1000 * speed,
           ease: "none",
           scrollTrigger: {
             trigger: containerRef.current,
             start: "top bottom",
             end: "bottom top",
-            scrub: true
-          }
+            scrub: true,
+          },
         });
       });
     }, containerRef);
@@ -392,91 +458,86 @@ function FloatingGallery() {
 
   return (
     <section ref={containerRef} className="relative h-[180vh] w-full overflow-hidden bg-background z-30">
-      {/* Background Typography pinned to center via sticky */}
+      {/* Background watermark */}
       <div className="sticky top-0 h-screen flex items-center justify-center pointer-events-none opacity-5 w-full">
         <h2 className="text-[20vw] font-black uppercase tracking-tighter mix-blend-overlay">Gallery</h2>
       </div>
 
-      {/* Positioned Images - We remove `animate` and let user freely drag */}
-
-      {/* TOP */}
-      <div className="absolute top-[40%] left-[50%] -translate-x-1/2 w-[240px] md:w-[300px] aspect-[4/5] float-wrapper z-20" data-speed="1.5">
-        <motion.div
-          drag dragConstraints={{ top: -150, bottom: 150, left: -200, right: 200 }} dragElastic={0.1}
-          whileHover={{ scale: 1.02 }} whileDrag={{ scale: 1.1, rotate: -2, zIndex: 50, cursor: "grabbing" }}
-          className="w-full h-full cursor-grab overflow-hidden rounded-[30px] border border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.5)]"
-        >
-          <img src={project.gallery.top} alt="Top" className="w-full h-full object-cover pointer-events-none" />
-        </motion.div>
-      </div>
+      {/* TOP — centered */}
+      <GalleryCard
+        src={project.gallery.top}
+        alt="Top"
+        wrapperClass="top-[40%] left-[50%] -translate-x-1/2 w-[240px] md:w-[300px]"
+        speed="1.5"
+        rotate={-2}
+        zIndex="z-20"
+      />
 
       {/* LEFT */}
-      <div className="absolute top-[75%] left-[5%] md:left-[10%] w-[280px] md:w-[350px] aspect-[4/5] float-wrapper z-10" data-speed="2.2">
-        <motion.div
-          drag dragConstraints={{ top: -150, bottom: 150, left: -200, right: 200 }} dragElastic={0.1}
-          whileHover={{ scale: 1.02 }} whileDrag={{ scale: 1.1, rotate: 3, zIndex: 50, cursor: "grabbing" }}
-          className="w-full h-full cursor-grab overflow-hidden rounded-[30px] border border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.5)]"
-        >
-          <img src={project.gallery.left} alt="Left" className="w-full h-full object-cover pointer-events-none" />
-        </motion.div>
-      </div>
+      <GalleryCard
+        src={project.gallery.left}
+        alt="Left"
+        wrapperClass="top-[75%] left-[5%] md:left-[10%] w-[280px] md:w-[350px]"
+        landscapeOffset={{ left: "-8vw" }}
+        speed="2.2"
+        rotate={3}
+        zIndex="z-10"
+      />
 
       {/* CENTER */}
-      <div className="absolute top-[65%] left-[50%] -translate-x-1/2 w-[260px] md:w-[320px] aspect-[4/5] float-wrapper z-30" data-speed="1.2">
-        <motion.div
-          drag dragConstraints={{ top: -150, bottom: 150, left: -200, right: 200 }} dragElastic={0.1}
-          whileHover={{ scale: 1.02 }} whileDrag={{ scale: 1.1, rotate: -1, zIndex: 50, cursor: "grabbing" }}
-          className="w-full h-full cursor-grab overflow-hidden rounded-[30px] border border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.5)] bg-zinc-900"
-        >
-          <img src={project.gallery.center} alt="Center" className="w-full h-full object-cover pointer-events-none opacity-90" />
-        </motion.div>
-      </div>
+      <GalleryCard
+        src={project.gallery.center}
+        alt="Center"
+        wrapperClass="top-[65%] left-[50%] -translate-x-1/2 w-[260px] md:w-[320px]"
+        speed="1.2"
+        rotate={-1}
+        zIndex="z-30"
+      />
 
       {/* RIGHT */}
-      <div className="absolute top-[70%] right-[5%] md:right-[10%] w-[250px] md:w-[320px] aspect-[3/4] float-wrapper z-20" data-speed="1.8">
-        <motion.div
-          drag dragConstraints={{ top: -150, bottom: 150, left: -200, right: 200 }} dragElastic={0.1}
-          whileHover={{ scale: 1.02 }} whileDrag={{ scale: 1.1, rotate: 4, zIndex: 50, cursor: "grabbing" }}
-          className="w-full h-full cursor-grab overflow-hidden rounded-[30px] border border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.5)]"
-        >
-          <img src={project.gallery.right} alt="Right" className="w-full h-full object-cover pointer-events-none" />
-        </motion.div>
-      </div>
+      <GalleryCard
+        src={project.gallery.right}
+        alt="Right"
+        wrapperClass="top-[70%] right-[5%] md:right-[10%] w-[250px] md:w-[320px]"
+        landscapeOffset={{ right: "-8vw" }}
+        speed="1.8"
+        rotate={4}
+        zIndex="z-20"
+      />
 
       {/* BOTTOM LEFT */}
-      <div className="absolute top-[100%] left-[20%] -translate-x-1/2 w-[240px] md:w-[300px] aspect-[4/5] float-wrapper z-20" data-speed="1.5">
-        <motion.div
-          drag dragConstraints={{ top: -150, bottom: 150, left: -200, right: 200 }} dragElastic={0.1}
-          whileHover={{ scale: 1.02 }} whileDrag={{ scale: 1.1, rotate: -2, zIndex: 50, cursor: "grabbing" }}
-          className="w-full h-full cursor-grab overflow-hidden rounded-[30px] border border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.5)]"
-        >
-          <img src={project.gallery.bottomLeft} alt="Top" className="w-full h-full object-cover pointer-events-none" />
-        </motion.div>
-      </div>
+      <GalleryCard
+        src={project.gallery.bottomLeft}
+        alt="Bottom Left"
+        wrapperClass="top-[100%] left-[20%] -translate-x-1/2 w-[240px] md:w-[300px]"
+        landscapeOffset={{ left: "-4vw" }}
+        speed="1.5"
+        rotate={-2}
+        zIndex="z-20"
+      />
 
       {/* BOTTOM RIGHT */}
-      <div className="absolute top-[100%] right-[0%] -translate-x-1/2 w-[240px] md:w-[300px] aspect-[4/5] float-wrapper z-20" data-speed="1.5">
-        <motion.div
-          drag dragConstraints={{ top: -150, bottom: 150, left: -200, right: 200 }} dragElastic={0.1}
-          whileHover={{ scale: 1.02 }} whileDrag={{ scale: 1.1, rotate: -2, zIndex: 50, cursor: "grabbing" }}
-          className="w-full h-full cursor-grab overflow-hidden rounded-[30px] border border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.5)]"
-        >
-          <img src={project.gallery.bottomRight} alt="Top" className="w-full h-full object-cover pointer-events-none" />
-        </motion.div>
-      </div>
+      <GalleryCard
+        src={project.gallery.bottomRight}
+        alt="Bottom Right"
+        wrapperClass="top-[100%] right-[0%] -translate-x-1/2 w-[240px] md:w-[300px]"
+        landscapeOffset={{ right: "-14vw" }}
+        speed="1.5"
+        rotate={2}
+        zIndex="z-20"
+      />
 
-      {/* BOTTOM */}
-      <div className="absolute top-[90%] left-[50%] -translate-x-1/2 w-[300px] md:w-[400px] aspect-square float-wrapper z-10" data-speed="0.9">
-        <motion.div
-          drag dragConstraints={{ top: -150, bottom: 150, left: -200, right: 200 }} dragElastic={0.1}
-          whileHover={{ scale: 1.02 }} whileDrag={{ scale: 1.1, rotate: -3, zIndex: 50, cursor: "grabbing" }}
-          className="w-full h-full cursor-grab overflow-hidden rounded-[30px] border border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.5)]"
-        >
-          <img src={project.gallery.bottom} alt="Bottom" className="w-full h-full object-cover pointer-events-none" />
-        </motion.div>
-      </div>
+      {/* BOTTOM — centered */}
+      <GalleryCard
+        src={project.gallery.bottom}
+        alt="Bottom"
+        wrapperClass="top-[90%] left-[50%] -translate-x-1/2 w-[300px] md:w-[400px]"
+        speed="0.9"
+        rotate={-3}
+        zIndex="z-10"
+      />
 
-      {/* Overlay gradient to smooth edges */}
+      {/* Edge fade-outs */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-transparent h-40 top-0 z-40 pointer-events-none" />
       <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent h-40 bottom-0 z-40 mt-auto pointer-events-none" />
     </section>

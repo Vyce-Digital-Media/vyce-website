@@ -672,7 +672,7 @@ export const projectsData: Record<string, ProjectShowcase> = {
       buttonText: "Start a project",
       link: "/contact"
     }
-  },   
+  },
 
   "pesto-pavilion": {
     id: 6,
@@ -782,6 +782,477 @@ export const projectsData: Record<string, ProjectShowcase> = {
         category: "Web",
         image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=1400&h=900&fit=crop&q=80",
         link: "/showcase/ecotellus"
+      }
+    ],
+    cta: {
+      title: "Ready to scale?",
+      subtitle: "Let's build something exceptional together.",
+      buttonText: "Start a project",
+      link: "/contact"
+    }
+  },
+  "earthy-crafts-web": {
+    id: 7,
+    slug: "earthy-crafts-web",
+    category: "Web",
+    tags: ["Social Media", "Performance Marketing", "Web Design"],
+    year: "2026",
+    image: "/portfolio/earthy-web/1.webp",
+    summary: "Earthy Crafts is a luxury handcrafted decor platform that blends timeless artistry with modern design, showcasing premium marble sculptures and artisan-crafted home decor pieces.",
+    accent: "rgba(255,180,80,0.15)",
+    hero: {
+      tagLine: "Web Development and SEO",
+      titleFirstPart: "Earthy",
+      titleSecondPart: "Crafts",
+      summary: "Earthy Crafts is a luxury handcrafted decor platform that blends timeless artistry with modern design, showcasing premium marble sculptures and artisan-crafted home decor pieces.",
+      bgImage: "/portfolio/earthy-web/1.webp",
+      clientLogoBase64: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMzMzIiAvPjwvc3ZnPg==",
+    },
+    details: {
+      client: "Earthy Crafts",
+      industry: "Web",
+      services: ["Social Strategy", "Web Design", "Performance Ads"],
+      startDate: "January 2026",
+      endDate: "April 2026",
+      duration: "4 Months",
+      year: "2026",
+    },
+    problemStatement: "Earthy Crafts is a luxury handcrafted decor platform that blends timeless artistry with modern design, showcasing premium marble sculptures and artisan-crafted home decor pieces. We ripped this down to the studs, interrogated their business model, and built a digital weapon.",
+    gallery: {
+      top: "/portfolio/earthy-web/1.webp",
+      left: "/portfolio/earthy-web/2.webp",
+      center: "/portfolio/earthy-web/3.webp",
+      right: "/portfolio/earthy-web/4.webp",
+      bottomLeft: "/portfolio/earthy-web/5.webp",
+      bottomRight: "/portfolio/earthy-web/6.webp",
+      bottom: "/portfolio/earthy-web/7.webp",
+    },
+    execution: [
+      {
+        weeks: "Week 1-2",
+        title: "Research & Planning",
+        description: "Deep dive into the landscape, audience mapping, and architecting the core user journey.",
+        tags: ["Strategy", "UX Design"]
+      },
+      {
+        weeks: "Week 3-5",
+        title: "Design & Development",
+        description: "Translating insights into high-fidelity components. Implementing the core features.",
+        tags: ["Web", "Design", "Dev"]
+      },
+      {
+        weeks: "Week 6-12",
+        title: "Execution & Optimization",
+        description: "Scaling the platform, running performance audits, and executing the cross-channel growth campaign.",
+        tags: ["Growth", "SEO", "Performance"]
+      }
+    ],
+    strategy: [
+      {
+        num: "01",
+        title: ["Research", "& Insights"],
+        color: "#7c3aed",
+        items: [
+          "Competitor landscape mapping",
+          "Audience behavior & intent signals",
+          "Platform-specific performance data",
+          "Content gap & opportunity analysis",
+        ],
+      },
+      {
+        num: "02",
+        title: ["Strategic", "Direction"],
+        color: "#f97316",
+        items: [
+          "Full-funnel strategy architecture",
+          "Content direction & messaging pillars",
+          "UX philosophy & journey mapping",
+          "Brand positioning & differentiation",
+        ],
+      },
+      {
+        num: "03",
+        title: ["Execution", "Plan"],
+        color: "#10b981",
+        items: [
+          "Technology stack selection",
+          "Sprint-based delivery roadmap",
+          "KPI framework & measurement plan",
+          "Risk mitigation & iteration loops",
+        ],
+      }
+    ],
+    impact: [
+      { label: "Conversion Rate", value: "3.2", suffix: "x", description: "Increase in qualified leads within the first 90 days of launch." },
+      { label: "User Retention", value: "45", suffix: "%", description: "Improvement in 30-day retention due to optimized UX." },
+      { label: "Performance", value: "99", prefix: "", description: "Lighthouse performance score, up from 42." }
+    ],
+    relatedProjects: [
+      {
+        title: "Global Peace Ministry",
+        category: "Web",
+        image: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1400&h=900&fit=crop&q=80",
+        link: "/showcase/global-peace-ministry"
+      },
+      {
+        title: "Ecotellus",
+        category: "Web",
+        image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=1400&h=900&fit=crop&q=80",
+        link: "/showcase/ecotellus"
+      }
+    ],
+    cta: {
+      title: "Ready to scale?",
+      subtitle: "Let's build something exceptional together.",
+      buttonText: "Start a project",
+      link: "/contact"
+    }
+  },
+
+  "dokarh-web": {
+    id: 8,
+    slug: "dokarh-web",
+    category: "Web",
+    tags: ["E-commerce", "Web Design", "Development"],
+    year: "2026",
+    image: "/portfolio/dokarh-web/1.webp",
+    summary: "Dokarh is a modern e-commerce platform crafted to deliver seamless shopping experiences with a bold and interactive user interface.",
+    accent: "rgba(100,149,237,0.15)",
+    hero: {
+      tagLine: "Web Development",
+      titleFirstPart: "Dokarh",
+      titleSecondPart: "",
+      summary: "Dokarh is a modern e-commerce platform crafted to deliver seamless shopping experiences with a bold and interactive user interface.",
+      bgImage: "/portfolio/dokarh-web/1.webp",
+      clientLogoBase64: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMzMzIiAvPjwvc3ZnPg==",
+    },
+    details: {
+      client: "Dokarh",
+      industry: "E-commerce",
+      services: ["Web Design", "Development", "UI/UX"],
+      startDate: "March 2026",
+      endDate: "May 2026",
+      duration: "3 Months",
+      year: "2026",
+    },
+    problemStatement: "Dokarh needed a robust e-commerce platform that could handle high volume traffic while maintaining an elegant, premium feel. We designed a custom storefront that maximizes conversions without compromising on aesthetics.",
+    gallery: {
+      top: "/portfolio/dokarh-web/1.webp",
+      left: "/portfolio/dokarh-web/2.webp",
+      center: "/portfolio/dokarh-web/3.webp",
+      right: "/portfolio/dokarh-web/4.webp",
+      bottomLeft: "/portfolio/dokarh-web/5.webp",
+      bottomRight: "/portfolio/dokarh-web/6.webp",
+      bottom: "/portfolio/dokarh-web/7.webp",
+    },
+    execution: [
+      {
+        weeks: "Week 1-2",
+        title: "Strategy & Prototyping",
+        description: "Mapping out the user journey and creating high-fidelity wireframes.",
+        tags: ["Strategy", "UX Design"]
+      },
+      {
+        weeks: "Week 3-8",
+        title: "Development & Integration",
+        description: "Building the custom frontend and integrating robust payment solutions.",
+        tags: ["Web", "Dev", "Integration"]
+      },
+      {
+        weeks: "Week 9-12",
+        title: "Testing & Launch",
+        description: "Rigorous quality assurance, load testing, and deployment to production.",
+        tags: ["QA", "Launch"]
+      }
+    ],
+    strategy: [
+      {
+        num: "01",
+        title: ["User", "Experience"],
+        color: "#3b82f6",
+        items: [
+          "Frictionless checkout process",
+          "Intuitive product discovery",
+          "Mobile-first responsive design",
+          "Performance-driven architecture",
+        ],
+      },
+      {
+        num: "02",
+        title: ["Technical", "Foundation"],
+        color: "#10b981",
+        items: [
+          "Headless CMS integration",
+          "Global CDN deployment",
+          "Automated inventory sync",
+          "Secure payment gateways",
+        ],
+      },
+      {
+        num: "03",
+        title: ["Growth", "Mechanics"],
+        color: "#8b5cf6",
+        items: [
+          "SEO-optimized product pages",
+          "Dynamic retargeting setup",
+          "Abandoned cart recovery",
+          "Conversion rate optimization",
+        ],
+      }
+    ],
+    impact: [
+      { label: "Conversion Rate", value: "4.1", suffix: "%", description: "Average conversion rate across all product categories." },
+      { label: "Load Time", value: "0.8", suffix: "s", description: "Average page load time, drastically reducing bounce rates." },
+      { label: "Revenue Increase", value: "210", suffix: "%", description: "YoY revenue growth post-launch." }
+    ],
+    relatedProjects: [
+      {
+        title: "Earthy Crafts",
+        category: "Web",
+        image: "/portfolio/earthy-web/1.webp",
+        link: "/showcase/earthy-crafts-web"
+      },
+      {
+        title: "MLDC",
+        category: "Web",
+        image: "/portfolio/mldc-web/1.webp",
+        link: "/showcase/mldc-web"
+      }
+    ],
+    cta: {
+      title: "Ready to scale?",
+      subtitle: "Let's build something exceptional together.",
+      buttonText: "Start a project",
+      link: "/contact"
+    }
+  },
+
+  "global-peace-web": {
+    id: 9,
+    slug: "global-peace-web",
+    category: "Web",
+    tags: ["Non-Profit", "Web Design", "Donation System"],
+    year: "2026",
+    image: "/portfolio/global-peace-web/1.webp",
+    summary: "Global Peace Ministry is a global non-profit organization dedicated to humanitarian aid and community building, with a platform designed to streamline donations and volunteer onboarding.",
+    accent: "rgba(16,185,129,0.15)",
+    hero: {
+      tagLine: "Digital Transformation",
+      titleFirstPart: "Global",
+      titleSecondPart: "Peace",
+      summary: "Global Peace Ministry is a global non-profit organization dedicated to humanitarian aid and community building, with a platform designed to streamline donations and volunteer onboarding.",
+      bgImage: "/portfolio/global-peace-web/1.webp",
+      clientLogoBase64: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMzMzIiAvPjwvc3ZnPg==",
+    },
+    details: {
+      client: "Global Peace Ministry",
+      industry: "Non-Profit",
+      services: ["Web Design", "Development", "Donation Integration"],
+      startDate: "February 2026",
+      endDate: "April 2026",
+      duration: "3 Months",
+      year: "2026",
+    },
+    problemStatement: "The ministry struggled with a fragmented digital presence and an inefficient donation process. We built a unified platform that tells their compelling story while making it effortless for supporters to contribute.",
+    gallery: {
+      top: "/portfolio/global-peace-web/1.webp",
+      left: "/portfolio/global-peace-web/2.webp",
+      center: "/portfolio/global-peace-web/3.webp",
+      right: "/portfolio/global-peace-web/4.webp",
+      bottomLeft: "/portfolio/global-peace-web/5.webp",
+      bottomRight: "/portfolio/global-peace-web/6.webp",
+      bottom: "/portfolio/global-peace-web/7.webp",
+    },
+    execution: [
+      {
+        weeks: "Week 1-3",
+        title: "Discovery & UX",
+        description: "Understanding donor behavior and designing a narrative-driven user experience.",
+        tags: ["Research", "UX Design"]
+      },
+      {
+        weeks: "Week 4-8",
+        title: "Platform Development",
+        description: "Building the website and integrating a secure, multi-currency donation system.",
+        tags: ["Web", "Dev", "Fintech"]
+      },
+      {
+        weeks: "Week 9-12",
+        title: "Content & Launch",
+        description: "Populating impactful stories and rolling out the platform globally.",
+        tags: ["Content", "Launch"]
+      }
+    ],
+    strategy: [
+      {
+        num: "01",
+        title: ["Narrative", "Design"],
+        color: "#10b981",
+        items: [
+          "Impact-driven storytelling",
+          "Visual communication strategy",
+          "Volunteer spotlight features",
+          "Transparent impact reporting",
+        ],
+      },
+      {
+        num: "02",
+        title: ["Donor", "Experience"],
+        color: "#3b82f6",
+        items: [
+          "Frictionless donation flow",
+          "Recurring giving options",
+          "Tax receipt automation",
+          "Multi-currency support",
+        ],
+      },
+      {
+        num: "03",
+        title: ["Platform", "Scale"],
+        color: "#f59e0b",
+        items: [
+          "High-availability infrastructure",
+          "Accessibility compliance",
+          "Multilingual architecture",
+          "Global CDN delivery",
+        ],
+      }
+    ],
+    impact: [
+      { label: "Donation Volume", value: "3.5", suffix: "x", description: "Increase in monthly recurring donations." },
+      { label: "Volunteer Signups", value: "150", suffix: "%", description: "Growth in new volunteer registrations." },
+      { label: "Global Reach", value: "45", suffix: "+", description: "Countries reached with the new localized platform." }
+    ],
+    relatedProjects: [
+      {
+        title: "Earthy Crafts",
+        category: "Web",
+        image: "/portfolio/earthy-web/1.webp",
+        link: "/showcase/earthy-crafts-web"
+      },
+      {
+        title: "MLDC",
+        category: "Web",
+        image: "/portfolio/mldc-web/1.webp",
+        link: "/showcase/mldc-web"
+      }
+    ],
+    cta: {
+      title: "Ready to scale?",
+      subtitle: "Let's build something exceptional together.",
+      buttonText: "Start a project",
+      link: "/contact"
+    }
+  },
+
+  "mldc-web": {
+    id: 10,
+    slug: "mldc-web",
+    category: "Web",
+    tags: ["Corporate", "Web Design", "B2B"],
+    year: "2026",
+    image: "/portfolio/mldc-web/1.webp",
+    summary: "MLDC is a leading corporate entity requiring a robust, professional digital presence to highlight their extensive service portfolio and industry leadership.",
+    accent: "rgba(239,68,68,0.15)",
+    hero: {
+      tagLine: "Corporate Web Presence",
+      titleFirstPart: "MLDC",
+      titleSecondPart: "",
+      summary: "MLDC is a leading corporate entity requiring a robust, professional digital presence to highlight their extensive service portfolio and industry leadership.",
+      bgImage: "/portfolio/mldc-web/1.webp",
+      clientLogoBase64: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMzMzIiAvPjwvc3ZnPg==",
+    },
+    details: {
+      client: "MLDC",
+      industry: "Corporate",
+      services: ["Corporate Site", "UI/UX", "B2B Strategy"],
+      startDate: "January 2026",
+      endDate: "April 2026",
+      duration: "4 Months",
+      year: "2026",
+    },
+    problemStatement: "MLDC's previous website failed to reflect their market position. We engineered a sleek, high-performance corporate platform designed to build trust and generate qualified B2B leads.",
+    gallery: {
+      top: "/portfolio/mldc-web/1.webp",
+      left: "/portfolio/mldc-web/2.webp",
+      center: "/portfolio/mldc-web/3.webp",
+      right: "/portfolio/mldc-web/4.webp",
+      bottomLeft: "/portfolio/mldc-web/5.webp",
+      bottomRight: "/portfolio/mldc-web/6.webp",
+      bottom: "/portfolio/mldc-web/7.webp",
+    },
+    execution: [
+      {
+        weeks: "Week 1-4",
+        title: "Stakeholder Alignment & Strategy",
+        description: "Deep dive workshops with key executives to define digital objectives and brand positioning.",
+        tags: ["Strategy", "Workshops"]
+      },
+      {
+        weeks: "Week 5-10",
+        title: "Design & Architecture",
+        description: "Developing a scalable design system and laying out the corporate information architecture.",
+        tags: ["UX/UI", "Design System"]
+      },
+      {
+        weeks: "Week 11-16",
+        title: "Development & Deployment",
+        description: "Implementing the platform with enterprise-grade security and performance standards.",
+        tags: ["Enterprise Dev", "Security"]
+      }
+    ],
+    strategy: [
+      {
+        num: "01",
+        title: ["Brand", "Authority"],
+        color: "#ef4444",
+        items: [
+          "Premium visual identity",
+          "Thought leadership hubs",
+          "Interactive case studies",
+          "Executive team showcases",
+        ],
+      },
+      {
+        num: "02",
+        title: ["Lead", "Generation"],
+        color: "#3b82f6",
+        items: [
+          "Strategic conversion points",
+          "CRM integration",
+          "Gated premium content",
+          "Automated lead scoring",
+        ],
+      },
+      {
+        num: "03",
+        title: ["Enterprise", "Tech"],
+        color: "#6366f1",
+        items: [
+          "SOC2 compliant architecture",
+          "Role-based access control",
+          "Advanced analytics tracking",
+          "Seamless legacy integration",
+        ],
+      }
+    ],
+    impact: [
+      { label: "B2B Leads", value: "2.8", suffix: "x", description: "Increase in qualified enterprise leads generated." },
+      { label: "Time on Site", value: "240", suffix: "%", description: "Improvement in average session duration." },
+      { label: "Security", value: "100", suffix: "%", description: "Compliance with all enterprise security requirements." }
+    ],
+    relatedProjects: [
+      {
+        title: "Earthy Crafts",
+        category: "Web",
+        image: "/portfolio/earthy-web/1.webp",
+        link: "/showcase/earthy-crafts-web"
+      },
+      {
+        title: "Dokarh",
+        category: "Web",
+        image: "/portfolio/dokarh-web/1.webp",
+        link: "/showcase/dokarh-web"
       }
     ],
     cta: {
@@ -2562,123 +3033,7 @@ export const projectsData: Record<string, ProjectShowcase> = {
   //   }
   // },
 
-  // "earthy-crafts-17": {
-  //   id: 17,
-  //   slug: "earthy-crafts-17",
-  //   category: "Web",
-  //   tags: ["Social Media", "Performance Marketing", "Web Design"],
-  //   year: "2026",
-  //   image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=1400&h=900&fit=crop&q=80",
-  //   summary: "Earthy Crafts is a luxury handcrafted decor platform that blends timeless artistry with modern design, showcasing premium marble sculptures and artisan-crafted home decor pieces.",
-  //   accent: "rgba(255,180,80,0.15)",
-  //   hero: {
-  //     tagLine: "Web Development and SEO",
-  //     titleFirstPart: "Earthy",
-  //     titleSecondPart: "Crafts",
-  //     summary: "Earthy Crafts is a luxury handcrafted decor platform that blends timeless artistry with modern design, showcasing premium marble sculptures and artisan-crafted home decor pieces.",
-  //     bgImage: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=1400&h=900&fit=crop&q=80",
-  //     clientLogoBase64: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMzMzIiAvPjwvc3ZnPg==",
-  //   },
-  //   details: {
-  //     client: "Earthy Crafts",
-  //     industry: "Web",
-  //     services: ["Social Strategy", "Web Design", "Performance Ads"],
-  //     startDate: "January 2026",
-  //     endDate: "April 2026",
-  //     duration: "4 Months",
-  //     year: "2026",
-  //   },
-  //   problemStatement: "Earthy Crafts is a luxury handcrafted decor platform that blends timeless artistry with modern design, showcasing premium marble sculptures and artisan-crafted home decor pieces. We ripped this down to the studs, interrogated their business model, and built a digital weapon.",
-  //   gallery: {
-  //     top: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80",
-  //     left: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
-  //     center: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1000&q=80",
-  //     right: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80",
-  //     bottomLeft: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80",
-  //     bottomRight: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80",
-  //     bottom: "https://images.unsplash.com/photo-1483478550801-ceba5fe50e8e?w=800&q=80",
-  //   },
-  //   execution: [
-  //     {
-  //       weeks: "Week 1-2",
-  //       title: "Research & Planning",
-  //       description: "Deep dive into the landscape, audience mapping, and architecting the core user journey.",
-  //       tags: ["Strategy", "UX Design"]
-  //     },
-  //     {
-  //       weeks: "Week 3-5",
-  //       title: "Design & Development",
-  //       description: "Translating insights into high-fidelity components. Implementing the core features.",
-  //       tags: ["Web", "Design", "Dev"]
-  //     },
-  //     {
-  //       weeks: "Week 6-12",
-  //       title: "Execution & Optimization",
-  //       description: "Scaling the platform, running performance audits, and executing the cross-channel growth campaign.",
-  //       tags: ["Growth", "SEO", "Performance"]
-  //     }
-  //   ],
-  //   strategy: [
-  //     {
-  //       num: "01",
-  //       title: ["Research", "& Insights"],
-  //       color: "#7c3aed",
-  //       items: [
-  //         "Competitor landscape mapping",
-  //         "Audience behavior & intent signals",
-  //         "Platform-specific performance data",
-  //         "Content gap & opportunity analysis",
-  //       ],
-  //     },
-  //     {
-  //       num: "02",
-  //       title: ["Strategic", "Direction"],
-  //       color: "#f97316",
-  //       items: [
-  //         "Full-funnel strategy architecture",
-  //         "Content direction & messaging pillars",
-  //         "UX philosophy & journey mapping",
-  //         "Brand positioning & differentiation",
-  //       ],
-  //     },
-  //     {
-  //       num: "03",
-  //       title: ["Execution", "Plan"],
-  //       color: "#10b981",
-  //       items: [
-  //         "Technology stack selection",
-  //         "Sprint-based delivery roadmap",
-  //         "KPI framework & measurement plan",
-  //         "Risk mitigation & iteration loops",
-  //       ],
-  //     }
-  //   ],
-  //   impact: [
-  //     { label: "Conversion Rate", value: "3.2", suffix: "x", description: "Increase in qualified leads within the first 90 days of launch." },
-  //     { label: "User Retention", value: "45", suffix: "%", description: "Improvement in 30-day retention due to optimized UX." },
-  //     { label: "Performance", value: "99", prefix: "", description: "Lighthouse performance score, up from 42." }
-  //   ],
-  //   relatedProjects: [
-  //     {
-  //       title: "Global Peace Ministry",
-  //       category: "Web",
-  //       image: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1400&h=900&fit=crop&q=80",
-  //       link: "/showcase/global-peace-ministry"
-  //     },
-  //     {
-  //       title: "Ecotellus",
-  //       category: "Web",
-  //       image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=1400&h=900&fit=crop&q=80",
-  //       link: "/showcase/ecotellus"
-  //     }
-  //   ],
-  //   cta: {
-  //     title: "Ready to scale?",
-  //     subtitle: "Let's build something exceptional together.",
-  //     buttonText: "Start a project",
-  //     link: "/contact"
-  //   }
-  // },
+
 
   // "eyve-18": {
   //   id: 18,

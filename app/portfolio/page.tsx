@@ -122,7 +122,7 @@ function CoverflowProjectCard({ project, index, activeProgress }: { project: any
           </div>
 
           <div className="mt-auto">
-            <Link href={`/showcase/${project.title.toLowerCase().replace(/\s+/g, '-')}`} className="group/btn inline-flex items-center gap-4 text-[11px] font-black uppercase tracking-[0.3em] text-white transition-colors duration-300">
+            <Link href={`/showcase/${project.slug}`} className="group/btn inline-flex items-center gap-4 text-[11px] font-black uppercase tracking-[0.3em] text-white transition-colors duration-300">
               Explore Project
               <span className="flex h-14 w-14 items-center justify-center rounded-full border border-white/20 bg-black/50 transition-all duration-500 group-hover/btn:border-primary group-hover/btn:bg-primary group-hover/btn:text-background group-hover/btn:rotate-45 group-hover/btn:scale-110">
                 <ArrowUpRight size={20} />
