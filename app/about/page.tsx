@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 import {
   motion,
@@ -338,6 +338,28 @@ export default function AboutPage() {
   const floatX = useSpring(cursorX, { stiffness: 180, damping: 22 });
   const floatY = useSpring(cursorY, { stiffness: 180, damping: 22 });
 
+  // Interactive dots for hero
+  const dotRevealRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const section = heroRef.current as HTMLElement | null;
+    if (!section) return;
+
+    const onMouseMove = (e: MouseEvent) => {
+      const rect = section.getBoundingClientRect();
+      const relX = e.clientX - rect.left;
+      const relY = e.clientY - rect.top;
+      if (dotRevealRef.current) {
+        dotRevealRef.current.style.setProperty("--mx", `${relX}px`);
+        dotRevealRef.current.style.setProperty("--my", `${relY}px`);
+      }
+    };
+
+    section.addEventListener("mousemove", onMouseMove, { passive: true });
+    return () => {
+      section.removeEventListener("mousemove", onMouseMove);
+    };
+  }, []);
+
   return (
     <div className="bg-background text-foreground overflow-hidden">
 
@@ -347,6 +369,34 @@ export default function AboutPage() {
         className="relative flex h-screen min-h-[640px] overflow-hidden"
         style={{ background: "#f5f5f0" }}
       >
+        {/* Dot grid — base faint layer (always visible) */}
+        <div aria-hidden style={{
+          position: "absolute", inset: 0,
+          backgroundImage: "radial-gradient(circle, rgba(0,0,0,0.06) 1.5px, transparent 1.5px)",
+          backgroundSize: "28px 28px", pointerEvents: "none", zIndex: 0,
+        }} />
+
+        {/* Dot grid — bright revealed layer (cursor spotlight mask) */}
+        <div
+          ref={dotRevealRef}
+          aria-hidden
+          style={{
+            position: "absolute", inset: 0,
+            backgroundImage: "radial-gradient(circle, rgba(0,0,0,0.55) 1.5px, transparent 1.5px)",
+            backgroundSize: "28px 28px",
+            pointerEvents: "none", zIndex: 0,
+            WebkitMaskImage: "radial-gradient(circle 280px at var(--mx, 50%) var(--my, 50%), black 0%, transparent 100%)",
+            maskImage: "radial-gradient(circle 280px at var(--mx, 50%) var(--my, 50%), black 0%, transparent 100%)",
+          } as React.CSSProperties}
+        />
+
+        {/* Edge vignette */}
+        <div aria-hidden style={{
+          position: "absolute", inset: 0,
+          background: "radial-gradient(ellipse 80% 60% at 50% 50%, transparent 50%, rgba(245,245,240,0.4) 100%)",
+          pointerEvents: "none", zIndex: 1,
+        }} />
+
         {/* LEFT: Text Content */}
         <motion.div
           style={{ y: heroY, opacity: heroOpacity }}
@@ -399,17 +449,17 @@ export default function AboutPage() {
         </motion.div>
 
         {/* RIGHT: Two infinite-scroll image columns */}
-        <div className="hidden lg:flex gap-3 w-[45%] shrink-0 overflow-hidden relative pointer-events-none">
+        <div className="hidden lg:flex gap-4 w-[45%] shrink-0 absolute right-0 top-[-20vh] bottom-[-20vh] pointer-events-none overflow-hidden pr-8">
           {/* Fade edges */}
-          <div className="absolute inset-x-0 top-0 h-32 z-10 pointer-events-none" style={{ background: "linear-gradient(to bottom, #f5f5f0, transparent)" }} />
-          <div className="absolute inset-x-0 bottom-0 h-32 z-10 pointer-events-none" style={{ background: "linear-gradient(to top, #f5f5f0, transparent)" }} />
+          <div className="absolute inset-x-0 top-0 h-[25vh] z-10 pointer-events-none" style={{ background: "linear-gradient(to bottom, #f5f5f0, transparent)" }} />
+          <div className="absolute inset-x-0 bottom-0 h-[25vh] z-10 pointer-events-none" style={{ background: "linear-gradient(to top, #f5f5f0, transparent)" }} />
 
           {/* Column 1 — scrolls UP */}
-          <div className="flex-1 overflow-hidden">
+          <div className="flex-1 overflow-hidden mt-[10vh]">
             <motion.div
               animate={{ y: ["0%", "-50%"] }}
               transition={{ duration: 18, ease: "linear", repeat: Infinity }}
-              className="flex flex-col gap-3"
+              className="flex flex-col gap-4"
             >
               {["/hero1.webp", "/hero2.webp", "/hero3.webp", "/hero4.webp", "/hero5.webp",
                 "/hero1.webp", "/hero2.webp", "/hero3.webp", "/hero4.webp", "/hero5.webp"].map((src, i) => (
@@ -422,11 +472,11 @@ export default function AboutPage() {
           </div>
 
           {/* Column 2 — scrolls DOWN */}
-          <div className="flex-1 overflow-hidden mt-12">
+          <div className="flex-1 overflow-hidden">
             <motion.div
               animate={{ y: ["-50%", "0%"] }}
               transition={{ duration: 22, ease: "linear", repeat: Infinity }}
-              className="flex flex-col gap-3"
+              className="flex flex-col gap-4"
             >
               {["/hero6.webp", "/hero7.webp", "/hero8.webp", "/hero9.webp", "/hero10.webp",
                 "/hero6.webp", "/hero7.webp", "/hero8.webp", "/hero9.webp", "/hero10.webp"].map((src, i) => (

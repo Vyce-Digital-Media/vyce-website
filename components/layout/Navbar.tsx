@@ -61,7 +61,7 @@ export default function Navbar() {
       >
         <nav className="mx-auto flex max-w-[1600px] items-center justify-between px-6 md:px-12 lg:px-16">
           <Link href="/" className="flex items-center gap-4 group">
-            <img src="/assets/nav-logo.png" alt="Logo" className="h-12 w-auto text-foreground sm:h-16 md:h-20 ml-4 md:ml-8" />
+            <img src="/assets/nav-logo.png" alt="Logo" className="h-12 w-auto sm:h-16 md:h-20 ml-4 md:ml-8 brightness-0" />
           </Link>
 
           <div
@@ -107,7 +107,7 @@ export default function Navbar() {
                   target="_blank"
                   rel="noreferrer"
                   aria-label={social.name}
-                  className="group flex h-12 w-12 items-center justify-center rounded-full border border-foreground/10 bg-foreground/5 text-foreground transition-all duration-300 hover:border-primary hover:bg-primary/15 hover:text-primary hover:shadow-[0_0_20px_rgba(0,68,255,0.3)]"
+                  className="group flex h-12 w-12 items-center justify-center rounded-full border border-black/20 bg-black/5 text-black transition-all duration-300 hover:border-black/40 hover:bg-black/10 hover:shadow-[0_0_20px_rgba(0,0,0,0.1)]"
                 >
                   <i className={cn(social.iconClass, "text-[20px] transition-transform duration-300 group-hover:scale-120")} />
                 </a>
@@ -118,7 +118,7 @@ export default function Navbar() {
           <button
             type="button"
             onClick={() => setIsOpen(true)}
-            className="absolute right-6 top-1/2 -translate-y-1/2 flex h-10 w-10 items-center justify-center text-foreground md:hidden"
+            className="absolute right-6 top-1/2 -translate-y-1/2 flex h-10 w-10 items-center justify-center text-black md:hidden"
             aria-label="Open menu"
           >
             <Menu size={22} strokeWidth={1.25} />
