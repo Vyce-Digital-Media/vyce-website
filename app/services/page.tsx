@@ -159,19 +159,19 @@ const phases = [
     step: "01",
     title: "Project-Based",
     detail:
-      "One clear brief. One focused engagement. We scope the work, execute at full intensity, and deliver something your industry will be talking about. Clean, contained, and done properly.",
+      "We take a single, clear objective and engineer a high-impact solution. No hand-holding, no pointless meetings—just an outcome your industry will be forced to notice. Clean, contained, and executed flawlessly.",
   },
   {
     step: "02",
     title: "Retainer",
     detail:
-      "We become an extension of your team — monthly strategy, consistent execution, and the kind of compounding momentum that turns brands into market leaders. Long-term thinking. Measurable results.",
+      "We become your dedicated growth engine. Monthly strategy grounded in numbers, not vibes, combined with relentless execution. We build the kind of compounding momentum that turns brands into market leaders.",
   },
   {
     step: "03",
     title: "Consultation",
     detail:
-      "You get our full attention, honest assessment, and a clear roadmap for what needs to change. No upselling. No fluff. Just expert perspective on where your strategy is leaking and how to fix it.",
+      "Get our unfiltered perspective on why your current strategy is failing. We diagnose the wreckage and hand you a ruthless roadmap to fix it. No upselling. No fluff. Just data-backed clarity.",
   },
 ];
 
@@ -342,6 +342,68 @@ function HorizontalServiceGallery({ servicesList, titleNode }: { servicesList: t
     </div>
   );
 }
+const portfolioImages = [
+  '/portfolio/bb-smm/1.webp',
+  '/portfolio/pesto-smm/1.webp',
+  '/portfolio/bb-smm/2.webp',
+  '/portfolio/pesto-smm/2.webp',
+  '/portfolio/bb-smm/3.webp',
+  '/portfolio/pesto-smm/3.webp',
+  '/portfolio/bb-smm/4.webp',
+  '/portfolio/pesto-smm/4.webp',
+  '/portfolio/bb-smm/5.webp',
+  '/portfolio/pesto-smm/5.webp',
+  '/portfolio/bb-smm/6.webp',
+  '/portfolio/pesto-smm/6.webp',
+];
+
+function RotatingRing({ radius, duration, reverse, items, tilt = 0, scale = 1 }: { radius: number, duration: number, reverse?: boolean, items: number[], tilt?: number, scale?: number }) {
+  return (
+    <motion.div
+      animate={{ rotate: reverse ? -360 : 360 }}
+      transition={{ duration, repeat: Infinity, ease: "linear" }}
+      className="absolute flex items-center justify-center"
+      style={{ width: 0, height: 0, transformStyle: "preserve-3d" }}
+    >
+      {items.map((idx, i) => {
+        const angle = (i / items.length) * 360;
+        return (
+          <div
+            key={i}
+            className="absolute flex items-center justify-center"
+            style={{
+              transform: `rotate(${angle}deg) translateY(-${radius}px) rotateX(${tilt}deg) scale(${scale})`,
+              transformStyle: "preserve-3d"
+            }}
+          >
+            {/* The Image Card */}
+            <div className="bg-white p-1.5 rounded-[16px] shadow-[0_15px_50px_rgb(0,0,0,0.15)] border border-black/[0.04] w-[180px] h-[220px] md:w-[240px] md:h-[300px]">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={portfolioImages[idx % portfolioImages.length]} alt="service display" className="w-full h-full object-cover rounded-[10px]" />
+            </div>
+          </div>
+        );
+      })}
+    </motion.div>
+  );
+}
+
+function ScatteredCardsHero() {
+  const innerItems = [0, 1, 2, 3, 4, 5, 0, 1]; // 8 items
+  const outerItems = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]; // 12 items
+  
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 flex items-center justify-center" style={{ perspective: "1200px" }}>
+      <div className="hidden md:flex items-center justify-center" style={{ transformStyle: "preserve-3d" }}>
+         <RotatingRing radius={520} duration={110} reverse items={innerItems} tilt={-35} scale={0.95} />
+         <RotatingRing radius={750} duration={150} items={outerItems} tilt={-35} scale={1.05} />
+      </div>
+      <div className="flex md:hidden items-center justify-center" style={{ transformStyle: "preserve-3d" }}>
+         <RotatingRing radius={420} duration={90} reverse items={innerItems} tilt={-35} scale={0.9} />
+      </div>
+    </div>
+  );
+}
 
 export default function ServicesPage() {
   const [hoveredStep, setHoveredStep] = React.useState<string | null>(null);
@@ -390,7 +452,7 @@ export default function ServicesPage() {
       {/* ── 00. HERO ──────────────────────────────────────────────── */}
       <section
         ref={heroRef}
-        className="relative flex h-screen min-h-[640px] overflow-hidden"
+        className="relative flex flex-col h-screen min-h-[750px] overflow-hidden"
         style={{ background: "#f5f5f0" }}
       >
         {/* Dot grid — base faint layer (always visible) */}
@@ -421,17 +483,19 @@ export default function ServicesPage() {
           pointerEvents: "none", zIndex: 1,
         }} />
 
-        {/* LEFT: Text Content */}
+        <ScatteredCardsHero />
+
+        {/* TOP: Centered Text Content */}
         <motion.div
           style={{ y: heroY, opacity: heroOpacity }}
-          className="relative z-10 flex flex-col justify-center px-8 md:px-16 lg:px-20 w-full lg:w-[45%] shrink-0"
+          className="relative z-10 flex flex-col items-center justify-center text-center px-6 md:px-16 w-full h-full pointer-events-none"
         >
 
           {/* Headline */}
-          <div className="space-y-1">
+          <div className="space-y-1 max-w-4xl mx-auto">
             <RevealLine>
               <motion.h1
-                style={{ fontSize: "clamp(2rem, 3.5vw, 4rem)", fontWeight: 900, lineHeight: 1.05, letterSpacing: "-0.03em", color: "#111", margin: "0 0 18px 0" }}
+                style={{ fontSize: "clamp(2.5rem, 5.5vw, 5.5rem)", fontWeight: 900, lineHeight: 1.05, letterSpacing: "-0.03em", color: "#111", margin: "0 0 18px 0" }}
               >
                 <span>Built for brands that</span><br />
                 <span style={{ color: "#111" }}>refuse to be ignored.</span>
@@ -442,18 +506,18 @@ export default function ServicesPage() {
           {/* Subtext */}
           <FadeIn delay={0.3}>
             <motion.p
-              style={{ fontSize: "clamp(0.95rem, 1.4vw, 1.1rem)", color: "#666", lineHeight: 1.65, marginBottom: 32, maxWidth: 480 }}
+              style={{ fontSize: "clamp(1rem, 1.4vw, 1.25rem)", color: "#666", lineHeight: 1.65, marginBottom: 36, maxWidth: 680, marginLeft: "auto", marginRight: "auto" }}
             >
-              We don&apos;t sell packages. We sell outcomes. Strategy, design, code, and content — executed without hand-holding, pointless meetings, or a single mediocre deliverable. You bring the ambition. We bring the rest.
+              We don't sell packages. We sell outcomes. From strategy and branding to high-performance code and campaigns — executed without hand-holding or pointless meetings. You bring the ambition. We bring the execution.
             </motion.p>
           </FadeIn>
 
           {/* CTA Buttons */}
           <FadeIn delay={0.45}>
-            <motion.div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+            <motion.div style={{ display: "flex", gap: 16, flexWrap: "wrap", justifyContent: "center", pointerEvents: "auto" }}>
               <Link
                 href="/contact"
-                style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "13px 26px", borderRadius: 10, background: "#111", color: "#fff", fontSize: 14, fontWeight: 700, textDecoration: "none", transition: "all 0.2s ease", letterSpacing: "0.01em" }}
+                style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "14px 28px", borderRadius: 12, background: "#111", color: "#fff", fontSize: 15, fontWeight: 700, textDecoration: "none", transition: "all 0.2s ease", letterSpacing: "0.01em" }}
                 onMouseEnter={(e) => { e.currentTarget.style.background = "#222"; }}
                 onMouseLeave={(e) => { e.currentTarget.style.background = "#111"; }}
               >
@@ -461,55 +525,15 @@ export default function ServicesPage() {
               </Link>
               <Link
                 href="/portfolio"
-                style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "13px 26px", borderRadius: 10, border: "1.5px solid rgba(0,0,0,0.18)", background: "transparent", color: "#111", fontSize: 14, fontWeight: 700, textDecoration: "none", transition: "all 0.2s ease", letterSpacing: "0.01em" }}
+                style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "14px 28px", borderRadius: 12, border: "1.5px solid rgba(0,0,0,0.18)", background: "transparent", color: "#111", fontSize: 15, fontWeight: 700, textDecoration: "none", transition: "all 0.2s ease", letterSpacing: "0.01em" }}
                 onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(0,0,0,0.05)"; e.currentTarget.style.borderColor = "rgba(0,0,0,0.3)"; }}
                 onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.borderColor = "rgba(0,0,0,0.18)"; }}
               >
-                View Work <ArrowRight size={15} />
+                View Work <ArrowRight size={16} />
               </Link>
             </motion.div>
           </FadeIn>
         </motion.div>
-
-        {/* RIGHT: 6 Boxes Grid */}
-        <div className="hidden lg:flex w-[55%] shrink-0 items-center justify-center p-8 relative z-10">
-          <div className="grid grid-cols-3 grid-rows-2 gap-4 lg:gap-6 w-full h-full max-h-[700px]">
-            {services.slice(0, 6).map((service, i) => (
-              <motion.div
-                key={service.num}
-                initial={{ opacity: 0, scale: 0.9, y: 30 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                transition={{ delay: 0.4 + i * 0.1, duration: 0.6, type: "spring", stiffness: 200, damping: 20 }}
-                className="relative rounded-[32px] overflow-hidden border border-black/5 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 flex flex-col items-center pt-8 group cursor-pointer"
-                style={{
-                  background: `linear-gradient(135deg, #ffffff 0%, ${service.bgTo} 100%)`,
-                  "--hover-color": service.themeColor
-                } as React.CSSProperties}
-              >
-                {/* Text inside the box */}
-                <div className="px-5 text-center z-10 mb-6 h-12 flex items-center justify-center transform transition-all duration-500 group-hover:-translate-y-2 group-hover:scale-110">
-                  <h3 className="font-bold text-zinc-800 text-[15px] tracking-tight leading-snug transition-colors duration-500 group-hover:text-[var(--hover-color)]">{service.title}</h3>
-                </div>
-
-                {/* Phone Skeleton */}
-                <div className="relative w-[75%] max-w-[160px] aspect-[1/2] rounded-t-[28px] border-[6px] border-b-0 border-[#1a1f2c] bg-white shadow-2xl overflow-hidden mt-auto flex flex-col transform origin-bottom transition-transform duration-500 group-hover:scale-110">
-                  {/* Notch */}
-                  <div className="absolute top-2 left-1/2 -translate-x-1/2 w-[35%] h-[10px] bg-[#1a1f2c] rounded-full z-20" />
-
-                  {/* Screen Image */}
-                  <div className="w-full h-full relative">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={`/hero${i + 1}.webp`}
-                      alt={service.title}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
       </section>
 
       {/* ── 01. SERVICE CARDS ─────────────────────────────────────── */}
@@ -541,12 +565,12 @@ export default function ServicesPage() {
               <h2 className="text-5xl font-black uppercase tracking-tighter leading-[0.9] md:text-7xl">
                 How <br />
                 <span className="font-satoshi font-normal italic text-primary/80">We Work</span> <br />
-                (Mercilessly).
+                (Without Excuses).
               </h2>
             </div>
             <FadeIn delay={0.2}>
               <p className="max-w-md text-lg text-foreground/40 font-medium leading-relaxed">
-                No decks that look impressive but say nothing. We diagnose what&apos;s broken, quote what it costs to fix it, and then execute until the results make you slightly emotional. Three engagement models. All lethal.
+                The internet is full of brands that look okay and do nothing. We refuse to add to the pile. We diagnose what's broken and execute until the results speak for themselves. Three engagement models. All lethal.
               </p>
             </FadeIn>
 
@@ -579,7 +603,7 @@ export default function ServicesPage() {
                       {p.title}
                     </span>
                   </div>
-                );
+                 );
               })}
             </div>
           </div>
@@ -667,7 +691,7 @@ export default function ServicesPage() {
 
                   <FadeIn delay={0.2}>
                     <p className="text-lg leading-relaxed text-foreground/45 md:text-xl">
-                      Dump your mess on us. We&apos;ll sort through the wreckage, tell you what&apos;s salvageable, and build something your competitors will spend months trying to reverse-engineer. No fluff. No bloated retainers. Just ruthless output.
+                      Dump your mess on us. We'll sort through the wreckage, figure out exactly what's holding you back, and build a high-performance experience your competitors will spend months trying to reverse-engineer. We build things that actually do something.
                     </p>
                   </FadeIn>
 
@@ -678,7 +702,7 @@ export default function ServicesPage() {
                     href="/contact"
                     className="group inline-flex items-center gap-4 rounded-full bg-primary px-10 py-5 text-[11px] font-black uppercase tracking-[0.3em] text-white transition-all duration-300 hover:bg-primary/90 hover:scale-105 active:scale-95 shadow-[0_20px_40px_-10px_rgba(0,68,255,0.3)]"
                   >
-                    Book a Free Call
+                    Talk to us (we're nice)
                     <ArrowRight
                       size={16}
                       className="transition-transform duration-300 group-hover:translate-x-1"

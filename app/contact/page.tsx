@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 import {
   motion,
@@ -114,11 +114,11 @@ function FadeIn({ children, delay = 0, className = "" }: { children: React.React
 function FAQItem({ item, isOpen, onToggle }: { item: typeof faqItems[0]; isOpen: boolean; onToggle: () => void }) {
   return (
     <FadeIn delay={0}>
-      <div className={`border-t border-white/[0.07] transition-colors duration-300 ${isOpen ? "border-primary/20" : ""}`}>
+      <div className={`border-t border-black/[0.08] transition-colors duration-300 ${isOpen ? "border-primary/30" : ""}`}>
         <button onClick={onToggle} className="flex w-full items-start justify-between gap-6 py-6 text-left cursor-pointer">
-          <span className={`text-sm font-semibold leading-snug transition-colors duration-300 md:text-base ${isOpen ? "text-white" : "text-foreground/55"}`}>{item.q}</span>
+          <span className={`text-sm font-semibold leading-snug transition-colors duration-300 md:text-base ${isOpen ? "text-[#111]" : "text-black/60"}`}>{item.q}</span>
           <motion.div animate={{ rotate: isOpen ? 180 : 0 }} transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className={`mt-0.5 flex-shrink-0 transition-colors duration-300 ${isOpen ? "text-primary" : "text-foreground/25"}`}>
+            className={`mt-0.5 flex-shrink-0 transition-colors duration-300 ${isOpen ? "text-primary" : "text-black/30"}`}>
             <ChevronDown size={16} strokeWidth={1.5} />
           </motion.div>
         </button>
@@ -126,7 +126,7 @@ function FAQItem({ item, isOpen, onToggle }: { item: typeof faqItems[0]; isOpen:
           {isOpen && (
             <motion.div key="ans" initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }} className="overflow-hidden">
-              <p className="pb-7 text-sm leading-relaxed text-foreground/45 font-medium">{item.a}</p>
+              <p className="pb-7 text-sm leading-relaxed text-black/60 font-medium">{item.a}</p>
             </motion.div>
           )}
         </AnimatePresence>
@@ -144,21 +144,21 @@ function InfoCard({ info, index }: { info: typeof contactInfo[0]; index: number 
     <FadeIn delay={index * 0.1}>
       <a
         href={info.href}
-        className="group relative flex items-start gap-5 overflow-hidden rounded-2xl border border-white/[0.07] bg-zinc-950/50 p-6 transition-all duration-500 hover:border-primary/20 hover:-translate-y-1 hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.6)]"
+        className="group relative flex items-start gap-5 overflow-hidden rounded-2xl border border-black/[0.08] bg-white p-6 transition-all duration-500 hover:border-primary/30 hover:-translate-y-1 hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.1)]"
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
       >
         {/* Icon */}
-        <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl border border-white/[0.08] transition-all duration-500 group-hover:border-primary/30"
-          style={{ background: hovered ? info.accent : "transparent" }}>
-          <Icon size={20} strokeWidth={1.25} className="text-foreground/60 group-hover:text-primary transition-colors duration-300" />
+        <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl border border-black/[0.08] transition-all duration-500 group-hover:border-primary/40"
+          style={{ background: hovered ? info.accent : "rgba(0,0,0,0.02)" }}>
+          <Icon size={20} strokeWidth={1.25} className="text-black/60 group-hover:text-primary transition-colors duration-300" />
         </div>
         <div>
-          <p className="text-[9px] font-bold uppercase tracking-[0.4em] text-foreground/30">{info.title}</p>
-          <p className="mt-1.5 text-base font-semibold text-foreground/80 group-hover:text-white transition-colors duration-300">{info.value}</p>
+          <p className="text-[9px] font-bold uppercase tracking-[0.4em] text-black/40">{info.title}</p>
+          <p className="mt-1.5 text-base font-semibold text-[#111] transition-colors duration-300">{info.value}</p>
         </div>
         {/* Arrow */}
-        <ArrowUpRight size={14} className="absolute right-5 top-5 text-foreground/15 transition-all duration-300 group-hover:text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+        <ArrowUpRight size={14} className="absolute right-5 top-5 text-black/20 transition-all duration-300 group-hover:text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
         {/* Glow */}
         <motion.div className="absolute inset-0 rounded-2xl pointer-events-none" animate={{ opacity: hovered ? 1 : 0 }} transition={{ duration: 0.4 }}
           style={{ background: `radial-gradient(ellipse at 0% 50%, ${info.accent}, transparent 70%)` }} />
@@ -169,8 +169,8 @@ function InfoCard({ info, index }: { info: typeof contactInfo[0]; index: number 
 
 // ─── Form ──────────────────────────────────────────────────────────────────
 
-const inputClass = "w-full rounded-xl border border-white/[0.08] bg-white/[0.02] px-5 py-4 text-sm font-medium text-foreground outline-none transition-all duration-300 focus:border-primary/50 focus:bg-white/[0.04] placeholder:text-foreground/20 hover:border-white/[0.15]";
-const labelClass = "block text-[10px] font-bold uppercase tracking-[0.2em] text-foreground/40 mb-2.5 ml-2";
+const inputClass = "w-full rounded-xl border border-black/[0.08] bg-black/[0.02] px-5 py-4 text-sm font-medium text-[#111] outline-none transition-all duration-300 focus:border-primary/50 focus:bg-white placeholder:text-black/40 hover:border-black/[0.15]";
+const labelClass = "block text-[10px] font-bold uppercase tracking-[0.2em] text-black/60 mb-2.5 ml-2";
 
 function ContactForm() {
   const [selectedType, setSelectedType] = useState<string | null>(null);
@@ -183,9 +183,9 @@ function ContactForm() {
   };
 
   return (
-    <div className="relative overflow-hidden rounded-[32px] border border-white/[0.07] bg-gradient-to-br from-zinc-950 to-[#010204] p-8 md:p-12">
+    <div className="relative overflow-hidden rounded-[32px] border border-black/[0.08] bg-white p-8 md:p-12 shadow-[0_15px_50px_-15px_rgba(0,0,0,0.05)]">
       {/* Ambient glow */}
-      <div className="pointer-events-none absolute -top-1/4 -right-1/4 h-64 w-64 rounded-full bg-primary/8 blur-[100px]" />
+      <div className="pointer-events-none absolute -top-1/4 -right-1/4 h-64 w-64 rounded-full bg-primary/10 blur-[100px]" />
 
       <AnimatePresence mode="wait">
         {submitted ? (
@@ -195,13 +195,13 @@ function ContactForm() {
               <Send size={24} className="text-primary" strokeWidth={1.5} />
             </div>
             <div>
-              <h3 className="text-2xl font-black uppercase tracking-tighter">Message Sent!</h3>
-              <p className="mt-3 text-sm text-foreground/40 font-medium leading-relaxed max-w-sm">
+              <h3 className="text-2xl font-black uppercase tracking-tighter text-[#111]">Message Sent!</h3>
+              <p className="mt-3 text-sm text-black/60 font-medium leading-relaxed max-w-sm">
                 We&apos;ll be in touch within two business days. Check your inbox.
               </p>
             </div>
             <button onClick={() => setSubmitted(false)}
-              className="text-[9px] font-bold uppercase tracking-[0.4em] text-foreground/30 hover:text-primary transition-colors duration-300 cursor-pointer">
+              className="text-[9px] font-bold uppercase tracking-[0.4em] text-black/40 hover:text-primary transition-colors duration-300 cursor-pointer">
               Send another →
             </button>
           </motion.div>
@@ -241,8 +241,8 @@ function ContactForm() {
                     type="button"
                     onClick={() => setSelectedType(selectedType === type ? null : type)}
                     className={`rounded-full px-5 py-2.5 text-[10px] font-bold uppercase tracking-[0.2em] transition-all duration-300 cursor-pointer ${selectedType === type
-                      ? "bg-primary text-background border-primary"
-                      : "border border-white/10 bg-white/[0.02] text-foreground/40 hover:border-white/[0.2] hover:text-foreground/80 hover:bg-white/[0.05]"
+                      ? "bg-primary text-white border-primary shadow-md"
+                      : "border border-black/10 bg-black/[0.02] text-black/60 hover:border-black/[0.2] hover:text-[#111] hover:bg-black/[0.04]"
                       }`}
                   >
                     {type}
@@ -261,8 +261,8 @@ function ContactForm() {
                     type="button"
                     onClick={() => setSelectedBudget(selectedBudget === range ? null : range)}
                     className={`rounded-full px-5 py-2.5 text-[10px] font-bold uppercase tracking-[0.2em] transition-all duration-300 cursor-pointer ${selectedBudget === range
-                      ? "bg-primary text-background border-primary"
-                      : "border border-white/10 bg-white/[0.02] text-foreground/40 hover:border-white/[0.2] hover:text-foreground/80 hover:bg-white/[0.05]"
+                      ? "bg-primary text-white border-primary shadow-md"
+                      : "border border-black/10 bg-black/[0.02] text-black/60 hover:border-black/[0.2] hover:text-[#111] hover:bg-black/[0.04]"
                       }`}
                   >
                     {range}
@@ -285,7 +285,7 @@ function ContactForm() {
             {/* Submit */}
             <FadeIn delay={0.3} className="pt-2">
               <button type="submit"
-                className="group inline-flex w-full md:w-auto items-center justify-center gap-5 rounded-xl bg-foreground px-14 py-5 text-[12px] font-black uppercase tracking-[0.3em] text-background transition-all duration-300 hover:bg-primary hover:scale-[1.02] active:scale-95 cursor-pointer shadow-[0_20px_40px_-10px_rgba(255,255,255,0.1)]">
+                className="group inline-flex w-full md:w-auto items-center justify-center gap-5 rounded-xl bg-[#111] px-14 py-5 text-[12px] font-black uppercase tracking-[0.3em] text-white transition-all duration-300 hover:bg-primary hover:scale-[1.02] active:scale-95 cursor-pointer shadow-lg">
                 Send message
                 <Send size={18} strokeWidth={2} className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-0.5" />
               </button>
@@ -296,7 +296,7 @@ function ContactForm() {
 
       {/* Sweeping light */}
       <motion.div animate={{ x: ["-120%", "220%"] }} transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", repeatDelay: 4 }}
-        className="pointer-events-none absolute -top-1/2 left-0 h-[200%] w-1/3 bg-gradient-to-r from-transparent via-white/[0.018] to-transparent skew-x-[-25deg]" />
+        className="pointer-events-none absolute -top-1/2 left-0 h-[200%] w-1/3 bg-gradient-to-r from-transparent via-black/[0.03] to-transparent skew-x-[-25deg]" />
     </div>
   );
 }
@@ -305,63 +305,91 @@ function ContactForm() {
 
 export default function ContactPage() {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const dotRevealRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const section = sectionRef.current as HTMLElement | null;
+    if (!section) return;
+
+    const onMouseMove = (e: MouseEvent) => {
+      const rect = section.getBoundingClientRect();
+      const relX = e.clientX - rect.left;
+      const relY = e.clientY - rect.top;
+      if (dotRevealRef.current) {
+        dotRevealRef.current.style.setProperty("--mx", `${relX}px`);
+        dotRevealRef.current.style.setProperty("--my", `${relY}px`);
+      }
+    };
+
+    section.addEventListener("mousemove", onMouseMove, { passive: true });
+    return () => {
+      section.removeEventListener("mousemove", onMouseMove);
+    };
+  }, []);
 
   return (
-    <div className="bg-background text-foreground overflow-hidden">
+    <div ref={sectionRef} className="relative bg-[#f5f5f0] text-[#111] overflow-hidden">
+      {/* Dot grid — base faint layer */}
+      <div aria-hidden style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(circle, rgba(0,0,0,0.06) 1.5px, transparent 1.5px)", backgroundSize: "28px 28px", pointerEvents: "none", zIndex: 0 }} />
+      {/* Dot grid — bright revealed layer */}
+      <div ref={dotRevealRef} aria-hidden style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(circle, rgba(0,0,0,0.55) 1.5px, transparent 1.5px)", backgroundSize: "28px 28px", pointerEvents: "none", zIndex: 0, WebkitMaskImage: "radial-gradient(circle 280px at var(--mx, 50%) var(--my, 50%), black 0%, transparent 100%)", maskImage: "radial-gradient(circle 280px at var(--mx, 50%) var(--my, 50%), black 0%, transparent 100%)" } as React.CSSProperties} />
+      {/* Edge vignette */}
+      <div aria-hidden style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 80% 60% at 50% 50%, transparent 50%, rgba(245,245,240,0.4) 100%)", pointerEvents: "none", zIndex: 1 }} />
 
       {/* ── MAIN CONTENT ──────────────────────────────────────────── */}
-      <section className="relative px-6 pt-32 pb-20 md:px-12 md:pt-40 lg:px-20">
+      <section className="relative z-10 px-6 pt-32 pb-20 md:px-12 md:pt-40 lg:px-20">
         <div className="mx-auto max-w-[1500px] flex flex-col gap-20 lg:gap-32">
 
           {/* Top: form */}
           <div className="w-full">
             <FadeIn delay={0.1} className="mb-12 flex flex-col items-center text-center">
               <div>
-                <RevealLine><h2 className="text-4xl font-black uppercase tracking-tighter leading-[0.9] md:text-6xl lg:text-7xl">Tell us what you&apos;re</h2></RevealLine>
+                <RevealLine><h2 className="text-4xl font-black uppercase tracking-tighter leading-[0.9] md:text-6xl lg:text-7xl text-[#111]">Tell us what you&apos;re</h2></RevealLine>
                 <RevealLine delay={0.07}><h2 className="text-4xl font-satoshi pb-2 font-normal italic text-primary leading-[0.9] md:text-6xl lg:text-7xl">actually trying to fix.</h2></RevealLine>
                 <FadeIn delay={0.2} className="mt-6 flex justify-center">
-                  <p className="text-sm md:text-base text-foreground/50 font-medium leading-relaxed max-w-lg text-center">
+                  <p className="text-sm md:text-base text-black/60 font-medium leading-relaxed max-w-lg text-center">
                     No 47-field forms. Just the basics — so we can show up to the first call actually knowing something about you.
                   </p>
                 </FadeIn>
               </div>
             </FadeIn>
             <div className="mx-auto w-full">
-              <ContactForm />
+              <ContactForm /> 
             </div>
           </div>
 
-          <div className="w-full h-px bg-white/[0.05]" />
+          <div className="w-full h-px bg-black/[0.08]" />
 
           {/* Bottom: details */}
           <div className="grid gap-16 lg:grid-cols-2 lg:gap-20 mx-auto w-full">
             {/* Column A: Contact & Office Hours */}
             <div className="flex flex-col gap-12">
               <div className="space-y-4">
-                <FadeIn><p className="text-[9px] font-bold uppercase tracking-[0.4em] text-foreground/30 mb-6">Reach us directly</p></FadeIn>
+                <FadeIn><p className="text-[9px] font-bold uppercase tracking-[0.4em] text-black/40 mb-6">Reach us directly</p></FadeIn>
                 {contactInfo.map((info, i) => <InfoCard key={i} info={info} index={i} />)}
               </div>
 
               <FadeIn delay={0.2}>
-                <div className="rounded-2xl border border-white/[0.07] bg-zinc-950/50 p-7 space-y-6">
+                <div className="rounded-2xl border border-black/[0.08] bg-white p-7 space-y-6 shadow-sm">
                   <div className="flex items-start gap-4">
-                    <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg border border-white/[0.08]">
+                    <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg border border-black/[0.08] bg-black/[0.02]">
                       <Clock size={16} strokeWidth={1.25} className="text-primary" />
                     </div>
                     <div>
-                      <p className="text-sm font-semibold text-foreground">Office hours</p>
-                      <p className="mt-2 text-sm leading-relaxed text-foreground/40 font-medium">
+                      <p className="text-sm font-semibold text-[#111]">Office hours</p>
+                      <p className="mt-2 text-sm leading-relaxed text-black/60 font-medium">
                         Monday–Saturday, 10am–7pm IST (We usually respond faster than that.)
                       </p>
                     </div>
                   </div>
-                  <div className="border-t border-white/[0.06] pt-6 flex items-start gap-4">
-                    <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg border border-white/[0.08]">
+                  <div className="border-t border-black/[0.06] pt-6 flex items-start gap-4">
+                    <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg border border-black/[0.08] bg-black/[0.02]">
                       <MessageCircle size={16} strokeWidth={1.25} className="text-primary" />
                     </div>
                     <div>
-                      <p className="text-sm font-semibold text-foreground">Urgent launch?</p>
-                      <p className="mt-2 text-sm text-foreground/40 font-medium">Mention your launch date in the message — we route urgent requests to producers the same day.</p>
+                      <p className="text-sm font-semibold text-[#111]">Urgent launch?</p>
+                      <p className="mt-2 text-sm text-black/60 font-medium">Mention your launch date in the message — we route urgent requests to producers the same day.</p>
                     </div>
                   </div>
                 </div>
@@ -371,7 +399,7 @@ export default function ContactPage() {
             {/* Column B: Map & FAQ */}
             <div className="flex flex-col gap-12">
               <FadeIn delay={0.25}>
-                <div className="relative overflow-hidden rounded-2xl border border-white/[0.07] h-64 w-full bg-zinc-950/40 mt-2">
+                <div className="relative overflow-hidden rounded-2xl border border-black/[0.08] h-64 w-full bg-black/[0.03] mt-2 shadow-sm">
                   <iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3721.135854977098!2d72.7596652!3d21.1469911!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be04d80f5d96493%3A0x5f79790a213bd724!2sLuxuria%20Business%20Hub!5e0!3m2!1sen!2sin!4v1776070850466!5m2!1sen!2sin"
                     width="100%"
@@ -380,13 +408,13 @@ export default function ContactPage() {
                     allowFullScreen={false}
                     loading="lazy"
                   />
-                  <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-background to-transparent pointer-events-none z-10" />
-                  <div className="absolute inset-x-0 top-0 h-12 bg-gradient-to-b from-background to-transparent pointer-events-none z-10 opacity-30" />
+                  <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#f5f5f0] to-transparent pointer-events-none z-10" />
+                  <div className="absolute inset-x-0 top-0 h-12 bg-gradient-to-b from-[#f5f5f0] to-transparent pointer-events-none z-10 opacity-30" />
                 </div>
               </FadeIn>
 
               <div>
-                <FadeIn><p className="text-[9px] font-bold uppercase tracking-[0.4em] text-foreground/30 mb-2">FAQ</p></FadeIn>
+                <FadeIn><p className="text-[9px] font-bold uppercase tracking-[0.4em] text-black/40 mb-2">FAQ</p></FadeIn>
                 {faqItems.map((item, i) => (
                   <FAQItem
                     key={item.q}
@@ -395,13 +423,13 @@ export default function ContactPage() {
                     onToggle={() => setOpenFaqIndex(openFaqIndex === i ? null : i)}
                   />
                 ))}
-                <div className="border-t border-white/[0.07]" />
+                <div className="border-t border-black/[0.08]" />
               </div>
 
               <FadeIn delay={0.1}>
-                <Link href="/portfolio" className="group inline-flex items-center gap-4 text-[10px] font-black uppercase tracking-[0.4em] text-foreground/35 hover:text-primary transition-colors duration-300">
+                <Link href="/portfolio" className="group inline-flex items-center gap-4 text-[10px] font-black uppercase tracking-[0.4em] text-black/50 hover:text-primary transition-colors duration-300">
                   View selected work
-                  <span className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 transition-all duration-300 group-hover:border-primary group-hover:translate-x-1 group-hover:bg-primary/10">
+                  <span className="flex h-8 w-8 items-center justify-center rounded-full border border-black/[0.15] transition-all duration-300 group-hover:border-primary group-hover:translate-x-1 group-hover:bg-primary/10">
                     <ArrowUpRight size={13} />
                   </span>
                 </Link>

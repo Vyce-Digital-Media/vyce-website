@@ -14,6 +14,7 @@ import {
 import { ArrowUpRight } from "lucide-react";
 
 import { categories, projects } from "@/constants/portfolio";
+import PortfolioHero3D from "@/components/sections/PortfolioHero3D";
 
 function RevealLine({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
   const ref = useRef(null);
@@ -155,13 +156,6 @@ function NavDot({ index, activeProgress }: { index: number; activeProgress: Moti
 export default function PortfolioPage() {
   const [activeCategory, setActiveCategory] = useState("All");
 
-  // Hero Animation
-  const heroRef = useRef(null);
-  const { scrollYProgress: heroScroll } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
-  const heroY = useTransform(heroScroll, [0, 1], [0, 200]);
-  const heroOpacity = useTransform(heroScroll, [0, 0.7], [1, 0]);
-  const heroScale = useTransform(heroScroll, [0, 1], [1, 0.92]);
-
   // Gallery Scroll Animation
   const filtered = activeCategory === "All" ? projects : projects.filter((p) => p.category === activeCategory);
   const targetRef = useRef(null);
@@ -190,31 +184,7 @@ export default function PortfolioPage() {
     <div className="bg-background text-foreground bg-zinc-950">
 
       {/* HERO */}
-      <section ref={heroRef} className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 pt-0 pb-32">
-        <div className="pointer-events-none absolute inset-0 opacity-[0.03]">
-          {Array.from({ length: 6 }).map((_, i) => (
-            <div key={i} className="absolute top-0 h-full w-px bg-white" style={{ left: `${(i + 1) * (100 / 7)}%` }} />
-          ))}
-        </div>
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,68,255,0.08)_0%,transparent_70%)]" />
-        <motion.div style={{ y: heroY, opacity: heroOpacity, scale: heroScale }} className="relative z-10 flex flex-col items-center gap-8 text-center pt-24">
-          <FadeIn>
-            <span className="inline-flex items-center gap-3 rounded-full border border-white/10 px-5 py-2 mt-8 text-[10px] font-bold uppercase tracking-[0.4em] text-foreground/40 bg-white/5 backdrop-blur-md">
-              <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
-              No Fake Mockups. Just Raw Dominance.
-            </span>
-          </FadeIn>
-          <div className="space-y-2">
-            <RevealLine><h1 className="text-[clamp(3.5rem,10vw,12rem)] font-black uppercase tracking-tighter leading-[0.88]">Talk is cheap.</h1></RevealLine>
-            <RevealLine delay={0.1}><h1 className="text-[clamp(3.5rem,10vw,12rem)] font-satoshi font-normal italic text-primary leading-[0.88]">Look at the receipts.</h1></RevealLine>
-          </div>
-          <FadeIn delay={0.3} className="max-w-2xl mt-6">
-            <p className="text-base md:text-xl text-foreground/40 font-medium leading-relaxed">
-              We didn't just 'make these look pretty.' We resurrected dead brands, hijacked search rankings, and made clients stupid amounts of money. Scroll and weep.
-            </p>
-          </FadeIn>
-        </motion.div>
-      </section>
+      <PortfolioHero3D />
 
       {/* 3D HORIZONTAL COVERFLOW */}
       <section ref={targetRef} style={{ height: trackHeight }} className="relative bg-zinc-950">
