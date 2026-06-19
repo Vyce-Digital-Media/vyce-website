@@ -357,50 +357,115 @@ const portfolioImages = [
   '/portfolio/pesto-smm/6.webp',
 ];
 
-function RotatingRing({ radius, duration, reverse, items, tilt = 0, scale = 1 }: { radius: number, duration: number, reverse?: boolean, items: number[], tilt?: number, scale?: number }) {
+function FloatingCard({ conf, i, springX, springY, scrollYProgress }: { conf: any, i: number, springX: any, springY: any, scrollYProgress: any }) {
+  // Scroll Explosion mappings:
+  // 0 -> 0.25: Cards explode outwards from the exact center (0vw, 0vh) to their scatter positions
+  const moveX = useTransform(scrollYProgress, [0, 0.25], ["0vw", conf.x]);
+  const moveY = useTransform(scrollYProgress, [0, 0.25], ["0vh", conf.y]);
+  const rotateZ = useTransform(scrollYProgress, [0, 0.25], [0, conf.rotate]);
+
+  // Scale mapping: start tiny/invisible, grow to normal scale, and stay there!
+  const zoomScale = useTransform(scrollYProgress, [0, 0.25], [0.2, conf.scale]);
+  // Fade in at start and stay there
+  const opacity = useTransform(scrollYProgress, [0, 0.1], [0, 1]);
+
+  // Mouse Parallax based on depth
+  const parallaxX = useTransform(springX, [-1, 1], [-conf.depth, conf.depth]);
+  const parallaxY = useTransform(springY, [-1, 1], [-conf.depth, conf.depth]);
+
   return (
     <motion.div
-      animate={{ rotate: reverse ? -360 : 360 }}
-      transition={{ duration, repeat: Infinity, ease: "linear" }}
-      className="absolute flex items-center justify-center"
-      style={{ width: 0, height: 0, transformStyle: "preserve-3d" }}
+      className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transform-style-3d z-0"
+      style={{
+        x: moveX,
+        y: moveY,
+        rotateZ: rotateZ,
+        scale: zoomScale,
+        opacity: opacity,
+        translateZ: conf.depth * 2,
+      }}
     >
-      {items.map((idx, i) => {
-        const angle = (i / items.length) * 360;
-        return (
-          <div
-            key={i}
-            className="absolute flex items-center justify-center"
-            style={{
-              transform: `rotate(${angle}deg) translateY(-${radius}px) rotateX(${tilt}deg) scale(${scale})`,
-              transformStyle: "preserve-3d"
-            }}
-          >
-            {/* The Image Card */}
-            <div className="bg-white p-1.5 rounded-[16px] shadow-[0_15px_50px_rgb(0,0,0,0.15)] border border-black/[0.04] w-[180px] h-[220px] md:w-[240px] md:h-[300px]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={portfolioImages[idx % portfolioImages.length]} alt="service display" className="w-full h-full object-cover rounded-[10px]" />
-            </div>
-          </div>
-        );
-      })}
+      <motion.div
+        className="rounded-[16px] shadow-[0_30px_60px_rgba(0,0,0,0.3)] bg-white p-2 md:p-3 transform-style-3d origin-center"
+        style={{
+          width: "clamp(160px, 16vw, 280px)",
+          aspectRatio: "3/4",
+          x: parallaxX,
+          y: parallaxY,
+        }}
+      >
+        {/* Continuous subtle zero-gravity floating */}
+        <motion.div
+          className="w-full h-full origin-center"
+          animate={{
+            y: [0, -15, 0],
+            rotateZ: [0, 3, 0]
+          }}
+          transition={{
+            duration: 5 + (i % 3),
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: i * 0.2
+          }}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={conf.src} alt="" className="w-full h-full object-cover rounded-[10px] md:rounded-[12px]" />
+        </motion.div>
+      </motion.div>
     </motion.div>
   );
 }
 
-function ScatteredCardsHero() {
-  const innerItems = [0, 1, 2, 3, 4, 5, 0, 1]; // 8 items
-  const outerItems = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]; // 12 items
-  
+function CrazyFloatingHero({ scrollYProgress }: { scrollYProgress: any }) {
+  const [mounted, setMounted] = React.useState(false);
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const springX = useSpring(mouseX, { stiffness: 40, damping: 20 });
+  const springY = useSpring(mouseY, { stiffness: 40, damping: 20 });
+
+  React.useEffect(() => {
+    setMounted(true);
+    const handleMouseMove = (e: MouseEvent) => {
+      const x = (e.clientX / window.innerWidth) * 2 - 1;
+      const y = (e.clientY / window.innerHeight) * 2 - 1;
+      mouseX.set(x);
+      mouseY.set(y);
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, [mouseX, mouseY]);
+
+  // Scatter positions distributed across the entire screen, including the center
+  const scatterConfig = [
+    { src: portfolioImages[0], x: "-30vw", y: "-30vh", rotate: -15, scale: 1.1, depth: 80 },  // Top Left
+    { src: portfolioImages[1], x: "0vw", y: "-35vh", rotate: 10, scale: 0.9, depth: 40 },  // Top Center
+    { src: portfolioImages[2], x: "35vw", y: "-25vh", rotate: -12, scale: 1.1, depth: 100 }, // Top Right
+    { src: portfolioImages[3], x: "-40vw", y: "5vh", rotate: -22, scale: 0.85, depth: 60 }, // Far Left Mid
+    { src: portfolioImages[4], x: "-10vw", y: "5vh", rotate: 15, scale: 1.0, depth: 50 },  // Center Left
+    { src: portfolioImages[5], x: "10vw", y: "-5vh", rotate: -8, scale: 1.05, depth: 90 }, // Center Right
+    { src: portfolioImages[6], x: "-35vw", y: "35vh", rotate: 20, scale: 0.95, depth: 110 },// Bottom Left
+    { src: portfolioImages[7], x: "-5vw", y: "35vh", rotate: -18, scale: 1.1, depth: 30 },  // Bottom Center
+    { src: portfolioImages[8], x: "25vw", y: "25vh", rotate: 12, scale: 0.9, depth: 120 }, // Mid Bottom Right
+    { src: portfolioImages[9], x: "40vw", y: "15vh", rotate: -25, scale: 0.8, depth: 40 },  // Far Right Mid
+  ];
+
+  // Map mouse movement to a dramatic 3D scene tilt
+  const sceneRotateX = useTransform(springY, [-1, 1], [15, -15]);
+  const sceneRotateY = useTransform(springX, [-1, 1], [-15, 15]);
+
+  if (!mounted) return null;
+
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 flex items-center justify-center" style={{ perspective: "1200px" }}>
-      <div className="hidden md:flex items-center justify-center" style={{ transformStyle: "preserve-3d" }}>
-         <RotatingRing radius={520} duration={110} reverse items={innerItems} tilt={-35} scale={0.95} />
-         <RotatingRing radius={750} duration={150} items={outerItems} tilt={-35} scale={1.05} />
-      </div>
-      <div className="flex md:hidden items-center justify-center" style={{ transformStyle: "preserve-3d" }}>
-         <RotatingRing radius={420} duration={90} reverse items={innerItems} tilt={-35} scale={0.9} />
-      </div>
+    <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 perspective-[1000px]">
+      <motion.div
+        className="relative w-full h-full transform-style-3d"
+        style={{ rotateX: sceneRotateX, rotateY: sceneRotateY }}
+      >
+        {scatterConfig.map((conf, i) => (
+          <FloatingCard key={i} conf={conf} i={i} springX={springX} springY={springY} scrollYProgress={scrollYProgress} />
+        ))}
+      </motion.div>
     </div>
   );
 }
@@ -413,8 +478,14 @@ export default function ServicesPage() {
     target: heroRef,
     offset: ["start start", "end start"],
   });
-  const heroY = useTransform(heroScroll, [0, 1], [0, 180]);
-  const heroOpacity = useTransform(heroScroll, [0, 0.7], [1, 0]);
+  const smoothHeroScroll = useSpring(heroScroll, {
+    stiffness: 40,
+    damping: 20,
+    restDelta: 0.001
+  });
+  // Text moves up slightly and fades out instantly as cards begin to explode (0 to 0.05)
+  const heroY = useTransform(smoothHeroScroll, [0, 0.25], [0, -40]);
+  const heroOpacity = useTransform(smoothHeroScroll, [0, 0.05], [1, 0]);
 
   // Interactive dots for hero
   const dotRevealRef = useRef<HTMLDivElement>(null);
@@ -452,88 +523,89 @@ export default function ServicesPage() {
       {/* ── 00. HERO ──────────────────────────────────────────────── */}
       <section
         ref={heroRef}
-        className="relative flex flex-col h-screen min-h-[750px] overflow-hidden"
-        style={{ background: "#f5f5f0" }}
+        className="relative h-[200vh] bg-[#f5f5f0]"
       >
-        {/* Dot grid — base faint layer (always visible) */}
-        <div aria-hidden style={{
-          position: "absolute", inset: 0,
-          backgroundImage: "radial-gradient(circle, rgba(0,0,0,0.06) 1.5px, transparent 1.5px)",
-          backgroundSize: "28px 28px", pointerEvents: "none", zIndex: 0,
-        }} />
-
-        {/* Dot grid — bright revealed layer (cursor spotlight mask) */}
-        <div
-          ref={dotRevealRef}
-          aria-hidden
-          style={{
+        <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-center overflow-hidden">
+          {/* Dot grid — base faint layer (always visible) */}
+          <div aria-hidden style={{
             position: "absolute", inset: 0,
-            backgroundImage: "radial-gradient(circle, rgba(0,0,0,0.55) 1.5px, transparent 1.5px)",
-            backgroundSize: "28px 28px",
-            pointerEvents: "none", zIndex: 0,
-            WebkitMaskImage: "radial-gradient(circle 280px at var(--mx, 50%) var(--my, 50%), black 0%, transparent 100%)",
-            maskImage: "radial-gradient(circle 280px at var(--mx, 50%) var(--my, 50%), black 0%, transparent 100%)",
-          } as React.CSSProperties}
-        />
+            backgroundImage: "radial-gradient(circle, rgba(0,0,0,0.06) 1.5px, transparent 1.5px)",
+            backgroundSize: "28px 28px", pointerEvents: "none", zIndex: 0,
+          }} />
 
-        {/* Edge vignette */}
-        <div aria-hidden style={{
-          position: "absolute", inset: 0,
-          background: "radial-gradient(ellipse 80% 60% at 50% 50%, transparent 50%, rgba(245,245,240,0.4) 100%)",
-          pointerEvents: "none", zIndex: 1,
-        }} />
+          {/* Dot grid — bright revealed layer (cursor spotlight mask) */}
+          <div
+            ref={dotRevealRef}
+            aria-hidden
+            style={{
+              position: "absolute", inset: 0,
+              backgroundImage: "radial-gradient(circle, rgba(0,0,0,0.55) 1.5px, transparent 1.5px)",
+              backgroundSize: "28px 28px",
+              pointerEvents: "none", zIndex: 0,
+              WebkitMaskImage: "radial-gradient(circle 280px at var(--mx, 50%) var(--my, 50%), black 0%, transparent 100%)",
+              maskImage: "radial-gradient(circle 280px at var(--mx, 50%) var(--my, 50%), black 0%, transparent 100%)",
+            } as React.CSSProperties}
+          />
 
-        <ScatteredCardsHero />
+          {/* Edge vignette */}
+          <div aria-hidden style={{
+            position: "absolute", inset: 0,
+            background: "radial-gradient(ellipse 80% 60% at 50% 50%, transparent 50%, rgba(245,245,240,0.4) 100%)",
+            pointerEvents: "none", zIndex: 1,
+          }} />
 
-        {/* TOP: Centered Text Content */}
-        <motion.div
-          style={{ y: heroY, opacity: heroOpacity }}
-          className="relative z-10 flex flex-col items-center justify-center text-center px-6 md:px-16 w-full h-full pointer-events-none"
-        >
+          <CrazyFloatingHero scrollYProgress={smoothHeroScroll} />
 
-          {/* Headline */}
-          <div className="space-y-1 max-w-4xl mx-auto">
-            <RevealLine>
-              <motion.h1
-                style={{ fontSize: "clamp(2.5rem, 5.5vw, 5.5rem)", fontWeight: 900, lineHeight: 1.05, letterSpacing: "-0.03em", color: "#111", margin: "0 0 18px 0" }}
+          {/* TOP: Centered Text Content */}
+          <motion.div
+            style={{ y: heroY, opacity: heroOpacity }}
+            className="relative z-10 flex flex-col items-center justify-center text-center px-6 md:px-16 w-full h-full pointer-events-none"
+          >
+
+            {/* Headline */}
+            <div className="space-y-1 max-w-4xl mx-auto">
+              <RevealLine>
+                <motion.h1
+                  style={{ fontSize: "clamp(2.5rem, 5.5vw, 5.5rem)", fontWeight: 900, lineHeight: 1.05, letterSpacing: "-0.03em", color: "#111", margin: "0 0 18px 0" }}
+                >
+                  <span>Built for brands that</span><br />
+                  <span style={{ color: "#111" }}>refuse to be ignored.</span>
+                </motion.h1>
+              </RevealLine>
+            </div>
+
+            {/* Subtext */}
+            <FadeIn delay={0.3}>
+              <motion.p
+                style={{ fontSize: "clamp(1rem, 1.4vw, 1.25rem)", color: "#666", lineHeight: 1.65, marginBottom: 36, maxWidth: 680, marginLeft: "auto", marginRight: "auto" }}
               >
-                <span>Built for brands that</span><br />
-                <span style={{ color: "#111" }}>refuse to be ignored.</span>
-              </motion.h1>
-            </RevealLine>
-          </div>
+                We don't sell packages. We sell outcomes. From strategy and branding to high-performance code and campaigns — executed without hand-holding or pointless meetings. You bring the ambition. We bring the execution.
+              </motion.p>
+            </FadeIn>
 
-          {/* Subtext */}
-          <FadeIn delay={0.3}>
-            <motion.p
-              style={{ fontSize: "clamp(1rem, 1.4vw, 1.25rem)", color: "#666", lineHeight: 1.65, marginBottom: 36, maxWidth: 680, marginLeft: "auto", marginRight: "auto" }}
-            >
-              We don't sell packages. We sell outcomes. From strategy and branding to high-performance code and campaigns — executed without hand-holding or pointless meetings. You bring the ambition. We bring the execution.
-            </motion.p>
-          </FadeIn>
-
-          {/* CTA Buttons */}
-          <FadeIn delay={0.45}>
-            <motion.div style={{ display: "flex", gap: 16, flexWrap: "wrap", justifyContent: "center", pointerEvents: "auto" }}>
-              <Link
-                href="/contact"
-                style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "14px 28px", borderRadius: 12, background: "#111", color: "#fff", fontSize: 15, fontWeight: 700, textDecoration: "none", transition: "all 0.2s ease", letterSpacing: "0.01em" }}
-                onMouseEnter={(e) => { e.currentTarget.style.background = "#222"; }}
-                onMouseLeave={(e) => { e.currentTarget.style.background = "#111"; }}
-              >
-                Work With Us
-              </Link>
-              <Link
-                href="/portfolio"
-                style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "14px 28px", borderRadius: 12, border: "1.5px solid rgba(0,0,0,0.18)", background: "transparent", color: "#111", fontSize: 15, fontWeight: 700, textDecoration: "none", transition: "all 0.2s ease", letterSpacing: "0.01em" }}
-                onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(0,0,0,0.05)"; e.currentTarget.style.borderColor = "rgba(0,0,0,0.3)"; }}
-                onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.borderColor = "rgba(0,0,0,0.18)"; }}
-              >
-                View Work <ArrowRight size={16} />
-              </Link>
-            </motion.div>
-          </FadeIn>
-        </motion.div>
+            {/* CTA Buttons */}
+            <FadeIn delay={0.45}>
+              <motion.div style={{ display: "flex", gap: 16, flexWrap: "wrap", justifyContent: "center", pointerEvents: "auto" }}>
+                <Link
+                  href="/contact"
+                  style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "14px 28px", borderRadius: 12, background: "#111", color: "#fff", fontSize: 15, fontWeight: 700, textDecoration: "none", transition: "all 0.2s ease", letterSpacing: "0.01em" }}
+                  onMouseEnter={(e) => { e.currentTarget.style.background = "#222"; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.background = "#111"; }}
+                >
+                  Work With Us
+                </Link>
+                <Link
+                  href="/portfolio"
+                  style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "14px 28px", borderRadius: 12, border: "1.5px solid rgba(0,0,0,0.18)", background: "transparent", color: "#111", fontSize: 15, fontWeight: 700, textDecoration: "none", transition: "all 0.2s ease", letterSpacing: "0.01em" }}
+                  onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(0,0,0,0.05)"; e.currentTarget.style.borderColor = "rgba(0,0,0,0.3)"; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.borderColor = "rgba(0,0,0,0.18)"; }}
+                >
+                  View Work <ArrowRight size={16} />
+                </Link>
+              </motion.div>
+            </FadeIn>
+          </motion.div>
+        </div>
       </section>
 
       {/* ── 01. SERVICE CARDS ─────────────────────────────────────── */}
@@ -603,7 +675,7 @@ export default function ServicesPage() {
                       {p.title}
                     </span>
                   </div>
-                 );
+                );
               })}
             </div>
           </div>

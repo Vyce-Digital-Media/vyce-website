@@ -53,7 +53,7 @@ function GlassImage({ src, opacity, width, height, delay }: { src: string, opaci
       opacity,
       width, height, borderRadius: 12, overflow: 'hidden', border: '2px solid #fff',
       boxShadow: '0 12px 30px rgba(0,0,0,0.1)',
-      animation: `floatAnim 4s ease-in-out infinite ${delay}`
+      animation: `floatAnim 4s ease-in-out infinite ${delay}` 
     }}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src={src} alt="floating card" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
