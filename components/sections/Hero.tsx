@@ -5,12 +5,23 @@ import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion } from "framer-motion";
-import { ArrowRight, ArrowUp, Infinity as InfinityIcon, Activity } from "lucide-react";
+import { ArrowRight, ArrowUp, Infinity as InfinityIcon, Activity, Search } from "lucide-react";
+
+// Wrappers for social icons using FontAwesome since lucide-react removed brand icons
+const FaWhatsappIcon = ({ size, color }: any) => (
+  <i className="fa-brands fa-whatsapp" style={{ fontSize: size, color, display: "flex", alignItems: "center", justifyContent: "center" }} />
+);
+const FaInstagramIcon = ({ size, color }: any) => (
+  <i className="fa-brands fa-instagram" style={{ fontSize: size, color, display: "flex", alignItems: "center", justifyContent: "center" }} />
+);
+const FaLinkedinIcon = ({ size, color }: any) => (
+  <i className="fa-brands fa-linkedin" style={{ fontSize: size, color, display: "flex", alignItems: "center", justifyContent: "center" }} />
+);
 
 gsap.registerPlugin(ScrollTrigger);
 
 // ─── Types ────────────────────────────────────────────────────────────────────
-type CardType = "image" | "chart" | "folder" | "input" | "icon" | "text";
+type CardType = "image" | "chart" | "chart-impressions" | "folder" | "input" | "icon" | "text";
 
 type CardDef = {
   id: string;
@@ -47,7 +58,7 @@ const CARDS: CardDef[] = [
     fx: -0.32, fy: 0.24, width: 210, height: 263, rotate: 4, depth: 1,
   },
   {
-    id: "w0-chart-bl", wave: 0, type: "chart",
+    id: "w0-chart-bl", wave: 0, type: "chart-impressions",
     fx: -0.39, fy: 0.35, width: 170, height: 110, rotate: -2, depth: 5,
   },
   {
@@ -68,12 +79,12 @@ const CARDS: CardDef[] = [
   },
   {
     id: "w0-text-r", wave: 0, type: "text",
-    title: "Audience",
-    content: "Primary audience: people who've been burned by 3 agencies already and are quietly hoping this one is different. Spoiler: it is.",
-    fx: 0.41, fy: 0.05, width: 190, rotate: -2, depth: 5,
+    title: "Target Audience",
+    content: "Affluent men and women aged 25–45 who value premium skincare, self-care, and luxury experiences. They are quality-conscious, digitally active consumers willing to invest in trusted, high-performance products that deliver visible results.",
+    fx: 0.41, fy: 0.05, width: 190, rotate: -2, depth: 0,
   },
   {
-    id: "w0-folder-bc", wave: 0, type: "folder", title: "References",
+    id: "w0-folder-bc", wave: 0, type: "folder", title: "Content Inspo",
     avatars: [
       "/hero1.webp",
       "/hero2.webp",
@@ -82,7 +93,11 @@ const CARDS: CardDef[] = [
     fx: 0.03, fy: 0.38, width: 130, height: 90, rotate: 3, depth: 3,
   },
   {
-    id: "w0-input-br", wave: 0, type: "input", title: "Create a digital ad campaign",
+    id: "w0-icon-insta", wave: 0, type: "icon", Icon: FaInstagramIcon,
+    fx: 0.27, fy: -0.15, width: 50, height: 50, rotate: 12, depth: 4,
+  },
+  {
+    id: "w0-input-br", wave: 0, type: "input", title: "Brands with Unforgettable Identity",
     fx: 0.32, fy: 0.42, width: 260, rotate: -1, depth: 2,
   },
 
@@ -94,7 +109,7 @@ const CARDS: CardDef[] = [
     fx: -0.28, fy: -0.24, width: 200, height: 250, rotate: -2, depth: 1,
   },
   {
-    id: "w1-folder-l", wave: 1, type: "folder", title: "Product",
+    id: "w1-folder-l", wave: 1, type: "folder", title: "Products",
     avatars: [
       "/hero1.webp",
       "/hero2.webp",
@@ -116,8 +131,12 @@ const CARDS: CardDef[] = [
   {
     id: "w1-text-tr", wave: 1, type: "text",
     title: "Q2 Campaign",
-    content: "The campaign targets founders who've said 'we'll handle marketing later' for 18 months straight. Urgency: overdue.",
+    content: "They are quality-conscious, digitally active consumers willing to invest in trusted, high-performance products that deliver visible results.",
     fx: 0.22, fy: -0.10, width: 170, rotate: -3, depth: 4,
+  },
+  {
+    id: "w1-icon-linkedin", wave: 1, type: "icon", Icon: FaLinkedinIcon,
+    fx: 0.0, fy: 0.35, width: 50, height: 50, rotate: -8, depth: 3,
   },
   {
     id: "w1-img-br", wave: 1, type: "image",
@@ -148,11 +167,15 @@ const CARDS: CardDef[] = [
     fx: 0.25, fy: -0.15, width: 50, height: 50, rotate: 8, depth: 4,
   },
   {
-    id: "w2-folder-bc", wave: 2, type: "folder", title: "Fonts",
+    id: "w2-folder-bc", wave: 2, type: "folder", title: "Fonts and Colours",
     avatars: [
       "/hero8.webp",
     ],
     fx: -0.05, fy: 0.35, width: 100, height: 80, rotate: -3, depth: 2,
+  },
+  {
+    id: "w2-icon-wa", wave: 2, type: "icon", Icon: FaWhatsappIcon,
+    fx: -0.40, fy: 0.05, width: 50, height: 50, rotate: 15, depth: 4,
   },
   {
     id: "w2-img-br", wave: 2, type: "image",
@@ -184,6 +207,50 @@ function CardRenderer({ card }: { card: CardDef }) {
         </div>
       );
 
+    case "chart-impressions":
+      return (
+        <div style={{
+          width: card.width, height: card.height,
+          borderRadius: 16, overflow: "hidden", position: "relative",
+          boxShadow: "0 16px 40px rgba(0,0,0,0.12)",
+          border: "1px solid rgba(255,255,255,0.8)",
+          background: "rgba(255,255,255,0.9)",
+          backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)"
+        }}>
+          <svg style={{ width: "100%", height: "100%" }} viewBox="0 0 170 110">
+            {/* Title */}
+            <text x="12" y="16" fontSize="7" fontWeight="800" fill="#222">Impressions</text>
+
+            {/* Horizontal grid lines */}
+            {[
+              { y: 30 },
+              { y: 50 },
+              { y: 70 },
+              { y: 90 }
+            ].map(tick => (
+              <line key={tick.y} x1="12" y1={tick.y} x2="160" y2={tick.y} stroke="rgba(0,0,0,0.06)" strokeWidth="0.5" />
+            ))}
+
+            {/* Line Path */}
+            <path d="M 12 70 L 16 60 L 23 58 L 28 62 L 34 66 L 39 58 L 45 58 L 50 60 L 56 58 L 61 64 L 67 50 L 72 58 L 78 62 L 83 60 L 89 60 L 94 64 L 100 62 L 105 68 L 111 80 L 116 58 L 122 64 L 127 54 L 133 66 L 138 60 L 144 60 L 149 68 L 155 62 L 160 90" fill="none" stroke="#42D2CE" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+
+            {/* Legend Area */}
+            <g transform="translate(68, 103)">
+              {/* Impressions Legend */}
+              <rect x="-14" y="-3.5" width="4" height="4" rx="0.5" fill="#42D2CE" />
+              <text x="-8" y="0" fontSize="4.5" fill="#333">Impressions</text>
+
+              {/* Historical edits Legend */}
+              <g transform="translate(18, -4)">
+                <circle cx="2.5" cy="2.5" r="2" fill="none" stroke="#666" strokeWidth="0.5" />
+                <path d="M 2.5 1.5 L 2.5 2.5 L 3.5 2.5" fill="none" stroke="#666" strokeWidth="0.5" />
+                <text x="6" y="4" fontSize="4.5" fill="#333">Historical edits</text>
+              </g>
+            </g>
+          </svg>
+        </div>
+      );
+
     case "chart":
       return (
         <div style={{
@@ -208,8 +275,19 @@ function CardRenderer({ card }: { card: CardDef }) {
     case "folder":
       return (
         <div style={{ position: "relative", paddingTop: 16 }}>
+          {/* Folder Tab */}
+          <div style={{
+            position: "absolute", top: 0, left: 0,
+            width: "38%", height: 17,
+            borderTopLeftRadius: 10, borderTopRightRadius: 10,
+            border: "1px solid rgba(255,255,255,0.6)",
+            borderBottom: "none",
+            background: "rgba(255,255,255,0.45)",
+            backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)",
+            zIndex: 1
+          }} />
           {card.avatars && (
-            <div style={{ position: "absolute", top: 0, left: "50%", transform: "translateX(-50%)", display: "flex", zIndex: 2 }}>
+            <div style={{ position: "absolute", top: -2, left: "50%", transform: "translateX(-50%)", display: "flex", zIndex: 2 }}>
               {card.avatars.map((src, i) => (
                 <img key={i} src={src} alt="Avatar" style={{
                   width: 32, height: 32, borderRadius: 4, objectFit: "cover",
@@ -246,7 +324,7 @@ function CardRenderer({ card }: { card: CardDef }) {
         }}>
           <span style={{ flex: 1, paddingLeft: 16, fontSize: 12, fontWeight: 500, color: "rgba(0,0,0,0.6)" }}>{card.title}</span>
           <div style={{ width: 32, height: 32, borderRadius: "50%", background: "#111", display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <ArrowUp size={14} color="#fff" strokeWidth={3} />
+            <Search size={14} color="#fff" strokeWidth={2.5} />
           </div>
         </div>
       );
@@ -573,43 +651,27 @@ export default function Hero() {
             transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             style={{
               display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center",
-              maxWidth: 680, padding: "56px 48px", pointerEvents: "auto",
+              maxWidth: 900, padding: "56px 24px", pointerEvents: "auto",
             }}
           >
-            {/* Badge pill */}
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              style={{
-                display: "inline-flex", alignItems: "center", gap: 8,
-                padding: "6px 16px", borderRadius: 999, border: "1px solid rgba(0,0,0,0.1)",
-                background: "rgba(255,255,255,0.85)", backdropFilter: "blur(8px)", marginBottom: 28,
-              }}
-            >
-              <span style={{ width: 7, height: 7, borderRadius: "50%", background: "#0044ff", animation: "pulse 2s infinite", display: "block", flexShrink: 0 }} />
-              <span style={{ fontSize: 12, fontWeight: 600, color: "#444", letterSpacing: "0.02em" }}>Surat&apos;s most referred. Not just claimed — referred.</span>
-              <Link href="/about" style={{ fontSize: 12, fontWeight: 700, color: "#0044ff", textDecoration: "none" }}>Proof →</Link>
-            </motion.div>
-
             {/* Headline */}
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.0, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
-              style={{ fontSize: "clamp(2.6rem, 6.5vw, 5.2rem)", fontWeight: 900, lineHeight: 1.05, letterSpacing: "-0.03em", color: "#111", margin: "0 0 18px 0" }}
+              style={{ fontSize: "clamp(2.4rem, 6vw, 5.2rem)", fontWeight: 900, lineHeight: 1.05, letterSpacing: "-0.03em", color: "#111", margin: "0 0 18px 0" }}
             >
-              <span style={{ whiteSpace: "nowrap" }}>Stop blending in.</span><br /><span style={{ color: "#111" }}>Start owning it.</span>
+              <span style={{ whiteSpace: "nowrap" }}>Growth Crafted for</span><br /><span style={{ color: "#111", whiteSpace: "nowrap" }}>those who Demand More</span>
             </motion.h1>
 
             {/* Sub-copy */}
             <motion.p
-              initial={{ opacity: 0, y: 24 }} 
+              initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.0, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
               style={{ fontSize: "clamp(0.95rem, 1.8vw, 1.1rem)", color: "#666", lineHeight: 1.65, marginBottom: 32, maxWidth: 440 }}
             >
-              We build brands, websites, and campaigns that actually do something. Novel concept, we know.
+              A brand without identity is just another blur in the feed.
             </motion.p>
 
             {/* CTA Buttons */}
