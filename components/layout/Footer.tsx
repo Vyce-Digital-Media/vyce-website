@@ -4,11 +4,10 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 const navLinks = [
+  { name: "Home", href: "/" },
   { name: "About Us", href: "/about" },
   { name: "Services", href: "/services" },
   { name: "Portfolio", href: "/portfolio" },
-  { name: "Process", href: "/process" },
-  { name: "Clients", href: "/clients" },
   { name: "Contact", href: "/contact" },
 ];
 
@@ -309,34 +308,6 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* ── Divider ─────────────────────────────────────── */}
-          <div style={{ borderTop: "1px solid rgba(255,255,255,0.12)", marginBottom: 0 }} />
-
-          {/* ── Bottom copyright bar ─────────────────────────── */}
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              padding: "16px 0",
-              fontSize: "0.72rem",
-              fontWeight: 600,
-              letterSpacing: "0.04em",
-              color: "rgba(255,255,255,0.35)",
-            }}
-          >
-            <span>© {year} Vyce Digital Media. All rights reserved.</span>
-            <div style={{ display: "flex", gap: 20 }}>
-              <Link href="/terms" style={{ color: "rgba(255,255,255,0.35)", textDecoration: "none", transition: "color 0.2s" }}
-                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "#fff"; }}
-                onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.35)"; }}
-              >Terms</Link>
-              <Link href="/privacy" style={{ color: "rgba(255,255,255,0.35)", textDecoration: "none", transition: "color 0.2s" }}
-                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "#fff"; }}
-                onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.35)"; }}
-              >Privacy</Link>
-            </div>
-          </div>
 
           {/* ── Giant VYCE wordmark ──────────────────────────── */}
           <div
@@ -352,16 +323,6 @@ export default function Footer() {
               paddingBottom: "1rem", // Lifted up so it's fully visible
             }}
           >
-            <img
-              src="/assets/nav-logo.png"
-              alt="Vyce Logo"
-              style={{
-                height: "clamp(3.5rem, 11vw, 11rem)",
-                width: "auto",
-                opacity: 0.40,
-                filter: "brightness(0) invert(1)",
-              }}
-            />
             <span
               style={{
                 fontSize: "clamp(5rem, 15vw, 15rem)",
