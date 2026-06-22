@@ -71,13 +71,6 @@ const SERVICES = [
   },
 ] as const;
 
-const STATS = [
-  { value: "100+", label: "Projects Delivered" },
-  { value: "₹5Cr+", label: "Revenue Generated" },
-  { value: "15+", label: "Industries Served" },
-  { value: "15+", label: "Team Members" },
-];
-
 // ─── Large Card UI (pure markup, no animation — GSAP handles it) ─────────────────
 function LargeCardUI({ service }: { service: (typeof SERVICES)[0] }) {
   return (
@@ -309,7 +302,6 @@ export default function ServicesGrid() {
   const card04Ref = useRef<HTMLDivElement>(null);
   const card05Ref = useRef<HTMLDivElement>(null);
   const card06Ref = useRef<HTMLDivElement>(null);
-  const statsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const wrapper = wrapperRef.current;
@@ -325,7 +317,6 @@ export default function ServicesGrid() {
       card04Ref.current,
       card05Ref.current,
       card06Ref.current,
-      statsRef.current,
     ].filter(Boolean);
 
     gsap.set(animatables, { opacity: 0, y: 60, scale: 0.97 });
@@ -378,8 +369,7 @@ export default function ServicesGrid() {
       // 5. Card 06 — SEO full width
       .to(card06Ref.current, { opacity: 1, y: 0, scale: 1, duration: 1.2, ease }, 4.8)
 
-      // 6. Stats strip
-      .to(statsRef.current, { opacity: 1, y: 0, scale: 1, duration: 1, ease }, 6)
+
 
       // 7. Hold at end so user can read everything
       .to({}, { duration: 1.5 });
@@ -520,62 +510,6 @@ export default function ServicesGrid() {
           </div>
         </div>
 
-        {/* ── Stats Strip ── */}
-        <div
-          ref={statsRef}
-          className="sg-stats"
-          style={{
-            flexShrink: 0,
-            marginTop: "clamp(8px, 1vw, 14px)",
-            display: "grid",
-            gridTemplateColumns: "repeat(4, 1fr)",
-            gap: "clamp(8px, 1vw, 14px)",
-            position: "relative",
-            zIndex: 1,
-          }}
-        >
-          {STATS.map((s, i) => (
-            <div
-              key={i}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: 10,
-                padding: "12px 18px",
-                background: "#fff",
-                borderRadius: 14,
-                border: "1px solid rgba(0,0,0,0.07)",
-                boxShadow: "0 2px 12px rgba(0,0,0,0.04)",
-              }}
-            >
-              <span
-                style={{
-                  fontSize: "clamp(1.2rem, 1.8vw, 1.75rem)",
-                  fontWeight: 900,
-                  color: "#0a0a0a",
-                  letterSpacing: "-0.04em",
-                  lineHeight: 1,
-                  flexShrink: 0,
-                }}
-              >
-                {s.value}
-              </span>
-              <span
-                style={{
-                  fontSize: 9,
-                  fontWeight: 700,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.18em",
-                  color: "rgba(0,0,0,0.35)",
-                  lineHeight: 1.35,
-                }}
-              >
-                {s.label}
-              </span>
-            </div>
-          ))}
-        </div>
-
         {/* ── Responsive overrides ── */}
         <style>{`
           @media (max-width: 1023px) {
@@ -589,12 +523,10 @@ export default function ServicesGrid() {
             .sg-grid > div:nth-child(4) { grid-column: 1 !important; grid-row: 3 !important; min-height: 190px; }
             .sg-grid > div:nth-child(5) { grid-column: 2 !important; grid-row: 3 !important; min-height: 190px; }
             .sg-grid > div:nth-child(6) { grid-column: 1 / span 2 !important; grid-row: 4 !important; }
-            .sg-stats { grid-template-columns: 1fr 1fr !important; }
           }
           @media (max-width: 599px) {
             .sg-grid { grid-template-columns: 1fr !important; }
             .sg-grid > div { grid-column: 1 !important; grid-row: auto !important; min-height: 200px !important; }
-            .sg-stats { grid-template-columns: 1fr 1fr !important; }
           }
         `}</style>
       </section>
