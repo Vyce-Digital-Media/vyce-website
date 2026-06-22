@@ -1,107 +1,383 @@
+"use client";
+
 import Link from "next/link";
-import { ArrowUpRight, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 const navLinks = [
   { name: "About Us", href: "/about" },
   { name: "Services", href: "/services" },
   { name: "Portfolio", href: "/portfolio" },
-  { name: "Contact Us", href: "/contact" },
+  { name: "Process", href: "/process" },
+  { name: "Clients", href: "/clients" },
+  { name: "Contact", href: "/contact" },
+];
+
+const serviceLinks = [
+  { name: "Brand Identity", href: "/services/branding" },
+  { name: "Social Media", href: "/services/social-media-management" },
+  { name: "Web Design", href: "/services/web-experiences" },
+  { name: "Performance Marketing", href: "/services/digital-growth" },
+  { name: "UI/UX Design", href: "/services/product-design" },
+  { name: "SEO", href: "/services/seo" },
 ];
 
 const socialLinks = [
-  { name: "Instagram", href: "#" },
-  { name: "LinkedIn", href: "#" },
-  { name: "WhatsApp", href: "#" },
+  { name: "Instagram", href: "#", iconClass: "fa-brands fa-instagram" },
+  { name: "LinkedIn", href: "#", iconClass: "fa-brands fa-linkedin" },
+  { name: "WhatsApp", href: "#", iconClass: "fa-brands fa-whatsapp" },
 ];
 
 export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-background border-t border-white/5 relative overflow-hidden">
-      <div className="relative z-10 mx-auto max-w-[1600px] px-6 py-10 md:px-12 lg:px-14">
+    /* Outer wrapper — provides the "floating" margin gap around the card */
+    <div
+      style={{
+        padding: "clamp(12px, 2vw, 28px)",
+        background: "transparent",
+        fontFamily: "'Inter', 'Outfit', sans-serif",
+      }}
+    >
+      <footer
+        style={{
+          background: "#0033cc",
+          borderRadius: 28,
+          overflow: "hidden",
+          position: "relative",
+          color: "#fff",
+        }}
+      >
+        {/* ── Subtle noise / dot texture overlay ─── */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            backgroundImage:
+              "radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px)",
+            backgroundSize: "28px 28px",
+            pointerEvents: "none",
+            zIndex: 0,
+          }}
+        />
 
-        {/* Main 4-Column Grid */}
-        <div className="grid grid-cols-2 gap-y-12 gap-x-4 md:gap-x-8 lg:grid-cols-12 lg:gap-x-12">
+        {/* ── Main content ─────────────────────────────────── */}
+        <div
+          style={{
+            position: "relative",
+            zIndex: 1,
+            padding: "clamp(32px, 5vw, 64px) clamp(28px, 5vw, 60px) 0",
+          }}
+        >
+          {/* 4-column grid */}
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1.8fr 1fr 1fr 1.4fr",
+              gap: "clamp(24px, 4vw, 60px)",
+              marginBottom: "clamp(40px, 6vw, 72px)",
+            }}
+          >
+            {/* Col 1 — Brand statement */}
+            <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+              <Link href="/" style={{ display: "inline-block" }}>
+                <img
+                  src="/assets/nav-logo.png"
+                  alt="Vyce"
+                  style={{ height: 56, width: "auto", filter: "brightness(0) invert(1)" }}
+                />
+              </Link>
 
-          {/* Column 1: Logo & Description */}
-          <div className="col-span-2 space-y-6 lg:col-span-5 transition-all duration-300">
-            <Link href="/" className="inline-block transition-transform hover:scale-105">
-              <img src="/assets/nav-logo.png" alt="Logo" className="h-24 w-auto brightness-0 invert" />
-            </Link>
-            <p className="text-md leading-relaxed text-foreground/50">
-              Strategy. Creativity. Results. All in one place. <br />
-              Address : 903 Luxuria Business Hub, Surat, Gujarat, India. <br />
-              Email : hello@vycedigitalmedia.com <br />
-              Phone : +91 XXXXX XXXXX
-            </p>
-          </div>
-
-          {/* Column 2: Navigation Links */}
-          <div className="col-span-1 space-y-6 lg:col-span-2 transition-all duration-300">
-            <h4 className="text-base font-semibold text-foreground">Navigation</h4>
-            <ul className="space-y-4 text-sm font-medium text-foreground/50">
-              {navLinks.map((link) => (
-                <li key={link.name}>
-                  <Link href={link.href} className="transition-all duration-300 hover:text-white hover:pl-1">
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Column 3: Social / Community Links */}
-          <div className="col-span-1 space-y-6 lg:col-span-2 transition-all duration-300">
-            <h4 className="text-base font-semibold text-foreground">Socials</h4>
-            <ul className="space-y-4 text-sm font-medium text-foreground/50">
-              {socialLinks.map((link) => (
-                <li key={link.name}>
-                  <a href={link.href} className="transition-all duration-300 hover:text-white hover:pl-1">
-                    {link.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Column 4: Subscribe */}
-          <div className="col-span-2 space-y-6 lg:col-span-3 transition-all duration-300">
-            <h4 className="text-base font-semibold text-foreground">Subscribe</h4>
-            <p className="text-sm font-medium text-foreground/50">
-              Subscribe to get latest offer
-            </p>
-            <form className="relative flex items-center max-w-sm">
-              <input
-                type="email"
-                placeholder="Email Address"
-                className="w-full rounded-md bg-white px-4 py-3 pr-12 text-sm text-black placeholder-gray-400 outline-none focus:ring-2 focus:ring-primary/50 transition-all"
-                required
-              />
-              <button
-                type="submit"
-                className="absolute right-2 flex h-8 w-8 items-center justify-center rounded-full bg-[#5287fa] text-white transition-opacity hover:opacity-90"
-                aria-label="Subscribe"
+              <p
+                style={{
+                  fontSize: "clamp(0.78rem, 0.9vw, 0.88rem)",
+                  lineHeight: 1.75,
+                  color: "rgba(255,255,255,0.55)",
+                  maxWidth: 280,
+                  fontWeight: 450,
+                }}
               >
-                <ArrowRight className="h-4 w-4" />
-              </button>
-            </form>
+                Strategy. Creativity. Results. All in one place.
+                <br /><br />
+                903 Luxuria Business Hub,<br />
+                Surat, Gujarat, India.
+              </p>
+
+              {/* Social icons */}
+              <div style={{ display: "flex", gap: 10, marginTop: 4 }}>
+                {socialLinks.map(({ name, href, iconClass }) => (
+                  <a
+                    key={name}
+                    href={href}
+                    aria-label={name}
+                    style={{
+                      width: 36,
+                      height: 36,
+                      borderRadius: "50%",
+                      border: "1px solid rgba(255,255,255,0.18)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      color: "rgba(255,255,255,0.7)",
+                      transition: "background 0.2s, color 0.2s, border-color 0.2s",
+                      textDecoration: "none",
+                    }}
+                    onMouseEnter={(e) => {
+                      (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.15)";
+                      (e.currentTarget as HTMLElement).style.color = "#fff";
+                    }}
+                    onMouseLeave={(e) => {
+                      (e.currentTarget as HTMLElement).style.background = "transparent";
+                      (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.7)";
+                    }}
+                  >
+                    <i className={iconClass} style={{ fontSize: "15px" }} />
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            {/* Col 2 — Navigation */}
+            <div>
+              <h5
+                style={{
+                  fontSize: "0.7rem",
+                  fontWeight: 800,
+                  letterSpacing: "0.35em",
+                  textTransform: "uppercase",
+                  color: "rgba(255,255,255,0.4)",
+                  marginBottom: 20,
+                }}
+              >
+                Navigation
+              </h5>
+              <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: 12 }}>
+                {navLinks.map((link) => (
+                  <li key={link.name}>
+                    <Link
+                      href={link.href}
+                      style={{
+                        fontSize: "clamp(0.8rem, 0.9vw, 0.9rem)",
+                        fontWeight: 500,
+                        color: "rgba(255,255,255,0.65)",
+                        textDecoration: "none",
+                        transition: "color 0.2s, padding-left 0.2s",
+                        display: "inline-block",
+                      }}
+                      onMouseEnter={(e) => {
+                        (e.currentTarget as HTMLElement).style.color = "#fff";
+                        (e.currentTarget as HTMLElement).style.paddingLeft = "4px";
+                      }}
+                      onMouseLeave={(e) => {
+                        (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.65)";
+                        (e.currentTarget as HTMLElement).style.paddingLeft = "0";
+                      }}
+                    >
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Col 3 — Services */}
+            <div>
+              <h5
+                style={{
+                  fontSize: "0.7rem",
+                  fontWeight: 800,
+                  letterSpacing: "0.35em",
+                  textTransform: "uppercase",
+                  color: "rgba(255,255,255,0.4)",
+                  marginBottom: 20,
+                }}
+              >
+                Services
+              </h5>
+              <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: 12 }}>
+                {serviceLinks.map((link) => (
+                  <li key={link.name}>
+                    <Link
+                      href={link.href}
+                      style={{
+                        fontSize: "clamp(0.8rem, 0.9vw, 0.9rem)",
+                        fontWeight: 500,
+                        color: "rgba(255,255,255,0.65)",
+                        textDecoration: "none",
+                        transition: "color 0.2s, padding-left 0.2s",
+                        display: "inline-block",
+                      }}
+                      onMouseEnter={(e) => {
+                        (e.currentTarget as HTMLElement).style.color = "#fff";
+                        (e.currentTarget as HTMLElement).style.paddingLeft = "4px";
+                      }}
+                      onMouseLeave={(e) => {
+                        (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.65)";
+                        (e.currentTarget as HTMLElement).style.paddingLeft = "0";
+                      }}
+                    >
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Col 4 — Newsletter + Contact */}
+            <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+              <div>
+                <h5
+                  style={{
+                    fontSize: "0.7rem",
+                    fontWeight: 800,
+                    letterSpacing: "0.35em",
+                    textTransform: "uppercase",
+                    color: "rgba(255,255,255,0.4)",
+                    marginBottom: 12,
+                  }}
+                >
+                  Join our list
+                </h5>
+                <p
+                  style={{
+                    fontSize: "0.82rem",
+                    color: "rgba(255,255,255,0.5)",
+                    marginBottom: 14,
+                    lineHeight: 1.6,
+                    fontWeight: 450,
+                  }}
+                >
+                  Latest campaigns, strategies &amp; industry moves — delivered straight to you.
+                </p>
+                <form
+                  style={{ position: "relative", display: "flex", alignItems: "center" }}
+                  onSubmit={(e) => e.preventDefault()}
+                >
+                  <input
+                    type="email"
+                    placeholder="your@email.com"
+                    style={{
+                      width: "100%",
+                      background: "rgba(255,255,255,0.1)",
+                      border: "1px solid rgba(255,255,255,0.18)",
+                      borderRadius: 999,
+                      padding: "10px 46px 10px 16px",
+                      fontSize: "0.82rem",
+                      color: "#fff",
+                      outline: "none",
+                      fontFamily: "inherit",
+                    }}
+                    onFocus={(e) => {
+                      (e.target as HTMLElement).style.border = "1px solid rgba(255,255,255,0.5)";
+                    }}
+                    onBlur={(e) => {
+                      (e.target as HTMLElement).style.border = "1px solid rgba(255,255,255,0.18)";
+                    }}
+                  />
+                  <button
+                    type="submit"
+                    aria-label="Subscribe"
+                    style={{
+                      position: "absolute",
+                      right: 4,
+                      width: 32,
+                      height: 32,
+                      borderRadius: "50%",
+                      background: "#fff",
+                      border: "none",
+                      cursor: "pointer",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      color: "#0033cc",
+                      transition: "transform 0.2s",
+                    }}
+                    onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.transform = "scale(1.1)"; }}
+                    onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.transform = "scale(1)"; }}
+                  >
+                    <ArrowRight size={14} />
+                  </button>
+                </form>
+              </div>
+
+              <div style={{ paddingTop: 8, borderTop: "1px solid rgba(255,255,255,0.1)" }}>
+                <p style={{ fontSize: "0.8rem", color: "rgba(255,255,255,0.45)", lineHeight: 1.7 }}>
+                  hello@vycedigitalmedia.com<br />
+                  +91 XXXXX XXXXX
+                </p>
+              </div>
+            </div>
           </div>
 
-        </div>
+          {/* ── Divider ─────────────────────────────────────── */}
+          <div style={{ borderTop: "1px solid rgba(255,255,255,0.12)", marginBottom: 0 }} />
 
-        {/* Bottom Legal Bar */}
-        <div className="mt-12 flex flex-col gap-6 border-t border-dashed border-white/10 pt-8 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-sm text-foreground/40">
-            © {year} Vyce Digital Media. All rights reserved.
-          </p>
-          <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-foreground/40">
-            <Link href="/terms" className="transition hover:text-white">Terms</Link>
-            <Link href="/privacy" className="transition hover:text-white">Privacy</Link>
+          {/* ── Bottom copyright bar ─────────────────────────── */}
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              padding: "16px 0",
+              fontSize: "0.72rem",
+              fontWeight: 600,
+              letterSpacing: "0.04em",
+              color: "rgba(255,255,255,0.35)",
+            }}
+          >
+            <span>© {year} Vyce Digital Media. All rights reserved.</span>
+            <div style={{ display: "flex", gap: 20 }}>
+              <Link href="/terms" style={{ color: "rgba(255,255,255,0.35)", textDecoration: "none", transition: "color 0.2s" }}
+                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "#fff"; }}
+                onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.35)"; }}
+              >Terms</Link>
+              <Link href="/privacy" style={{ color: "rgba(255,255,255,0.35)", textDecoration: "none", transition: "color 0.2s" }}
+                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "#fff"; }}
+                onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.35)"; }}
+              >Privacy</Link>
+            </div>
+          </div>
+
+          {/* ── Giant VYCE wordmark ──────────────────────────── */}
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "clamp(1rem, 3vw, 3rem)",
+              lineHeight: 0.85,
+              userSelect: "none",
+              pointerEvents: "none",
+              overflow: "hidden",
+              paddingBottom: "1rem", // Lifted up so it's fully visible
+            }}
+          >
+            <img
+              src="/assets/nav-logo.png"
+              alt="Vyce Logo"
+              style={{
+                height: "clamp(3.5rem, 11vw, 11rem)",
+                width: "auto",
+                opacity: 0.40,
+                filter: "brightness(0) invert(1)",
+              }}
+            />
+            <span
+              style={{
+                fontSize: "clamp(5rem, 15vw, 15rem)",
+                fontWeight: 900,
+                letterSpacing: "-0.04em",
+                color: "rgba(255,255,255,0.07)",
+                display: "block",
+                fontFamily: "'Cinzel Decorative', serif",
+                lineHeight: 1,
+              }}
+            >
+              VYCE
+            </span>
           </div>
         </div>
-
-      </div>
-    </footer>
+      </footer>
+    </div>
   );
 }

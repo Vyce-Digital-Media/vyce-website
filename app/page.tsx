@@ -36,9 +36,18 @@ function FadeIn({ children, delay = 0, className = "" }: { children: React.React
 export default function Home() {
   return (
     <div className="flex flex-col">
-      <Hero />
-
-      <ServicesGrid />
+      <div className="relative">
+        {/* Shared sticky background for Hero and ServicesGrid */}
+        <div className="sticky top-0 h-[100dvh] w-full overflow-hidden bg-[linear-gradient(160deg,#f5f5f3_0%,#ededeb_50%,#f0f0ee_100%)] z-[-1]">
+          <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(0,0,0,0.06)_1.5px,transparent_1.5px)] [background-size:28px_28px]" />
+        </div>
+        
+        {/* Content pulled up over the background */}
+        <div className="-mt-[100dvh]">
+          <Hero />
+          <ServicesGrid />
+        </div>
+      </div>
 
       {/* New 3D ImageScroller Portfolio Experience */}
       <ExploreCollection />

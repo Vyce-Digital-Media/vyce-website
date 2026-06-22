@@ -583,15 +583,9 @@ export default function Hero() {
         aria-label="Hero"
         style={{
           position: "sticky", top: 0, height: "100dvh", width: "100%", overflow: "hidden",
-          background: "linear-gradient(160deg, #f5f5f3 0%, #ededeb 50%, #f0f0ee 100%)",
+          background: "transparent",
         }}
       >
-        {/* Dot grid — base faint layer (always visible) */}
-        <div aria-hidden style={{
-          position: "absolute", inset: 0,
-          backgroundImage: "radial-gradient(circle, rgba(0,0,0,0.06) 1.5px, transparent 1.5px)",
-          backgroundSize: "28px 28px", pointerEvents: "none", zIndex: 0,
-        }} />
 
         {/* Dot grid — bright revealed layer (cursor spotlight mask) */}
         <div
@@ -641,7 +635,7 @@ export default function Hero() {
         </div>
 
         {/* ── Static Center Content (Always on top) ────────────────────────────── */}
-        <div style={{
+        <div className="hero-center" style={{
           position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center",
           zIndex: 100, pointerEvents: "none",
         }}>
