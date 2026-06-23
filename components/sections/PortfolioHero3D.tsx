@@ -61,7 +61,7 @@ function GlassImage({ src, opacity, width, height, delay }: { src: string, opaci
   );
 }
 
-function MazeScene({ scrollYProgress }: { scrollYProgress: any }) {
+function MazeScene({ scrollYProgress, isMobile }: { scrollYProgress: any, isMobile: boolean }) {
   const currentOffset = useRef({ x: 0, y: 0 });
 
   const t1 = useRef<any>(null);
@@ -130,47 +130,47 @@ function MazeScene({ scrollYProgress }: { scrollYProgress: any }) {
       <fog attach="fog" args={["#ffffff", 10, 25]} />
 
       {/* ================= CORRIDOR 1 ================= */}
-      <Text ref={t1} position={[0, 0, -10]} rotation={[0, 0, 0]} fontSize={4.5} color="#000" font={fontUrl} letterSpacing={-0.05} lineHeight={0.9} anchorX="center" anchorY="middle" textAlign="center">
+      <Text ref={t1} position={[0, 0, -10]} rotation={[0, 0, 0]} fontSize={isMobile ? 1.8 : 4.5} color="#000" font={fontUrl} letterSpacing={-0.05} lineHeight={0.9} anchorX="center" anchorY="middle" textAlign="center">
         Hey ya what{"\n"}was going on?
       </Text>
-      <Html position={[-12, 5.5, -10]} transform center zIndexRange={[100, 0]}>
-        <GlassCard opacity={op1}><InfinityIcon size={24} color="#111" /></GlassCard>
+      <Html position={[isMobile ? -6 : -12, 5.5, -10]} transform center zIndexRange={[100, 0]}>
+        <GlassCard opacity={op1}><InfinityIcon size={isMobile ? 18 : 24} color="#111" /></GlassCard>
       </Html>
-      <Html position={[12, -5.5, -10]} transform center zIndexRange={[100, 0]}>
+      <Html position={[isMobile ? 6 : 12, -5.5, -10]} transform center zIndexRange={[100, 0]}>
         <GlassInput text="Create a digital ad campaign" opacity={op1} />
       </Html>
 
       {/* ================= CORRIDOR 2 (Looking Right) ================= */}
-      <Text ref={t2} position={[17, 0, -8]} rotation={[0, -Math.PI / 2, 0]} fontSize={4.5} color="#000" font={fontUrl} letterSpacing={-0.05} lineHeight={0.9} anchorX="center" anchorY="middle" textAlign="center">
+      <Text ref={t2} position={[17, 0, -8]} rotation={[0, -Math.PI / 2, 0]} fontSize={isMobile ? 1.8 : 4.5} color="#000" font={fontUrl} letterSpacing={-0.05} lineHeight={0.9} anchorX="center" anchorY="middle" textAlign="center">
         You want to see{"\n"}our portfolio?
       </Text>
-      <Html position={[17, 5.5, -18]} rotation={[0, -Math.PI / 2, 0]} transform center zIndexRange={[100, 0]}>
-        <GlassCard opacity={op2}><Activity size={24} color="#111" /></GlassCard>
+      <Html position={[17, 5.5, isMobile ? -12 : -18]} rotation={[0, -Math.PI / 2, 0]} transform center zIndexRange={[100, 0]}>
+        <GlassCard opacity={op2}><Activity size={isMobile ? 18 : 24} color="#111" /></GlassCard>
       </Html>
-      <Html position={[17, -5.5, 2]} rotation={[0, -Math.PI / 2, 0]} transform center zIndexRange={[100, 0]}>
-        <GlassImage src="/portfolio/bb-smm/1.webp" opacity={op2} width={120} height={150} delay="1s" />
+      <Html position={[17, -5.5, isMobile ? -4 : 2]} rotation={[0, -Math.PI / 2, 0]} transform center zIndexRange={[100, 0]}>
+        <GlassImage src="/portfolio/bb-smm/1.webp" opacity={op2} width={isMobile ? 80 : 120} height={isMobile ? 100 : 150} delay="1s" />
       </Html>
 
       {/* ================= CORRIDOR 3 (Looking Forward again) ================= */}
-      <Text ref={t3} position={[15, 0, -27]} rotation={[0, 0, 0]} fontSize={4.5} color="#000" font={fontUrl} letterSpacing={-0.05} lineHeight={0.9} anchorX="center" anchorY="middle" textAlign="center">
+      <Text ref={t3} position={[15, 0, -27]} rotation={[0, 0, 0]} fontSize={isMobile ? 1.8 : 4.5} color="#000" font={fontUrl} letterSpacing={-0.05} lineHeight={0.9} anchorX="center" anchorY="middle" textAlign="center">
         Haha you are{"\n"}on the way.
       </Text>
-      <Html position={[5, 5.5, -27]} transform center zIndexRange={[100, 0]}>
-        <GlassImage src="/portfolio/pesto-smm/1.webp" opacity={op3} width={120} height={160} delay="0.5s" />
+      <Html position={[isMobile ? 9 : 5, 5.5, -27]} transform center zIndexRange={[100, 0]}>
+        <GlassImage src="/portfolio/pesto-smm/1.webp" opacity={op3} width={isMobile ? 80 : 120} height={isMobile ? 110 : 160} delay="0.5s" />
       </Html>
-      <Html position={[25, -5.5, -27]} transform center zIndexRange={[100, 0]}>
-        <GlassCard opacity={op3}><Folder size={24} color="#111" /></GlassCard>
+      <Html position={[isMobile ? 21 : 25, -5.5, -27]} transform center zIndexRange={[100, 0]}>
+        <GlassCard opacity={op3}><Folder size={isMobile ? 18 : 24} color="#111" /></GlassCard>
       </Html>
 
       {/* ================= CORRIDOR 4 (Looking Right) ================= */}
-      <Text ref={t4} position={[32, 0, -25]} rotation={[0, -Math.PI / 2, 0]} fontSize={4.5} color="#000" font={fontUrl} letterSpacing={-0.05} lineHeight={0.9} anchorX="center" anchorY="middle" textAlign="center">
+      <Text ref={t4} position={[32, 0, -25]} rotation={[0, -Math.PI / 2, 0]} fontSize={isMobile ? 1.8 : 4.5} color="#000" font={fontUrl} letterSpacing={-0.05} lineHeight={0.9} anchorX="center" anchorY="middle" textAlign="center">
         Welcome to VYCE{"\n"}portfolio.
       </Text>
-      <Html position={[32, -5.5, -36]} rotation={[0, -Math.PI / 2, 0]} transform center zIndexRange={[100, 0]}>
-        <GlassCard opacity={op4}><ImageIcon size={24} color="#111" /></GlassCard>
+      <Html position={[32, -5.5, isMobile ? -30 : -36]} rotation={[0, -Math.PI / 2, 0]} transform center zIndexRange={[100, 0]}>
+        <GlassCard opacity={op4}><ImageIcon size={isMobile ? 18 : 24} color="#111" /></GlassCard>
       </Html>
-      <Html position={[32, 5.5, -14]} rotation={[0, -Math.PI / 2, 0]} transform center zIndexRange={[100, 0]}>
-        <GlassImage src="/portfolio/bb-smm/2.webp" opacity={op4} width={140} height={180} delay="1.5s" />
+      <Html position={[32, 5.5, isMobile ? -20 : -14]} rotation={[0, -Math.PI / 2, 0]} transform center zIndexRange={[100, 0]}>
+        <GlassImage src="/portfolio/bb-smm/2.webp" opacity={op4} width={isMobile ? 90 : 140} height={isMobile ? 120 : 180} delay="1.5s" />
       </Html>
     </>
   );
@@ -179,6 +179,7 @@ function MazeScene({ scrollYProgress }: { scrollYProgress: any }) {
 export default function PortfolioHero3D() {
   const containerRef = useRef<HTMLDivElement>(null);
   const dotRevealRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = React.useState(false);
 
   // Track scroll over the height of this 500vh container
   const { scrollYProgress } = useFramerScroll({
@@ -204,8 +205,14 @@ export default function PortfolioHero3D() {
     };
 
     window.addEventListener("mousemove", onMouseMove, { passive: true });
+    // Listen for resize
+    setIsMobile(window.innerWidth < 768);
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener('resize', handleResize);
+
     return () => {
       window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener('resize', handleResize);
     };
   }, []);
 
@@ -235,7 +242,7 @@ export default function PortfolioHero3D() {
         />
 
         <Canvas camera={{ position: [0, 0, 0], fov: 75 }} gl={{ antialias: true, alpha: true }} style={{ position: 'relative', zIndex: 1 }}>
-          <MazeScene scrollYProgress={smoothProgress} />
+          <MazeScene scrollYProgress={smoothProgress} isMobile={isMobile} />
         </Canvas>
       </div>
 

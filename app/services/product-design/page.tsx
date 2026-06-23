@@ -100,7 +100,7 @@ export default function ProductDesignPage() {
     <div className="bg-background text-foreground overflow-clip">
 
       {/* ── 01. HERO WITH FROSTED GLASS ─────────────────────────────── */}
-      <section ref={heroRef} className="relative h-screen w-full flex items-center justify-center px-6 md:px-12 lg:px-20 overflow-hidden">
+      <section ref={heroRef} className="relative h-[100dvh] md:h-screen w-full flex items-center justify-center px-6 md:px-12 lg:px-20 overflow-hidden">
         {/* Abstract blurred background shapes */}
         <div className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[40vw] h-[40vw] max-w-[600px] max-h-[600px] rounded-full bg-blue-600/30 blur-[120px]" />
         <div className="absolute top-1/3 right-1/4 translate-x-1/2 -translate-y-1/2 w-[30vw] h-[30vw] max-w-[500px] max-h-[500px] rounded-full bg-purple-600/20 blur-[100px]" />
@@ -152,7 +152,7 @@ export default function ProductDesignPage() {
             </RevealLine>
           </div>
 
-          <FadeIn delay={0.3} className="mt-8 max-w-2xl px-4">
+          <FadeIn delay={0.3} className="mt-6 md:mt-8 max-w-2xl px-4">
             <p className="text-base md:text-xl text-foreground/50 font-medium leading-relaxed">
               If your onboarding flow needs a video tutorial, you haven&apos;t built a product — you&apos;ve built a puzzle. We design interfaces so frictionless that users feel smart for using them. That&apos;s the trick. That&apos;s also how you retain customers.
             </p>
@@ -165,8 +165,8 @@ export default function ProductDesignPage() {
       </section>
 
       {/* ── 02. SYSTEM ASSEMBLY DIAGRAM ───────────────────────────── */}
-      <section ref={diagramRef} className="py-32 px-6 md:px-12 lg:px-20 bg-zinc-950/40 relative overflow-hidden">
-        <div className="mx-auto max-w-[1600px] grid lg:grid-cols-2 gap-20 items-center">
+      <section ref={diagramRef} className="py-20 md:py-32 px-6 md:px-12 lg:px-20 bg-zinc-950/40 relative overflow-hidden">
+        <div className="mx-auto max-w-[1600px] grid lg:grid-cols-2 gap-12 md:gap-20 items-center">
 
           <div className="space-y-12">
             <RevealLine>
@@ -226,7 +226,7 @@ export default function ProductDesignPage() {
       </section>
 
       {/* ── 03. CTA FINALE ────────────────────────────────────────── */}
-      <section className="relative px-6 py-48 md:px-12 lg:px-20 overflow-hidden flex items-center justify-center text-center">
+      <section className="relative px-6 py-32 md:py-48 md:px-12 lg:px-20 overflow-hidden flex items-center justify-center text-center">
         <div className="relative z-10 max-w-4xl max-auto space-y-12">
           <div>
             <RevealLine>
@@ -242,7 +242,7 @@ export default function ProductDesignPage() {
           </div>
 
           <FadeIn delay={0.3}>
-            <Link href="/contact" className="group inline-flex items-center gap-4 rounded-full bg-white px-10 py-5 text-[11px] font-black uppercase tracking-[0.3em] text-black transition-all duration-300 hover:bg-neutral-200 hover:scale-105 active:scale-95 shadow-[0_0_40px_-10px_rgba(255,255,255,0.3)]">
+            <Link href="/contact" className="group inline-flex items-center gap-4 rounded-full bg-white px-8 py-4 md:px-10 md:py-5 text-[10px] md:text-[11px] font-black uppercase tracking-[0.3em] text-black transition-all duration-300 hover:bg-neutral-200 hover:scale-105 active:scale-95 shadow-[0_0_40px_-10px_rgba(255,255,255,0.3)]">
               Start the Brief
               <ArrowUpRight size={16} className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </Link>

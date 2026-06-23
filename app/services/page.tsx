@@ -328,12 +328,12 @@ function HorizontalServiceGallery({ servicesList, titleNode }: { servicesList: t
   return (
     <div ref={containerRef} className="relative w-full bg-zinc-950 overflow-hidden pb-32">
       {/* Title */}
-      <div className="pt-24 pb-12 w-full flex justify-center text-center">
+      <div className="pt-20 md:pt-24 pb-8 md:pb-12 w-full flex justify-center text-center">
         {titleNode}
       </div>
 
-      <div ref={scrollSectionRef} className="h-screen flex items-center overflow-hidden bg-zinc-950">
-        <div ref={scrollWrapperRef} className="flex h-[75vh] px-[5vw] gap-12 w-[fit-content] items-center">
+      <div ref={scrollSectionRef} className="h-[100dvh] md:h-screen flex items-center overflow-hidden bg-zinc-950">
+        <div ref={scrollWrapperRef} className="flex h-[70vh] md:h-[75vh] px-[5vw] gap-6 md:gap-12 w-[fit-content] items-center">
           {servicesList.map((service, index) => (
             <ServiceGalleryCard key={service.num} service={service} index={index} />
           ))}
@@ -525,7 +525,7 @@ export default function ServicesPage() {
         ref={heroRef}
         className="relative h-[200vh] bg-[#f5f5f0]"
       >
-        <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-center overflow-hidden">
+        <div className="sticky top-0 h-[100dvh] w-full flex flex-col items-center justify-center overflow-hidden">
           {/* Dot grid — base faint layer (always visible) */}
           <div aria-hidden style={{
             position: "absolute", inset: 0,
@@ -627,9 +627,9 @@ export default function ServicesPage() {
       {/* ── 02. PROCESS ───────────────────────────────────────────── */}
       <section
         ref={processRef}
-        className="relative px-6 py-32 md:px-12 lg:px-20"
+        className="relative px-6 py-20 md:py-32 md:px-12 lg:px-20"
       >
-        <div className="mx-auto max-w-[1600px] grid gap-24 lg:grid-cols-[1fr_1.2fr] items-start">
+        <div className="mx-auto max-w-[1600px] grid gap-16 md:gap-24 lg:grid-cols-[1fr_1.2fr] items-start">
           {/* Sticky left */}
           <div className="lg:sticky lg:top-48 lg:h-fit space-y-12">
             <div className="space-y-6">
@@ -690,7 +690,7 @@ export default function ServicesPage() {
               />
             </div>
 
-            <div className="space-y-32 md:space-y-48 lg:pl-16">
+            <div className="space-y-20 md:space-y-48 lg:pl-16">
               {phases.map((phase, i) => (
                 <motion.div
                   key={phase.step}
@@ -734,10 +734,10 @@ export default function ServicesPage() {
       </section>
 
       {/* ── 03. ENGINEERING CALLOUT ───────────────────────────────── */}
-      <section className="relative px-6 py-24 md:px-12 lg:px-20 bg-zinc-950/30 overflow-hidden">
+      <section className="relative px-6 py-16 md:py-24 md:px-12 lg:px-20 bg-zinc-950/30 overflow-hidden">
         <div className="mx-auto max-w-[1600px]">
           <FadeIn>
-            <div className="relative overflow-hidden rounded-[40px] border border-white/[0.07] bg-gradient-to-br from-[#050a15] to-[#01020a] p-12 md:p-20">
+            <div className="relative overflow-hidden rounded-[32px] md:rounded-[40px] border border-white/[0.07] bg-gradient-to-br from-[#050a15] to-[#01020a] p-8 md:p-12 lg:p-20">
               {/* Glow orb */}
               <div className="pointer-events-none absolute -top-1/4 right-1/4 h-96 w-96 rounded-full bg-primary/10 blur-[120px]" />
 
@@ -753,8 +753,9 @@ export default function ServicesPage() {
                   </FadeIn>
 
                   <RevealLine>
-                    <h2 className="text-2xl font-black uppercase tracking-tighter leading-[0.9] md:text-6xl">
+                    <h2 className="text-3xl md:text-5xl lg:text-6xl font-black uppercase tracking-tighter leading-[0.9]">
                       Not sure where to start?
+                      <br className="md:hidden" />
                       <span className="font-satoshi font-normal italic text-primary">
                         That&apos;s exactly why we exist.
                       </span>

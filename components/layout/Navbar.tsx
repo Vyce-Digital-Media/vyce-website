@@ -24,6 +24,7 @@ const socialLinks = [
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
   const pathname = usePathname();
 
@@ -38,9 +39,18 @@ export default function Navbar() {
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
+    const onResize = () => setIsMobile(window.innerWidth < 768);
+    
     onScroll();
+    onResize();
+    
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener("resize", onResize, { passive: true });
+    
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onResize);
+    };
   }, []);
 
   useEffect(() => {
@@ -61,7 +71,7 @@ export default function Navbar() {
       >
         <nav className="mx-auto flex max-w-[1600px] items-center justify-between px-6 md:px-12 lg:px-16">
           <Link href="/" className="flex items-center gap-4 group">
-            <img src="/assets/nav-logo.png" alt="Logo" className="h-12 w-auto sm:h-16 md:h-20 ml-4 md:ml-8 brightness-0" />
+            <img src="/assets/nav-logo.png" alt="Logo" className="h-12 w-auto sm:h-16 md:h-20 md:ml-8 brightness-0" />
           </Link>
 
           <div
@@ -115,20 +125,13 @@ export default function Navbar() {
             })}
           </div>
 
-          <button
-            type="button"
-            onClick={() => setIsOpen(true)}
-            className="absolute right-6 top-1/2 -translate-y-1/2 flex h-10 w-10 items-center justify-center text-black md:hidden"
-            aria-label="Open menu"
-          >
-            <Menu size={22} strokeWidth={1.25} />
-          </button>
+          {/* Mobile hamburger menu removed as per user request */}
         </nav>
       </header>
 
-      {/* Floating Action Button (Shows on Scroll) */}
+      {/* Floating Action Button (Shows on Scroll OR always on Mobile) */}
       <AnimatePresence>
-        {scrolled && !isOpen && (
+        {((scrolled || isMobile) && !isOpen) && (
           <motion.button
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
@@ -179,10 +182,10 @@ export default function Navbar() {
               animate={{ clipPath: "circle(150% at calc(100% - 50px) 50px)" }}
               exit={{ clipPath: "circle(0px at calc(100% - 50px) 50px)", transition: { duration: 0.6, ease: [0.76, 0, 0.24, 1] } }}
               transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1], delay: 0.1 }}
-              className="fixed inset-0 z-[201] bg-white text-black overflow-hidden h-[100dvh]"
+              className="fixed inset-0 z-[201] bg-white text-black overflow-y-auto h-[100dvh]"
             >
-              <div className="h-full w-full flex flex-col px-6 md:px-16 lg:px-24 py-16 md:py-8 justify-center">
-                <div className="flex flex-col md:flex-row items-center justify-between max-w-[1600px] w-full mx-auto gap-8 md:gap-16 flex-1">
+              <div className="min-h-full w-full flex flex-col px-6 md:px-16 lg:px-24 py-24 md:py-8 justify-center">
+                <div className="flex flex-col md:flex-row items-center justify-center md:justify-between max-w-[1600px] w-full mx-auto gap-12 md:gap-16 flex-1">
                   {/* Huge Vertically Centered Logo on Left */}
                   <div className="flex w-full md:w-1/2 justify-center items-center">
                     <Link href="/" onClick={() => setIsOpen(false)}>

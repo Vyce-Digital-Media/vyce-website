@@ -79,7 +79,7 @@ function HeroSection() {
   }, []);
 
   return (
-    <section ref={containerRef} className="h-screen w-full relative overflow-hidden flex items-center">
+    <section ref={containerRef} className="h-[100dvh] md:h-screen w-full relative overflow-hidden flex items-center">
       {/* Absolute Image Layer */}
       <div ref={imageWrapperRef} className="absolute inset-0 z-20 overflow-hidden pointer-events-none">
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -107,7 +107,7 @@ function HeroSection() {
           </p>
         </RevealLine>
 
-        <div className="flex items-start gap-10 mt-10 border-t border-white/20 pt-10">
+        <div className="flex flex-col md:flex-row items-start gap-6 md:gap-10 mt-8 md:mt-10 border-t border-white/20 pt-8 md:pt-10">
           <RevealLine delay={0.35} className="mr-4">
             <div className="w-16 h-16 rounded-2xl overflow-hidden bg-white/5 flex items-center justify-center p-3 border border-white/10 shadow-2xl backdrop-blur-sm">
               <img
@@ -118,7 +118,7 @@ function HeroSection() {
             </div>
           </RevealLine>
 
-          <div className="grid grid-cols-2 gap-8 max-w-xs">
+          <div className="grid grid-cols-2 gap-8 w-full max-w-xs">
             <div>
               <RevealLine delay={0.4}>
                 <span className="text-[11px] font-mono uppercase tracking-[0.3em] text-white/60 block mb-2">Client</span>
@@ -253,7 +253,7 @@ function ProjectTableSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative z-30 bg-background px-8 md:px-20 py-24 overflow-hidden h-screen"
+      className="relative z-30 bg-background px-6 md:px-20 py-16 md:py-24 overflow-hidden min-h-[100dvh] md:h-screen flex flex-col justify-center"
     >
       {/* Ambient blobs */}
       <div className="pointer-events-none absolute top-0 right-0 w-[500px] h-[500px] bg-primary/4 rounded-full blur-[140px]" />
@@ -337,7 +337,7 @@ function DescriptionSection() {
   const words = text.split(" ");
 
   return (
-    <section ref={containerRef} className="h-screen w-full flex flex-col items-center justify-center px-8 md:px-20 relative z-30 bg-background gap-10">
+    <section ref={containerRef} className="h-[100dvh] md:h-screen w-full flex flex-col items-center justify-center px-6 md:px-20 relative z-30 bg-background gap-6 md:gap-10">
 
       {/* Ambient blobs */}
       <div className="pointer-events-none absolute top-0 right-0 w-[500px] h-[500px] bg-primary/4 rounded-full blur-[140px]" />
@@ -350,7 +350,7 @@ function DescriptionSection() {
         </h2>
       </div>
       {/* Animated word reveal */}
-      <div className="max-w-4/5 w-full">
+      <div className="w-[90%] md:w-4/5 mx-auto">
         <p className="text-[clamp(1rem,2vw,1.8rem)] font-black uppercase text-justify tracking-tighter leading-[1.1] w-full">
           {words.map((word, i) => (
             <React.Fragment key={i}>
@@ -604,7 +604,7 @@ function LightModeSection({ setGlobalTheme }: { setGlobalTheme: (theme: 'dark' |
   }, []);
 
   return (
-    <section ref={sectionRef} className="pt-30 px-8 md:px-20 relative z-30 transition-colors duration-1000">
+    <section ref={sectionRef} className="pt-20 md:pt-30 px-6 md:px-20 relative z-30 transition-colors duration-1000">
       <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center text-center">
         <RevealLine>
           <span className="text-current font-mono text-xs uppercase tracking-[0.3em] opacity-40 mb-8 block">The Autopsy</span>
@@ -703,10 +703,10 @@ function CenteredGrowthSection({ setGlobalTheme }: { setGlobalTheme: (theme: 'da
   }, [setGlobalTheme]);
 
   return (
-    <section ref={containerRef} className="h-screen w-full relative flex items-center justify-center overflow-hidden z-30">
+    <section ref={containerRef} className="h-[100dvh] md:h-screen w-full relative flex items-center justify-center overflow-hidden z-30">
       <div
         ref={imageRef}
-        className="w-[30vw] md:w-[20vw] aspect-[4/5] rounded-[24px] overflow-hidden relative shadow-2xl"
+        className="w-[50vw] md:w-[20vw] aspect-[4/5] rounded-[24px] overflow-hidden relative shadow-2xl"
       >
         <img
           src={project.hero.bgImage}
@@ -830,7 +830,7 @@ function StrategySection() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative z-30 bg-background px-8 md:px-20 py-28 overflow-hidden">
+    <section ref={sectionRef} className="relative z-30 bg-background px-6 md:px-20 py-20 md:py-28 overflow-hidden">
       <div className="pointer-events-none absolute top-0 left-1/3 w-[600px] h-[600px] bg-violet-500/[0.04] rounded-full blur-[160px]" />
       <div className="pointer-events-none absolute bottom-0 right-0 w-[400px] h-[400px] bg-orange-500/[0.03] rounded-full blur-[120px]" />
 
@@ -961,7 +961,7 @@ function ResultsSection() {
   }, []);
 
   return (
-    <section ref={containerRef} className="relative z-30 bg-white px-8 md:px-20 py-32 h-screen overflow-hidden text-black">
+    <section ref={containerRef} className="relative z-30 bg-white px-6 md:px-20 py-20 md:py-32 min-h-[100dvh] md:h-screen overflow-hidden text-black flex flex-col justify-center">
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col items-center text-center mb-24">
           <h2 className="text-[clamp(2.5rem,6vw,6rem)] font-black uppercase tracking-tighter leading-none mb-8">
@@ -1038,7 +1038,7 @@ function RelatedProjectsSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative z-30 bg-white px-8 md:px-20 min-h-screen flex items-center overflow-hidden text-black py-20">
+    <section ref={sectionRef} className="relative z-30 bg-white px-6 md:px-20 min-h-[100dvh] md:min-h-screen flex items-center overflow-hidden text-black py-16 md:py-20">
       <div className="max-w-7xl mx-auto w-full">
         <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-8">
           <div className="max-w-xl text-left">

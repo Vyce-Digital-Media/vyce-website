@@ -70,9 +70,8 @@ export default function Footer() {
         >
           {/* 4-column grid */}
           <div
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.8fr_1fr_1fr_1.4fr]"
             style={{
-              display: "grid",
-              gridTemplateColumns: "1.8fr 1fr 1fr 1.4fr",
               gap: "clamp(24px, 4vw, 60px)",
               marginBottom: "clamp(40px, 6vw, 72px)",
             }}

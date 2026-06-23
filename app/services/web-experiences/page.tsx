@@ -152,7 +152,7 @@ function HorizontalScrollSection() {
   }, []);
 
   return (
-    <section ref={triggerRef} className="relative h-screen bg-background overflow-hidden flex items-center">
+    <section ref={triggerRef} className="relative h-[100dvh] md:h-screen bg-background overflow-hidden flex items-center">
       <div className="absolute top-12 md:top-20 left-1/2 -translate-x-1/2 z-10 pointer-events-none w-full flex justify-center">
         <RevealLine>
           <div className="flex flex-row items-center gap-3 md:gap-5">
@@ -162,7 +162,7 @@ function HorizontalScrollSection() {
         </RevealLine>
       </div>
 
-      <div ref={sectionRef} className="flex gap-4 sm:gap-8 lg:gap-12 pl-6 pr-6 lg:pl-[10vw] lg:pr-[10vw] h-[80vh] items-center mt-40 w-max">
+      <div ref={sectionRef} className="flex gap-4 sm:gap-8 lg:gap-12 pl-6 pr-6 lg:pl-[10vw] lg:pr-[10vw] h-[80vh] items-center mt-20 md:mt-40 w-max">
         {webTypes.map((item, index) => {
           const isMac = index % 2 === 0;
 
@@ -279,7 +279,7 @@ export default function WebExperiencesPage() {
     <div className="bg-background text-foreground overflow-clip">
 
       {/* ── 01. HERO ──────────────────────────────────────────────── */}
-      <section ref={heroRef} className="relative h-screen w-full overflow-hidden flex items-center justify-center">
+      <section ref={heroRef} className="relative h-[100dvh] md:h-screen w-full overflow-hidden flex items-center justify-center">
         {/* ThreeJS Background Canvas */}
         <div className="absolute inset-0 z-0 opacity-40">
           <Canvas camera={{ position: [0, 0, 8], fov: 45 }}>
@@ -299,7 +299,7 @@ export default function WebExperiencesPage() {
             </span>
           </FadeIn>
 
-          <div className="mt-8 space-y-2 lg:space-y-4">
+          <div className="mt-6 md:mt-8 space-y-2 lg:space-y-4">
             <RevealLine>
               <h1 className="text-[clamp(3rem,8vw,9rem)] font-black uppercase tracking-tighter leading-[0.88]">
                 Native Digital
@@ -312,7 +312,7 @@ export default function WebExperiencesPage() {
             </RevealLine>
           </div>
 
-          <FadeIn delay={0.3} className="mt-8 max-w-2xl px-4">
+          <FadeIn delay={0.3} className="mt-6 md:mt-8 max-w-2xl px-4">
             <p className="text-base md:text-xl text-foreground/50 font-medium leading-relaxed">
               Your website has one job: make people take action. If it&apos;s not doing that, it&apos;s not a website. It&apos;s a liability. We turn liabilities into your best-performing salesperson.
             </p>
@@ -329,8 +329,8 @@ export default function WebExperiencesPage() {
       <HorizontalScrollSection />
 
       {/* ── 03. PROOF & TECH STACK ────────────────────────────────── */}
-      <section className="relative px-6 py-32 md:py-48 lg:px-20 bg-zinc-950/50">
-        <div className="mx-auto max-w-[1600px] grid lg:grid-cols-2 gap-24 items-center">
+      <section className="relative px-6 py-20 md:py-32 md:py-48 lg:px-20 bg-zinc-950/50">
+        <div className="mx-auto max-w-[1600px] grid lg:grid-cols-2 gap-12 md:gap-24 items-center">
           <div className="space-y-12">
             <RevealLine>
               <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-[0.9]">
@@ -361,7 +361,7 @@ export default function WebExperiencesPage() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={isStatsInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.8, delay: i * 0.15, ease: [0.16, 1, 0.3, 1] }}
-                className={`p-10 rounded-3xl border border-white/[0.04] bg-zinc-950 ${i === stats.length - 1 ? 'sm:col-span-2 sm:aspect-[2.5/1] aspect-square' : 'aspect-square'} flex flex-col justify-between group hover:border-primary/20 transition-colors duration-500`}
+                className={`p-8 md:p-10 rounded-3xl border border-white/[0.04] bg-zinc-950 ${i === stats.length - 1 ? 'sm:col-span-2 sm:aspect-[2.5/1] aspect-square' : 'aspect-square'} flex flex-col justify-between group hover:border-primary/20 transition-colors duration-500`}
               >
                 <div className="text-xs font-bold uppercase tracking-[0.2em] text-foreground/30">{stat.metric}</div>
                 <div>
@@ -375,7 +375,7 @@ export default function WebExperiencesPage() {
       </section>
 
       {/* ── 04. CTA FINALE ────────────────────────────────────────── */}
-      <section className="relative px-6 py-48 md:px-12 lg:px-20 overflow-hidden flex items-center justify-center text-center">
+      <section className="relative px-6 py-32 md:py-48 md:px-12 lg:px-20 overflow-hidden flex items-center justify-center text-center">
         {/* Animated Blue Orb */}
         <motion.div
           animate={{
@@ -401,7 +401,7 @@ export default function WebExperiencesPage() {
           </div>
 
           <FadeIn delay={0.3}>
-            <Link href="/contact" className="group inline-flex items-center gap-4 rounded-full bg-white px-10 py-5 text-[11px] font-black uppercase tracking-[0.3em] text-black transition-all duration-300 hover:bg-neutral-200 hover:scale-105 active:scale-95 shadow-[0_0_40px_-10px_rgba(255,255,255,0.3)]">
+            <Link href="/contact" className="group inline-flex items-center gap-4 rounded-full bg-white px-8 py-4 md:px-10 md:py-5 text-[10px] md:text-[11px] font-black uppercase tracking-[0.3em] text-black transition-all duration-300 hover:bg-neutral-200 hover:scale-105 active:scale-95 shadow-[0_0_40px_-10px_rgba(255,255,255,0.3)]">
               Start the Brief
               <ArrowUpRight size={16} className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </Link>

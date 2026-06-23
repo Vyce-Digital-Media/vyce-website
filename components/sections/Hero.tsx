@@ -376,6 +376,12 @@ export default function Hero() {
 
     const W = window.innerWidth;
     const H = window.innerHeight;
+    const isMobile = window.innerWidth < 768;
+    
+    // Scale and coordinate modifiers for mobile to ensure cards are visible but nicely clustered
+    const mScale = isMobile ? 0.75 : 1; 
+    const spreadX = isMobile ? 0.7 : 1;
+    const spreadY = isMobile ? 0.75 : 1;
 
     // ── Master timeline ───────────────────────────────────────────────────────
     const tl = gsap.timeline({
@@ -392,8 +398,8 @@ export default function Hero() {
       const el = cardRefs.current.get(card.id);
       if (!el) return;
 
-      const finalX = card.fx * W;
-      const finalY = card.fy * H;
+      const finalX = card.fx * W * spreadX;
+      const finalY = card.fy * H * spreadY;
       // We drift them far outwards so they physically leave the screen
       const driftX = finalX * 2.8;
       const driftY = finalY * 2.8;
@@ -408,7 +414,7 @@ export default function Hero() {
         gsap.set(el, {
           x: finalX, y: finalY,
           xPercent: -50, yPercent: -50,
-          scale: 1, opacity: 1,
+          scale: mScale, opacity: 1,
           rotate: card.rotate,
           zIndex: 50 + (card.depth || 0),
           force3D: true,
@@ -416,7 +422,7 @@ export default function Hero() {
 
         // Phase 1: Foreground to Off-screen
         tl.to(el, {
-          scale: 1.5,
+          scale: mScale * 1.5,
           x: driftX, y: driftY,
           rotate: card.rotate + spinDirection,
           duration: 0.33,
@@ -433,7 +439,7 @@ export default function Hero() {
         gsap.set(el, {
           x: finalX * 0.2, y: finalY * 0.2,
           xPercent: -50, yPercent: -50,
-          scale: 0.2, opacity: 0,
+          scale: mScale * 0.2, opacity: 0,
           rotate: card.rotate - 10,
           zIndex: 40 + (card.depth || 0),
           force3D: true,
@@ -441,7 +447,7 @@ export default function Hero() {
 
         // Phase 1: Midground to Foreground (Reaches original size exactly halfway)
         tl.to(el, {
-          scale: 1,
+          scale: mScale,
           x: finalX, y: finalY,
           rotate: card.rotate,
           duration: 0.33,
@@ -455,7 +461,7 @@ export default function Hero() {
 
         // Phase 2: Foreground to Off-screen
         tl.to(el, {
-          scale: 1.5,
+          scale: mScale * 1.5,
           x: driftX, y: driftY,
           rotate: card.rotate + spinDirection,
           duration: 0.33,
@@ -480,7 +486,7 @@ export default function Hero() {
 
         // Phase 1: Background to Midground
         tl.to(el, {
-          scale: 0.2,
+          scale: mScale * 0.2,
           x: finalX * 0.2, y: finalY * 0.2,
           rotate: card.rotate - 10,
           opacity: 0,
@@ -490,7 +496,7 @@ export default function Hero() {
 
         // Phase 2: Midground to Foreground (Reaches original size exactly halfway)
         tl.to(el, {
-          scale: 1,
+          scale: mScale,
           x: finalX, y: finalY,
           rotate: card.rotate,
           duration: 0.33,
@@ -504,7 +510,7 @@ export default function Hero() {
 
         // Phase 3: Foreground to Off-screen
         tl.to(el, {
-          scale: 1.5,
+          scale: mScale * 1.5,
           x: driftX, y: driftY,
           rotate: card.rotate + spinDirection,
           duration: 0.33,
@@ -653,9 +659,9 @@ export default function Hero() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.0, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
-              style={{ fontSize: "clamp(2.4rem, 6vw, 5.2rem)", fontWeight: 900, lineHeight: 1.05, letterSpacing: "-0.03em", color: "#111", margin: "0 0 18px 0" }}
+              style={{ fontSize: "clamp(2rem, 8vw, 5.2rem)", fontWeight: 900, lineHeight: 1.05, letterSpacing: "-0.03em", color: "#111", margin: "0 0 18px 0" }}
             >
-              <span style={{ whiteSpace: "nowrap" }}>Growth Crafted for</span><br /><span style={{ color: "#111", whiteSpace: "nowrap" }}>those who Demand More</span>
+              <span className="whitespace-normal md:whitespace-nowrap">Growth Crafted for</span><br /><span className="whitespace-normal md:whitespace-nowrap" style={{ color: "#111" }}>those who Demand More</span>
             </motion.h1>
 
             {/* Sub-copy */}

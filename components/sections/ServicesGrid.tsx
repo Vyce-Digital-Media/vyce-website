@@ -522,11 +522,15 @@ export default function ServicesGrid() {
             .sg-grid > div:nth-child(3) { grid-column: 2 !important; grid-row: 2 !important; min-height: 190px; }
             .sg-grid > div:nth-child(4) { grid-column: 1 !important; grid-row: 3 !important; min-height: 190px; }
             .sg-grid > div:nth-child(5) { grid-column: 2 !important; grid-row: 3 !important; min-height: 190px; }
-            .sg-grid > div:nth-child(6) { grid-column: 1 / span 2 !important; grid-row: 4 !important; }
+            .sg-grid > div:nth-child(6) { grid-column: 1 / span 2 !important; grid-row: 4 !important; min-height: 140px; }
           }
-          @media (max-width: 599px) {
-            .sg-grid { grid-template-columns: 1fr !important; }
-            .sg-grid > div { grid-column: 1 !important; grid-row: auto !important; min-height: 200px !important; }
+          @media (max-width: 767px) {
+            .sg-grid {
+              grid-template-rows: 1.2fr 1fr 1fr 0.8fr !important;
+            }
+            .sg-grid > div {
+              min-height: 0 !important;
+            }
           }
         `}</style>
       </section>

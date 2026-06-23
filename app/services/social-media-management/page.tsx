@@ -180,7 +180,7 @@ function ScrollShowcase() {
   }, []);
 
   return (
-    <section ref={containerRef} className="bg-shift relative h-screen w-full overflow-hidden flex items-center justify-center transition-colors duration-500">
+    <section ref={containerRef} className="bg-shift relative h-[100dvh] md:h-screen w-full overflow-hidden flex items-center justify-center transition-colors duration-500">
 
       <div className="hero-text absolute top-25 left-0 w-full text-center z-10 pointer-events-none">
         <p className="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tighter">Content that <span className="text-[#ff0055] italic font-satoshi font-normal">Converts.</span></p>
@@ -304,7 +304,7 @@ export default function SocialMediaManagementPage() {
     <div className="bg-background text-foreground overflow-clip">
 
       {/* ── 01. HERO ──────────────────────────────────────────────── */}
-      <section ref={heroRef} className="relative h-screen w-full overflow-hidden flex items-center justify-center">
+      <section ref={heroRef} className="relative h-[100dvh] md:h-screen w-full overflow-hidden flex items-center justify-center">
         <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,rgba(255,0,85,0.15)_0%,rgba(0,0,0,1)_70%)] pointer-events-none" />
 
         <motion.div style={{ opacity: heroOpacity, scale: heroScale }} className="relative z-10 w-full max-w-[1600px] px-6 md:px-12 lg:px-20 text-center flex flex-col items-center">
@@ -315,7 +315,7 @@ export default function SocialMediaManagementPage() {
             </span>
           </FadeIn>
 
-          <div className="mt-8 space-y-2 lg:space-y-4">
+          <div className="mt-6 md:mt-8 space-y-2 lg:space-y-4">
             <RevealLine>
               <h1 className="text-[clamp(3rem,8vw,9rem)] font-black uppercase tracking-tighter leading-[0.88]">
                 Viral By
@@ -328,7 +328,7 @@ export default function SocialMediaManagementPage() {
             </RevealLine>
           </div>
 
-          <FadeIn delay={0.3} className="mt-8 max-w-2xl px-4">
+          <FadeIn delay={0.3} className="mt-6 md:mt-8 max-w-2xl px-4">
             <p className="text-base md:text-xl text-foreground/50 font-medium leading-relaxed">
               Most brands post. Some brands go viral. Almost none build an actual audience. Guess which category you&apos;re in right now. We&apos;re here to fix that.
             </p>
@@ -344,8 +344,8 @@ export default function SocialMediaManagementPage() {
       <ScrollShowcase />
 
       {/* ── 03. STATS & METRICS ───────────────────────────────────── */}
-      <section className="relative px-6 py-32 md:py-48 lg:px-20 bg-zinc-950">
-        <div className="mx-auto max-w-[1600px] grid lg:grid-cols-2 gap-24 items-center">
+      <section className="relative px-6 py-20 md:py-32 md:py-48 lg:px-20 bg-zinc-950">
+        <div className="mx-auto max-w-[1600px] grid lg:grid-cols-2 gap-12 md:gap-24 items-center">
           <div className="space-y-12">
             <RevealLine>
               <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-[0.9]">
@@ -366,7 +366,7 @@ export default function SocialMediaManagementPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.8 }}
-              className="p-10 rounded-3xl border border-white/[0.04] bg-black aspect-square flex flex-col justify-between group hover:border-[#ff0055]/30 transition-colors duration-500"
+              className="p-8 md:p-10 rounded-3xl border border-white/[0.04] bg-black aspect-square flex flex-col justify-between group hover:border-[#ff0055]/30 transition-colors duration-500"
             >
               <div className="text-xs font-bold uppercase tracking-[0.2em] text-foreground/30">Total Reach</div>
               <div>
@@ -382,7 +382,7 @@ export default function SocialMediaManagementPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.8, delay: 0.15 }}
-              className="p-10 rounded-3xl border border-white/[0.04] bg-black aspect-square flex flex-col justify-between group hover:border-[#ff0055]/30 transition-colors duration-500"
+              className="p-8 md:p-10 rounded-3xl border border-white/[0.04] bg-black aspect-square flex flex-col justify-between group hover:border-[#ff0055]/30 transition-colors duration-500"
             >
               <div className="text-xs font-bold uppercase tracking-[0.2em] text-foreground/30">Engagement Rate</div>
               <div>
@@ -398,7 +398,7 @@ export default function SocialMediaManagementPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.8, delay: 0.3 }}
-              className="sm:col-span-2 p-10 rounded-3xl border border-white/[0.04] bg-black sm:aspect-[2.5/1] aspect-square flex flex-col justify-between group hover:border-[#ff0055]/30 transition-colors duration-500"
+              className="sm:col-span-2 p-8 md:p-10 rounded-3xl border border-white/[0.04] bg-black sm:aspect-[2.5/1] aspect-square flex flex-col justify-between group hover:border-[#ff0055]/30 transition-colors duration-500"
             >
               <div className="text-xs font-bold uppercase tracking-[0.2em] text-foreground/30">Follower Growth</div>
               <div>
@@ -413,7 +413,7 @@ export default function SocialMediaManagementPage() {
       </section>
 
       {/* ── 04. CTA FINALE ────────────────────────────────────────── */}
-      <section className="relative px-6 py-48 md:px-12 lg:px-20 overflow-hidden flex items-center justify-center text-center">
+      <section className="relative px-6 py-32 md:py-48 md:px-12 lg:px-20 overflow-hidden flex items-center justify-center text-center">
         <motion.div
           animate={{
             scale: [1, 1.2, 1],
@@ -438,7 +438,7 @@ export default function SocialMediaManagementPage() {
           </div>
 
           <FadeIn delay={0.3}>
-            <Link href="/contact" className="group inline-flex items-center gap-4 rounded-full bg-white px-10 py-5 text-[11px] font-black uppercase tracking-[0.3em] text-black transition-all duration-300 hover:bg-neutral-200 hover:scale-105 active:scale-95 shadow-[0_0_40px_-10px_rgba(255,0,85,0.4)]">
+            <Link href="/contact" className="group inline-flex items-center gap-4 rounded-full bg-white px-8 py-4 md:px-10 md:py-5 text-[10px] md:text-[11px] font-black uppercase tracking-[0.3em] text-black transition-all duration-300 hover:bg-neutral-200 hover:scale-105 active:scale-95 shadow-[0_0_40px_-10px_rgba(255,0,85,0.4)]">
               Initiate Strategy
               <ArrowUpRight size={16} className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </Link>

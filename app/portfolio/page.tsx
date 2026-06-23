@@ -69,7 +69,7 @@ function CoverflowProjectCard({ project, index, activeProgress }: { project: any
         perspective: 2000,
         pointerEvents: "none",
       }}
-      className="flex items-center justify-center p-6 md:p-12"
+      className="flex items-center justify-center p-4 pl-10 md:p-12"
     >
       <motion.div
         style={{
@@ -83,7 +83,7 @@ function CoverflowProjectCard({ project, index, activeProgress }: { project: any
         className="group relative flex h-[75vh] max-h-[850px] w-full max-w-[1300px] flex-col md:flex-row overflow-visible rounded-none"
       >
         {/* IMAGE SECTOR - Floating off the card */}
-        <div className="relative h-1/2 md:h-full w-full md:w-[60%] overflow-hidden rounded-[2rem] shadow-2xl z-20 group-hover:shadow-[0_0_80px_rgba(255,255,255,0.05)] transition-shadow duration-700">
+        <div className="relative h-[40%] md:h-full w-full md:w-[60%] overflow-hidden rounded-2xl md:rounded-[2rem] shadow-2xl z-20 group-hover:shadow-[0_0_80px_rgba(255,255,255,0.05)] transition-shadow duration-700">
           <motion.div className="w-full h-full" style={{ scale: imageScale }} whileHover={{ scale: 1.05 }} transition={{ duration: 0.8, ease: "easeOut" }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={project.image} alt={project.title} className="h-full w-full object-cover" />
@@ -96,37 +96,37 @@ function CoverflowProjectCard({ project, index, activeProgress }: { project: any
         </div>
 
         {/* CONTENT SECTOR - Glassmorphism floating slightly behind/overlapping */}
-        <div className="relative flex flex-1 flex-col justify-center p-8 pl-4 md:p-12 md:pl-20 z-10 md:-ml-12 rounded-[2rem] bg-zinc-950/60 backdrop-blur-3xl border border-white/5 shadow-2xl group-hover:bg-zinc-900/60 transition-colors duration-700 overflow-hidden">
+        <div className="relative flex flex-1 flex-col justify-center p-5 md:p-12 pl-5 md:pl-20 z-10 -mt-6 md:-mt-0 md:-ml-12 rounded-2xl md:rounded-[2rem] bg-zinc-950/60 backdrop-blur-3xl border border-white/5 shadow-2xl group-hover:bg-zinc-900/60 transition-colors duration-700 overflow-hidden">
           <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/4" />
 
-          <div className="flex items-center gap-4 text-[10px] font-bold uppercase tracking-[0.3em] text-white/50 mb-8">
-            <span className="font-satoshi text-3xl italic text-primary drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">{String(index + 1).padStart(2, "0")}</span>
-            <span className="h-px w-8 bg-white/20" />
+          <div className="flex items-center gap-4 text-[9px] md:text-[10px] font-bold uppercase tracking-[0.3em] text-white/50 mb-4 md:mb-8">
+            <span className="font-satoshi text-2xl md:text-3xl italic text-primary drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">{String(index + 1).padStart(2, "0")}</span>
+            <span className="h-px w-6 md:w-8 bg-white/20" />
             <span className="text-primary/80">{project.category}</span>
           </div>
 
-          <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter text-white mb-4 leading-[0.85] drop-shadow-xl group-hover:text-primary transition-colors duration-500">
+          <h2 className="text-3xl sm:text-4xl md:text-6xl font-black uppercase tracking-tighter text-white mb-2 md:mb-4 leading-[0.85] drop-shadow-xl group-hover:text-primary transition-colors duration-500">
             {project.title}
           </h2>
 
-          <p className="text-sm md:text-base text-white/60 font-medium leading-relaxed mb-6 max-w-md">
+          <p className="text-xs sm:text-sm md:text-base text-white/60 font-medium leading-relaxed mb-4 md:mb-6 max-w-md">
             {project.summary}
           </p>
 
-          <div className="space-y-4 mb-8">
+          <div className="space-y-2 md:space-y-4 mb-4 md:mb-8">
             {project.scope.map((item: string) => (
-              <div key={item} className="group/item flex items-center gap-4 text-xs md:text-sm text-white/40 uppercase tracking-widest font-bold hover:text-white transition-colors duration-300">
-                <div className="h-[2px] w-0 group-hover/item:w-6 rounded-full bg-primary transition-all duration-300" />
+              <div key={item} className="group/item flex items-center gap-3 md:gap-4 text-[10px] sm:text-xs md:text-sm text-white/40 uppercase tracking-widest font-bold hover:text-white transition-colors duration-300">
+                <div className="h-[2px] w-0 group-hover/item:w-4 md:group-hover/item:w-6 rounded-full bg-primary transition-all duration-300" />
                 {item}
               </div>
             ))}
           </div>
 
-          <div className="mt-auto">
-            <Link href={`/showcase/${project.slug}`} className="group/btn inline-flex items-center gap-4 text-[11px] font-black uppercase tracking-[0.3em] text-white transition-colors duration-300">
+          <div className="md:mt-auto pt-2 md:pt-0">
+            <Link href={`/showcase/${project.slug}`} className="group/btn inline-flex items-center gap-3 md:gap-4 text-[10px] md:text-[11px] font-black uppercase tracking-[0.3em] text-white transition-colors duration-300">
               Explore Project
-              <span className="flex h-14 w-14 items-center justify-center rounded-full border border-white/20 bg-black/50 transition-all duration-500 group-hover/btn:border-primary group-hover/btn:bg-primary group-hover/btn:text-background group-hover/btn:rotate-45 group-hover/btn:scale-110">
-                <ArrowUpRight size={20} />
+              <span className="flex h-10 w-10 md:h-14 md:w-14 items-center justify-center rounded-full border border-white/20 bg-black/50 transition-all duration-500 group-hover/btn:border-primary group-hover/btn:bg-primary group-hover/btn:text-background group-hover/btn:rotate-45 group-hover/btn:scale-110">
+                <ArrowUpRight size={16} className="md:w-[20px] md:h-[20px]" />
               </span>
             </Link>
           </div>
@@ -188,7 +188,7 @@ export default function PortfolioPage() {
 
       {/* 3D HORIZONTAL COVERFLOW */}
       <section ref={targetRef} style={{ height: trackHeight }} className="relative bg-zinc-950">
-        <div className="sticky top-0 flex h-screen min-h-screen items-center justify-center overflow-hidden">
+        <div className="sticky top-0 flex h-[100dvh] min-h-[100dvh] md:h-screen md:min-h-screen items-center justify-center overflow-hidden">
 
           {/* Dynamic Background Glow Layer */}
           <motion.div
@@ -198,11 +198,11 @@ export default function PortfolioPage() {
           <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(9,9,11,1)_100%)] pointer-events-none" />
 
           {/* Categories Fixed Header */}
-          <div className="absolute top-20 md:top-10 left-0 w-full z-20 px-6 mt-12 md:px-20 flex flex-col items-center">
-            <div className="flex flex-wrap justify-center gap-2">
+          <div className="absolute top-20 md:top-10 left-0 w-full z-20 md:mt-12 md:px-20 flex flex-col md:items-center">
+            <div className="flex w-full md:w-auto overflow-x-auto hide-scrollbar md:flex-wrap md:justify-center gap-2 px-4 md:px-0 pb-4 md:pb-0 snap-x">
               {categories.map((cat) => (
                 <button key={cat} onClick={() => setActiveCategory(cat)}
-                  className={`rounded-full px-5 py-2 text-[10px] font-bold uppercase tracking-[0.3em] transition-all duration-300 cursor-pointer border ${activeCategory === cat ? "bg-primary border-primary text-background" : "border-white/10 text-white/50 bg-black/40 backdrop-blur-md hover:border-white/40 hover:text-white/80"}`}>
+                  className={`snap-center whitespace-nowrap rounded-full px-5 py-2 text-[10px] font-bold uppercase tracking-[0.3em] transition-all duration-300 cursor-pointer border ${activeCategory === cat ? "bg-primary border-primary text-background" : "border-white/10 text-white/50 bg-black/40 backdrop-blur-md hover:border-white/40 hover:text-white/80"}`}>
                   {cat}
                 </button>
               ))}
@@ -210,7 +210,7 @@ export default function PortfolioPage() {
           </div>
 
           {/* Vertical Dot Navigation */}
-          <div className="absolute left-8 lg:left-12 top-1/2 -translate-y-1/2 z-30 flex flex-col gap-5">
+          <div className="absolute left-3 md:left-8 lg:left-12 top-1/2 -translate-y-1/2 z-30 flex flex-col gap-4 md:gap-5">
             {filtered.map((_, i) => (
               <NavDot key={i} index={i} activeProgress={activeProgress} />
             ))}
@@ -235,7 +235,7 @@ export default function PortfolioPage() {
       </section>
 
       {/* FOOTER CTA */}
-      <section className="relative px-6 py-32 md:px-12 lg:px-20 bg-zinc-950 overflow-hidden border-t border-white/[0.05]">
+      <section className="relative px-6 py-20 md:py-32 md:px-12 lg:px-20 bg-zinc-950 overflow-hidden border-t border-white/[0.05]">
         <div className="mx-auto max-w-[1600px] text-center relative z-10">
           <FadeIn>
             <div className="relative inline-block">
@@ -287,11 +287,11 @@ export default function PortfolioPage() {
               </h2>
               <div className="absolute -right-10 top-0 h-4 w-4 bg-primary animate-pulse" />
             </div>
-            <p className="mt-8 text-xl text-white/40 max-w-2xl mx-auto font-medium leading-relaxed">
+            <p className="mt-6 md:mt-8 text-base md:text-xl text-white/40 max-w-2xl mx-auto font-medium leading-relaxed">
               Your brand could be our next masterpiece. Or we could work for your competitor and ruin your life. Your call.
             </p>
-            <div className="mt-12">
-              <Link href="/contact" className="group inline-flex items-center gap-4 rounded-full bg-white px-10 py-5 text-[11px] font-black uppercase tracking-[0.3em] text-black transition-all duration-500 hover:bg-primary active:scale-95">
+            <div className="mt-8 md:mt-12">
+              <Link href="/contact" className="group inline-flex items-center gap-4 rounded-full bg-white px-8 py-4 md:px-10 md:py-5 text-[10px] md:text-[11px] font-black uppercase tracking-[0.3em] text-black transition-all duration-500 hover:bg-primary active:scale-95">
                 Stop Waiting
                 <ArrowUpRight size={16} className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
               </Link>

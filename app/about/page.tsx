@@ -249,7 +249,7 @@ function TeamCard({
         ease: [0.16, 1, 0.3, 1],
         delay: index * 0.15,
       }}
-      className="group relative h-[600px] w-full cursor-pointer perspective-[1200px]"
+      className="group relative h-[450px] md:h-[600px] w-full cursor-pointer perspective-[1200px]"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
@@ -366,7 +366,7 @@ export default function AboutPage() {
       {/* ── 00. HERO ──────────────────────────────────────────────── */}
       <section
         ref={heroRef}
-        className="relative flex h-screen min-h-[640px] overflow-hidden"
+        className="relative flex h-[100dvh] min-h-[640px] overflow-hidden"
         style={{ background: "#f5f5f0" }}
       >
         {/* Dot grid — base faint layer (always visible) */}
@@ -448,7 +448,46 @@ export default function AboutPage() {
           </FadeIn>
         </motion.div>
 
-        {/* RIGHT: Two infinite-scroll image columns */}
+        {/* MOBILE: Two horizontal infinite-scroll image lines */}
+        <div className="flex lg:hidden absolute inset-0 z-0 pointer-events-none overflow-hidden flex-col justify-between py-24 sm:py-32 opacity-60">
+          {/* Fade edges */}
+          <div className="absolute inset-y-0 left-0 w-[15vw] z-10" style={{ background: "linear-gradient(to right, #f5f5f0, transparent)" }} />
+          <div className="absolute inset-y-0 right-0 w-[15vw] z-10" style={{ background: "linear-gradient(to left, #f5f5f0, transparent)" }} />
+          
+          {/* Top Line — scrolls left to right */}
+          <div className="w-full relative py-4 flex items-center">
+            <motion.div
+              animate={{ x: ["-50%", "0%"] }}
+              transition={{ duration: 25, ease: "linear", repeat: Infinity }}
+              className="flex gap-4 w-max"
+            >
+              {["/hero1.webp", "/hero2.webp", "/hero3.webp", "/hero4.webp", "/hero5.webp",
+                "/hero1.webp", "/hero2.webp", "/hero3.webp", "/hero4.webp", "/hero5.webp"].map((src, i) => (
+                  <div key={`mob-top-${i}`} className="h-28 sm:h-36 aspect-[3/4] rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.15)] flex-shrink-0">
+                    <img src={src} alt="" className="w-full h-full object-cover" />
+                  </div>
+              ))}
+            </motion.div>
+          </div>
+
+          {/* Bottom Line — scrolls right to left */}
+          <div className="w-full relative py-4 flex items-center">
+            <motion.div
+              animate={{ x: ["0%", "-50%"] }}
+              transition={{ duration: 25, ease: "linear", repeat: Infinity }}
+              className="flex gap-4 w-max"
+            >
+              {["/hero6.webp", "/hero7.webp", "/hero8.webp", "/hero9.webp", "/hero10.webp",
+                "/hero6.webp", "/hero7.webp", "/hero8.webp", "/hero9.webp", "/hero10.webp"].map((src, i) => (
+                  <div key={`mob-bot-${i}`} className="h-28 sm:h-36 aspect-[3/4] rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.15)] flex-shrink-0">
+                    <img src={src} alt="" className="w-full h-full object-cover" />
+                  </div>
+              ))}
+            </motion.div>
+          </div>
+        </div>
+
+        {/* RIGHT: Two infinite-scroll image columns (Desktop only) */}
         <div className="hidden lg:flex gap-4 w-[45%] shrink-0 absolute right-0 top-[-20vh] bottom-[-20vh] pointer-events-none overflow-hidden pr-8">
           {/* Fade edges */}
           <div className="absolute inset-x-0 top-0 h-[25vh] z-10 pointer-events-none" style={{ background: "linear-gradient(to bottom, #f5f5f0, transparent)" }} />
@@ -492,7 +531,7 @@ export default function AboutPage() {
 
 
       {/* ── 02. OUR STORY ───────────────────────────────────────── */}
-      <section ref={storyRef} className="relative px-6 py-32 md:px-12 lg:px-20 bg-zinc-950/30 overflow-hidden">
+      <section ref={storyRef} className="relative px-6 py-20 md:py-32 md:px-12 lg:px-20 bg-zinc-950/30 overflow-hidden">
         <div className="mx-auto max-w-[1500px] space-y-20">
           <div>
             <RevealLine className="mt-4">
@@ -526,23 +565,23 @@ export default function AboutPage() {
 
                 {/* Narrative Content - Always present but fades out when image is shown */}
                 <div
-                  className={`relative z-10 p-12 md:p-16 space-y-12 transition-opacity duration-500 ${hoveredMilestone !== null ? "opacity-0 pointer-events-none" : "opacity-100"
+                  className={`relative z-10 p-8 md:p-12 lg:p-16 space-y-8 md:space-y-12 transition-opacity duration-500 ${hoveredMilestone !== null ? "opacity-0 pointer-events-none" : "opacity-100"
                     }`}
                 >
-                  <h3 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-[1.0] text-white">
+                  <h3 className="text-3xl sm:text-4xl md:text-6xl font-black uppercase tracking-tighter leading-[1.0] text-white">
                     The honest <span className="text-primary glow-text transition-all duration-700 group-hover:brightness-125">origin story.</span> <br />
                   </h3>
                   <div className="max-w-2xl">
-                    <p className="text-lg md:text-xl text-foreground/50 font-medium leading-[1.6] tracking-tight">
+                    <p className="text-base md:text-lg lg:text-xl text-foreground/50 font-medium leading-[1.6] tracking-tight">
                       Alok and Niraj started Vyce Digital Media out of Surat because they kept seeing the same thing — businesses with genuinely better products losing to competitors who just marketed better. <span className="text-white">Not a better product. Better marketing.</span>
                     </p>
-                    <p className="mt-8 text-lg md:text-xl text-foreground/50 font-medium leading-[1.6] tracking-tight">
+                    <p className="mt-6 md:mt-8 text-base md:text-lg lg:text-xl text-foreground/50 font-medium leading-[1.6] tracking-tight">
                       That felt deeply unfair. So they decided to do something about it.
                     </p>
-                    <p className="mt-8 text-lg md:text-xl text-foreground/50 font-medium leading-[1.6] tracking-tight">
+                    <p className="mt-6 md:mt-8 text-base md:text-lg lg:text-xl text-foreground/50 font-medium leading-[1.6] tracking-tight">
                       Vyce was built to level that playing field. To make sure the quality of your business actually matches — and then exceeds — how it shows up online. <span className="text-white">One brand at a time. Done properly.</span>
                     </p>
-                    <p className="mt-8 text-lg md:text-xl text-foreground/50 font-medium leading-[1.6] tracking-tight">
+                    <p className="mt-6 md:mt-8 text-base md:text-lg lg:text-xl text-foreground/50 font-medium leading-[1.6] tracking-tight">
                       100+ clients and several years later, the frustration became a methodology. <span className="text-primary font-bold">And the methodology became results you can actually measure.</span>
                     </p>
                   </div>
@@ -643,11 +682,11 @@ export default function AboutPage() {
               {milestones.map((m, i) => (
                 <FadeIn key={m.year} delay={i * 0.1}>
                   <div
-                    className={`group flex items-start gap-8 cursor-default transition-all duration-300 hover:px-3 ${i === 0 ? "pt-12 md:pt-16 pb-10" : "py-10"
+                    className={`group flex items-start gap-4 md:gap-8 cursor-default transition-all duration-300 hover:px-3 ${i === 0 ? "pt-8 md:pt-16 pb-8 md:pb-10" : "py-8 md:py-10"
                       }`}
                     onMouseEnter={() => setHoveredMilestone(i)}
                   >
-                    <span className="font-satoshi text-5xl italic text-primary/20 transition-colors duration-500 group-hover:text-primary/70 leading-none mt-1 flex-shrink-0">
+                    <span className="font-satoshi text-4xl md:text-5xl italic text-primary/20 transition-colors duration-500 group-hover:text-primary/70 leading-none mt-1 flex-shrink-0">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <div className="flex-1">
@@ -679,7 +718,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── 03. MISSION & VISION ─────────────────────────────────── */}
-      <section className="relative px-6 py-32 md:px-12 lg:px-20 overflow-hidden">
+      <section className="relative px-6 py-20 md:py-32 md:px-12 lg:px-20 overflow-hidden">
         <div className="mx-auto max-w-[1500px]">
           <div className="mt-8 grid gap-16 lg:grid-cols-2 items-end">
             <div>
@@ -697,7 +736,7 @@ export default function AboutPage() {
               { label: "Vision", headline: "A world where the best businesses actually win. Not just the ones with the biggest ad budgets. (We're working on it.)" },
             ].map((card, i) => (
               <FadeIn key={card.label} delay={i * 0.15}>
-                <div className="group relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-zinc-950 to-zinc-900 p-12 transition-all duration-500 hover:border-primary/30">
+                <div className="group relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-zinc-950 to-zinc-900 p-8 md:p-12 transition-all duration-500 hover:border-primary/30">
                   <p className="text-[9px] font-bold uppercase tracking-[0.5em] text-primary/50">{card.label}</p>
                   <p className="mt-6 text-2xl md:text-3xl font-black uppercase tracking-tighter leading-tight text-foreground/80">
                     {card.headline}
@@ -714,7 +753,7 @@ export default function AboutPage() {
 
       {/* ── 04. CORE VALUES ──────────────────────────────────────── */}
       <section
-        className="relative px-6 py-32 md:px-12 lg:px-20 bg-zinc-950/30 overflow-hidden"
+        className="relative px-6 py-20 md:py-32 md:px-12 lg:px-20 bg-zinc-950/30 overflow-hidden"
         onMouseLeave={() => setHoveredValue(null)}
       >
         <div className="mx-auto max-w-[1500px]">
@@ -736,11 +775,11 @@ export default function AboutPage() {
               {coreValues.map((v, i) => (
                 <FadeIn key={v.num} delay={i * 0.1}>
                   <div
-                    className="group flex items-center gap-8 py-12 transition-all duration-300 hover:pl-4 cursor-default"
+                    className="group flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-8 py-8 md:py-12 transition-all duration-300 hover:pl-0 md:hover:pl-4 cursor-default"
                     onMouseEnter={() => setHoveredValue(i)}
                     onMouseLeave={() => setHoveredValue(null)}
                   >
-                    <span className="font-satoshi text-6xl italic text-primary/20 transition-colors duration-500 group-hover:text-primary/80 leading-none flex-shrink-0 w-20">
+                    <span className="font-satoshi text-5xl md:text-6xl italic text-primary/20 transition-colors duration-500 group-hover:text-primary/80 leading-none flex-shrink-0 w-auto md:w-20">
                       {v.num}
                     </span>
                     <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-16 flex-1">
@@ -808,7 +847,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── 05. MEET THE TEAM ────────────────────────────────────── */}
-      <section className="relative px-6 py-32 md:px-12 lg:px-20 overflow-hidden">
+      <section className="relative px-6 py-20 md:py-32 md:px-12 lg:px-20 overflow-hidden">
         <div className="mx-auto max-w-[1500px]">
           <div className="mb-20">
             <RevealLine className="mt-4">
@@ -834,7 +873,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── 06. WHY CHOOSE VYCE ──────────────────────────────────── */}
-      <section className="relative px-6 py-32 md:px-12 lg:px-20 bg-zinc-950/30 overflow-hidden">
+      <section className="relative px-6 py-20 md:py-32 md:px-12 lg:px-20 bg-zinc-950/30 overflow-hidden">
         <div className="mx-auto max-w-[1500px] w-full grid gap-12 lg:grid-cols-[1.3fr_0.7fr] items-center">
           <div className="space-y-12">
             <div>
@@ -891,12 +930,12 @@ export default function AboutPage() {
                       delay: i * 0.1,
                       ease: [0.16, 1, 0.3, 1]
                     }}
-                    className="grid grid-cols-2 py-8 border-b border-white/5 group hover:bg-white/[0.03] transition-all duration-500 px-4 rounded-xl relative overflow-hidden"
+                    className="grid grid-cols-2 py-6 md:py-8 border-b border-white/5 group hover:bg-white/[0.03] transition-all duration-500 px-2 md:px-4 rounded-xl relative overflow-hidden"
                   >
-                    <div className="text-sm md:text-base text-foreground/30 font-medium px-6 leading-relaxed text-center group-hover:text-foreground/50 transition-colors duration-500">
+                    <div className="text-xs md:text-base text-foreground/30 font-medium px-2 md:px-6 leading-relaxed text-center group-hover:text-foreground/50 transition-colors duration-500 flex items-center justify-center">
                       {row.agency}
                     </div>
-                    <div className="text-sm md:text-base text-foreground/70 font-bold leading-relaxed px-6 text-center group-hover:text-white transition-all duration-500 group-hover:scale-[1.02]">
+                    <div className="text-xs md:text-base text-foreground/70 font-bold leading-relaxed px-2 md:px-6 text-center group-hover:text-white transition-all duration-500 group-hover:scale-[1.02] flex items-center justify-center">
                       {row.vyce}
                     </div>
 

@@ -97,12 +97,12 @@ export default function DigitalGrowthPage() {
   });
   const chartProgress = useTransform(diagramScroll, [0.3, 0.65], [0, 1]);
 
-  return (
+  return (  
     <div className="bg-background text-foreground overflow-clip">
       {/* Intense Hero Section remains same... */}
-
+    
       {/* ── 01. INTENSE HERO ────────────────────────────────────────── */}
-      <section ref={heroRef} className="relative min-h-screen w-full flex flex-col justify-center px-6 pt-32 pb-12 md:px-12 lg:px-20 overflow-hidden">
+      <section ref={heroRef} className="relative h-[100dvh] md:h-screen w-full flex flex-col justify-center px-6 pt-32 pb-12 md:px-12 lg:px-20 overflow-hidden">
         {/* Dynamic aggressive background */}
         <div className="absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_bottom,rgba(255,106,0,0.1)_0%,transparent_60%)] pointer-events-none" />
 
@@ -134,7 +134,7 @@ export default function DigitalGrowthPage() {
               </RevealLine>
             </div>
 
-            <FadeIn delay={0.3} className="mt-8 max-w-xl">
+            <FadeIn delay={0.3} className="mt-6 md:mt-8 max-w-xl">
               <p className="text-base md:text-xl text-foreground/50 font-medium leading-relaxed">
                 We converted ₹2L into ₹20L for a client in 12 months. Not with luck—with data, discipline, and a refusal to tolerate underperforming creative. We track every rupee. We kill every loser. We scale every winner.
               </p>
@@ -174,7 +174,7 @@ export default function DigitalGrowthPage() {
       </section>
 
       {/* ── 02. DASHBOARD / EXPERIMENTATION ───────────────────────── */}
-      <section ref={diagramRef} className="py-32 px-6 md:px-12 lg:px-20 bg-zinc-950">
+      <section ref={diagramRef} className="py-24 md:py-32 px-6 md:px-12 lg:px-20 bg-zinc-950">
         <div className="mx-auto max-w-[1600px]">
 
           <div className="mb-24">
@@ -277,7 +277,7 @@ export default function DigitalGrowthPage() {
       </section>
 
       {/* ── 03. CTA FINALE ────────────────────────────────────────── */}
-      <section className="relative px-6 py-48 md:px-12 lg:px-20 overflow-hidden flex items-center justify-center text-center">
+      <section className="relative px-6 py-32 md:py-48 md:px-12 lg:px-20 overflow-hidden flex items-center justify-center text-center">
         <div className="relative z-10 max-w-4xl max-auto space-y-12">
           <div>
             <RevealLine>
@@ -293,7 +293,7 @@ export default function DigitalGrowthPage() {
           </div>
 
           <FadeIn delay={0.3}>
-            <Link href="/contact" className="group inline-flex items-center gap-4 rounded-full bg-white px-10 py-5 text-[11px] font-black uppercase tracking-[0.3em] text-black transition-all duration-300 hover:bg-neutral-200 hover:scale-105 active:scale-95 shadow-[0_0_40px_-10px_rgba(255,106,0,0.3)]">
+            <Link href="/contact" className="group inline-flex items-center gap-4 rounded-full bg-white px-8 py-4 md:px-10 md:py-5 text-[10px] md:text-[11px] font-black uppercase tracking-[0.3em] text-black transition-all duration-300 hover:bg-neutral-200 hover:scale-105 active:scale-95 shadow-[0_0_40px_-10px_rgba(255,106,0,0.3)]">
               Start the Brief
               <ArrowUpRight size={16} className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </Link>

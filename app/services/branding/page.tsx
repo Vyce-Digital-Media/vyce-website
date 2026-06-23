@@ -142,7 +142,7 @@ function HorizontalScrollSection() {
   }, []);
 
   return (
-    <section ref={triggerRef} className="relative h-screen bg-zinc-950 overflow-hidden flex items-center border-y border-white/[0.05]">
+    <section ref={triggerRef} className="relative h-[100dvh] md:h-screen bg-zinc-950 overflow-hidden flex items-center border-y border-white/[0.05]">
       {/* Background typographic noise */}
       <div className="absolute inset-0 pointer-events-none opacity-[0.02] overflow-hidden flex flex-col justify-between">
         {Array.from({ length: 5 }).map((_, i) => (
@@ -152,7 +152,7 @@ function HorizontalScrollSection() {
         ))}
       </div>
 
-      <div className="absolute top-20 left-0 w-full z-10 pointer-events-none flex justify-center">
+      <div className="absolute top-20 md:top-32 left-0 w-full z-10 pointer-events-none flex justify-center">
         <RevealLine>
           <h2 className="text-3xl md:text-5xl uppercase tracking-tighter text-white">
             <span className="font-black">Visual</span>{" "}
@@ -161,7 +161,7 @@ function HorizontalScrollSection() {
         </RevealLine>
       </div>
 
-      <div ref={sectionRef} className="flex gap-12 lg:gap-20 px-12 lg:px-20 h-auto items-center mt-24 w-max relative z-20">
+      <div ref={sectionRef} className="flex gap-6 md:gap-12 lg:gap-20 px-6 md:px-12 lg:px-20 h-auto items-center mt-16 md:mt-24 w-max relative z-20">
         {expressions.map((item, index) => (
           <div key={index} className="w-[80vw] lg:w-[45vw] max-w-[700px] flex-shrink-0 group">
             <div className="rounded-sm overflow-hidden bg-background relative aspect-[4/3] border border-white/5 shadow-2xl">
@@ -173,9 +173,9 @@ function HorizontalScrollSection() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent opacity-90 transition-opacity duration-700 group-hover:opacity-60" />
 
-              <div className="absolute inset-0 p-8 md:p-12 flex flex-col justify-end">
+              <div className="absolute inset-0 p-6 md:p-12 flex flex-col justify-end">
                 <span className="text-primary font-mono text-xs font-bold uppercase tracking-[0.2em] mb-3">{`// Vol. ${String(index + 1).padStart(2, '0')}`}</span>
-                <h3 className="text-4xl md:text-6xl font-satoshi transition-colors duration-500 group-hover:italic mb-4">{item.title}</h3>
+                <h3 className="text-3xl md:text-6xl font-satoshi transition-colors duration-500 group-hover:italic mb-2 md:mb-4">{item.title}</h3>
                 <p className="max-w-md text-foreground/50 text-sm md:text-base font-medium leading-relaxed opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-700 ease-[0.16,1,0.3,1]">
                   {item.description}
                 </p>
@@ -195,7 +195,7 @@ function ProcessAccordion({ step, isOpen, onToggle }: { step: typeof processStep
     <div className={`border-b border-white/[0.06] transition-colors duration-500 ${isOpen ? 'border-primary/30' : ''}`}>
       <button
         onClick={onToggle}
-        className="w-full py-8 flex flex-col md:flex-row md:items-center justify-between gap-4 text-left cursor-pointer group"
+        className="w-full py-6 md:py-8 flex flex-col md:flex-row md:items-center justify-between gap-4 text-left cursor-pointer group"
       >
         <span className="text-[10px] font-mono text-primary/60 uppercase tracking-[0.2em] w-32 shrink-0">{step.phase}</span>
 
@@ -218,7 +218,7 @@ function ProcessAccordion({ step, isOpen, onToggle }: { step: typeof processStep
             transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
             className="overflow-hidden"
           >
-            <div className="pb-10 md:pl-[144px]">
+            <div className="pb-6 md:pb-10 md:pl-[144px]">
               <p className="max-w-2xl text-lg text-foreground/50 font-medium leading-relaxed">
                 {step.description}
               </p>
@@ -271,7 +271,7 @@ export default function BrandingPage() {
     <div className="bg-background text-foreground overflow-clip">
 
       {/* ── 01. EDITORIAL HERO WITH 3D ────────────────────────────── */}
-      <section ref={heroRef} className="relative h-screen w-full overflow-hidden flex items-center justify-center">
+      <section ref={heroRef} className="relative h-[100dvh] md:h-screen w-full overflow-hidden flex items-center justify-center">
         {/* ThreeJS Background Canvas */}
         <div className="absolute inset-0 z-0">
           <Canvas camera={{ position: [0, 0, 7], fov: 45 }}>
@@ -291,7 +291,7 @@ export default function BrandingPage() {
             </span>
           </FadeIn>
 
-          <div className="mt-8 space-y-2 lg:space-y-4">
+          <div className="mt-6 md:mt-8 space-y-2 lg:space-y-4">
             <RevealLine>
               <h1 className="text-[clamp(3.5rem,8vw,10rem)] font-black uppercase tracking-tighter leading-[0.88]">
                 Identity &
@@ -304,7 +304,7 @@ export default function BrandingPage() {
             </RevealLine>
           </div>
 
-          <FadeIn delay={0.3} className="mt-8 max-w-2xl px-4">
+          <FadeIn delay={0.3} className="mt-6 md:mt-8 max-w-2xl px-4">
             <p className="text-base md:text-xl text-foreground/50 font-medium leading-relaxed">
               Your logo is not your brand. Your Instagram grid is not your brand. Your brand is what people say about you in the group chat when you&apos;re not in it. Let&apos;s make sure that conversation is worth having.
             </p>
@@ -321,8 +321,8 @@ export default function BrandingPage() {
       <HorizontalScrollSection />
 
       {/* ── 03. PROOF SECTION (STAT COUNTERS) ─────────────────────── */}
-      <section className="py-32 px-6 md:px-12 lg:px-20">
-        <div className="mx-auto max-w-[1600px] grid lg:grid-cols-2 gap-20 items-center">
+      <section className="py-20 md:py-32 px-6 md:px-12 lg:px-20">
+        <div className="mx-auto max-w-[1600px] grid lg:grid-cols-2 gap-12 md:gap-20 items-center">
           <div>
             <RevealLine>
               <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-none mb-6">Built To <br /><span className="italic font-satoshi font-normal text-primary">Outlast Trends.</span></h2>
@@ -335,11 +335,11 @@ export default function BrandingPage() {
           </div>
 
           <div className="grid grid-cols-2 gap-6">
-            <FadeIn delay={0.2} className="p-8 border border-white/[0.05] bg-white/[0.01] rounded-2xl flex flex-col justify-between aspect-square group hover:border-white/20 transition-colors">
+            <FadeIn delay={0.2} className="p-6 md:p-8 border border-white/[0.05] bg-white/[0.01] rounded-2xl flex flex-col justify-between aspect-square group hover:border-white/20 transition-colors">
               <div className="text-xs font-mono uppercase text-foreground/30">Average Rev Lift</div>
               <div className="text-5xl md:text-7xl font-black group-hover:text-primary transition-colors duration-500">2.4x</div>
             </FadeIn>
-            <FadeIn delay={0.3} className="p-8 border border-white/[0.05] bg-white/[0.01] rounded-2xl flex flex-col justify-between aspect-[1/1.5] lg:aspect-square mt-12 group hover:border-white/20 transition-colors">
+            <FadeIn delay={0.3} className="p-6 md:p-8 border border-white/[0.05] bg-white/[0.01] rounded-2xl flex flex-col justify-between aspect-[1/1.5] lg:aspect-square mt-6 md:mt-12 group hover:border-white/20 transition-colors">
               <div className="text-xs font-mono uppercase text-foreground/30">Client Retention</div>
               <div className="text-5xl md:text-7xl font-black group-hover:text-primary transition-colors duration-500">96%</div>
             </FadeIn>
@@ -348,7 +348,7 @@ export default function BrandingPage() {
       </section>
 
       {/* ── 04. PROCESS ───────────────────────────────────────────── */}
-      <section className="py-32 px-6 md:px-12 lg:px-20 bg-zinc-950/50">
+      <section className="py-20 md:py-32 px-6 md:px-12 lg:px-20 bg-zinc-950/50">
         <div className="mx-auto max-w-[1600px]">
           <FadeIn className="mb-16">
             <h2 className="text-2xl font-black uppercase tracking-widest text-foreground/30">The Methodology</h2>
@@ -367,7 +367,7 @@ export default function BrandingPage() {
       </section>
 
       {/* ── 05. CTA FINALE ────────────────────────────────────────── */}
-      <section className="relative px-6 py-48 md:px-12 lg:px-20 overflow-hidden flex items-center justify-center text-center">
+      <section className="relative px-6 py-32 md:py-48 md:px-12 lg:px-20 overflow-hidden flex items-center justify-center text-center">
         {/* Animated Blue Orb */}
 
 
@@ -386,7 +386,7 @@ export default function BrandingPage() {
           </div>
 
           <FadeIn delay={0.3}>
-            <Link href="/contact" className="group inline-flex items-center gap-4 rounded-full bg-white px-10 py-5 text-[11px] font-black uppercase tracking-[0.3em] text-black transition-all duration-300 hover:bg-neutral-200 hover:scale-105 active:scale-95 shadow-[0_0_40px_-10px_rgba(255,255,255,0.3)]">
+            <Link href="/contact" className="group inline-flex items-center gap-4 rounded-full bg-white px-8 py-4 md:px-10 md:py-5 text-[10px] md:text-[11px] font-black uppercase tracking-[0.3em] text-black transition-all duration-300 hover:bg-neutral-200 hover:scale-105 active:scale-95 shadow-[0_0_40px_-10px_rgba(255,255,255,0.3)]">
               Start the Brief
               <ArrowUpRight size={16} className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </Link>
