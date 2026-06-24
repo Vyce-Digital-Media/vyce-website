@@ -75,23 +75,24 @@ const SERVICES = [
 function LargeCardUI({ service }: { service: (typeof SERVICES)[0] }) {
   return (
     <div
+      className="group"
       style={{
-        background: service.bg,
+        background: "#111111",
         borderRadius: 22,
         padding: "clamp(22px, 2.8vw, 36px)",
         display: "flex",
         flexDirection: "column",
         position: "relative",
         overflow: "hidden",
-        border: "1px solid rgba(0,0,0,0.06)",
-        boxShadow: "0 2px 16px rgba(0,0,0,0.05)",
+        border: "1px solid rgba(255,255,255,0.1)",
+        boxShadow: "0 10px 30px rgba(0,0,0,0.25)",
         height: "100%",
       }}
     >
       {/* Top row: number + arrow */}
-      <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "flex-end", marginBottom: 18 }}>
+      <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "flex-end", marginBottom: 18, position: "relative", zIndex: 2 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-          <span style={{ fontSize: "1rem", fontWeight: 900, color: "rgba(0,0,0,0.1)", letterSpacing: "-0.04em" }}>
+          <span style={{ fontSize: "1rem", fontWeight: 900, color: "rgba(255,255,255,0.3)", letterSpacing: "-0.04em" }}>
             {service.index}
           </span>
           <Link
@@ -100,12 +101,12 @@ function LargeCardUI({ service }: { service: (typeof SERVICES)[0] }) {
               width: 32,
               height: 32,
               borderRadius: "50%",
-              border: "1.5px solid rgba(0,0,0,0.15)",
+              border: "1.5px solid rgba(255,255,255,0.25)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
               fontSize: 15,
-              color: "#0a0a0a",
+              color: "#fff",
               textDecoration: "none",
               transition: "all 0.25s",
               flexShrink: 0,
@@ -119,8 +120,8 @@ function LargeCardUI({ service }: { service: (typeof SERVICES)[0] }) {
             onMouseLeave={(e) => {
               const el = e.currentTarget as HTMLElement;
               el.style.background = "transparent";
-              el.style.borderColor = "rgba(0,0,0,0.15)";
-              el.style.color = "#0a0a0a";
+              el.style.borderColor = "rgba(255,255,255,0.25)";
+              el.style.color = "#fff";
             }}
           >
             ↗
@@ -134,7 +135,7 @@ function LargeCardUI({ service }: { service: (typeof SERVICES)[0] }) {
           fontSize: "clamp(1.5rem, 2.2vw, 2.8rem)",
           fontWeight: 900,
           letterSpacing: "-0.03em",
-          color: "#0a0a0a",
+          color: "#ffffff",
           lineHeight: 1.1,
           marginBottom: 12,
           position: "relative",
@@ -146,9 +147,10 @@ function LargeCardUI({ service }: { service: (typeof SERVICES)[0] }) {
 
       {/* Desc */}
       <p
+        className="max-h-0 opacity-0 overflow-hidden transition-all duration-500 ease-in-out group-hover:max-h-[200px] group-hover:opacity-100 group-hover:mb-6"
         style={{
           fontSize: "clamp(0.76rem, 0.95vw, 0.92rem)",
-          color: "rgba(0,0,0,0.5)",
+          color: "rgba(255,255,255,0.9)",
           lineHeight: 1.7,
           fontWeight: 500,
           position: "relative",
@@ -173,12 +175,12 @@ function LargeCardUI({ service }: { service: (typeof SERVICES)[0] }) {
           alt={service.title}
           style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
         />
-        {/* Light gradient overlay to ensure dark text is readable */}
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(90deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.7) 45%, rgba(255,255,255,0) 100%)" }} />
+        {/* Subtle dark gradient overlay to ensure white text is readable while keeping image vibrant */}
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(90deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0) 100%)" }} />
       </div>
 
       {/* CTA */}
-      <div style={{ marginTop: "auto", paddingTop: 18, borderTop: "1px solid rgba(0,0,0,0.07)", position: "relative", zIndex: 2 }}>
+      <div style={{ marginTop: "auto", paddingTop: 18, borderTop: "1px solid rgba(255,255,255,0.15)", position: "relative", zIndex: 2 }}>
         <Link
           href={service.href} 
           style={{
@@ -207,34 +209,35 @@ function LargeCardUI({ service }: { service: (typeof SERVICES)[0] }) {
 function ImageCardUI({ service, wide = false }: { service: (typeof SERVICES)[number]; wide?: boolean }) {
   return (
     <div
+      className="group"
       style={{
-        background: service.bg,
+        background: "#111111",
         borderRadius: 22,
         padding: wide ? "clamp(16px, 2.5vh, 28px)" : "clamp(14px, 2vh, 24px)",
         display: "flex",
         flexDirection: "column",
         position: "relative",
         overflow: "hidden",
-        border: "1px solid rgba(0,0,0,0.06)",
-        boxShadow: "0 2px 16px rgba(0,0,0,0.05)",
+        border: "1px solid rgba(255,255,255,0.1)",
+        boxShadow: "0 10px 30px rgba(0,0,0,0.25)",
         height: "100%",
       }}
     >
       {/* Index number */}
       <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: wide ? 12 : 8, position: "relative", zIndex: 2 }}>
-        <span style={{ fontSize: wide ? "1.2rem" : "1rem", fontWeight: 900, color: "rgba(0,0,0,0.1)", letterSpacing: "-0.04em" }}>
+        <span style={{ fontSize: wide ? "1.2rem" : "1rem", fontWeight: 900, color: "rgba(255,255,255,0.3)", letterSpacing: "-0.04em" }}>
           {service.index}
         </span>
       </div>
 
       {/* Text block */}
-      <div style={{ flex: 1, display: "flex", flexDirection: "column", zIndex: 2, position: "relative", maxWidth: wide ? "60%" : "52%" }}>
+      <div style={{ flex: 1, display: "flex", flexDirection: "column", zIndex: 2, position: "relative", maxWidth: wide ? "70%" : "85%" }}>
         <h3
           style={{
             fontSize: wide ? "clamp(1.1rem, 1.8vw, 1.6rem)" : "clamp(0.95rem, 1.4vw, 1.15rem)",
             fontWeight: 900,
             letterSpacing: "-0.025em",
-            color: "#0a0a0a",
+            color: "#ffffff",
             lineHeight: 1.15,
             marginBottom: wide ? 8 : 6,
           }}
@@ -242,11 +245,9 @@ function ImageCardUI({ service, wide = false }: { service: (typeof SERVICES)[num
           {service.title}
         </h3>
 
-        {wide && (
-          <p style={{ fontSize: "clamp(0.76rem, 0.9vw, 0.88rem)", color: "rgba(0,0,0,0.45)", lineHeight: 1.65, fontWeight: 500, marginBottom: 12 }}>
-            {service.desc}
-          </p>
-        )}
+        <p className="max-h-0 opacity-0 overflow-hidden transition-all duration-500 ease-in-out group-hover:max-h-[200px] group-hover:opacity-100 group-hover:mb-3" style={{ fontSize: "clamp(0.76rem, 0.9vw, 0.88rem)", color: "rgba(255,255,255,0.9)", lineHeight: 1.65, fontWeight: 500 }}>
+          {service.desc}
+        </p>
 
         <div style={{ marginTop: "auto", paddingTop: 8 }}>
           <Link
@@ -285,7 +286,7 @@ function ImageCardUI({ service, wide = false }: { service: (typeof SERVICES)[num
           alt={service.title}
           style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
         />
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(90deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.6) 60%, rgba(255,255,255,0) 100%)" }} />
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(90deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.2) 60%, rgba(0,0,0,0) 100%)" }} />
       </div>
     </div>
   );

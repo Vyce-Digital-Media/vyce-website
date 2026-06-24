@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 
 const navLinks = [
   { name: "Home", href: "/" },
@@ -28,6 +30,13 @@ const socialLinks = [
 
 export default function Footer() {
   const year = new Date().getFullYear();
+  const footerRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: footerRef,
+    offset: ["start 85%", "end end"],
+  });
+  const scaleY = useTransform(scrollYProgress, [0, 1], [0.05, 1]);
+  const opacity = useTransform(scrollYProgress, [0, 1], [0.05, 0.15]);
 
   return (
     /* Outer wrapper — provides the "floating" margin gap around the card */
@@ -39,6 +48,7 @@ export default function Footer() {
       }}
     >
       <footer
+        ref={footerRef}
         style={{
           background: "#0033cc",
           borderRadius: 28,
@@ -73,7 +83,7 @@ export default function Footer() {
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.8fr_1fr_1fr_1.4fr]"
             style={{
               gap: "clamp(24px, 4vw, 60px)",
-              marginBottom: "clamp(40px, 6vw, 72px)",
+              marginBottom: "clamp(20px, 3vw, 32px)",
             }}
           >
             {/* Col 1 — Brand statement */}
@@ -308,33 +318,31 @@ export default function Footer() {
           </div>
 
 
-          {/* ── Giant VYCE wordmark ──────────────────────────── */}
+          {/* ── Giant VYCE logo ──────────────────────────── */}
           <div
             style={{
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              gap: "clamp(1rem, 3vw, 3rem)",
-              lineHeight: 0.85,
               userSelect: "none",
               pointerEvents: "none",
               overflow: "hidden",
               paddingBottom: "1rem", // Lifted up so it's fully visible
+              width: "100%",
             }}
           >
-            <span
+            <motion.img
+              src="/assets/VYCE LOGO SILVER WHITE.svg"
+              alt="VYCE Logo"
               style={{
-                fontSize: "clamp(5rem, 15vw, 15rem)",
-                fontWeight: 900,
-                letterSpacing: "-0.04em",
-                color: "rgba(255,255,255,0.07)",
-                display: "block",
-                fontFamily: "'Cinzel Decorative', serif",
-                lineHeight: 1,
+                width: "100%",
+                maxHeight: "clamp(150px, 30vw, 350px)",
+                objectFit: "contain",
+                opacity: opacity,
+                scaleY: scaleY,
+                transformOrigin: "top center",
               }}
-            >
-              VYCE
-            </span>
+            />
           </div>
         </div>
       </footer>
